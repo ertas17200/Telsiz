@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "purpose": "Kullanıcı eğitim katmanının kaynak/rule provenance sözleşmesi. Bu manifest kendi başına hukuki yayın izni üretmez.",
+  "modules": [
+    {
+      "id": "ACADEMY.TR.CORE-COMPLIANCE",
+      "title": "Türkiye amatör telsiz temel uyum çerçevesi",
+      "content_status": "source_grounded",
+      "legal_content": true,
+      "legal_verdicts": false,
+      "source_ids": [
+        "TR.BTK.FTM.TECH.2022-IK-SYD-245"
+      ],
+      "rule_ids": [
+        "TR.AMATEUR.TECHNICAL_COMPLIANCE",
+        "TR.AMATEUR.DUMMY_LOAD"
+      ],
+      "candidate_refs": [],
+      "notes": "Yalnız verified/current official_legal kaynak ve verified legal kurallardan görünüm üretir. Yayın izni kararı academy katmanından değil mevcut karar motorundan gelir."
+    },
+    {
+      "id": "ACADEMY.TR.EXAM-OPERATIONS",
+      "title": "Sınav ve belge işlemleri için resmî operasyonel kaynak haritası",
+      "content_status": "source_grounded",
+      "legal_content": false,
+      "legal_verdicts": false,
+      "source_ids": [
+        "TR.KEGM.AMATEUR.FAQ"
+      ],
+      "rule_ids": [],
+      "candidate_refs": [],
+      "notes": "KEGM'nin verified official_technical SSS kaynağına dayanır. P3 yönetmelik exact-text doğrulaması pending olduğundan hukuki sınav kuralı üretmez."
+    },
+    {
+      "id": "ACADEMY.IARU.BANDPLAN-PRACTICE",
+      "title": "IARU Region 1 band planı çalışma pratiği",
+      "content_status": "source_grounded",
+      "legal_content": false,
+      "legal_verdicts": false,
+      "source_ids": [
+        "IARU.R1.BANDPLANS"
+      ],
+      "rule_ids": [
+        "IARU.R1.NATIONAL_RULES_PREVAIL"
+      ],
+      "candidate_refs": [],
+      "notes": "Amatör çalışma pratiğini açıklar; Türkiye'de hukuki izin oluşturmaz ve ulusal düzenlemelerin yerine geçmez."
+    },
+    {
+      "id": "ACADEMY.TOOL.GRID-LOCATOR",
+      "title": "Maidenhead grid locator eğitim aracı",
+      "content_status": "educational_only",
+      "legal_content": false,
+      "legal_verdicts": false,
+      "source_ids": [],
+      "rule_ids": [],
+      "candidate_refs": [
+        "CAND.COMMUNITY.ARCH-YUNUS.AMATOR-TELSIZ-REHBERI"
+      ],
+      "notes": "Topluluk reposundaki kullanıcı aracı fikrinden esinlenen eğitim modülü adayıdır; kaynak/izin iddiası taşımaz."
+    }
+  ]
+}
