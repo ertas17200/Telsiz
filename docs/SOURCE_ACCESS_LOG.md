@@ -33,3 +33,14 @@ What is still missing:
 - SHA-256 digest.
 
 Therefore P0 advances from **source-content blocked** to **raw transcription complete / semantic promotion HOLD**. `coverage_status` remains `partial`; no complete legal-permission verdict is enabled.
+
+## ≈2026-09-28T20:30Z — candidate source domains (Claude Code environment)
+
+| DOMAIN | ACCESS | ERROR_CLASS |
+|---|---|---|
+| www.btk.gov.tr, www.mevzuat.gov.tr, www.resmigazete.gov.tr, www.kiyiemniyeti.gov.tr, www.uab.gov.tr | BLOCKED | curl: CONNECT refused (HTTP 000); WebFetch EGRESS_BLOCKED (btk, mevzuat, resmigazete, kiyiemniyeti) |
+| www.itu.int, www.cept.org, docdb.cept.org, efis.cept.org | BLOCKED | curl: CONNECT refused (HTTP 000); WebFetch EGRESS_BLOCKED (docdb.cept.org) |
+| www.iaru-r1.org, www.iaru.org, trac.org.tr | BLOCKED | curl: CONNECT refused (HTTP 000); WebFetch EGRESS_BLOCKED (iaru-r1, trac) |
+| github.com/arch-yunus/Amator-Telsiz- | NOT_FOUND_OR_PRIVATE | GitHub add_repo "not found or no access"; WebFetch HTTP 404 |
+
+Result: no candidate in `data/source_candidates.json` could be verified; all remain `candidate_unverified` / `candidate_inaccessible`.

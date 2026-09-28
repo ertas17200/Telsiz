@@ -1,0 +1,468 @@
+{
+  "schema_version": 1,
+  "purpose": "Doğrulanmamış aday kaynaklar. Bu dosyadaki hiçbir kayıt kural, frekans satırı veya cevap için kaynak olarak kullanılamaz. Doğrulanan kayıt data/sources.json içine gerçek metadata ile taşınır ve buradan silinir.",
+  "last_access_probe": "2026-09-28T20:31Z — adayların tüm erişim alanları bu çalışma ortamından engelli (curl CONNECT 403 / WebFetch EGRESS_BLOCKED); bkz. docs/SOURCE_ACCESS_LOG.md",
+  "candidates": [
+    {
+      "id": "CAND.TR.BTK.NATIONAL_FREQUENCY_PLAN",
+      "title": "Ulusal Frekans Planı",
+      "publisher": "Bilgi Teknolojileri ve İletişim Kurumu",
+      "expected_source_type": "official_legal",
+      "jurisdiction": "TR",
+      "search_entry_point": "https://www.btk.gov.tr/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.btk.gov.tr"
+      ],
+      "unlocks": {
+        "phases": [
+          "P0"
+        ],
+        "fields": [
+          "allocation_status"
+        ],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Amatör tahsislerinin birincil/ikincil statüsü"
+      },
+      "related_sources": [
+        "TR.BTK.FTM.TECH.2022-IK-SYD-245"
+      ],
+      "cannot_support": [],
+      "notes": "Aday kayıt; yayıncı, kanonik URL, metin ve yürürlük doğrulanmadı. Planın hukuki niteliği ve güncel sürümü ayrıca doğrulanmalı."
+    },
+    {
+      "id": "CAND.TR.BTK.FTM.TECH.AMENDMENT_HISTORY",
+      "title": "FTM Teknik Ölçütler değişiklik kararları (BTK kurul kararları)",
+      "publisher": "Bilgi Teknolojileri ve İletişim Kurumu",
+      "expected_source_type": "official_legal",
+      "jurisdiction": "TR",
+      "search_entry_point": "https://www.btk.gov.tr/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.btk.gov.tr"
+      ],
+      "unlocks": {
+        "phases": [
+          "P0"
+        ],
+        "fields": [],
+        "conflicts": [
+          "TR-BTK-NUMBERING-001",
+          "TR-BTK-UNIT-001",
+          "TR-BTK-EMISSION-001"
+        ],
+        "rules": [],
+        "purpose": "Madde/tablo numaralandırması ve birim yazımı uyuşmazlıklarının sürüm geçmişinden çözülmesi"
+      },
+      "related_sources": [
+        "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+        "TR.BTK.AMATEUR_OVERVIEW"
+      ],
+      "cannot_support": [],
+      "notes": "Aday kayıt; yayıncı, kanonik URL, metin ve yürürlük doğrulanmadı."
+    },
+    {
+      "id": "CAND.TR.RG.FTM.REGULATION.PUBLICATION",
+      "title": "Frekans Tahsisinden Muaf Telsiz Cihaz ve Sistemleri Hakkında Yönetmelik — Resmî Gazete yayımı ve değişiklik zinciri",
+      "publisher": "T.C. Resmî Gazete",
+      "expected_source_type": "official_legal",
+      "jurisdiction": "TR",
+      "search_entry_point": "https://www.resmigazete.gov.tr/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.resmigazete.gov.tr",
+        "www.mevzuat.gov.tr"
+      ],
+      "unlocks": {
+        "phases": [
+          "P2"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Yayım tarihi/sayısı ve değişikliklerin resmî provenance'ı"
+      },
+      "related_sources": [
+        "TR.BTK.FTM.REGULATION.2018"
+      ],
+      "cannot_support": [],
+      "notes": "Aday kayıt; yayıncı, kanonik URL, metin ve yürürlük doğrulanmadı."
+    },
+    {
+      "id": "CAND.TR.RG.KEGM.EXAM.REGULATION.PUBLICATION",
+      "title": "KEGM Amatör Telsizcilik Sınav ve Belgelendirme Yönetmeliği — Resmî Gazete yayımı ve değişiklik zinciri",
+      "publisher": "T.C. Resmî Gazete",
+      "expected_source_type": "official_legal",
+      "jurisdiction": "TR",
+      "search_entry_point": "https://www.resmigazete.gov.tr/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.resmigazete.gov.tr",
+        "www.mevzuat.gov.tr"
+      ],
+      "unlocks": {
+        "phases": [
+          "P3",
+          "P4",
+          "P5",
+          "P6"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Yayım/yürürlük provenance'ı; belge sınıfı, çağrı işareti, sınav ve yenileme hükümlerinin doğrulanacağı metin"
+      },
+      "related_sources": [
+        "TR.KEGM.AMATEUR.EXAM.REGULATION"
+      ],
+      "cannot_support": [],
+      "notes": "Aday kayıt; yayıncı, kanonik URL, metin ve yürürlük doğrulanmadı."
+    },
+    {
+      "id": "CAND.ITU.RR",
+      "title": "ITU Radio Regulations (özellikle Madde 1, 5 ve 25)",
+      "publisher": "International Telecommunication Union",
+      "expected_source_type": "official_legal",
+      "jurisdiction": "INTERNATIONAL",
+      "search_entry_point": "https://www.itu.int/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.itu.int"
+      ],
+      "unlocks": {
+        "phases": [
+          "P1",
+          "P10"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [
+          "TR.AMATEUR.NO_OBSCURING_ENCRYPTION"
+        ],
+        "purpose": "Amatör servis tanımı, uluslararası tahsis tablosu/dipnotları, amatör servis hükümleri (şifreleme, üçüncü taraf trafiği, acil durum)"
+      },
+      "related_sources": [],
+      "cannot_support": [],
+      "notes": "Aday kayıt; yayıncı, kanonik URL, metin ve yürürlük doğrulanmadı. Uluslararası metindir; Türkiye iç hukukundaki etkisi ve hangi sürümün bağlayıcı olduğu ayrıca doğrulanmadan TR hukuki kuralı üretemez."
+    },
+    {
+      "id": "CAND.CEPT.TR-61-01",
+      "title": "CEPT Recommendation T/R 61-01 (CEPT Radio Amateur Licence)",
+      "publisher": "CEPT / ECC",
+      "expected_source_type": "official_legal",
+      "jurisdiction": "CEPT",
+      "search_entry_point": "https://www.cept.org/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.cept.org",
+        "docdb.cept.org",
+        "efis.cept.org"
+      ],
+      "unlocks": {
+        "phases": [
+          "P4",
+          "P5"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Yabancı amatörlerin Türkiye'de çalışması ve CEPT lisans eşdeğerliği"
+      },
+      "related_sources": [],
+      "cannot_support": [],
+      "notes": "Aday kayıt; yayıncı, kanonik URL, metin ve yürürlük doğrulanmadı. Türkiye'nin uygulama durumu (EFIS/ECO kaydı) doğrulanmadan kural üretilemez."
+    },
+    {
+      "id": "CAND.CEPT.TR-61-02",
+      "title": "CEPT Recommendation T/R 61-02 (HAREC)",
+      "publisher": "CEPT / ECC",
+      "expected_source_type": "official_legal",
+      "jurisdiction": "CEPT",
+      "search_entry_point": "https://www.cept.org/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.cept.org",
+        "docdb.cept.org",
+        "efis.cept.org"
+      ],
+      "unlocks": {
+        "phases": [
+          "P4",
+          "P6"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Harmonize sınav müfredatı ve belge sınıflarının CEPT karşılığı"
+      },
+      "related_sources": [],
+      "cannot_support": [],
+      "notes": "Aday kayıt; yayıncı, kanonik URL, metin ve yürürlük doğrulanmadı. Türkiye'nin uygulama durumu doğrulanmadan kural üretilemez."
+    },
+    {
+      "id": "CAND.CEPT.ECC-REC-05-06",
+      "title": "ECC Recommendation (05)06 (CEPT Novice Radio Amateur Licence)",
+      "publisher": "CEPT / ECC",
+      "expected_source_type": "official_legal",
+      "jurisdiction": "CEPT",
+      "search_entry_point": "https://www.cept.org/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.cept.org",
+        "docdb.cept.org",
+        "efis.cept.org"
+      ],
+      "unlocks": {
+        "phases": [
+          "P4"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Başlangıç sınıfı lisansın CEPT karşılığı"
+      },
+      "related_sources": [],
+      "cannot_support": [],
+      "notes": "Aday kayıt; yayıncı, kanonik URL, metin ve yürürlük doğrulanmadı. Türkiye'nin uygulama durumu doğrulanmadan kural üretilemez."
+    },
+    {
+      "id": "CAND.TR.KEGM.EXAM_GUIDE",
+      "title": "KEGM amatör telsizcilik sınav kılavuzu / soru havuzu (yayımlanmışsa)",
+      "publisher": "Kıyı Emniyeti Genel Müdürlüğü",
+      "expected_source_type": "official_technical",
+      "jurisdiction": "TR",
+      "search_entry_point": "https://www.kiyiemniyeti.gov.tr/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.kiyiemniyeti.gov.tr"
+      ],
+      "unlocks": {
+        "phases": [
+          "P6"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Sınav konuları, başvuru ve belge işlemleri"
+      },
+      "related_sources": [
+        "TR.KEGM.AMATEUR.FAQ"
+      ],
+      "cannot_support": [
+        "legal_claims"
+      ],
+      "notes": "Aday kayıt; böyle bir yayının varlığı doğrulanmadı."
+    },
+    {
+      "id": "CAND.TR.KEGM.CALLSIGN_POLICY",
+      "title": "KEGM çağrı işareti tahsis ve önek uygulaması",
+      "publisher": "Kıyı Emniyeti Genel Müdürlüğü",
+      "expected_source_type": "official_technical",
+      "jurisdiction": "TR",
+      "search_entry_point": "https://www.kiyiemniyeti.gov.tr/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.kiyiemniyeti.gov.tr"
+      ],
+      "unlocks": {
+        "phases": [
+          "P5"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Çağrı işareti yapısı, önekler, özel çağrı işaretleri"
+      },
+      "related_sources": [
+        "TR.KEGM.AMATEUR.FAQ",
+        "TR.KEGM.AMATEUR.EXAM.REGULATION"
+      ],
+      "cannot_support": [
+        "legal_claims"
+      ],
+      "notes": "Aday kayıt; hukuki dayanak Yönetmelik metninden (P3) doğrulanmalıdır."
+    },
+    {
+      "id": "CAND.TR.BTK.AMATEUR_REPEATER_LIST",
+      "title": "İzinli amatör tekrarlayıcı/role listesi (yayımlanmışsa)",
+      "publisher": "Bilgi Teknolojileri ve İletişim Kurumu",
+      "expected_source_type": "official_technical",
+      "jurisdiction": "TR",
+      "search_entry_point": "https://www.btk.gov.tr/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.btk.gov.tr"
+      ],
+      "unlocks": {
+        "phases": [
+          "P7"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Kurulu dernek tekrarlayıcılarının resmî listesi"
+      },
+      "related_sources": [
+        "TR.BTK.RADIO.PROCEDURES"
+      ],
+      "cannot_support": [
+        "legal_claims"
+      ],
+      "notes": "Aday kayıt; böyle bir listenin yayımlandığı doğrulanmadı."
+    },
+    {
+      "id": "CAND.IARU.R1.HF_BANDPLAN_DOC",
+      "title": "IARU Region 1 HF Band Plan (sürümlü doküman)",
+      "publisher": "International Amateur Radio Union Region 1",
+      "expected_source_type": "amateur_association",
+      "jurisdiction": "IARU-REGION-1",
+      "search_entry_point": "https://www.iaru-r1.org/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.iaru-r1.org"
+      ],
+      "unlocks": {
+        "phases": [
+          "P8"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "HF alt bant/mod tavsiyeleri (yalnız çalışma pratiği)"
+      },
+      "related_sources": [
+        "IARU.R1.BANDPLANS"
+      ],
+      "cannot_support": [
+        "legal_claims",
+        "turkish_permission"
+      ],
+      "notes": "Registry'de yalnız band planı giriş sayfası var; sürümlü doküman ayrıca kaydedilmeli."
+    },
+    {
+      "id": "CAND.IARU.R1.EMCOMM_GUIDE",
+      "title": "IARU Region 1 acil durum haberleşmesi rehberi",
+      "publisher": "International Amateur Radio Union Region 1",
+      "expected_source_type": "amateur_association",
+      "jurisdiction": "IARU-REGION-1",
+      "search_entry_point": "https://www.iaru-r1.org/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.iaru-r1.org"
+      ],
+      "unlocks": {
+        "phases": [
+          "P8"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Acil durum işletme pratiği"
+      },
+      "related_sources": [],
+      "cannot_support": [
+        "legal_claims",
+        "turkish_permission"
+      ],
+      "notes": "Aday kayıt; güncel sürüm doğrulanmadı."
+    },
+    {
+      "id": "CAND.TR.TRAC.REPEATER_LIST",
+      "title": "TRAC röle/tekrarlayıcı listesi",
+      "publisher": "Türkiye Radyo Amatörleri Cemiyeti",
+      "expected_source_type": "amateur_association",
+      "jurisdiction": "TR",
+      "search_entry_point": "https://trac.org.tr/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "trac.org.tr"
+      ],
+      "unlocks": {
+        "phases": [
+          "P9"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Türkiye'deki röle frekansları ve ton bilgileri (pratik bilgi)"
+      },
+      "related_sources": [],
+      "cannot_support": [
+        "legal_claims",
+        "turkish_permission"
+      ],
+      "notes": "Aday kayıt; resmî izin durumunu kanıtlamaz."
+    },
+    {
+      "id": "CAND.TR.TRAC.EXAM_STUDY",
+      "title": "TRAC sınav hazırlık / eğitim materyali",
+      "publisher": "Türkiye Radyo Amatörleri Cemiyeti",
+      "expected_source_type": "amateur_association",
+      "jurisdiction": "TR",
+      "search_entry_point": "https://trac.org.tr/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "trac.org.tr"
+      ],
+      "unlocks": {
+        "phases": [
+          "P9"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Eğitim içeriği ve teknik açıklamalar"
+      },
+      "related_sources": [],
+      "cannot_support": [
+        "legal_claims",
+        "turkish_permission"
+      ],
+      "notes": "Aday kayıt; içindeki eski mevzuat kopyaları yalnız provenance/tarihçe amacıyla kullanılabilir."
+    },
+    {
+      "id": "CAND.COMMUNITY.ARCH-YUNUS.AMATOR-TELSIZ",
+      "title": "arch-yunus/Amator-Telsiz- (GitHub deposu)",
+      "publisher": "arch-yunus (GitHub)",
+      "expected_source_type": "community",
+      "jurisdiction": "TR",
+      "search_entry_point": "https://github.com/arch-yunus/Amator-Telsiz-",
+      "canonical_url": null,
+      "status": "candidate_inaccessible",
+      "required_access_domains": [
+        "github.com"
+      ],
+      "unlocks": {
+        "phases": [
+          "P11"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Keşif ve çapraz kontrol"
+      },
+      "related_sources": [],
+      "cannot_support": [
+        "legal_claims",
+        "turkish_permission"
+      ],
+      "notes": "Kullanıcı tarafından önerildi. 2026-09-28 (bu oturum): GitHub add_repo 'not found or no access', web 404; depo özel, yanlış adlı veya mevcut olmayabilir. İçerik görülmedi."
+    }
+  ]
+}

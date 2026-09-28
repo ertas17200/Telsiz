@@ -94,6 +94,7 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 - [Frequency table contract](docs/FREQUENCY_TABLE.md)
 - [Official source access log](docs/SOURCE_ACCESS_LOG.md)
 - [Known source conflicts](docs/SOURCE_CONFLICTS.md)
+- [Unverified source candidates](docs/SOURCE_CANDIDATES.md)
 
 ## Status
 
