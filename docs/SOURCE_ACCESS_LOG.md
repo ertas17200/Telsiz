@@ -55,3 +55,21 @@ Result: no candidate in `data/source_candidates.json` could be verified; all rem
 | `github.com/arch-yunus/Amator-Telsiz-Rehberi` | REACHABLE | GitHub repository metadata, README, ROADMAP and root tree were read successfully; repository reports MIT license | Candidate status corrected from `candidate_inaccessible` to `candidate_unverified`; community content still cannot ground legal claims |
 
 This recheck supersedes only the earlier access-state observation for the community repository. It does not retroactively verify any claim copied from that repository.
+
+
+## 2026-09-28 — P1/P2/P3 canonical-text recheck
+
+The current verification path can read several official BTK/KEGM web pages, but still cannot retrieve the canonical consolidated Mevzuat Bilgi Sistemi texts needed for exact-text legal promotion.
+
+| PHASE | CANONICAL TARGET | CURRENT ACCESS | OFFICIAL CORROBORATION | RESULT |
+|---|---|---|---|---|
+| P1 — Law No. 5809 | `https://www.mevzuat.gov.tr/Metin1.Aspx?MevzuatIliski=0&MevzuatKod=1.5.5809&No=5809&Tertip=5&Tur=1` | inaccessible in current web path; PDF variant timed out | BTK's current FTM page quotes Article 37(3) and references Articles 36/37; other current BTK pages also attribute provisions to Law No. 5809 | `VERIFY_REQUIRED`; no promotion from secondary quotation alone |
+| P2 — FTM Regulation | `https://www.mevzuat.gov.tr/Metin.Aspx?MevzuatIliski=0&MevzuatKod=7.5.29010&sourceXmlSearch=frekans` | inaccessible in current web path | BTK's current FTM page identifies the regulation as published 27.11.2018 / RG 30608 and quotes Article 6(1) | `VERIFY_REQUIRED`; consolidated exact text still missing |
+| P3 — KEGM amateur exam/certification regulation | `https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=13769&MevzuatTur=7&MevzuatTertip=5` | inaccessible in current web path | KEGM's current Regulations page maps the title to MevzuatNo 13769; KEGM FAQ/2026 exam notice quote selected provisions | `VERIFY_REQUIRED`; selected official quotations do not replace the consolidated regulation |
+
+Fail-closed interpretation:
+
+- official institutional quotations are useful corroboration and provenance;
+- they do not replace the current consolidated legal text for rule promotion;
+- P1/P2/P3 remain on HOLD for exact-text verification;
+- work may proceed on source-independent engineering features without weakening these legal gates.
