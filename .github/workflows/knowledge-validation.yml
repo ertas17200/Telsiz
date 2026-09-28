@@ -30,5 +30,8 @@ jobs:
       - name: Validate knowledge registries
         run: python scripts/validate_knowledge.py
 
+      - name: Validate BTK raw transcription
+        run: python scripts/validate_btk_raw.py
+
       - name: Test grounding contract
         run: python -m unittest discover -s tests -p "test_*.py" -v
