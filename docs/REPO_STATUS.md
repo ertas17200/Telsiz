@@ -1,10 +1,10 @@
 # Repository Status — 2026-09-28
 
-This file is the canonical human-readable closure snapshot for the current Telsiz repository state. Machine-readable source, rule and frequency data remain authoritative in `data/`.
+This file is the canonical human-readable **engineering closure snapshot** for Telsiz. Machine-readable source, rule and frequency data remain authoritative in `data/`. The engineering baseline below is the last verified commit that changed code/data/validation behavior; later documentation-only commits may advance `main` without changing that engineering baseline.
 
-## Canonical main baseline
+## Canonical engineering baseline
 
-- `main`: `88bf927e59503f6371295c2938aacaeb5952c772`
+- Engineering baseline: `88bf927e59503f6371295c2938aacaeb5952c772`
 - Open pull requests at snapshot time: **0**
 - Latest main workflow: `Knowledge Validation`
 - Main run: `36470211240`
@@ -150,7 +150,7 @@ Once official-source access is available, continue in this order:
 ```text
 REPOSITORY_CONTROLS=PASS
 CI=PASS
-CURRENT_MAIN=88bf927e59503f6371295c2938aacaeb5952c772
+ENGINEERING_BASELINE=88bf927e59503f6371295c2938aacaeb5952c772
 FREQUENCY_COVERAGE=PARTIAL
 P0=BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
 P1=BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
