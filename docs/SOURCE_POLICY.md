@@ -106,3 +106,7 @@ When an official artifact (e.g. a PDF) is fetched:
 4. keep extracted structured data in GitHub and a human-readable provenance summary in the Drive knowledge base.
 
 A new fetch of the same URL whose SHA-256 differs from the recorded value means `SOURCE_CHANGED`: the source and every rule/row derived from it return to `REVERIFY_REQUIRED` (not `verified`) until re-checked. A changed file is never silently treated as equivalent to the recorded one.
+
+## 8. Candidate sources
+
+Sources that are known to be needed but not yet verified live in `data/source_candidates.json` (human view: `docs/SOURCE_CANDIDATES.md`). A candidate never carries a canonical URL, never has a verified status and can never be cited by a rule or frequency row. On verification it is promoted to `data/sources.json` with real metadata and removed from the candidate file.

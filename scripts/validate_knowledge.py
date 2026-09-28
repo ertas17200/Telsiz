@@ -19,6 +19,8 @@ SOURCES = ROOT / "data" / "sources.json"
 RULES = ROOT / "data" / "rules.json"
 FREQUENCY_TABLE = ROOT / "data" / "frequency_table.json"
 BTK_RAW_TABLE = ROOT / "data" / "btk_amateur_table_raw.json"
+SOURCE_CANDIDATES = ROOT / "data" / "source_candidates.json"
+SOURCE_CONFLICTS_DOC = ROOT / "docs" / "SOURCE_CONFLICTS.md"
 
 ALLOWED_TYPES = {
     "official_legal",
@@ -48,6 +50,10 @@ ALLOWED_RULE_TYPES = {
 ALLOWED_AUTHORITIES = {"legal", "official_technical", "amateur_practice"}
 ID_RE = re.compile(r"^[A-Z0-9][A-Z0-9._-]{2,95}$")
 SHA_RE = re.compile(r"^(sha256:)?[a-fA-F0-9]{64}$")
+HOST_RE = re.compile(r"^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$")
+CONFLICT_HEADING_RE = re.compile(r"^## (TR-[A-Z0-9-]+)\s*$", re.MULTILINE)
+ALLOWED_CANDIDATE_STATUS = {"candidate_unverified", "candidate_inaccessible"}
+ALLOWED_PHASES = {f"P{n}" for n in range(12)}
 ALLOWED_COVERAGE = {"partial", "complete"}
 ALLOWED_LICENSE_CLASSES = {"A", "B", "C"}
 RESTRICTION_FIELDS = (
@@ -506,6 +512,84 @@ def validate_frequency_table(
         validate_completeness(table, table_source)
 
 
+def validate_source_candidates(
+    payload: dict,
+    sources_by_id: dict[str, dict],
+    rules: list[dict],
+    table: dict,
+    known_conflicts: set[str],
+) -> None:
+    """Candidates are discovery records only; they can never ground anything."""
+    candidates = payload.get("candidates")
+    if not isinstance(candidates, list):
+        fail("source candidates: candidates must be a list")
+    rule_ids = {rule["id"] for rule in rules}
+    seen: set[str] = set()
+    for index, cand in enumerate(candidates):
+        if not isinstance(cand, dict):
+            fail(f"candidates[{index}] must be an object")
+        cand_id = cand.get("id")
+        if not isinstance(cand_id, str) or not ID_RE.fullmatch(cand_id) or not cand_id.startswith("CAND."):
+            fail(f"candidates[{index}].id must match ID pattern and start with CAND.")
+        if cand_id in seen:
+            fail(f"duplicate candidate id: {cand_id}")
+        if cand_id in sources_by_id:
+            fail(f"{cand_id}: candidate id collides with a registered source")
+        seen.add(cand_id)
+
+        for key in ("title", "publisher", "jurisdiction"):
+            if not isinstance(cand.get(key), str) or len(cand[key].strip()) < 2:
+                fail(f"{cand_id}: {key} is required")
+        if cand.get("expected_source_type") not in ALLOWED_TYPES:
+            fail(f"{cand_id}: invalid expected_source_type")
+        if cand.get("status") not in ALLOWED_CANDIDATE_STATUS:
+            fail(f"{cand_id}: invalid candidate status")
+        if cand.get("canonical_url") is not None:
+            fail(f"{cand_id}: a candidate cannot claim a canonical_url; promote it to sources.json instead")
+        entry = urlparse(cand.get("search_entry_point") or "")
+        if entry.scheme != "https" or not entry.netloc:
+            fail(f"{cand_id}: search_entry_point must be absolute HTTPS")
+
+        domains = cand.get("required_access_domains")
+        if not isinstance(domains, list) or not domains or not all(
+            isinstance(d, str) and HOST_RE.fullmatch(d) for d in domains
+        ):
+            fail(f"{cand_id}: required_access_domains must be a non-empty hostname list")
+
+        unlocks = cand.get("unlocks")
+        if not isinstance(unlocks, dict):
+            fail(f"{cand_id}: unlocks must be an object")
+        phases = unlocks.get("phases")
+        if not isinstance(phases, list) or not phases or not set(phases) <= ALLOWED_PHASES:
+            fail(f"{cand_id}: unlocks.phases must be a non-empty subset of P0-P11")
+        if not isinstance(unlocks.get("purpose"), str) or len(unlocks["purpose"].strip()) < 8:
+            fail(f"{cand_id}: unlocks.purpose is required")
+        unknown_fields = set(unlocks.get("fields", [])) - set(RESTRICTION_FIELDS)
+        if unknown_fields:
+            fail(f"{cand_id}: unlocks unknown frequency fields {sorted(unknown_fields)}")
+        unknown_conflicts = set(unlocks.get("conflicts", [])) - known_conflicts
+        if unknown_conflicts:
+            fail(f"{cand_id}: unlocks unknown conflicts {sorted(unknown_conflicts)}")
+        unknown_rules = set(unlocks.get("rules", [])) - rule_ids
+        if unknown_rules:
+            fail(f"{cand_id}: unlocks unknown rules {sorted(unknown_rules)}")
+
+        unknown_sources = set(cand.get("related_sources", [])) - set(sources_by_id)
+        if unknown_sources:
+            fail(f"{cand_id}: related_sources not registered {sorted(unknown_sources)}")
+        cannot = cand.get("cannot_support")
+        if not isinstance(cannot, list):
+            fail(f"{cand_id}: cannot_support must be a list")
+        if not cand["expected_source_type"].startswith("official_") and "legal_claims" not in cannot:
+            fail(f"{cand_id}: non-official candidate must declare cannot_support legal_claims")
+
+    grounded = [(rule["id"], rule["source_id"]) for rule in rules]
+    grounded += [(row["id"], row["source_id"]) for row in table["rows"]]
+    for item_id, source_id in grounded:
+        if source_id in seen:
+            fail(f"{item_id}: cites unverified candidate {source_id}")
+
+
 def main() -> int:
     source_payload = load_json(SOURCES, "source registry")
     sources = source_payload.get("sources")
@@ -535,11 +619,15 @@ def main() -> int:
     table = load_json(FREQUENCY_TABLE, "frequency table")
     validate_frequency_table(table, sources_by_id, rules_by_id)
     validate_rows_within_raw(table, load_json(BTK_RAW_TABLE, "raw BTK transcription"))
+    known_conflicts = set(CONFLICT_HEADING_RE.findall(SOURCE_CONFLICTS_DOC.read_text(encoding="utf-8")))
+    candidates = load_json(SOURCE_CANDIDATES, "source candidates")
+    validate_source_candidates(candidates, sources_by_id, rules, table, known_conflicts)
 
     print(
         f"PASS: validated {len(sources)} source record(s), "
-        f"{len(rules)} grounded rule(s) "
-        f"and {len(table['rows'])} frequency row(s) "
+        f"{len(rules)} grounded rule(s), "
+        f"{len(table['rows'])} frequency row(s) "
+        f"and {len(candidates['candidates'])} unverified source candidate(s) "
         f"[coverage={table['coverage_status']}]"
     )
     return 0
