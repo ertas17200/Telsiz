@@ -4,24 +4,28 @@ This file is the canonical human-readable **engineering closure snapshot** for T
 
 ## Canonical engineering baseline
 
-- Engineering baseline: `88bf927e59503f6371295c2938aacaeb5952c772`
-- Open pull requests at snapshot time: **0**
-- Latest main workflow: `Knowledge Validation`
-- Main run: `36470211240`
+- Engineering baseline: `4d5f6b797218fffc6bc3729361232dfece15ea43`
+- Technical closure PR: **#10**
+- Open pull requests at technical-closure snapshot: **0**
+- Main workflow: `Knowledge Validation`
+- Main exact-head run: `36477656205`
 - Status: `completed`
 - Conclusion: `success`
-- Runner: `GitHub Actions 1000014000`
-- Completed workflow steps: **9**
+- Runner: `GitHub Actions 1000014027`
+- Completed workflow steps: **10**
 
-The CI job confirms:
+The exact-head main job proves:
 
 - tracked Python/cache artifact check: **PASS**
 - source/rule/frequency registry validation: **PASS**
-- unit test suite: **53 tests, OK**
+- BTK raw transcription validator: **PASS**
+- unit test suite: **65 tests, OK**
 - source registry: **11 records**
 - grounded rules: **10 records**
-- frequency rows: **2 records**
-- frequency coverage: **partial**
+- semantic frequency rows: **2 records**
+- raw BTK amateur source rows: **33 records**
+- Tablo 26-1 emission definitions: **24 records**
+- semantic frequency coverage: **partial**
 
 ## Closed PR chain
 
@@ -30,64 +34,74 @@ The CI job confirms:
 | #5 | Frequency-table safety structure, fail-closed lookup and question→rule→source tests | `599a65b0290a3c6aacfa56cfe0700a7705e6b527` | `516a0a15645dbf75dd381b48ef07f6aad2eda28d` | MERGED |
 | #6 | Remove accidentally tracked Python bytecode and add ignore protection | `fd38e029ab6716e4fb2b294a32d95dae5fa386d8` | `d39b042cd14a4c1ec65f88eb838f38d01f5b8dfd` | MERGED |
 | #7 | Decision engine, completeness gate, source access log and tracked-cache regression CI | `d01a7dc479b938d4091cb6773361c80427d12965` | `88bf927e59503f6371295c2938aacaeb5952c772` | MERGED |
+| #8 | Canonical repository closure-status document | `39fad23342d1a7faed409f4dd726a0277da60f4e` | `0085b3ad910fba86095edcf7f4cf5f598867c7a2` | MERGED |
+| #9 | Distinguish moving main from engineering baseline | `6f6b2fefc7a68e926a98a1455e2e317282afc9f6` | `b6c4a03bde0f6b71024a3065199c2989bcf35e0d` | MERGED |
+| #10 | Official BTK amateur-table raw extraction, emission map and raw-integrity gate | `341e74206a7adb42ed8d87b0d96af85d7dc010c2` | `4d5f6b797218fffc6bc3729361232dfece15ea43` | MERGED |
 
-## Current frequency-table status
+## P0 — BTK amateur frequency table
 
-Canonical file: `data/frequency_table.json`
+Canonical semantic file: `data/frequency_table.json`  
+Canonical raw source transcription: `data/btk_amateur_table_raw.json`  
+Emission reference: `data/btk_emission_types.json`
 
 Current state:
 
 ```text
-coverage_status=partial
-coverage_blocker=BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
-artifact=null
-row_count_reconciliation=null
+RAW_SOURCE_ROWS=33
+RAW_ROW_TRANSCRIPTION=PASS
+EMISSION_DEFINITIONS=24
+SEMANTIC_FREQUENCY_ROWS=2
+FREQUENCY_COVERAGE=PARTIAL
+ARTIFACT_SHA256=UNKNOWN
+SEMANTIC_PROMOTION=HOLD
 ```
 
-Only the already-grounded C-class power rows are present:
+The official BTK PDF was opened through a trusted PDF rendering path, its amateur table pages were visually verified, and all **33** visible source rows were transcribed. The raw transcription is now independently validated in CI.
 
-- 144–146 MHz → 5 W maximum transmitter output power
-- 430–440 MHz → 5 W maximum transmitter output power
+The semantic table remains partial. Raw rows do **not** directly create an `ALLOWED` verdict.
 
-These rows are **not** a complete amateur frequency table.
+Only the previously grounded semantic C-class limits remain decision-enabled:
 
-For unextracted fields:
+- 144–146 MHz → maximum transmitter output power 5 W
+- 430–440 MHz → maximum transmitter output power 5 W
+
+For unextracted semantic dimensions:
 
 ```text
 null = NOT_EXTRACTED
 ```
 
-`null` must never be interpreted as "no restriction" or "permission granted".
+A missing or unresolved semantic field produces `UNKNOWN`, not fabricated permission.
 
-A missing row must not automatically become `NOT_ALLOWED`; incomplete evidence produces `UNKNOWN`.
+## Remaining P0 gate
 
-## Official-source access blocker
+The source-content access blocker has been reduced substantially: the official PDF content is available through a trusted renderer and the raw table is reconciled 33/33.
 
-The 2026-09-28 source probe recorded the following domains as blocked from the Claude Code cloud environment by egress policy:
+P0 is **not** fully complete because byte-level artifact evidence is still missing and source-internal conflicts remain open:
 
-- `www.btk.gov.tr`
-- `www.mevzuat.gov.tr`
-- `www.resmigazete.gov.tr`
-- `resmigazete.gov.tr`
+1. raw official PDF bytes must be acquired from the same canonical URL;
+2. file size and SHA-256 must be recorded;
+3. source registry must bind that hash;
+4. source-change detection must compare later downloads;
+5. raw rows must be promoted into conflict-aware semantic records;
+6. open source conflicts must not be silently normalized.
 
-Observed failure class: `CONNECT 403 / EGRESS_BLOCKED`.
-
-Therefore:
+Current status:
 
 ```text
-P0 full BTK amateur frequency table = BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
-P1 5809 full-text verification       = BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
-P2 FTM Regulation verification      = BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
-P3 KEGM Regulation verification     = BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
+P0=RAW_TRANSCRIPTION_COMPLETE_SEMANTIC_PROMOTION_HOLD
+P0_BLOCKER=ARTIFACT_SHA256_AND_SOURCE_CONFLICTS
 ```
 
-This blocker describes the execution environment, not the availability or validity of the official sources themselves.
+## Open official-source conflicts
 
-No unofficial mirror, forum, community copy or memory-derived completion may be used to bypass this blocker.
+- `TR-BTK-NUMBERING-001` — Article 22 refers to Table-26 while the visible amateur-table heading is Table 25.
+- `TR-BTK-EMISSION-001` — the merged emission cell repeats source tokens and contains `A3J`/`J2C`, while Tablo 26-1 does not define those two codes. No silent substitution is permitted.
+- `TR-BTK-UNIT-001` — the 28000–29700 kHz row contains a B-class condition sentence written as 28000–29700 MHz. No silent unit correction is permitted.
 
-See: [Official source access log](SOURCE_ACCESS_LOG.md).
+See [Known source conflicts](SOURCE_CONFLICTS.md) and [BTK raw extraction evidence](BTK_RAW_EXTRACTION.md).
 
-## Fail-closed controls now enforced
+## Fail-closed controls
 
 The repository currently enforces these controls programmatically:
 
@@ -96,64 +110,62 @@ The repository currently enforces these controls programmatically:
 3. verified legal rules require current legal sources;
 4. pending sources cannot support verified legal rules;
 5. amateur-association material cannot create Turkish legal permission;
-6. unknown/missing frequency information resolves to `UNKNOWN`, not fabricated permission or prohibition;
-7. a table cannot be marked `complete` without official artifact evidence, matching SHA-256, row/footnote reconciliation and fully extracted row fields;
-8. conflicting overlapping frequency rows are rejected;
-9. tracked `.pyc`, `__pycache__`, `.pytest_cache`, `.mypy_cache` and `.ruff_cache` artifacts fail CI.
+6. unknown/missing semantic frequency information resolves to `UNKNOWN`;
+7. semantic coverage cannot become `complete` without artifact evidence, SHA-256, reconciliation and required extracted dimensions;
+8. conflicting overlapping semantic rows are rejected;
+9. raw BTK transcription must contain exactly 33 source rows and 24 emission definitions;
+10. source-only undefined emission anomalies are explicitly preserved rather than normalized;
+11. repeated source emission tokens are de-duplicated only in the machine list while provenance records the anomaly;
+12. tracked Python/cache artifacts fail CI.
 
-## Source artifact policy
+## CI learning from PR #10
 
-When official access becomes available:
+Two pre-merge runs correctly failed when inherited merged-cell emission repetitions were present in machine-readable arrays. The validator was **not weakened**. The data was corrected, source anomalies were documented, and a regression test was added across every raw row.
 
-1. fetch the official artifact;
-2. record canonical URL, fetch time, HTTP status, MIME type, size and page count;
-3. calculate SHA-256;
-4. bind the hash to the source record;
-5. extract rows/rules with exact source locators;
-6. reconcile source row and footnote counts;
-7. run the full validator and tests;
-8. only then permit `coverage_status=complete`.
-
-If the same source URL later produces a different SHA-256, derived data returns to:
+Final exact-head evidence:
 
 ```text
-SOURCE_CHANGED
-REVERIFY_REQUIRED
-```
+PR_HEAD=341e74206a7adb42ed8d87b0d96af85d7dc010c2
+PR_RUN=36477491102
+PR_RUNNER=GitHub Actions 1000014026
+PR_CI=PASS
 
-until rechecked.
+MERGE_SHA=4d5f6b797218fffc6bc3729361232dfece15ea43
+MAIN_RUN=36477656205
+MAIN_RUNNER=GitHub Actions 1000014027
+MAIN_CI=PASS
+TESTS=65/65
+RAW_ROWS=33/33
+EMISSION_DEFINITIONS=24/24
+```
 
 ## Google Drive companion documentation
 
-The `Telsiz_AI_Knowledge_Base` Drive structure exists as a human-readable companion store. The latest synchronization includes separate records for:
-
-- PR #6 cleanup evidence;
-- PR #7 work log;
-- official source access probe;
-- frequency decision contract;
-- PR #7 test-suite evidence.
-
-Drive file identifiers are intentionally not duplicated in this repository. GitHub remains the canonical store for code, structured data, validation logic and exact commit history.
+The `Telsiz_AI_Knowledge_Base` Drive tree is the human-readable companion store. GitHub remains canonical for code, structured data, validators and commit history. New PR #10 evidence should be stored as a delta/readback record rather than overwriting an existing log when the Drive interface cannot edit it safely.
 
 ## NEXT
 
-Once official-source access is available, continue in this order:
+Continue fail-closed in this order:
 
-1. P0 — fetch the official BTK technical-criteria PDF, record SHA-256, extract and reconcile the full amateur frequency table;
-2. P1 — verify and atomize relevant provisions of Law No. 5809;
-3. P2 — verify and atomize the FTM Regulation;
-4. P3 — verify and atomize the KEGM amateur-radio examination/certification regulation;
-5. expand licence/call-sign and technical knowledge only from source-grounded material.
+1. **P0 artifact gate** — acquire the canonical official PDF bytes, calculate SHA-256/file size, bind the hash and activate source-change detection.
+2. **P0 semantic promotion** — map the 33 raw rows into semantic class/power/emission/context records without normalizing open conflicts.
+3. **P1** — exact-text verification and atomization of relevant Law No. 5809 provisions.
+4. **P2** — exact-text verification and atomization of the FTM Regulation.
+5. **P3** — exact-text verification and atomization of the KEGM amateur-radio examination/certification regulation.
+6. Expand licence/call-sign and technical knowledge only from source-grounded material.
 
 ## Closure state
 
 ```text
 REPOSITORY_CONTROLS=PASS
 CI=PASS
-ENGINEERING_BASELINE=88bf927e59503f6371295c2938aacaeb5952c772
+ENGINEERING_BASELINE=4d5f6b797218fffc6bc3729361232dfece15ea43
+RAW_BTK_ROWS=33
+EMISSION_DEFINITIONS=24
+TESTS=65
 FREQUENCY_COVERAGE=PARTIAL
-P0=BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
-P1=BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
-P2=BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
-P3=BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
+P0=RAW_TRANSCRIPTION_COMPLETE_SEMANTIC_PROMOTION_HOLD
+P1=VERIFY_REQUIRED
+P2=VERIFY_REQUIRED
+P3=VERIFY_REQUIRED
 ```
