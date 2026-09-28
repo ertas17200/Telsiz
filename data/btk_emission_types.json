@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+  "source_locator": {
+    "table": "Tablo 26-1 Emisyon tipleri",
+    "document_page": "46/47"
+  },
+  "definitions": [
+    {
+      "code": "A1A",
+      "bandwidth": "100 Hz"
+    },
+    {
+      "code": "A1B",
+      "bandwidth": "100 Hz"
+    },
+    {
+      "code": "A1D",
+      "bandwidth": "8 kHz"
+    },
+    {
+      "code": "A2A",
+      "bandwidth": "2.1 kHz"
+    },
+    {
+      "code": "A2B",
+      "bandwidth": "2.1 kHz"
+    },
+    {
+      "code": "A3C",
+      "bandwidth": "3 kHz"
+    },
+    {
+      "code": "A3F",
+      "bandwidth": "10.5 MHz"
+    },
+    {
+      "code": "C3F",
+      "bandwidth": "7.25 MHz"
+    },
+    {
+      "code": "F1A",
+      "bandwidth": "304 Hz"
+    },
+    {
+      "code": "F1B",
+      "bandwidth": "304 Hz"
+    },
+    {
+      "code": "F1D",
+      "bandwidth": "20 kHz"
+    },
+    {
+      "code": "F2A",
+      "bandwidth": "1.42 kHz"
+    },
+    {
+      "code": "F2B",
+      "bandwidth": "1.42 kHz"
+    },
+    {
+      "code": "F3E",
+      "bandwidth": "16 kHz"
+    },
+    {
+      "code": "F3F",
+      "bandwidth": "6 MHz"
+    },
+    {
+      "code": "G3E",
+      "bandwidth": "16 kHz"
+    },
+    {
+      "code": "H3E",
+      "bandwidth": "3 kHz"
+    },
+    {
+      "code": "J2A",
+      "bandwidth": "134 Hz"
+    },
+    {
+      "code": "J2B",
+      "bandwidth": "134 Hz"
+    },
+    {
+      "code": "J2D",
+      "bandwidth": "3 kHz"
+    },
+    {
+      "code": "J3C",
+      "bandwidth": "3 kHz"
+    },
+    {
+      "code": "J3E",
+      "bandwidth": "3 kHz"
+    },
+    {
+      "code": "J3F",
+      "bandwidth": "6 MHz"
+    },
+    {
+      "code": "R3E",
+      "bandwidth": "3 kHz"
+    }
+  ],
+  "integrity_notes": [
+    "The 28 MHz-and-above emission cell visually lists J2C, but Tablo 26-1 contains no J2C definition.",
+    "The 28 MHz-and-above emission cell visually repeats F2B; the raw transcription de-duplicates the code list and records the repetition as a source conflict.",
+    "F3E and G3E rows state that below 29.7 MHz the maximum bandwidth is 6 kHz even though the table's nominal bandwidth column shows 16 kHz."
+  ]
+}
