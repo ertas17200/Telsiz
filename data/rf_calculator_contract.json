@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "source_id": "BIPM.SI.DEFINING_CONSTANTS",
+  "speed_of_light_m_s": 299792458,
+  "formula": "lambda = c / f; propagation_length = lambda * velocity_factor",
+  "supported_frequency_units": {
+    "Hz": 1,
+    "kHz": 1000,
+    "MHz": 1000000,
+    "GHz": 1000000000
+  },
+  "velocity_factor": {
+    "minimum_exclusive": 0,
+    "maximum_inclusive": 1,
+    "default": 1,
+    "meaning": "User-supplied propagation velocity ratio relative to c. A value of 1 represents free space."
+  },
+  "outputs": [
+    "frequency_hz",
+    "free_space_wavelength_m",
+    "velocity_factor",
+    "propagation_wavelength_m",
+    "quarter_wave_m",
+    "half_wave_m",
+    "full_wave_m"
+  ],
+  "assumptions": [
+    "The calculation is an ideal electromagnetic wavelength/electrical-length calculation.",
+    "Quarter-wave and half-wave outputs are not guaranteed physical resonant antenna cut lengths.",
+    "Real antennas, feed lines, insulation, geometry, surroundings and end effects can change physical dimensions."
+  ],
+  "trust_boundary": {
+    "legal_content": false,
+    "legal_verdicts": false
+  }
+}

@@ -75,21 +75,21 @@ Acceptance:
 
 ### P11.3 — Operator tools
 
-**Implementation status: IN PROGRESS. Grid Locator, source-grounded Morse Trainer, source-grounded Q-code/RS(T) Trainer, and ADIF 3.1.7 QSO export are implemented; antenna/RF calculators remain.**
+**Implementation status: IMPLEMENTED BASELINE. Grid Locator, Morse Trainer, Q-code/RS(T) Trainer, ADIF 3.1.7 QSO export, and a source-grounded RF wavelength/electrical-length calculator are implemented.**
 
 Implemented:
 - deterministic Maidenhead grid locator encoder;
 - source-grounded ITU-R M.1677-1 Morse Trainer (A-Z/0-9 subset, encode/decode, seeded quiz);
 - source-grounded Q-code/RS(T) Trainer with separate IARU/ITU provenance and deterministic practice prompts;
 - bounded QSO record contract with source-grounded ADIF 3.1.7 ADI export;
+- BIPM-grounded free-space wavelength and velocity-factor electrical-length calculator with explicit no-cut-length guarantee;
 - 2/4/6-character Grid Locator precision;
 - locator cell bounds/center decoder;
 - strict global coordinate bounds and invalid-input rejection;
 - round-trip/boundary/normalization unit tests;
 - CLI output explicitly returns `legal_verdict: null`.
 
-Remaining:
-- antenna/RF calculators.
+Baseline remaining: none. Antenna-specific design/cut-length calculators require separate source and assumption contracts before they may be added.
 
 Acceptance:
 - deterministic tools have unit tests and boundary cases;
