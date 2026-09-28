@@ -33,5 +33,8 @@ jobs:
       - name: Validate BTK raw transcription
         run: python scripts/validate_btk_raw.py
 
+      - name: Validate official artifact registry
+        run: python scripts/artifact_gate.py validate-registry
+
       - name: Test grounding contract
         run: python -m unittest discover -s tests -p "test_*.py" -v
