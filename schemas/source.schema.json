@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ertas17200/Telsiz/schemas/source.schema.json",
+  "title": "Telsiz Source Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "publisher",
+    "source_type",
+    "jurisdiction",
+    "url",
+    "topics",
+    "verification_status",
+    "verified_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9._-]{2,63}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3
+    },
+    "publisher": {
+      "type": "string",
+      "minLength": 2
+    },
+    "source_type": {
+      "enum": [
+        "official_legal",
+        "official_technical",
+        "amateur_association",
+        "technical_manual",
+        "educational",
+        "community"
+      ]
+    },
+    "jurisdiction": {
+      "type": "string",
+      "minLength": 2
+    },
+    "url": {
+      "type": "string",
+      "pattern": "^https://"
+    },
+    "topics": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 2
+      }
+    },
+    "verification_status": {
+      "enum": ["verified", "pending", "unverified", "deprecated"]
+    },
+    "verified_at": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "publication_date": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "effective_date": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "legal_status": {
+      "enum": ["current", "superseded", "repealed", "unknown", "not_applicable"]
+    },
+    "instrument_id": {
+      "type": ["string", "null"]
+    },
+    "reference": {
+      "type": ["string", "null"]
+    },
+    "content_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^(sha256:)?[a-fA-F0-9]{64}$"
+    },
+    "supersedes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "superseded_by": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "notes": {
+      "type": ["string", "null"]
+    }
+  }
+}
