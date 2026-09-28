@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "source_id": "ADIF.SPEC.3.1.7",
+  "adif_version": "3.1.7",
+  "export_format": "ADI",
+  "purpose": "Bounded Telsiz QSO record contract for deterministic ADI export. This is an application contract, not the ADIF specification's database schema.",
+  "required_fields": [
+    "CALL",
+    "QSO_DATE",
+    "TIME_ON",
+    "MODE"
+  ],
+  "at_least_one_of": [
+    "BAND",
+    "FREQ"
+  ],
+  "optional_fields": [
+    "RST_SENT",
+    "RST_RCVD",
+    "GRIDSQUARE",
+    "COMMENT"
+  ],
+  "field_order": [
+    "QSO_DATE",
+    "TIME_ON",
+    "CALL",
+    "BAND",
+    "FREQ",
+    "MODE",
+    "RST_SENT",
+    "RST_RCVD",
+    "GRIDSQUARE",
+    "COMMENT"
+  ],
+  "rules": {
+    "QSO_DATE": "YYYYMMDD calendar date",
+    "TIME_ON": "HHMM or HHMMSS in UTC",
+    "FREQ": "positive decimal frequency in MHz when present",
+    "text": "v1 ADI exporter accepts printable ASCII only; newlines are rejected"
+  },
+  "trust_boundary": {
+    "legal_content": false,
+    "legal_verdicts": false,
+    "notes": "A successfully exported QSO record is not evidence that the transmission was legally permitted."
+  }
+}

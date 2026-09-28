@@ -48,5 +48,8 @@ jobs:
       - name: Validate Q-code and RST data
         run: python scripts/validate_operator_codes.py
 
+      - name: Validate QSO log and ADIF contract
+        run: python scripts/validate_qso_log.py
+
       - name: Test grounding contract
         run: python -m unittest discover -s tests -p "test_*.py" -v

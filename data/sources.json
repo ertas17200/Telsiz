@@ -360,6 +360,32 @@
       "supersedes": [],
       "superseded_by": [],
       "notes": "ITU resmî Recommendation sayfasında 'In force (Main)' olarak listelenir ve Radio Regulations tarafından referansla kullanılan sürümdür. Telsiz repo bunu Q-code terminolojisi için teknik provenance olarak kullanır; Türkiye'de amatör yayın izni veya hukuki verdict üretmez."
+    },
+    {
+      "id": "ADIF.SPEC.3.1.7",
+      "title": "Amateur Data Interchange Format (ADIF) Specification — Version 3.1.7",
+      "publisher": "ADIF Developers Group",
+      "source_type": "technical_manual",
+      "jurisdiction": "INTERNATIONAL",
+      "url": "https://adif.org.uk/ADIF_Current",
+      "topics": [
+        "QSO logging",
+        "ADI",
+        "ADIF",
+        "data interchange",
+        "amateur radio software"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T21:58:00Z",
+      "publication_date": "2026-03-22",
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": "ADIF 3.1.7",
+      "reference": "I.D Applicability; I.E Support of Fields; III.C QSO Fields; IV.A ADI File Format",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "ADIF 3.1.7 is the current released specification as of the verification date. The specification defines interchange formats rather than an application database schema. Telsiz uses a deliberately bounded internal QSO-record contract and exports a supported subset to ADI; this source does not create transmit permission."
     }
   ]
 }
