@@ -36,6 +36,7 @@ Telsiz/
 ├── academy/
 │   ├── EXAM.md
 │   ├── GRID_LOCATOR.md
+│   ├── MORSE_TRAINER.md
 │   ├── README.md
 │   ├── academy.json
 │   └── exam_questions.json
@@ -60,8 +61,10 @@ Telsiz/
 │   ├── exam_simulator.py
 │   ├── frequency_lookup.py
 │   ├── grid_locator.py
+│   ├── morse_trainer.py
 │   ├── validate_academy.py
 │   ├── validate_exam.py
+│   ├── validate_morse.py
 │   └── validate_knowledge.py
 └── tests/
 ```
@@ -81,6 +84,7 @@ python scripts/check_repo_hygiene.py
 python scripts/validate_knowledge.py
 python scripts/validate_academy.py
 python scripts/validate_exam.py
+python scripts/validate_morse.py
 python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
@@ -111,6 +115,7 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 - [Academy trust contract and module manifest](academy/README.md)
 - [Grounded practice exam contract](academy/EXAM.md)
 - [Maidenhead Grid Locator tool contract](academy/GRID_LOCATOR.md)
+- [Source-grounded Morse Trainer contract](academy/MORSE_TRAINER.md)
 
 ## Status
 
