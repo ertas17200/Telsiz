@@ -138,6 +138,11 @@ class GroundedExamScoringTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             sim.score_answers(BANK, {BANK["questions"][0]["id"]: "Z"})
 
+    def test_duplicate_cli_answer_rejected(self):
+        qid = BANK["questions"][0]["id"]
+        with self.assertRaises(ValueError):
+            sim.answers_from_pairs([(qid, "A"), (qid, "B")])
+
 
 if __name__ == "__main__":
     unittest.main()
