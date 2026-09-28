@@ -14,7 +14,7 @@
   "source_rows_counted": 33,
   "artifact_sha256": null,
   "semantic_promotion_status": "HOLD_ARTIFACT_HASH_AND_SOURCE_CONFLICTS",
-  "method": "Official BTK PDF text layer plus visual screenshot verification of pages 40-45 (PDF indices 39-44); merged-cell inheritance is recorded explicitly.",
+  "method": "Official BTK PDF text layer plus visual screenshot verification of pages 40-45 (PDF indices 39-44); merged-cell inheritance is recorded explicitly. Machine emission-code lists are de-duplicated across all rows while source repetitions remain documented in TR-BTK-EMISSION-001.",
   "known_source_conflicts": [
     "TR-BTK-NUMBERING-001",
     "TR-BTK-EMISSION-001",
@@ -620,7 +620,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -667,7 +666,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -720,7 +718,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -768,7 +765,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -816,7 +812,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -867,7 +862,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -915,7 +909,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -963,7 +956,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -1012,7 +1004,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -1060,7 +1051,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -1104,7 +1094,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -1148,7 +1137,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -1194,7 +1182,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -1240,7 +1227,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -1286,7 +1272,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -1330,7 +1315,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -1376,7 +1360,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
