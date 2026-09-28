@@ -22,7 +22,7 @@ EXPECTED_EMISSION_DEFINITIONS = 24
 ALLOWED_UNITS = {"kHz", "MHz", "GHz"}
 ALLOWED_CLASSES = {"A", "B", "C"}
 ALLOWED_PAGES = {"41/47", "42/47", "43/47", "44/47", "45/47"}
-KNOWN_UNDEFINED_EMISSION = "J2C"
+KNOWN_UNDEFINED_EMISSIONS = {"A3J", "J2C"}
 EXPECTED_CONFLICTS = {
     "TR-BTK-NUMBERING-001",
     "TR-BTK-EMISSION-001",
@@ -124,13 +124,15 @@ def validate_payloads(raw: dict, emission_map: dict) -> None:
         fail("every emission definition needs a bandwidth")
     defined = set(codes)
 
-    unexpected = all_codes - defined - {KNOWN_UNDEFINED_EMISSION}
+    unexpected = all_codes - defined - KNOWN_UNDEFINED_EMISSIONS
     if unexpected:
         fail(f"raw table contains unexpected undefined emissions: {sorted(unexpected)}")
-    if KNOWN_UNDEFINED_EMISSION not in all_codes:
-        fail("expected source inconsistency J2C is missing from raw transcription")
-    if KNOWN_UNDEFINED_EMISSION in defined:
-        fail("J2C must remain undefined because Tablo 26-1 does not define it")
+    missing_known = KNOWN_UNDEFINED_EMISSIONS - all_codes
+    if missing_known:
+        fail(f"expected source inconsistency code(s) missing from raw transcription: {sorted(missing_known)}")
+    wrongly_defined = KNOWN_UNDEFINED_EMISSIONS & defined
+    if wrongly_defined:
+        fail(f"source-only emission code(s) must remain undefined by Tablo 26-1: {sorted(wrongly_defined)}")
 
     row_144 = find_row(rows, 144, 146, "MHz")
     if set(row_144["license_classes"]) != {"A", "B", "C"}:
