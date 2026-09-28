@@ -34,6 +34,8 @@ Telsiz/
 ├── .github/workflows/
 │   └── knowledge-validation.yml
 ├── data/
+│   ├── frequency_table.json
+│   ├── rules.json
 │   └── sources.json
 ├── docs/
 │   ├── AI_ANSWER_POLICY.md
@@ -41,8 +43,10 @@ Telsiz/
 │   └── SOURCE_POLICY.md
 ├── schemas/
 │   └── source.schema.json
-└── scripts/
-    └── validate_knowledge.py
+├── scripts/
+│   ├── frequency_lookup.py
+│   └── validate_knowledge.py
+└── tests/
 ```
 
 ## Fail-closed rule
@@ -76,6 +80,7 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 - [Project scope](docs/PROJECT_SCOPE.md)
 - [Source policy](docs/SOURCE_POLICY.md)
 - [AI answer policy](docs/AI_ANSWER_POLICY.md)
+- [Frequency table contract](docs/FREQUENCY_TABLE.md)
 
 ## Status
 

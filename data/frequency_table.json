@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+  "table_locator": "MADDE 22 amatör istasyon tablosu (PDF başlığı: Tablo 25; madde içi atıf: Tablo-26 / Tablo 26-1)",
+  "coverage_status": "partial",
+  "coverage_blocker": "BLOCKED_BY_MISSING_ARTIFACT: resmî PDF (https://www.btk.gov.tr/uploads/pages/ftm-teknik-olcutler-ek-5.pdf) 2026-09-28 oturumunda ortamın ağ politikası tarafından engellendi; tam tablo byte/hash yakalanmadan satır çıkarımı yapılmadı.",
+  "null_field_semantics": "null = NOT_EXTRACTED. null hiçbir zaman 'kısıtlama yok' veya 'izin var' anlamına gelmez.",
+  "rows": [
+    {
+      "id": "TR.FTM.AMATEUR.ROW.C.144-146",
+      "frequency_min": 144,
+      "frequency_max": 146,
+      "unit": "MHz",
+      "license_class": ["C"],
+      "maximum_output_power": 5,
+      "power_unit": "W",
+      "emission": null,
+      "bandwidth": null,
+      "station_type": null,
+      "allowed_use": null,
+      "prohibited_use": null,
+      "special_condition": null,
+      "secondary_allocation": null,
+      "satellite": null,
+      "repeater": null,
+      "beacon": null,
+      "emergency": null,
+      "footnote": null,
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "table": "PDF heading: Tablo 25; internal references: Tablo-26 / Tablo 26-1",
+        "document_page": "43-44/47"
+      },
+      "derived_from_rule": "TR.AMATEUR.C_144_146_MAX_5W",
+      "verification_status": "verified",
+      "notes": "Yalnız sınıf/frekans/güç alanları doğrulanmış kuraldan aktarıldı. Emisyon, bant genişliği, alt bant ve dipnot alanları henüz çıkarılmadı."
+    },
+    {
+      "id": "TR.FTM.AMATEUR.ROW.C.430-440",
+      "frequency_min": 430,
+      "frequency_max": 440,
+      "unit": "MHz",
+      "license_class": ["C"],
+      "maximum_output_power": 5,
+      "power_unit": "W",
+      "emission": null,
+      "bandwidth": null,
+      "station_type": null,
+      "allowed_use": null,
+      "prohibited_use": null,
+      "special_condition": null,
+      "secondary_allocation": null,
+      "satellite": null,
+      "repeater": null,
+      "beacon": null,
+      "emergency": null,
+      "footnote": null,
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "table": "PDF heading: Tablo 25; internal references: Tablo-26 / Tablo 26-1",
+        "document_page": "44/47"
+      },
+      "derived_from_rule": "TR.AMATEUR.C_430_440_MAX_5W",
+      "verification_status": "verified",
+      "notes": "Yalnız sınıf/frekans/güç alanları doğrulanmış kuraldan aktarıldı. Role, uydu, beacon alt bantları ve dipnotlar henüz çıkarılmadı."
+    }
+  ]
+}
