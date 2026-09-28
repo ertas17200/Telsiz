@@ -95,3 +95,14 @@ Do not silently choose the more convenient statement.
 ## 6. AI grounding rule
 
 For a legal/regulatory answer, an AI must be able to identify the source record used. If no verified legal source supports the answer, the response must be framed as unverified or require current-source verification.
+
+## 7. Artifact archival
+
+When an official artifact (e.g. a PDF) is fetched:
+
+1. record `source_url`, fetch time, HTTP status, content type, size, page count and the raw-byte SHA-256;
+2. store the SHA-256 in the source record's `content_sha256`;
+3. do not commit the raw artifact unless its licence clearly permits it — metadata and hash are sufficient;
+4. keep extracted structured data in GitHub and a human-readable provenance summary in the Drive knowledge base.
+
+A new fetch of the same URL whose SHA-256 differs from the recorded value means `SOURCE_CHANGED`: the source and every rule/row derived from it return to `REVERIFY_REQUIRED` (not `verified`) until re-checked. A changed file is never silently treated as equivalent to the recorded one.

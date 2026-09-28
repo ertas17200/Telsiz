@@ -44,6 +44,7 @@ Telsiz/
 ├── schemas/
 │   └── source.schema.json
 ├── scripts/
+│   ├── check_repo_hygiene.py
 │   ├── frequency_lookup.py
 │   └── validate_knowledge.py
 └── tests/
@@ -81,6 +82,7 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 - [Source policy](docs/SOURCE_POLICY.md)
 - [AI answer policy](docs/AI_ANSWER_POLICY.md)
 - [Frequency table contract](docs/FREQUENCY_TABLE.md)
+- [Official source access log](docs/SOURCE_ACCESS_LOG.md)
 
 ## Status
 

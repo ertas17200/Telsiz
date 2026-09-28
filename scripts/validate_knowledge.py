@@ -48,32 +48,45 @@ ALLOWED_AUTHORITIES = {"legal", "official_technical", "amateur_practice"}
 ID_RE = re.compile(r"^[A-Z0-9][A-Z0-9._-]{2,95}$")
 SHA_RE = re.compile(r"^(sha256:)?[a-fA-F0-9]{64}$")
 ALLOWED_COVERAGE = {"partial", "complete"}
-ALLOWED_FREQ_UNITS = {"kHz", "MHz", "GHz"}
 ALLOWED_LICENSE_CLASSES = {"A", "B", "C"}
+RESTRICTION_FIELDS = (
+    "maximum_output_power",
+    "emission",
+    "bandwidth",
+    "station_type",
+    "allowed_use",
+    "prohibited_use",
+    "special_conditions",
+    "allocation_status",
+    "satellite",
+    "repeater",
+    "beacon",
+    "emergency",
+    "footnotes",
+)
+LIST_FIELDS = (
+    "emission",
+    "station_type",
+    "allowed_use",
+    "prohibited_use",
+    "special_conditions",
+    "footnotes",
+)
+FLAG_FIELDS = ("satellite", "repeater", "beacon", "emergency")
 FREQUENCY_ROW_FIELDS = {
     "id",
     "frequency_min",
     "frequency_max",
     "unit",
     "license_class",
-    "maximum_output_power",
     "power_unit",
-    "emission",
-    "bandwidth",
-    "station_type",
-    "allowed_use",
-    "prohibited_use",
-    "special_condition",
-    "secondary_allocation",
-    "satellite",
-    "repeater",
-    "beacon",
-    "emergency",
-    "footnote",
     "source_id",
     "source_locator",
     "verification_status",
+    *RESTRICTION_FIELDS,
 }
+UNIT_TO_MHZ = {"kHz": 0.001, "MHz": 1.0, "GHz": 1000.0}
+POWER_TO_W = {"mW": 0.001, "W": 1.0, "kW": 1000.0}
 
 
 def fail(message: str) -> None:
@@ -276,6 +289,158 @@ def validate_rule(
         fail(f"{rule_id}: parameters must be an object")
 
 
+def _is_number(value) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
+def validate_frequency_row(row: dict, index: int, sources_by_id: dict, rules_by_id: dict) -> None:
+    missing = sorted(FREQUENCY_ROW_FIELDS - row.keys())
+    if missing:
+        fail(f"frequency rows[{index}] missing fields: {', '.join(missing)}")
+    row_id = row["id"]
+    if not isinstance(row_id, str) or not ID_RE.fullmatch(row_id):
+        fail(f"frequency rows[{index}].id is invalid: {row_id!r}")
+
+    low, high = row["frequency_min"], row["frequency_max"]
+    if not (_is_number(low) and _is_number(high)):
+        fail(f"{row_id}: frequency bounds must be numbers")
+    if not 0 < low < high:
+        fail(f"{row_id}: frequency_min must be positive and below frequency_max")
+    if row["unit"] not in UNIT_TO_MHZ:
+        fail(f"{row_id}: invalid unit")
+
+    classes = row["license_class"]
+    if not isinstance(classes, list) or not classes or not set(classes) <= ALLOWED_LICENSE_CLASSES:
+        fail(f"{row_id}: license_class must be a non-empty subset of A/B/C")
+
+    power = row["maximum_output_power"]
+    if power is not None:
+        if not _is_number(power) or power <= 0:
+            fail(f"{row_id}: maximum_output_power must be positive")
+        if row["power_unit"] not in POWER_TO_W:
+            fail(f"{row_id}: power value requires a valid power_unit")
+
+    for field in LIST_FIELDS:
+        value = row[field]
+        if value is not None and (
+            not isinstance(value, list)
+            or not all(isinstance(v, str) and v.strip() for v in value)
+        ):
+            fail(f"{row_id}: {field} must be null (not extracted) or a string list")
+    for field in FLAG_FIELDS:
+        if row[field] is not None and not isinstance(row[field], bool):
+            fail(f"{row_id}: {field} must be null (not extracted) or boolean")
+    bandwidth = row["bandwidth"]
+    if bandwidth is not None and not (isinstance(bandwidth, str) and bandwidth.strip()):
+        fail(f"{row_id}: bandwidth must be null or a non-empty string")
+
+    locator = row["source_locator"]
+    if not isinstance(locator, dict) or not any(
+        isinstance(v, str) and v.strip() for v in locator.values()
+    ):
+        fail(f"{row_id}: source_locator must contain a usable locator")
+
+    if row["verification_status"] not in ALLOWED_VERIFICATION:
+        fail(f"{row_id}: invalid verification_status")
+
+    source = sources_by_id.get(row["source_id"])
+    if source is None:
+        fail(f"{row_id}: unknown source_id")
+    if row["verification_status"] == "verified":
+        if source["verification_status"] != "verified":
+            fail(f"{row_id}: verified row cannot cite non-verified source")
+        if source["source_type"] != "official_legal":
+            fail(f"{row_id}: verified row must cite official_legal source")
+        if source.get("legal_status") != "current":
+            fail(f"{row_id}: verified row requires a current legal source")
+
+    rule_id = row.get("derived_from_rule")
+    if rule_id is not None:
+        rule = rules_by_id.get(rule_id)
+        if rule is None:
+            fail(f"{row_id}: unknown derived_from_rule {rule_id}")
+        params = rule.get("parameters") or {}
+        expected = {
+            "frequency_min_mhz": low * UNIT_TO_MHZ[row["unit"]],
+            "frequency_max_mhz": high * UNIT_TO_MHZ[row["unit"]],
+            "max_transmitter_output_power_w": (
+                power * POWER_TO_W[row["power_unit"]] if power is not None else None
+            ),
+        }
+        for key, value in expected.items():
+            if key in params and params[key] != value:
+                fail(f"{row_id}: {key} disagrees with rule {rule_id}")
+        if "license_class" in params and params["license_class"] not in classes:
+            fail(f"{row_id}: license_class disagrees with rule {rule_id}")
+        if row["verification_status"] == "verified" and rule["verification_status"] != "verified":
+            fail(f"{row_id}: verified row cannot derive from non-verified rule")
+
+
+def check_row_conflicts(rows: list[dict]) -> None:
+    """Reject overlapping rows for the same class that disagree on power."""
+    for i, a in enumerate(rows):
+        a_low = a["frequency_min"] * UNIT_TO_MHZ[a["unit"]]
+        a_high = a["frequency_max"] * UNIT_TO_MHZ[a["unit"]]
+        for b in rows[i + 1 :]:
+            b_low = b["frequency_min"] * UNIT_TO_MHZ[b["unit"]]
+            b_high = b["frequency_max"] * UNIT_TO_MHZ[b["unit"]]
+            if a_low >= b_high or b_low >= a_high:
+                continue
+            if not set(a["license_class"]) & set(b["license_class"]):
+                continue
+            if a["maximum_output_power"] is None or b["maximum_output_power"] is None:
+                continue
+            a_w = a["maximum_output_power"] * POWER_TO_W[a["power_unit"]]
+            b_w = b["maximum_output_power"] * POWER_TO_W[b["power_unit"]]
+            if a_w != b_w and not (a["special_conditions"] or b["special_conditions"]):
+                fail(
+                    f"conflicting frequency rows {a['id']} / {b['id']}: "
+                    "overlapping range and class with different power and no distinguishing condition"
+                )
+
+
+def validate_completeness(table: dict, source: dict) -> None:
+    """Gate for coverage_status=complete (all conditions must hold)."""
+    if table.get("coverage_blocker") is not None:
+        fail("frequency table: complete coverage cannot carry a blocker")
+    if source["verification_status"] != "verified":
+        fail("frequency table: complete coverage requires a verified source")
+    digest = source.get("content_sha256")
+    if not digest:
+        fail("frequency table: complete coverage requires source content_sha256")
+
+    artifact = table.get("artifact")
+    if not isinstance(artifact, dict):
+        fail("frequency table: complete coverage requires artifact evidence")
+    for key in ("source_url", "fetched_at", "http_status", "content_type", "file_size", "sha256", "pdf_page_count"):
+        if artifact.get(key) in (None, ""):
+            fail(f"frequency table: artifact.{key} is required for complete coverage")
+    if not isinstance(artifact["sha256"], str) or not SHA_RE.fullmatch(artifact["sha256"]):
+        fail("frequency table: artifact.sha256 must be a SHA-256 hex digest")
+    if artifact["sha256"].removeprefix("sha256:").lower() != digest.removeprefix("sha256:").lower():
+        fail("frequency table: artifact sha256 does not match source content_sha256")
+    if artifact["http_status"] != 200:
+        fail("frequency table: artifact http_status must be 200")
+
+    recon = table.get("row_count_reconciliation")
+    if not isinstance(recon, dict):
+        fail("frequency table: complete coverage requires row_count_reconciliation")
+    for key in ("table_start_locator", "table_end_locator", "source_rows_counted", "footnotes_counted", "footnotes_recorded"):
+        if recon.get(key) in (None, ""):
+            fail(f"frequency table: row_count_reconciliation.{key} is required")
+    if recon["source_rows_counted"] != len(table["rows"]):
+        fail("frequency table: source_rows_counted does not match extracted rows")
+    if recon["footnotes_counted"] != recon["footnotes_recorded"]:
+        fail("frequency table: footnotes_counted does not match footnotes_recorded")
+
+    for row in table["rows"]:
+        if row["verification_status"] != "verified":
+            fail(f"{row['id']}: complete coverage requires every row verified")
+        empty = [field for field in RESTRICTION_FIELDS if row[field] is None]
+        if empty:
+            fail(f"{row['id']}: complete coverage requires extracted fields: {', '.join(empty)}")
+
+
 def validate_frequency_table(
     table: dict,
     sources_by_id: dict[str, dict],
@@ -289,18 +454,6 @@ def validate_frequency_table(
     if table_source is None:
         fail("frequency table: unknown source_id")
 
-    if coverage == "partial":
-        blocker = table.get("coverage_blocker")
-        if not isinstance(blocker, str) or len(blocker.strip()) < 8:
-            fail("frequency table: partial coverage requires a coverage_blocker")
-    else:
-        if table.get("coverage_blocker") is not None:
-            fail("frequency table: complete coverage cannot carry a blocker")
-        if table_source["verification_status"] != "verified":
-            fail("frequency table: complete coverage requires a verified source")
-        if not table_source.get("content_sha256"):
-            fail("frequency table: complete coverage requires source content_sha256")
-
     rows = table.get("rows")
     if not isinstance(rows, list):
         fail("frequency table: rows must be a list")
@@ -309,77 +462,18 @@ def validate_frequency_table(
     for index, row in enumerate(rows):
         if not isinstance(row, dict):
             fail(f"frequency rows[{index}] must be an object")
-        missing = sorted(FREQUENCY_ROW_FIELDS - row.keys())
-        if missing:
-            fail(f"frequency rows[{index}] missing fields: {', '.join(missing)}")
-        row_id = row["id"]
-        if not isinstance(row_id, str) or not ID_RE.fullmatch(row_id):
-            fail(f"frequency rows[{index}].id is invalid: {row_id!r}")
-        if row_id in seen:
-            fail(f"duplicate frequency row id: {row_id}")
-        seen.add(row_id)
+        validate_frequency_row(row, index, sources_by_id, rules_by_id)
+        if row["id"] in seen:
+            fail(f"duplicate frequency row id: {row['id']}")
+        seen.add(row["id"])
+    check_row_conflicts(rows)
 
-        low, high = row["frequency_min"], row["frequency_max"]
-        if not all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in (low, high)):
-            fail(f"{row_id}: frequency bounds must be numbers")
-        if not 0 < low < high:
-            fail(f"{row_id}: frequency_min must be positive and below frequency_max")
-        if row["unit"] not in ALLOWED_FREQ_UNITS:
-            fail(f"{row_id}: invalid unit")
-
-        classes = row["license_class"]
-        if (
-            not isinstance(classes, list)
-            or not classes
-            or not set(classes) <= ALLOWED_LICENSE_CLASSES
-        ):
-            fail(f"{row_id}: license_class must be a non-empty subset of A/B/C")
-
-        power = row["maximum_output_power"]
-        if power is not None:
-            if not isinstance(power, (int, float)) or isinstance(power, bool) or power <= 0:
-                fail(f"{row_id}: maximum_output_power must be positive")
-            if row["power_unit"] not in {"W", "mW", "kW"}:
-                fail(f"{row_id}: power value requires a valid power_unit")
-
-        locator = row["source_locator"]
-        if not isinstance(locator, dict) or not any(
-            isinstance(v, str) and v.strip() for v in locator.values()
-        ):
-            fail(f"{row_id}: source_locator must contain a usable locator")
-
-        if row["verification_status"] not in ALLOWED_VERIFICATION:
-            fail(f"{row_id}: invalid verification_status")
-
-        source = sources_by_id.get(row["source_id"])
-        if source is None:
-            fail(f"{row_id}: unknown source_id")
-        if row["verification_status"] == "verified":
-            if source["verification_status"] != "verified":
-                fail(f"{row_id}: verified row cannot cite non-verified source")
-            if source["source_type"] != "official_legal":
-                fail(f"{row_id}: verified row must cite official_legal source")
-            if source.get("legal_status") != "current":
-                fail(f"{row_id}: verified row requires a current legal source")
-
-        rule_id = row.get("derived_from_rule")
-        if rule_id is not None:
-            rule = rules_by_id.get(rule_id)
-            if rule is None:
-                fail(f"{row_id}: unknown derived_from_rule {rule_id}")
-            params = rule.get("parameters") or {}
-            expected = {
-                "frequency_min_mhz": row["frequency_min"] if row["unit"] == "MHz" else None,
-                "frequency_max_mhz": row["frequency_max"] if row["unit"] == "MHz" else None,
-                "max_transmitter_output_power_w": power if row["power_unit"] == "W" else None,
-            }
-            for key, value in expected.items():
-                if key in params and params[key] != value:
-                    fail(f"{row_id}: {key} disagrees with rule {rule_id}")
-            if "license_class" in params and params["license_class"] not in classes:
-                fail(f"{row_id}: license_class disagrees with rule {rule_id}")
-            if row["verification_status"] == "verified" and rule["verification_status"] != "verified":
-                fail(f"{row_id}: verified row cannot derive from non-verified rule")
+    if coverage == "partial":
+        blocker = table.get("coverage_blocker")
+        if not isinstance(blocker, str) or len(blocker.strip()) < 8:
+            fail("frequency table: partial coverage requires a coverage_blocker")
+    else:
+        validate_completeness(table, table_source)
 
 
 def main() -> int:
