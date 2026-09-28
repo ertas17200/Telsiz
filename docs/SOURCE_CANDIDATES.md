@@ -24,7 +24,6 @@ Kurallar:
 | `CAND.TR.BTK.AMATEUR_REPEATER_LIST` | official_technical | P7 | Kurulu dernek tekrarlayıcılarının resmî listesi | www.btk.gov.tr |
 | `CAND.IARU.R1.HF_BANDPLAN_DOC` | amateur_association | P8 | HF alt bant/mod tavsiyeleri (yalnız çalışma pratiği) | www.iaru-r1.org |
 | `CAND.IARU.R1.EMCOMM_GUIDE` | amateur_association | P8 | Acil durum işletme pratiği | www.iaru-r1.org |
-| `CAND.TR.TRAC.REPEATER_LIST` | amateur_association | P9 | Türkiye'deki röle frekansları ve ton bilgileri (pratik bilgi) | trac.org.tr |
 | `CAND.TR.TRAC.EXAM_STUDY` | amateur_association | P9 | Eğitim içeriği ve teknik açıklamalar | trac.org.tr |
 | `CAND.COMMUNITY.ARCH-YUNUS.AMATOR-TELSIZ-REHBERI` — *erişilebilir / doğrulanmamış* | community | P11 | Eğitim/araç fikirleri ve çapraz kontrol; tek başına kural üretmez | github.com |
 
@@ -39,3 +38,7 @@ Erişim durumu: `docs/SOURCE_ACCESS_LOG.md`.
 ## P11 topluluk referansı durumu
 
 `arch-yunus/Amator-Telsiz-Rehberi` 2026-09-28 tarihinde GitHub üzerinden erişilebilir olarak yeniden doğrulandı. Depo yapısı ve lisansı incelendi; buna rağmen `community` güven seviyesinde kalır. İçeriklerinden hukuki izin, Türkiye frekans yetkisi veya doğrulanmış teknik hüküm türetilemez. Uygulanabilecek fikirler `docs/COMMUNITY_REFERENCE_REVIEW.md` içinde ayrı backlog olarak tutulur.
+
+## Promoted candidates
+
+- `CAND.TR.TRAC.REPEATER_LIST` → `TR.TRAC.REPEATER.LIST` on 2026-09-28 after the live TRAC Röle Bilgileri page was read and registered. The promoted source remains `amateur_association` and cannot prove official permission.

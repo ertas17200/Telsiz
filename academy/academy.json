@@ -127,6 +127,20 @@
       "rule_ids": [],
       "candidate_refs": [],
       "notes": "Manufacturer-grounded compatibility and package-selection guard for DR/DE versus XDR/XDE. Operating manuals remain pending full-content verification and update steps are withheld until the package-specific firmware upgrade manual is verified."
+    },
+    {
+      "id": "ACADEMY.TR.REPEATER-OPERATIONS",
+      "title": "Türkiye repeater operational snapshot with authority separation",
+      "content_status": "source_grounded",
+      "legal_content": false,
+      "legal_verdicts": false,
+      "source_ids": [
+        "TR.TRAC.REPEATER.LIST",
+        "TR.BTK.RADIO.PROCEDURES"
+      ],
+      "rule_ids": [],
+      "candidate_refs": [],
+      "notes": "TRAC supplies operational RX/TX/status observations while BTK supplies the official permission framework. Association status never promotes an installation to officially licensed in this registry."
     }
   ]
 }

@@ -543,6 +543,32 @@
       "supersedes": [],
       "superseded_by": [],
       "notes": "Yaesu resmî iki sayfalık firmware bilgi belgesi tam olarak okunup görsel olarak doğrulandı. XDR/XDE firmware'inin DR/DE ile uyumsuz olduğunu, USA/AUS/EXP destination paketlerini, Japan ayrımını ve MAIN 4.50 + DSP 4.31 hedeflerini belirtir. Gerçek upgrade adımları ZIP içindeki ayrı Firmware Upgrade Manual'a yönlendirilir."
+    },
+    {
+      "id": "TR.TRAC.REPEATER.LIST",
+      "title": "Röle Bilgileri",
+      "publisher": "Türkiye Radyo Amatörleri Cemiyeti",
+      "source_type": "amateur_association",
+      "jurisdiction": "TR",
+      "url": "https://trac.org.tr/tr/role-bilgileri",
+      "topics": [
+        "röle",
+        "tekrarlayıcı",
+        "VHF",
+        "UHF",
+        "operasyonel durum"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T22:12:00Z",
+      "publication_date": null,
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": null,
+      "reference": "TRAC canlı Röle Bilgileri tablosu; 2026-09-28 snapshot gözlemi",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "TRAC'ın güncel operasyonel röle listesidir. Aktif/Bakımda durumu ve RX/TX bilgileri amatör işletme pratiği için kullanılabilir; resmî BTK frekans tahsisi, ruhsat veya kullanma izni kanıtı değildir."
     }
   ]
 }
