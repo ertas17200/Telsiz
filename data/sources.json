@@ -1,4 +1,81 @@
 {
   "schema_version": 1,
-  "sources": []
+  "sources": [
+    {
+      "id": "TR.BTK.AMATEUR_OVERVIEW",
+      "title": "Amatör Telsizcilik",
+      "publisher": "Bilgi Teknolojileri ve İletişim Kurumu",
+      "source_type": "official_technical",
+      "jurisdiction": "TR",
+      "url": "https://www.btk.gov.tr/amator-telsizcilik",
+      "topics": [
+        "amatör telsizcilik",
+        "belgelendirme",
+        "frekans muafiyeti",
+        "role sistemleri"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T18:25:00Z",
+      "publication_date": null,
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": null,
+      "reference": null,
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "BTK'nın güncel kurumsal amatör telsizcilik açıklama sayfası. Sayfa Teknik Ölçütler için Madde 21 atfı yapmaktadır; 2022/İK-SYD/245 numaralı güncel resmî PDF'de amatör telsiz istasyonu Madde 22 olarak görünmektedir. Kesin madde numarası için PDF esas alınmalıdır."
+    },
+    {
+      "id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "title": "Frekans Tahsisinden Muaf Telsiz Cihaz ve Sistemlerine İlişkin Teknik Ölçütler",
+      "publisher": "Bilgi Teknolojileri ve İletişim Kurumu",
+      "source_type": "official_legal",
+      "jurisdiction": "TR",
+      "url": "https://www.btk.gov.tr/uploads/pages/ftm-teknik-olcutler-ek-5.pdf",
+      "topics": [
+        "amatör telsiz istasyonu",
+        "frekans bantları",
+        "çıkış gücü",
+        "emisyon",
+        "kullanım kısıtlamaları"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T18:25:00Z",
+      "publication_date": "2022-09-23",
+      "effective_date": null,
+      "legal_status": "current",
+      "instrument_id": "2022/İK-SYD/245",
+      "reference": "MADDE 22; amatör telsiz cihaz ve sistemleri teknik ölçütleri tablosu",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "BTK'nın güncel FTM kaynak sayfasından erişilen resmî Teknik Ölçütler PDF'si. Karar tarihi 23.09.2022, karar sayısı 2022/İK-SYD/245. PDF'de Amatör telsiz istasyonu Madde 22'dir. Madde metninde Tablo-26 atfı bulunurken takip eden tablonun başlığı Tablo 25 olarak görünmektedir; numaralandırma tutarsızlığı ayrıca çatışma kaydında tutulur."
+    },
+    {
+      "id": "TR.KEGM.AMATEUR.FAQ",
+      "title": "Amatör Telsizcilik Sıkça Sorulan Sorular",
+      "publisher": "Kıyı Emniyeti Genel Müdürlüğü",
+      "source_type": "official_technical",
+      "jurisdiction": "TR",
+      "url": "https://www.kiyiemniyeti.gov.tr/sss",
+      "topics": [
+        "amatör telsizcilik sınavı",
+        "belge",
+        "çağrı işareti",
+        "başvuru"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T18:25:00Z",
+      "publication_date": null,
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": null,
+      "reference": null,
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "KEGM'nin güncel amatör telsizcilik SSS sayfası. Sınav, belge ve çağrı işareti işlemleri için resmî operasyonel kaynaktır; mevzuat metninin yerine kullanılmamalıdır."
+    }
+  ]
 }
