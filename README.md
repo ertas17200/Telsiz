@@ -33,6 +33,9 @@ A lower-authority source must not silently override a higher-authority source.
 Telsiz/
 ├── .github/workflows/
 │   └── knowledge-validation.yml
+├── academy/
+│   ├── README.md
+│   └── academy.json
 ├── data/
 │   ├── frequency_table.json
 │   ├── rules.json
@@ -52,6 +55,7 @@ Telsiz/
 ├── scripts/
 │   ├── check_repo_hygiene.py
 │   ├── frequency_lookup.py
+│   ├── validate_academy.py
 │   └── validate_knowledge.py
 └── tests/
 ```
@@ -69,6 +73,7 @@ Run:
 ```bash
 python scripts/check_repo_hygiene.py
 python scripts/validate_knowledge.py
+python scripts/validate_academy.py
 python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
@@ -96,6 +101,7 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 - [Known source conflicts](docs/SOURCE_CONFLICTS.md)
 - [Unverified source candidates](docs/SOURCE_CANDIDATES.md)
 - [Community reference review and P11 adaptation backlog](docs/COMMUNITY_REFERENCE_REVIEW.md)
+- [Academy trust contract and module manifest](academy/README.md)
 
 ## Status
 
