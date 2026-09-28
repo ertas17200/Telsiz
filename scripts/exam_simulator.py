@@ -72,6 +72,15 @@ def parse_answer(value: str) -> tuple[str, str]:
     return question_id, option_id
 
 
+def answers_from_pairs(pairs: list[tuple[str, str]]) -> dict[str, str]:
+    answers: dict[str, str] = {}
+    for question_id, option_id in pairs:
+        if question_id in answers:
+            raise ValueError(f"duplicate answer for question {question_id}")
+        answers[question_id] = option_id
+    return answers
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Telsiz source-grounded practice exam scorer (not an official KEGM exam simulator)"
@@ -97,7 +106,7 @@ def main() -> int:
         }, ensure_ascii=False, indent=2))
         return 0
 
-    answers = dict(args.answer)
+    answers = answers_from_pairs(args.answer)
     result = score_answers(bank, answers)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
