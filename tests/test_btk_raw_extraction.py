@@ -42,9 +42,14 @@ class RawBtkExtractionTests(unittest.TestCase):
             self.assertNotIn(code, defined)
         self.assertIn("TR-BTK-EMISSION-001", RAW["known_source_conflicts"])
 
-    def test_source_repetitions_are_de_duplicated_in_machine_row(self):
+    def test_source_repetitions_are_de_duplicated_in_all_machine_rows(self):
+        for row in RAW["rows"]:
+            self.assertEqual(
+                len(row["emission_codes"]),
+                len(set(row["emission_codes"])),
+                msg=f"duplicate emission in source row {row['source_row_index']}",
+            )
         row = next(r for r in RAW["rows"] if r["source_row_index"] == 16)
-        self.assertEqual(len(row["emission_codes"]), len(set(row["emission_codes"])))
         self.assertIn("repeats F2B and J3F", row["notes"])
 
     def test_source_unit_typo_is_preserved_as_conflict(self):
