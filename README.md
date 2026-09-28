@@ -105,6 +105,6 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 
 ## Status
 
-Repository controls and CI are operational. The amateur frequency table is intentionally **partial** while the official BTK artifact is inaccessible from the current source-ingestion environment. P0–P3 remain fail-closed until the relevant official sources can be fetched and verified.
+Repository controls and CI are operational. The amateur frequency table is intentionally **partial**. The canonical BTK PDF is render-readable, but byte-level artifact evidence (including SHA-256) is still unavailable in the current runtime; P0 therefore remains fail-closed. P1–P3 also remain fail-closed pending exact-text verification of their canonical legal sources.
 
 See [REPO_STATUS.md](docs/REPO_STATUS.md) for the exact baseline, CI evidence, blockers and next sequence.
