@@ -34,8 +34,10 @@ Telsiz/
 ├── .github/workflows/
 │   └── knowledge-validation.yml
 ├── academy/
+│   ├── EXAM.md
 │   ├── README.md
-│   └── academy.json
+│   ├── academy.json
+│   └── exam_questions.json
 ├── data/
 │   ├── frequency_table.json
 │   ├── rules.json
@@ -54,8 +56,10 @@ Telsiz/
 │   └── source.schema.json
 ├── scripts/
 │   ├── check_repo_hygiene.py
+│   ├── exam_simulator.py
 │   ├── frequency_lookup.py
 │   ├── validate_academy.py
+│   ├── validate_exam.py
 │   └── validate_knowledge.py
 └── tests/
 ```
@@ -74,6 +78,7 @@ Run:
 python scripts/check_repo_hygiene.py
 python scripts/validate_knowledge.py
 python scripts/validate_academy.py
+python scripts/validate_exam.py
 python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
@@ -102,6 +107,7 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 - [Unverified source candidates](docs/SOURCE_CANDIDATES.md)
 - [Community reference review and P11 adaptation backlog](docs/COMMUNITY_REFERENCE_REVIEW.md)
 - [Academy trust contract and module manifest](academy/README.md)
+- [Grounded practice exam contract](academy/EXAM.md)
 
 ## Status
 
