@@ -1,19 +1,78 @@
 # Amatör Frekans Tablosu — Atomik Veri Sözleşmesi
 
-Kanonik kayıt: `data/frequency_table.json`
-Kaynak: `TR.BTK.FTM.TECH.2022-IK-SYD-245`, MADDE 22 tablosu (PDF başlığı Tablo 25; madde içi atıf Tablo-26 — bkz. `SOURCE_CONFLICTS.md` TR-BTK-NUMBERING-001).
+Kanonik semantik kayıt: `data/frequency_table.json`  
+Ham resmî transkripsiyon: `data/btk_amateur_table_raw.json`  
+Emisyon referansı: `data/btk_emission_types.json`  
+Kaynak: `TR.BTK.FTM.TECH.2022-IK-SYD-245`, MADDE 22.
 
 ## Durum
 
-`coverage_status = partial` — **BLOCKED_BY_OFFICIAL_SOURCE_ACCESS** (bkz. `docs/SOURCE_ACCESS_LOG.md`).
-Tablonun tamamı çıkarılmadı. Yalnız doğrulanmış kurallardan türetilen iki satır vardır:
+`coverage_status = partial`
 
-| Satır | Sınıf | Aralık | Maks. çıkış gücü | Diğer alanlar |
-|---|---|---|---|---|
-| `TR.FTM.AMATEUR.ROW.C.144-146` | C | 144–146 MHz | 5 W | NOT_EXTRACTED |
-| `TR.FTM.AMATEUR.ROW.C.430-440` | C | 430–440 MHz | 5 W | NOT_EXTRACTED |
+Artık resmî BTK PDF içeriği doğrulanmış bir web-render yolu üzerinden okunmuş ve amatör frekans tablosundaki **33 görünür kaynak satırı** ham katmana aktarılmıştır. Ancak ham PDF byte'ları kod yürütme ortamına indirilemediği için artifact SHA-256 üretilememiştir. Ayrıca kaynak içindeki numaralandırma/emisyon/birim tutarsızlıkları açıktır.
 
-## Satır modeli
+Bu nedenle:
+
+- **raw transcription:** 33/33 satır, programatik olarak doğrulanır;
+- **emission reference:** 24 Tablo 26-1 tanımı;
+- **semantic decision table:** hâlâ partial;
+- **complete legal verdict:** kapalı.
+
+## İki katmanlı model
+
+### 1. Raw source transcription
+
+`data/btk_amateur_table_raw.json` kaynak tablodaki görünür satırları korur:
+
+- frekans min/max ve birim;
+- kaynakta görülen güç ifadesi;
+- emisyon kodları;
+- belge sınıfları;
+- kullanım kısıtlamalarının kaynak-anlamını koruyan kısa transkripsiyonu;
+- PDF sayfa locator'ı;
+- merged-cell inheritance notu;
+- açık kaynak çatışmaları.
+
+Bu katman karar vermek için tek başına kullanılmaz.
+
+### 2. Semantic decision table
+
+`data/frequency_table.json` AI karar motorunun fail-closed katmanıdır. Şimdilik yalnız daha önce atomik kurallarla doğrulanmış iki sınıf/güç kaydını taşır:
+
+| Satır | Sınıf | Aralık | Doğrulanmış limit |
+|---|---|---|---|
+| `TR.FTM.AMATEUR.ROW.C.144-146` | C | 144–146 MHz | 5 W |
+| `TR.FTM.AMATEUR.ROW.C.430-440` | C | 430–440 MHz | 5 W |
+
+Ham tabloda daha fazla veri bulunması, o verinin otomatik olarak `ALLOWED` kararı üretmesi anlamına gelmez.
+
+## Kaynak çatışmaları
+
+Aşağıdaki kayıtlar açık kaldığı sürece ham veriyi sessizce normalize etme:
+
+- `TR-BTK-NUMBERING-001`: MADDE 22 → Tablo-26 atfı, fakat görünür başlık Tablo 25.
+- `TR-BTK-EMISSION-001`: 28 MHz ve üstü emisyon hücresinde `F2B` tekrarı ve Tablo 26-1'de tanımsız `J2C`.
+- `TR-BTK-UNIT-001`: 28000–29700 kHz satırındaki B-sınıfı koşul cümlesinde `28000-29700 MHz` yazımı.
+
+## Raw validator
+
+```bash
+python scripts/validate_btk_raw.py
+```
+
+Validator en az şunları kanıtlar:
+
+- 33/33 kaynak satırı;
+- 24 benzersiz emisyon tanımı;
+- sıralı source-row index;
+- benzersiz frekans aralıkları;
+- A/B/C sınıf setlerinin geçerliliği;
+- locator sayfalarının 41–45/47 aralığında olması;
+- `J2C` tutarsızlığının korunması ve sessizce `J3C` yapılmaması;
+- semantic promotion'ın HOLD kalması;
+- artifact SHA-256'ın uydurulmaması.
+
+## Semantik satır modeli
 
 | Alan | Tip | `null` anlamı |
 |---|---|---|
@@ -25,44 +84,34 @@ Tablonun tamamı çıkarılmadı. Yalnız doğrulanmış kurallardan türetilen 
 | `satellite`, `repeater`, `beacon`, `emergency` | boolean | NOT_EXTRACTED |
 | `source_id`, `source_locator`, `verification_status` | — | zorunlu |
 
-`null` hiçbir zaman "kısıtlama yok" demek değildir. `[]` yalnız kaynak satırında ilgili hükmün bulunmadığı doğrulandıktan sonra yazılabilir.
+`null` hiçbir zaman "kısıtlama yok" veya "izin var" demek değildir.
 
-## Validator kuralları
+## Completeness gate
 
-- `verified` satır yalnız `verified` + `official_legal` + `current` kaynağa dayanır (IARU/TRAC/pending kaynak reddedilir).
-- `derived_from_rule` taşıyan satır kural parametreleriyle çelişemez.
-- Aynı sınıf için çakışan aralıkta, ayırt edici koşul olmadan farklı güç taşıyan satırlar reddedilir.
-- Geçersiz aralık (min ≥ max, ≤ 0) ve pozitif olmayan güç reddedilir.
-- `partial` kapsam bir `coverage_blocker` gerektirir.
+`coverage_status = complete` ancak aşağıdakilerin tümü geçerse mümkündür:
 
-## Completeness gate (`coverage_status = complete`)
+1. raw PDF artifact byte-for-byte elde edilmiş;
+2. `source_url`, `fetched_at`, HTTP 200, MIME type, file size ve PDF page count kaydedilmiş;
+3. SHA-256 hesaplanmış ve source registry'deki `content_sha256` ile eşleşmiş;
+4. 33 kaynak satırı ile semantik satır/koşul dönüşümü uzlaştırılmış;
+5. açık kaynak çatışmaları semantik yorumu etkiliyorsa çözülmüş veya açıkça modellenmiş;
+6. tüm required semantic dimensions çıkarılmış;
+7. validator + unit tests + exact-head CI PASS.
 
-Hepsi zorunludur; biri eksikse `partial` kalır:
+## Karar motoru
 
-1. `artifact`: `source_url`, `fetched_at`, `http_status = 200`, `content_type`, `file_size`, `sha256`, `pdf_page_count`.
-2. `artifact.sha256` = kaynak kaydındaki `content_sha256`.
-3. `row_count_reconciliation`: `table_start_locator`, `table_end_locator`, `source_rows_counted` (= çıkarılan satır sayısı), `footnotes_counted` = `footnotes_recorded`.
-4. Her satır `verified` ve tüm kısıtlama alanları çıkarılmış (hiç `null` yok).
-5. `coverage_blocker = null`.
+`scripts/frequency_lookup.py -> evaluate()` yalnız doğrulanmış semantik satırlardan karar verir.
 
-## Karar motoru (`scripts/frequency_lookup.py` → `evaluate`)
+- satır bulunmaması = `UNKNOWN`;
+- partial tablo = blanket `ALLOWED` yok;
+- IARU/TRAC = Türkiye için hukuki izin oluşturmaz;
+- doğrulanmış güç sınırının açık aşımı = `NOT_ALLOWED`;
+- diğer eksik/çelişkili durumlar = `UNKNOWN`.
 
-Girdi: jurisdiction, license_class, frequency, emission, bandwidth, requested_power, station_type, context (simplex/repeater/satellite/beacon/emergency), acknowledged_conditions.
+## NEXT
 
-| Çıktı | Ne zaman |
-|---|---|
-| `ALLOWED` | Kapsam complete, eşleşen tüm satırlar ve tüm girdiler çözülmüş, koşul yok |
-| `ALLOWED_WITH_CONDITIONS` | Aynı, fakat satırda özel koşul/dipnot var (`unacknowledged_conditions` listelenir) |
-| `NOT_ALLOWED` | Eşleşen **her** satır isteği açıkça engelliyor (doğrulanmış güç sınırı aşımı, açıkça yasaklı kullanım; complete tabloda listelenmemiş emisyon / kapalı uydu-role-beacon bayrağı) |
-| `UNKNOWN` | Diğer her durum: satır yok, girdi eksik, satır alanı çıkarılmamış, kapsam partial, jurisdiksiyon TR değil |
-
-- Satır bulunmaması **asla** `NOT_ALLOWED` değildir.
-- Yalnız frekansa bakılarak karar verilmez.
-- Yalnız `verified` + `official_legal` + `current` kaynaklı satırlar karara girer.
-
-## Tam çıkarım için gerekli adım
-
-1. Resmî PDF'yi BTK'dan indir; `artifact` ve kaynak `content_sha256` kaydet.
-2. Tablonun başlangıç/bitiş konumunu belirle; her satırı, devam satırını ve dipnotu aktar; okunamayan hücre `null`.
-3. Satır ve dipnot sayımlarını `row_count_reconciliation` içinde uzlaştır.
-4. Validator + test + exact-head CI → `coverage_status = complete`.
+1. Resmî PDF'nin raw byte artifact'ını al.
+2. SHA-256 + file size kaydet.
+3. Raw 33 satırı semantik sınıf/güç/emisyon/özel-kullanım nesnelerine dönüştür.
+4. J2C/F2B ve 28000-29700 MHz uyuşmazlıklarını çözmeden pozitif izin üretme.
+5. Exact-head CI + merge + main CI sonrası ancak uygun ise `coverage_status=complete`.
