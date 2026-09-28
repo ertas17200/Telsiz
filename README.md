@@ -35,6 +35,7 @@ Telsiz/
 │   └── knowledge-validation.yml
 ├── academy/
 │   ├── EXAM.md
+│   ├── GRID_LOCATOR.md
 │   ├── README.md
 │   ├── academy.json
 │   └── exam_questions.json
@@ -58,6 +59,7 @@ Telsiz/
 │   ├── check_repo_hygiene.py
 │   ├── exam_simulator.py
 │   ├── frequency_lookup.py
+│   ├── grid_locator.py
 │   ├── validate_academy.py
 │   ├── validate_exam.py
 │   └── validate_knowledge.py
@@ -108,6 +110,7 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 - [Community reference review and P11 adaptation backlog](docs/COMMUNITY_REFERENCE_REVIEW.md)
 - [Academy trust contract and module manifest](academy/README.md)
 - [Grounded practice exam contract](academy/EXAM.md)
+- [Maidenhead Grid Locator tool contract](academy/GRID_LOCATOR.md)
 
 ## Status
 
