@@ -95,6 +95,7 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 - [Official source access log](docs/SOURCE_ACCESS_LOG.md)
 - [Known source conflicts](docs/SOURCE_CONFLICTS.md)
 - [Unverified source candidates](docs/SOURCE_CANDIDATES.md)
+- [Community reference review and P11 adaptation backlog](docs/COMMUNITY_REFERENCE_REVIEW.md)
 
 ## Status
 

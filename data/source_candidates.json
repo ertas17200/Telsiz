@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "purpose": "Doğrulanmamış aday kaynaklar. Bu dosyadaki hiçbir kayıt kural, frekans satırı veya cevap için kaynak olarak kullanılamaz. Doğrulanan kayıt data/sources.json içine gerçek metadata ile taşınır ve buradan silinir.",
-  "last_access_probe": "2026-09-28T20:31Z — adayların tüm erişim alanları bu çalışma ortamından engelli (curl CONNECT 403 / WebFetch EGRESS_BLOCKED); bkz. docs/SOURCE_ACCESS_LOG.md",
+  "last_access_probe": "2026-09-28 — mixed access recheck: BTK canonical PDF is render-readable but raw-byte download remains unavailable for SHA-256; arch-yunus/Amator-Telsiz-Rehberi is reachable through GitHub and remains an unverified community source.",
   "candidates": [
     {
       "id": "CAND.TR.BTK.NATIONAL_FREQUENCY_PLAN",
@@ -437,14 +437,14 @@
       "notes": "Aday kayıt; içindeki eski mevzuat kopyaları yalnız provenance/tarihçe amacıyla kullanılabilir."
     },
     {
-      "id": "CAND.COMMUNITY.ARCH-YUNUS.AMATOR-TELSIZ",
-      "title": "arch-yunus/Amator-Telsiz- (GitHub deposu)",
+      "id": "CAND.COMMUNITY.ARCH-YUNUS.AMATOR-TELSIZ-REHBERI",
+      "title": "arch-yunus/Amator-Telsiz-Rehberi (GitHub deposu)",
       "publisher": "arch-yunus (GitHub)",
       "expected_source_type": "community",
       "jurisdiction": "TR",
-      "search_entry_point": "https://github.com/arch-yunus/Amator-Telsiz-",
+      "search_entry_point": "https://github.com/arch-yunus/Amator-Telsiz-Rehberi",
       "canonical_url": null,
-      "status": "candidate_inaccessible",
+      "status": "candidate_unverified",
       "required_access_domains": [
         "github.com"
       ],
@@ -455,14 +455,14 @@
         "fields": [],
         "conflicts": [],
         "rules": [],
-        "purpose": "Keşif ve çapraz kontrol"
+        "purpose": "Kullanıcı eğitimi ve yardımcı araç fikirleri için keşif/çapraz kontrol; hukuki veya teknik otorite değildir"
       },
       "related_sources": [],
       "cannot_support": [
         "legal_claims",
         "turkish_permission"
       ],
-      "notes": "Kullanıcı tarafından önerildi. 2026-09-28 (bu oturum): GitHub add_repo 'not found or no access', web 404; depo özel, yanlış adlı veya mevcut olmayabilir. İçerik görülmedi."
+      "notes": "2026-09-28 erişim doğrulaması: GitHub üzerinden depo metadata'sı, README, ROADMAP ve kök dizin yapısı okundu; depo MIT lisanslıdır. İçerik source-grounding yapılmadan Telsiz kural/frekans kayıtlarına veya kesin teknik/hukuki iddialara aktarılamaz."
     }
   ]
 }

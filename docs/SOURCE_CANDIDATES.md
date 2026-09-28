@@ -26,7 +26,7 @@ Kurallar:
 | `CAND.IARU.R1.EMCOMM_GUIDE` | amateur_association | P8 | Acil durum işletme pratiği | www.iaru-r1.org |
 | `CAND.TR.TRAC.REPEATER_LIST` | amateur_association | P9 | Türkiye'deki röle frekansları ve ton bilgileri (pratik bilgi) | trac.org.tr |
 | `CAND.TR.TRAC.EXAM_STUDY` | amateur_association | P9 | Eğitim içeriği ve teknik açıklamalar | trac.org.tr |
-| `CAND.COMMUNITY.ARCH-YUNUS.AMATOR-TELSIZ` — *erişilemedi* | community | P11 | Keşif ve çapraz kontrol | github.com |
+| `CAND.COMMUNITY.ARCH-YUNUS.AMATOR-TELSIZ-REHBERI` — *erişilebilir / doğrulanmamış* | community | P11 | Eğitim/araç fikirleri ve çapraz kontrol; tek başına kural üretmez | github.com |
 
 ## Öncelik
 
@@ -35,3 +35,7 @@ Kurallar:
 3. Resmî Gazete yayım kayıtları — P2/P3 provenance.
 
 Erişim durumu: `docs/SOURCE_ACCESS_LOG.md`.
+
+## P11 topluluk referansı durumu
+
+`arch-yunus/Amator-Telsiz-Rehberi` 2026-09-28 tarihinde GitHub üzerinden erişilebilir olarak yeniden doğrulandı. Depo yapısı ve lisansı incelendi; buna rağmen `community` güven seviyesinde kalır. İçeriklerinden hukuki izin, Türkiye frekans yetkisi veya doğrulanmış teknik hüküm türetilemez. Uygulanabilecek fikirler `docs/COMMUNITY_REFERENCE_REVIEW.md` içinde ayrı backlog olarak tutulur.
