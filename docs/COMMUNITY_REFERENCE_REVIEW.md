@@ -45,7 +45,7 @@ If source code or text is directly reused or adapted, preserve the applicable MI
 
 ### P11.1 — Academy layer
 
-**Implementation status: BUILT ON FEATURE BRANCH / CI VERIFICATION REQUIRED.**
+**Implementation status: IMPLEMENTED; every change remains subject to the repository CI gate before merge.**
 
 The first Academy scaffold is machine-verifiable rather than a free-form content dump:
 
