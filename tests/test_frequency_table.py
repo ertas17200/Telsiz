@@ -23,6 +23,7 @@ fl = load_module("frequency_lookup")
 SOURCES = {s["id"]: s for s in json.loads((ROOT / "data" / "sources.json").read_text("utf-8"))["sources"]}
 RULES = {r["id"]: r for r in json.loads((ROOT / "data" / "rules.json").read_text("utf-8"))["rules"]}
 TABLE = json.loads((ROOT / "data" / "frequency_table.json").read_text("utf-8"))
+RAW = json.loads((ROOT / "data" / "btk_amateur_table_raw.json").read_text("utf-8"))
 LEGAL_SOURCE = "TR.BTK.FTM.TECH.2022-IK-SYD-245"
 FAKE_SHA = "a" * 64
 
@@ -206,6 +207,34 @@ class FrequencyTableValidationTests(unittest.TestCase):
         with self.assertRaises(SystemExit):
             self.validate(table)
 
+    def test_row_cannot_extend_beyond_rule_scope(self):
+        table = copy.deepcopy(TABLE)
+        table["rows"][1].update(frequency_min=429.0)
+        with self.assertRaises(SystemExit):
+            self.validate(table)
+
+    # raw cross-check
+    def test_repository_rows_lie_inside_raw_rows(self):
+        vk.validate_rows_within_raw(TABLE, RAW)
+
+    def test_row_spanning_subband_gap_rejected(self):
+        table = copy.deepcopy(TABLE)
+        table["rows"][1].update(frequency_min=430, frequency_max=440)
+        with self.assertRaises(SystemExit):
+            vk.validate_rows_within_raw(table, RAW)
+
+    def test_row_class_not_listed_in_raw_rejected(self):
+        table = copy.deepcopy(TABLE)
+        table["rows"].append(full_row(id="TR.TEST.ROW.C.50", frequency_min=50, frequency_max=52, license_class=["C"]))
+        with self.assertRaises(SystemExit):
+            vk.validate_rows_within_raw(table, RAW)
+
+    def test_raw_cross_check_rejects_source_mismatch(self):
+        raw = copy.deepcopy(RAW)
+        raw["source_id"] = "TR.OTHER"
+        with self.assertRaises(SystemExit):
+            vk.validate_rows_within_raw(TABLE, raw)
+
     # authority
     def test_iaru_row_cannot_be_verified_legal_row(self):
         table = copy.deepcopy(TABLE)
@@ -230,10 +259,37 @@ class EvaluateContractTests(unittest.TestCase):
         self.assertEqual(result["rows"], ["TR.FTM.AMATEUR.ROW.C.144-146"])
         self.assertEqual(result["known_limits"][0]["max_output_power"], 5)
 
-    def test_c_433_mhz_finds_known_row_and_limit(self):
-        result = self.evaluate(license_class="C", frequency_mhz=433.0)
-        self.assertEqual(result["rows"], ["TR.FTM.AMATEUR.ROW.C.430-440"])
+    def test_c_433_5_mhz_finds_known_subband_row_and_limit(self):
+        result = self.evaluate(license_class="C", frequency_mhz=433.5)
+        self.assertEqual(result["rows"], ["TR.FTM.AMATEUR.ROW.C.433.4-433.575"])
+        self.assertEqual(result["known_limits"][0]["max_output_power"], 5)
         self.assertEqual(result["known_limits"][0]["power_unit"], "W")
+
+    def test_c_repeater_subband_is_its_own_row(self):
+        result = self.evaluate(license_class="C", frequency_mhz=431.6)
+        self.assertEqual(result["rows"], ["TR.FTM.AMATEUR.ROW.C.431.55-431.825"])
+
+    def test_gaps_between_430_440_subbands_have_no_row(self):
+        for freq in (430.0, 431.0, 433.0, 434.0, 438.5, 439.9):
+            with self.subTest(freq=freq):
+                result = self.evaluate(license_class="C", frequency_mhz=freq, requested_power_w=5)
+                self.assertEqual(result["rows"], [])
+                self.assertEqual(result["known_limits"], [])
+                self.assertEqual(result["legal_status"], fl.UNKNOWN)
+
+    def test_430_group_rows_match_raw_subbands_exactly(self):
+        raw = json.loads((ROOT / "data" / "btk_amateur_table_raw.json").read_text("utf-8"))
+        raw_430 = sorted(
+            (r["frequency_min"], r["frequency_max"])
+            for r in raw["rows"]
+            if r["unit"] == "MHz" and 430 <= r["frequency_min"] < 440
+        )
+        semantic_430 = sorted(
+            (r["frequency_min"], r["frequency_max"])
+            for r in TABLE["rows"]
+            if r["unit"] == "MHz" and 430 <= r["frequency_min"] < 440
+        )
+        self.assertEqual(semantic_430, raw_430)
 
     # fail closed
     def test_unknown_frequency_is_unknown_not_forbidden(self):
@@ -277,11 +333,11 @@ class EvaluateContractTests(unittest.TestCase):
         self.assertEqual(result["legal_status"], fl.UNKNOWN)
 
     def test_power_above_verified_limit_is_not_allowed(self):
-        result = self.evaluate(license_class="C", frequency_mhz=433.0, requested_power_w=10)
+        result = self.evaluate(license_class="C", frequency_mhz=433.5, requested_power_w=10)
         self.assertEqual(result["legal_status"], fl.NOT_ALLOWED)
 
     def test_power_within_limit_is_still_unknown_on_partial_table(self):
-        result = self.evaluate(license_class="C", frequency_mhz=433.0, requested_power_w=5)
+        result = self.evaluate(license_class="C", frequency_mhz=433.5, requested_power_w=5)
         self.assertEqual(result["legal_status"], fl.UNKNOWN)
 
     # authority at evaluation time

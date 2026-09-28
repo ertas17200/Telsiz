@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ROOT / "data" / "sources.json"
 RULES = ROOT / "data" / "rules.json"
 FREQUENCY_TABLE = ROOT / "data" / "frequency_table.json"
+BTK_RAW_TABLE = ROOT / "data" / "btk_amateur_table_raw.json"
 
 ALLOWED_TYPES = {
     "official_legal",
@@ -87,6 +88,7 @@ FREQUENCY_ROW_FIELDS = {
 }
 UNIT_TO_MHZ = {"kHz": 0.001, "MHz": 1.0, "GHz": 1000.0}
 POWER_TO_W = {"mW": 0.001, "W": 1.0, "kW": 1000.0}
+FREQ_EPSILON_MHZ = 1e-9
 
 
 def fail(message: str) -> None:
@@ -360,20 +362,48 @@ def validate_frequency_row(row: dict, index: int, sources_by_id: dict, rules_by_
         if rule is None:
             fail(f"{row_id}: unknown derived_from_rule {rule_id}")
         params = rule.get("parameters") or {}
-        expected = {
-            "frequency_min_mhz": low * UNIT_TO_MHZ[row["unit"]],
-            "frequency_max_mhz": high * UNIT_TO_MHZ[row["unit"]],
-            "max_transmitter_output_power_w": (
-                power * POWER_TO_W[row["power_unit"]] if power is not None else None
-            ),
-        }
-        for key, value in expected.items():
-            if key in params and params[key] != value:
-                fail(f"{row_id}: {key} disagrees with rule {rule_id}")
+        # The rule states a limit over a frequency scope; a row may cover only
+        # part of that scope (e.g. one visible sub-band) but never exceed it.
+        row_low_mhz = low * UNIT_TO_MHZ[row["unit"]]
+        row_high_mhz = high * UNIT_TO_MHZ[row["unit"]]
+        if "frequency_min_mhz" in params and row_low_mhz < params["frequency_min_mhz"] - FREQ_EPSILON_MHZ:
+            fail(f"{row_id}: frequency range extends below rule {rule_id} scope")
+        if "frequency_max_mhz" in params and row_high_mhz > params["frequency_max_mhz"] + FREQ_EPSILON_MHZ:
+            fail(f"{row_id}: frequency range extends above rule {rule_id} scope")
+        row_power_w = power * POWER_TO_W[row["power_unit"]] if power is not None else None
+        if "max_transmitter_output_power_w" in params and params["max_transmitter_output_power_w"] != row_power_w:
+            fail(f"{row_id}: max_transmitter_output_power_w disagrees with rule {rule_id}")
         if "license_class" in params and params["license_class"] not in classes:
             fail(f"{row_id}: license_class disagrees with rule {rule_id}")
         if row["verification_status"] == "verified" and rule["verification_status"] != "verified":
             fail(f"{row_id}: verified row cannot derive from non-verified rule")
+
+
+def validate_rows_within_raw(table: dict, raw: dict) -> None:
+    """Every semantic row must lie inside one raw source row that lists its classes.
+
+    Prevents a semantic row from spanning gaps between the visible source
+    sub-bands (e.g. treating a 430-440 MHz power condition as an allocation).
+    """
+    if raw.get("source_id") != table.get("source_id"):
+        fail("frequency table and raw BTK transcription cite different sources")
+    raw_rows = raw.get("rows")
+    if not isinstance(raw_rows, list) or not raw_rows:
+        fail("raw BTK transcription has no rows")
+    for row in table["rows"]:
+        low = row["frequency_min"] * UNIT_TO_MHZ[row["unit"]]
+        high = row["frequency_max"] * UNIT_TO_MHZ[row["unit"]]
+        covering = [
+            source_row
+            for source_row in raw_rows
+            if source_row.get("unit") in UNIT_TO_MHZ
+            and source_row["frequency_min"] * UNIT_TO_MHZ[source_row["unit"]] <= low + FREQ_EPSILON_MHZ
+            and high <= source_row["frequency_max"] * UNIT_TO_MHZ[source_row["unit"]] + FREQ_EPSILON_MHZ
+        ]
+        if not covering:
+            fail(f"{row['id']}: range is not inside any raw BTK source row")
+        if not any(set(row["license_class"]) <= set(r.get("license_classes") or []) for r in covering):
+            fail(f"{row['id']}: license_class not listed for the covering raw BTK source row")
 
 
 def check_row_conflicts(rows: list[dict]) -> None:
@@ -504,6 +534,7 @@ def main() -> int:
     rules_by_id = {rule["id"]: rule for rule in rules}
     table = load_json(FREQUENCY_TABLE, "frequency table")
     validate_frequency_table(table, sources_by_id, rules_by_id)
+    validate_rows_within_raw(table, load_json(BTK_RAW_TABLE, "raw BTK transcription"))
 
     print(
         f"PASS: validated {len(sources)} source record(s), "

@@ -37,12 +37,24 @@ Bu katman karar vermek için tek başına kullanılmaz.
 
 ### 2. Semantic decision table
 
-`data/frequency_table.json` AI karar motorunun fail-closed katmanıdır. Şimdilik yalnız daha önce atomik kurallarla doğrulanmış iki sınıf/güç kaydını taşır:
+`data/frequency_table.json` AI karar motorunun fail-closed katmanıdır. Şimdilik yalnız daha önce atomik kurallarla doğrulanmış C sınıfı güç sınırlarını, ham tablonun görünür alt bantlarına bölünmüş olarak taşır:
 
-| Satır | Sınıf | Aralık | Doğrulanmış limit |
-|---|---|---|---|
-| `TR.FTM.AMATEUR.ROW.C.144-146` | C | 144–146 MHz | 5 W |
-| `TR.FTM.AMATEUR.ROW.C.430-440` | C | 430–440 MHz | 5 W |
+| Satır | Sınıf | Aralık | Doğrulanmış limit | Ham satır |
+|---|---|---|---|---|
+| `TR.FTM.AMATEUR.ROW.C.144-146` | C | 144–146 MHz | 5 W | 18 |
+| `TR.FTM.AMATEUR.ROW.C.430.2-430.7` | C | 430,2–430,7 MHz | 5 W | 19 |
+| `TR.FTM.AMATEUR.ROW.C.431.55-431.825` | C | 431,55–431,825 MHz (dernek tekrarlayıcı alt bandı) | 5 W | 20 |
+| `TR.FTM.AMATEUR.ROW.C.432-432.975` | C | 432–432,975 MHz | 5 W | 21 |
+| `TR.FTM.AMATEUR.ROW.C.433.4-433.575` | C | 433,4–433,575 MHz | 5 W | 22 |
+| `TR.FTM.AMATEUR.ROW.C.435-437.975` | C | 435–437,975 MHz | 5 W | 23 |
+| `TR.FTM.AMATEUR.ROW.C.439.15-439.425` | C | 439,15–439,425 MHz (dernek tekrarlayıcı alt bandı) | 5 W | 24 |
+
+Tablodaki "C sınıfı 430–440 MHz'te 5 W" ifadesi bir **güç sınırıdır, tahsis değildir**. Ham tabloda 430–440 MHz arası tek parça değil, yukarıdaki altı görünür alt banttır. Alt bantlar arasındaki boşluklar (ör. 433,0 MHz, 434 MHz, 438,5 MHz) için semantik satır yoktur ve karar `UNKNOWN` olur.
+
+Validator iki kuralı zorlar:
+
+- Kuraldan türetilen satır kuralın frekans kapsamının **içinde** kalmalıdır (alt bant olabilir, kapsamı aşamaz).
+- Her semantik satır, sınıfını listeleyen **tek bir ham kaynak satırının içinde** kalmalıdır; alt bant boşluklarını kapsayan satır reddedilir.
 
 Ham tabloda daha fazla veri bulunması, o verinin otomatik olarak `ALLOWED` kararı üretmesi anlamına gelmez.
 
