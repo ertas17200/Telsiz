@@ -73,7 +73,7 @@ class SourceCandidateTests(unittest.TestCase):
 
     def test_non_official_candidate_must_disclaim_legal_claims(self):
         with self.assertRaises(SystemExit):
-            self.validate(self.mutate("CAND.COMMUNITY.ARCH-YUNUS.AMATOR-TELSIZ", cannot_support=[]))
+            self.validate(self.mutate("CAND.COMMUNITY.ARCH-YUNUS.AMATOR-TELSIZ-REHBERI", cannot_support=[]))
         with self.assertRaises(SystemExit):
             self.validate(self.mutate("CAND.TR.TRAC.REPEATER_LIST", cannot_support=["turkish_permission"]))
 
@@ -82,6 +82,16 @@ class SourceCandidateTests(unittest.TestCase):
             if not cand["expected_source_type"].startswith("official_"):
                 with self.subTest(cand=cand["id"]):
                     self.assertIn("legal_claims", cand["cannot_support"])
+
+    def test_arch_yunus_candidate_uses_exact_accessible_repo_identity(self):
+        cand = by_id(CANDIDATES, "CAND.COMMUNITY.ARCH-YUNUS.AMATOR-TELSIZ-REHBERI")
+        self.assertEqual(cand["status"], "candidate_unverified")
+        self.assertEqual(
+            cand["search_entry_point"],
+            "https://github.com/arch-yunus/Amator-Telsiz-Rehberi",
+        )
+        self.assertIn("legal_claims", cand["cannot_support"])
+        self.assertIn("turkish_permission", cand["cannot_support"])
 
     def test_unknown_conflict_reference_rejected(self):
         payload = copy.deepcopy(CANDIDATES)
