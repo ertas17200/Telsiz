@@ -23,9 +23,9 @@ This file records source inconsistencies that an AI must not silently normalize.
 **Detected:** 2026-09-28  
 **Source:** `TR.BTK.FTM.TECH.2022-IK-SYD-245`
 
-**Observation:** In the visually merged emission cell used by the 28 MHz-and-above rows, `F2B` appears twice and `J2C` is listed. In the immediately following `Tablo 26-1 Emisyon tipleri`, `J2C` has no definition, while `J3C` is defined.
+**Observation:** In the visually merged emission cell used by the 28 MHz-and-above rows, `F2B` and `J3F` are each repeated, and `A3J` plus `J2C` are listed. In the immediately following `Tablo 26-1 Emisyon tipleri`, neither `A3J` nor `J2C` is defined; that reference table instead contains `A3C` and `J3C`.
 
-**Resolution policy:** Preserve the source text as-is in the raw transcription, de-duplicate only the repeated `F2B` token for machine readability, keep `J2C` explicitly flagged as undefined, and do not silently replace it with `J3C`.
+**Resolution policy:** Preserve the source anomaly in provenance. The machine-readable code list de-duplicates repeated `F2B`/`J3F` tokens, keeps `A3J` and `J2C` explicitly flagged as undefined by Tablo 26-1, and never silently substitutes `A3C` or `J3C`.
 
 ## TR-BTK-UNIT-001
 
