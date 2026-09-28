@@ -45,12 +45,20 @@ If source code or text is directly reused or adapted, preserve the applicable MI
 
 ### P11.1 — Academy layer
 
-Add a user-facing `academy/` or equivalent knowledge presentation layer without weakening the existing source/claim separation.
+**Implementation status: IMPLEMENTED; every change remains subject to the repository CI gate before merge.**
+
+The first Academy scaffold is machine-verifiable rather than a free-form content dump:
+
+- `academy/academy.json` declares module provenance and trust status;
+- `scripts/validate_academy.py` enforces source/rule/candidate boundaries;
+- `tests/test_academy.py` locks the fail-closed contract;
+- GitHub Actions runs the Academy validator before the unit test suite.
 
 Acceptance:
 - educational pages cite Telsiz source IDs or clearly say when content is general theory;
 - legal facts never come from community content;
-- CI checks links/structure.
+- `legal_verdicts=true` is rejected so Academy cannot bypass the decision engine;
+- CI checks the manifest contract and regression tests.
 
 ### P11.2 — Grounded exam simulator
 
