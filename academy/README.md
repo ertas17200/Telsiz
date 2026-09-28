@@ -23,6 +23,8 @@ Academy, mevcut güven zincirinin **üstünde** çalışır; onu atlamaz:
 
 Grounded pratik sınav katmanı için [EXAM.md](EXAM.md) ve `exam_questions.json` kullanılır. Bu banka yalnız verified source/rule zincirleri alınır ve banka `practice_only` kalır.
 
+İlk deterministic operator tool: [GRID_LOCATOR.md](GRID_LOCATOR.md) / `scripts/grid_locator.py`. Bu araç `ACADEMY.TOOL.GRID-LOCATOR` modülüne bağlıdır ve hukuki verdict üretmez.
+
 ## Doğrulama
 
 ```bash
