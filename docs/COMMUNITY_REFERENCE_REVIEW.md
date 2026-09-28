@@ -62,12 +62,15 @@ Acceptance:
 
 ### P11.2 — Grounded exam simulator
 
-Build an exam/training engine whose questions carry provenance metadata.
+**Implementation status: IMPLEMENTED; every change remains subject to the repository CI gate before merge.**
+
+The first practice engine uses `academy/exam_questions.json`, `scripts/validate_exam.py` and `scripts/exam_simulator.py`. It is deliberately marked `practice_only`, not an official KEGM simulator.
 
 Acceptance:
-- each question has source/locator or an explicit `educational_only` status;
-- regulatory questions fail closed when their official source is pending;
-- scoring logic has unit tests;
+- each grounded question carries explicit verified source/rule IDs;
+- pending sources and unverified candidates are rejected from grounded questions;
+- `official_exam_claim=true` and time-sensitive questions are rejected in v1;
+- scoring logic has unit tests and preserves per-question provenance in output;
 - no guessed KEGM fee or current exam-rule value is hard-coded.
 
 ### P11.3 — Operator tools
