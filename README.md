@@ -39,9 +39,15 @@ Telsiz/
 │   └── sources.json
 ├── docs/
 │   ├── AI_ANSWER_POLICY.md
+│   ├── FREQUENCY_TABLE.md
+│   ├── GROUNDING_CONTRACT.md
 │   ├── PROJECT_SCOPE.md
+│   ├── REPO_STATUS.md
+│   ├── SOURCE_ACCESS_LOG.md
+│   ├── SOURCE_CONFLICTS.md
 │   └── SOURCE_POLICY.md
 ├── schemas/
+│   ├── rule.schema.json
 │   └── source.schema.json
 ├── scripts/
 │   ├── check_repo_hygiene.py
@@ -61,10 +67,12 @@ If a source is missing, outdated, conflicting or not verified, the AI must say s
 Run:
 
 ```bash
+python scripts/check_repo_hygiene.py
 python scripts/validate_knowledge.py
+python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
-The same validation runs in GitHub Actions.
+The same checks run in GitHub Actions.
 
 ## Source registry
 
@@ -78,12 +86,17 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 
 ## Project documents
 
+- [Current repository status](docs/REPO_STATUS.md)
 - [Project scope](docs/PROJECT_SCOPE.md)
 - [Source policy](docs/SOURCE_POLICY.md)
 - [AI answer policy](docs/AI_ANSWER_POLICY.md)
+- [Grounding contract](docs/GROUNDING_CONTRACT.md)
 - [Frequency table contract](docs/FREQUENCY_TABLE.md)
 - [Official source access log](docs/SOURCE_ACCESS_LOG.md)
+- [Known source conflicts](docs/SOURCE_CONFLICTS.md)
 
 ## Status
 
-Bootstrap phase. The repository structure and validation contract are being established before authoritative source ingestion begins.
+Repository controls and CI are operational. The amateur frequency table is intentionally **partial** while the official BTK artifact is inaccessible from the current source-ingestion environment. P0–P3 remain fail-closed until the relevant official sources can be fetched and verified.
+
+See [REPO_STATUS.md](docs/REPO_STATUS.md) for the exact baseline, CI evidence, blockers and next sequence.
