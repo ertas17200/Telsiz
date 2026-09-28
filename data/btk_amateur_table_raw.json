@@ -572,7 +572,6 @@
         "J2C",
         "J2D",
         "J3E",
-        "J3F",
         "R3E"
       ],
       "license_classes": [
@@ -591,7 +590,7 @@
       },
       "merged_cell_inheritance": "emission/class/restriction cells continue across a page break",
       "verification_status": "verified_visual",
-      "notes": "The emission cell visibly repeats F2B and lists J2C; Tablo 26-1 does not define J2C. See source-conflict record."
+      "notes": "The source emission cell visibly repeats F2B and J3F, and lists A3J and J2C. Tablo 26-1 defines neither A3J nor J2C. The machine list de-duplicates repeated tokens but does not silently replace undefined codes. See TR-BTK-EMISSION-001."
     },
     {
       "source_row_index": 17,
