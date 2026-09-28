@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "exam_status": "practice_only",
+  "purpose": "Kaynak/rule provenance zorunlu amatör telsiz pratik soru bankası. KEGM resmî soru bankası veya güncel sınav kuralı iddiası taşımaz.",
+  "questions": [
+    {
+      "id": "EXAM.TR.DUMMY-LOAD.001",
+      "prompt": "Amatör telsiz istasyonundaki vericinin ayar ve ölçümleri sırasında hangi yük kullanılmalıdır?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Suni yük (dummy load)"
+        },
+        {
+          "id": "B",
+          "text": "Herhangi bir açık devre"
+        },
+        {
+          "id": "C",
+          "text": "Yalnız araç anteni"
+        },
+        {
+          "id": "D",
+          "text": "Toprak hattı"
+        }
+      ],
+      "correct_option_id": "A",
+      "content_status": "source_grounded",
+      "legal_content": true,
+      "time_sensitive": false,
+      "official_exam_claim": false,
+      "source_ids": [
+        "TR.BTK.FTM.TECH.2022-IK-SYD-245"
+      ],
+      "rule_ids": [
+        "TR.AMATEUR.DUMMY_LOAD"
+      ],
+      "candidate_refs": [],
+      "explanation": "Cevap, doğrulanmış BTK Teknik Ölçütler kaynağına bağlı atomik kuraldan gelir.",
+      "tags": [
+        "teknik-uyum",
+        "dummy-load"
+      ]
+    },
+    {
+      "id": "EXAM.TR.C144-POWER.001",
+      "prompt": "Kayıtlı doğrulanmış kurala göre C sınıfı amatör telsizci için 144–146 MHz bandındaki verici çıkış gücü üst sınırı nedir?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1 W"
+        },
+        {
+          "id": "B",
+          "text": "5 W"
+        },
+        {
+          "id": "C",
+          "text": "25 W"
+        },
+        {
+          "id": "D",
+          "text": "75 W"
+        }
+      ],
+      "correct_option_id": "B",
+      "content_status": "source_grounded",
+      "legal_content": true,
+      "time_sensitive": false,
+      "official_exam_claim": false,
+      "source_ids": [
+        "TR.BTK.FTM.TECH.2022-IK-SYD-245"
+      ],
+      "rule_ids": [
+        "TR.AMATEUR.C_144_146_MAX_5W"
+      ],
+      "candidate_refs": [],
+      "explanation": "Bu soru yalnız doğrulanmış C sınıfı 144–146 MHz güç kuralını sınar; genel bir yayın izni kararı üretmez.",
+      "tags": [
+        "C-sınıfı",
+        "144-146-MHz",
+        "güç"
+      ]
+    },
+    {
+      "id": "EXAM.TR.ENCRYPTION.001",
+      "prompt": "Doğrulanmış kurala göre amatör haberleşmede üçüncü kişilerin haberleşmeyi dinlemesini engellemek amacıyla özel kriptolu sistem kullanımı için doğru ifade hangisidir?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Her zaman serbesttir"
+        },
+        {
+          "id": "B",
+          "text": "Yalnız yüksek güçte serbesttir"
+        },
+        {
+          "id": "C",
+          "text": "Uluslararası amatör haberleşmede kullanılan yöntem ve uygulamalar dışında bu amaçla kullanılamaz"
+        },
+        {
+          "id": "D",
+          "text": "Sadece hafta sonu kullanılabilir"
+        }
+      ],
+      "correct_option_id": "C",
+      "content_status": "source_grounded",
+      "legal_content": true,
+      "time_sensitive": false,
+      "official_exam_claim": false,
+      "source_ids": [
+        "TR.BTK.FTM.TECH.2022-IK-SYD-245"
+      ],
+      "rule_ids": [
+        "TR.AMATEUR.NO_OBSCURING_ENCRYPTION"
+      ],
+      "candidate_refs": [],
+      "explanation": "Soru, doğrulanmış atomik kuralın kapsamını ölçer ve daha geniş bir hukuki sonuç türetmez.",
+      "tags": [
+        "haberleşme",
+        "kriptolu-haberleşme"
+      ]
+    },
+    {
+      "id": "EXAM.IARU.NATIONAL-RULES.001",
+      "prompt": "IARU Region 1 band planı ile ulusal düzenleme arasında çelişki görünürse çalışma pratiğinde hangi yaklaşım izlenmelidir?",
+      "options": [
+        {
+          "id": "A",
+          "text": "IARU band planı her durumda ulusal düzenlemenin üstündedir"
+        },
+        {
+          "id": "B",
+          "text": "Ulusal düzenlemeye uyulur; IARU band planı çalışma rehberi olarak kullanılır"
+        },
+        {
+          "id": "C",
+          "text": "Topluluk forumundaki çoğunluk kararı uygulanır"
+        },
+        {
+          "id": "D",
+          "text": "Kaynakların hiçbiri dikkate alınmaz"
+        }
+      ],
+      "correct_option_id": "B",
+      "content_status": "source_grounded",
+      "legal_content": false,
+      "time_sensitive": false,
+      "official_exam_claim": false,
+      "source_ids": [
+        "IARU.R1.BANDPLANS"
+      ],
+      "rule_ids": [
+        "IARU.R1.NATIONAL_RULES_PREVAIL"
+      ],
+      "candidate_refs": [],
+      "explanation": "Bu soru amatör çalışma pratiği kuralını ölçer; IARU kaynağı Türkiye'de tek başına hukuki izin üretmez.",
+      "tags": [
+        "IARU",
+        "band-planı",
+        "kaynak-önceliği"
+      ]
+    }
+  ]
+}
