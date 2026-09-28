@@ -75,8 +75,17 @@ Acceptance:
 
 ### P11.3 — Operator tools
 
-Candidate tools:
-- Maidenhead grid locator calculator;
+**Implementation status: IN PROGRESS. Grid Locator sub-feature implemented; remaining tools stay backlog items.**
+
+Implemented:
+- deterministic Maidenhead grid locator encoder;
+- 2/4/6-character precision;
+- locator cell bounds/center decoder;
+- strict global coordinate bounds and invalid-input rejection;
+- round-trip/boundary/normalization unit tests;
+- CLI output explicitly returns `legal_verdict: null`.
+
+Remaining:
 - Morse trainer;
 - Q-code/RST trainer;
 - QSO log schema/export;
