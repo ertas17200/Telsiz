@@ -187,7 +187,7 @@
         "max_transmitter_output_power_w": 5
       },
       "answer_tags": ["C-sınıfı", "430-440-MHz", "5-W", "güç-limiti"],
-      "notes": "Alt bantlara ilişkin role, uydu, beacon ve diğer ilave kısıtlamalar ayrıca değerlendirilmelidir."
+      "notes": "Alt bantlara ilişkin role, uydu, beacon ve diğer ilave kısıtlamalar ayrıca değerlendirilmelidir. Bu kural bir güç sınırıdır, tahsis değildir: tablo 430-440 MHz aralığında yalnız görünür alt bantları listeler (bkz. data/frequency_table.json 430 alt bant satırları); alt bant boşlukları bu kuraldan izin almaz."
     },
     {
       "id": "IARU.R1.NATIONAL_RULES_PREVAIL",

@@ -58,7 +58,7 @@ class QuestionGroundingTests(unittest.TestCase):
                 self.assertNotEqual(rule["authority"], "legal", rule["id"])
 
     def test_power_questions_give_limit_without_legal_verdict(self):
-        for freq in (145.0, 433.0):
+        for freq in (145.0, 433.5):
             with self.subTest(freq=freq):
                 result = fl.evaluate(TABLE, SOURCES, fl.Request(license_class="C", frequency_mhz=freq))
                 self.assertEqual(
@@ -66,6 +66,12 @@ class QuestionGroundingTests(unittest.TestCase):
                     [(5, "W")],
                 )
                 self.assertEqual(result["legal_status"], fl.UNKNOWN)
+
+    def test_433_mhz_exactly_is_in_a_subband_gap(self):
+        # 433.0 MHz lies between the visible 432-432.975 and 433.4-433.575 sub-bands.
+        result = fl.evaluate(TABLE, SOURCES, fl.Request(license_class="C", frequency_mhz=433.0))
+        self.assertEqual(result["rows"], [])
+        self.assertEqual(result["legal_status"], fl.UNKNOWN)
 
     def test_partial_questions_stay_partial_while_table_is_partial(self):
         partial = [q for q, _, coverage in QUESTIONS if coverage == "partial"]
