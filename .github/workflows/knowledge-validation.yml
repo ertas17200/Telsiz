@@ -42,5 +42,8 @@ jobs:
       - name: Validate grounded practice exam
         run: python scripts/validate_exam.py
 
+      - name: Validate Morse data
+        run: python scripts/validate_morse.py
+
       - name: Test grounding contract
         run: python -m unittest discover -s tests -p "test_*.py" -v
