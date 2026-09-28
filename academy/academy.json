@@ -86,6 +86,19 @@
       "rule_ids": [],
       "candidate_refs": [],
       "notes": "Q-code practice uses the current IARU EOP amateur subset with ITU-R M.1172 provenance; RS(T) practice uses current IARU EOP and VHF Handbook signal-reporting references. The tool cannot decide transmit legality."
+    },
+    {
+      "id": "ACADEMY.TOOL.QSO-LOG-ADIF",
+      "title": "Source-grounded QSO log and ADIF 3.1.7 ADI exporter",
+      "content_status": "source_grounded",
+      "legal_content": false,
+      "legal_verdicts": false,
+      "source_ids": [
+        "ADIF.SPEC.3.1.7"
+      ],
+      "rule_ids": [],
+      "candidate_refs": [],
+      "notes": "Bounded QSO record validation and ADI export based on ADIF 3.1.7. This module is data interchange tooling only and cannot decide whether a transmission was lawful."
     }
   ]
 }

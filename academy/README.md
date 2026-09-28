@@ -22,6 +22,7 @@ Academy, mevcut güven zincirinin **üstünde** çalışır; onu atlamaz:
 - `ACADEMY.TOOL.GRID-LOCATOR`
 - `ACADEMY.TOOL.MORSE-TRAINER`
 - `ACADEMY.TOOL.QCODE-RST-TRAINER`
+- `ACADEMY.TOOL.QSO-LOG-ADIF`
 
 Grounded pratik sınav katmanı için [EXAM.md](EXAM.md) ve `exam_questions.json` kullanılır. Bu banka yalnız verified source/rule zincirleri alınır ve banka `practice_only` kalır.
 
@@ -31,6 +32,8 @@ Kaynak-grounded Mors eğiticisi: [MORSE_TRAINER.md](MORSE_TRAINER.md) / `scripts
 
 Kaynak-grounded Q-code/RS(T) eğiticisi: [QCODE_RST_TRAINER.md](QCODE_RST_TRAINER.md) / `scripts/qcode_rst_trainer.py`; Q-code için IARU EOP 4.2.0 + ITU-R M.1172, RS(T) için IARU EOP 4.2.0 + VHF Handbook 10.02 kullanılır.
 
+Kaynak-grounded QSO log/ADIF exporter: [QSO_LOG_ADIF.md](QSO_LOG_ADIF.md) / `scripts/qso_log_adif.py`; bounded uygulama sözleşmesi `ADIF.SPEC.3.1.7` kaynağına bağlıdır.
+
 ## Doğrulama
 
 ```bash
@@ -38,6 +41,7 @@ python scripts/validate_academy.py
 python scripts/validate_exam.py
 python scripts/validate_morse.py
 python scripts/validate_operator_codes.py
+python scripts/validate_qso_log.py
 python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
