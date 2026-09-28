@@ -58,6 +58,19 @@
         "CAND.COMMUNITY.ARCH-YUNUS.AMATOR-TELSIZ-REHBERI"
       ],
       "notes": "Topluluk reposundaki kullanıcı aracı fikrinden esinlenen eğitim modülü adayıdır; kaynak/izin iddiası taşımaz."
+    },
+    {
+      "id": "ACADEMY.TOOL.MORSE-TRAINER",
+      "title": "ITU-grounded International Morse trainer",
+      "content_status": "source_grounded",
+      "legal_content": false,
+      "legal_verdicts": false,
+      "source_ids": [
+        "ITU.R.M1677.1"
+      ],
+      "rule_ids": [],
+      "candidate_refs": [],
+      "notes": "ITU-R M.1677-1 kaynağına bağlı A-Z/0-9 eğitim aracı; hukuki yayın izni veya sınav güncelliği iddiası üretmez."
     }
   ]
 }
