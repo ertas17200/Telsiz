@@ -36,5 +36,8 @@ jobs:
       - name: Validate official artifact registry
         run: python scripts/artifact_gate.py validate-registry
 
+      - name: Validate academy manifest
+        run: python scripts/validate_academy.py
+
       - name: Test grounding contract
         run: python -m unittest discover -s tests -p "test_*.py" -v
