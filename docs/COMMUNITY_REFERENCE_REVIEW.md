@@ -98,12 +98,23 @@ Acceptance:
 
 ### P11.4 — Device manual knowledge
 
-Create a manufacturer-manual intake layer for radios such as Yaesu devices.
+**Implementation status: IMPLEMENTED BASELINE for Yaesu FTM-400.**
+
+The first manufacturer-manual layer uses Yaesu's official legacy product/download page and the separate DR/DE and XDR/XDE firmware information documents.
+
+Implemented:
+- exact DR/DE versus XDR/XDE model-family separation;
+- explicit USA/AUS/EXP destination package selection;
+- documented MAIN/DSP target metadata from the 22 Dec 2020 Yaesu update notices;
+- operating-manual URLs recorded as `pending` because full files exceeded the current content-verification path;
+- update steps withheld until the package-specific Yaesu Firmware Upgrade Manual is separately ingested and verified;
+- no country-to-destination inference and no legal transmit verdict.
 
 Acceptance:
 - manufacturer manual/version metadata is recorded;
-- firmware/update instructions are tied to exact model/manual/version;
-- manufacturer guidance is kept separate from Turkish regulatory permission.
+- firmware/update guidance is tied to exact model family and explicit destination;
+- incompatible firmware families are programmatically rejected;
+- manufacturer guidance remains separate from Turkish regulatory permission.
 
 ### P11.5 — Repeater and operating-practice data
 

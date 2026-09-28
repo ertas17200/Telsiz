@@ -54,5 +54,8 @@ jobs:
       - name: Validate RF wavelength calculator
         run: python scripts/validate_rf_calculator.py
 
+      - name: Validate device manual and firmware registry
+        run: python scripts/validate_device_manuals.py
+
       - name: Test grounding contract
         run: python -m unittest discover -s tests -p "test_*.py" -v

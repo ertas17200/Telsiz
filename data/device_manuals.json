@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "manufacturer": "Yaesu",
+  "product_page_source_id": "YAESU.FTM400.PRODUCT.ARCHIVE",
+  "trust_boundary": {
+    "legal_content": false,
+    "legal_verdicts": false,
+    "instruction_policy": "Firmware package selection may be returned only after exact model-family and destination input. Upgrade steps remain unavailable until the package-specific Firmware Upgrade Manual is separately verified."
+  },
+  "model_families": [
+    {
+      "id": "YAESU.FTM400.DR-DE",
+      "models": [
+        "FTM-400DR",
+        "FTM-400DE"
+      ],
+      "incompatible_family_ids": [
+        "YAESU.FTM400.XDR-XDE"
+      ],
+      "operating_manual_source_id": "YAESU.FTM400DRDE.OPERATING.MANUAL",
+      "operating_manual_content_status": "pending_full_content_verification",
+      "firmware_info_source_id": "YAESU.FTM400DRDE.FW.INFO.2020-12-22",
+      "firmware_info_date": "2020-12-22",
+      "documented_targets": {
+        "MAIN": "3.50",
+        "DSP": "4.31"
+      },
+      "destination_packages": {
+        "USA": "FTM-400D_USA_Firmware_Update_2020_12.zip",
+        "AUS": "FTM-400D_AUS_Firmware_Update_2020_12.zip",
+        "EXP": "FTM-400D_EXP_Firmware_Update_2020_12.zip"
+      },
+      "dsp_package": "PCTOOLe_v0431.zip",
+      "destination_notes": {
+        "USA": "Manufacturer document labels the USA package for its stated USA destination group.",
+        "AUS": "Manufacturer document provides a distinct AUS package.",
+        "EXP": "Manufacturer document labels EXP/EU/CHN for other non-USA/non-AUS destinations."
+      },
+      "update_instruction_status": "REQUIRE_PACKAGE_FIRMWARE_UPGRADE_MANUAL",
+      "notes": "Do not use XDR/XDE firmware on this family."
+    },
+    {
+      "id": "YAESU.FTM400.XDR-XDE",
+      "models": [
+        "FTM-400XDR",
+        "FTM-400XDE"
+      ],
+      "incompatible_family_ids": [
+        "YAESU.FTM400.DR-DE"
+      ],
+      "operating_manual_source_id": "YAESU.FTM400XDRXDE.OPERATING.MANUAL",
+      "operating_manual_content_status": "pending_full_content_verification",
+      "firmware_info_source_id": "YAESU.FTM400XDRXDE.FW.INFO.2020-12-22",
+      "firmware_info_date": "2020-12-22",
+      "documented_targets": {
+        "MAIN": "4.50",
+        "DSP": "4.31"
+      },
+      "destination_packages": {
+        "USA": "FTM-400XD_USA_Firmware_Update_2020_12.zip",
+        "AUS": "FTM-400XD_AUS_Firmware_Update_2020_12.zip",
+        "EXP": "FTM-400XD_EXP_Firmware_Update_2020_12.zip"
+      },
+      "dsp_package": "PCTOOLe_v0431.zip",
+      "destination_notes": {
+        "USA": "Manufacturer document labels the USA package for its stated USA destination group.",
+        "AUS": "Manufacturer document provides a distinct AUS package.",
+        "EXP": "Manufacturer document labels EXP/EU/CHN for other non-USA/non-AUS destinations; Japan is explicitly separate."
+      },
+      "update_instruction_status": "REQUIRE_PACKAGE_FIRMWARE_UPGRADE_MANUAL",
+      "notes": "Do not use DR/DE firmware on this family. Japan firmware is outside this v1 registry and must be checked on the Yaesu Japan site."
+    }
+  ]
+}
