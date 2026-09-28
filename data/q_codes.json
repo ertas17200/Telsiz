@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "source_ids": [
+    "IARU.R1.EOP.4.2.0",
+    "ITU.R.M1172.0"
+  ],
+  "coverage": "IARU_EOP_4.2.0_Table_10-A_core_amateur_subset",
+  "notes": "Concise paraphrases for training. ITU-R M.1172 is the standardized technical provenance; IARU EOP 4.2.0 identifies this subset as common amateur operating practice. This dataset does not create legal permission.",
+  "codes": [
+    {
+      "code": "QRG",
+      "question_summary": "What exact frequency is being used?",
+      "statement_summary": "The frequency is the specified value.",
+      "topic": "frequency"
+    },
+    {
+      "code": "QRK",
+      "question_summary": "How readable are my signals?",
+      "statement_summary": "Signal readability is reported on a 1–5 scale.",
+      "topic": "readability"
+    },
+    {
+      "code": "QRL",
+      "question_summary": "Are you busy, or is this frequency in use?",
+      "statement_summary": "I am busy, or this frequency is in use.",
+      "topic": "frequency-use"
+    },
+    {
+      "code": "QRM",
+      "question_summary": "Are you experiencing interference?",
+      "statement_summary": "I am experiencing interference.",
+      "topic": "interference"
+    },
+    {
+      "code": "QRN",
+      "question_summary": "Are natural atmospheric noises bothering reception?",
+      "statement_summary": "Natural atmospheric noise is affecting reception.",
+      "topic": "noise"
+    },
+    {
+      "code": "QRO",
+      "question_summary": "Should I increase transmitter power?",
+      "statement_summary": "Increase transmitter power.",
+      "topic": "power"
+    },
+    {
+      "code": "QRP",
+      "question_summary": "Should I reduce transmitter power?",
+      "statement_summary": "Reduce transmitter power.",
+      "topic": "power"
+    },
+    {
+      "code": "QRS",
+      "question_summary": "Should I send more slowly?",
+      "statement_summary": "Reduce the sending speed.",
+      "topic": "speed"
+    },
+    {
+      "code": "QRT",
+      "question_summary": "Should I stop transmitting?",
+      "statement_summary": "Stop transmitting.",
+      "topic": "stop"
+    },
+    {
+      "code": "QRU",
+      "question_summary": "Do you have anything for me?",
+      "statement_summary": "I have nothing for you.",
+      "topic": "traffic"
+    },
+    {
+      "code": "QRV",
+      "question_summary": "Are you ready?",
+      "statement_summary": "I am ready.",
+      "topic": "readiness"
+    },
+    {
+      "code": "QRX",
+      "question_summary": "When will you call again?",
+      "statement_summary": "I will call again at the specified time; in amateur practice it can also mean wait or stand by.",
+      "topic": "wait"
+    },
+    {
+      "code": "QRZ",
+      "question_summary": "Who is calling me?",
+      "statement_summary": "You are being called by the specified station.",
+      "topic": "caller"
+    },
+    {
+      "code": "QSB",
+      "question_summary": "Is my signal fading?",
+      "statement_summary": "Your signal is fading.",
+      "topic": "fading"
+    },
+    {
+      "code": "QSL",
+      "question_summary": "Can you confirm reception?",
+      "statement_summary": "Reception is confirmed.",
+      "topic": "confirmation"
+    },
+    {
+      "code": "QSO",
+      "question_summary": "Can you communicate with the specified station?",
+      "statement_summary": "I can communicate with the specified station.",
+      "topic": "contact"
+    },
+    {
+      "code": "QSX",
+      "question_summary": "Can you listen on the specified frequency?",
+      "statement_summary": "Listen on the specified frequency.",
+      "topic": "listen"
+    },
+    {
+      "code": "QSY",
+      "question_summary": "Should I change to the specified frequency?",
+      "statement_summary": "Change to the specified frequency.",
+      "topic": "frequency-change"
+    },
+    {
+      "code": "QTH",
+      "question_summary": "What is your location?",
+      "statement_summary": "My location is the specified place or position.",
+      "topic": "location"
+    },
+    {
+      "code": "QUF",
+      "question_summary": "Have you received the specified distress signal?",
+      "statement_summary": "I received the specified distress signal at the stated time.",
+      "topic": "distress"
+    }
+  ]
+}

@@ -21,6 +21,7 @@ Academy, mevcut güven zincirinin **üstünde** çalışır; onu atlamaz:
 - `ACADEMY.IARU.BANDPLAN-PRACTICE`
 - `ACADEMY.TOOL.GRID-LOCATOR`
 - `ACADEMY.TOOL.MORSE-TRAINER`
+- `ACADEMY.TOOL.QCODE-RST-TRAINER`
 
 Grounded pratik sınav katmanı için [EXAM.md](EXAM.md) ve `exam_questions.json` kullanılır. Bu banka yalnız verified source/rule zincirleri alınır ve banka `practice_only` kalır.
 
@@ -28,12 +29,15 @@ Grounded pratik sınav katmanı için [EXAM.md](EXAM.md) ve `exam_questions.json
 
 Kaynak-grounded Mors eğiticisi: [MORSE_TRAINER.md](MORSE_TRAINER.md) / `scripts/morse_trainer.py`; veri kaynağı `ITU.R.M1677.1`.
 
+Kaynak-grounded Q-code/RS(T) eğiticisi: [QCODE_RST_TRAINER.md](QCODE_RST_TRAINER.md) / `scripts/qcode_rst_trainer.py`; Q-code için IARU EOP 4.2.0 + ITU-R M.1172, RS(T) için IARU EOP 4.2.0 + VHF Handbook 10.02 kullanılır.
+
 ## Doğrulama
 
 ```bash
 python scripts/validate_academy.py
 python scripts/validate_exam.py
 python scripts/validate_morse.py
+python scripts/validate_operator_codes.py
 python -m unittest discover -s tests -p "test_*.py" -v
 ```
 

@@ -45,5 +45,8 @@ jobs:
       - name: Validate Morse data
         run: python scripts/validate_morse.py
 
+      - name: Validate Q-code and RST data
+        run: python scripts/validate_operator_codes.py
+
       - name: Test grounding contract
         run: python -m unittest discover -s tests -p "test_*.py" -v

@@ -309,6 +309,57 @@
       "supersedes": [],
       "superseded_by": [],
       "notes": "ITU'nun resmî Recommendation sayfasında M.1677-1 (10/2009) 'In force (Main)' olarak listelenmektedir. Telsiz repo bu kaynağı yalnız Mors eğitim/teknik karakter eşlemeleri için kullanır; Türkiye'de hukuki yayın izni üretmez."
+    },
+    {
+      "id": "IARU.R1.EOP.4.2.0",
+      "title": "Ethics and Operating Procedures for the Radio Amateur — Fourth Edition, Revision 4.2.0",
+      "publisher": "International Amateur Radio Union Region 1",
+      "source_type": "amateur_association",
+      "jurisdiction": "IARU-REGION-1",
+      "url": "https://www.iaru-r1.org/wp-content/uploads/2026/07/IARU-Ethics-and-Operating-Procedures-for-the-Radio-Amateur-4th-Ed-v4.2.0_F.pdf",
+      "topics": [
+        "Q-codes",
+        "RST",
+        "operating practice",
+        "amateur radio ethics",
+        "training"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T21:45:00Z",
+      "publication_date": "2026-07-31",
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": "Fourth Edition · Revision 4.2.0",
+      "reference": "Chapter 10 — Q-Codes and Operational Abbreviations; Section 13.4 — RST Reports",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "IARU Region 1'in 2026 tarihli güncel işletme/etik rehberi. Belge kendi Legal Note bölümünde per-se hukuki bağlayıcılığı olmadığını ve ulusal düzenlemelere başvurulması gerektiğini belirtir. Telsiz repo bu kaynağı yalnız amatör işletme pratiği ve eğitim için kullanır."
+    },
+    {
+      "id": "ITU.R.M1172.0",
+      "title": "Miscellaneous abbreviations and signals to be used for radiocommunications in the maritime mobile service — Recommendation ITU-R M.1172-0",
+      "publisher": "International Telecommunication Union",
+      "source_type": "official_technical",
+      "jurisdiction": "INTERNATIONAL",
+      "url": "https://www.itu.int/rec/R-REC-M.1172-0-199510-I/en",
+      "topics": [
+        "Q-code",
+        "radiocommunication abbreviations",
+        "operating signals",
+        "training"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T21:45:00Z",
+      "publication_date": "1995-10-20",
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": "ITU-R M.1172-0 (10/1995)",
+      "reference": "Annex 1, Section I — Q Code",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "ITU resmî Recommendation sayfasında 'In force (Main)' olarak listelenir ve Radio Regulations tarafından referansla kullanılan sürümdür. Telsiz repo bunu Q-code terminolojisi için teknik provenance olarak kullanır; Türkiye'de amatör yayın izni veya hukuki verdict üretmez."
     }
   ]
 }
