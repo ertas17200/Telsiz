@@ -34,12 +34,18 @@ class RawBtkExtractionTests(unittest.TestCase):
     def test_emission_definition_count_is_24(self):
         self.assertEqual(len(EMISSIONS["definitions"]), 24)
 
-    def test_j2c_conflict_is_preserved_not_normalized(self):
+    def test_undefined_source_emission_codes_are_preserved_not_normalized(self):
         raw_codes = {c for row in RAW["rows"] for c in row["emission_codes"]}
         defined = {d["code"] for d in EMISSIONS["definitions"]}
-        self.assertIn("J2C", raw_codes)
-        self.assertNotIn("J2C", defined)
+        for code in ("A3J", "J2C"):
+            self.assertIn(code, raw_codes)
+            self.assertNotIn(code, defined)
         self.assertIn("TR-BTK-EMISSION-001", RAW["known_source_conflicts"])
+
+    def test_source_repetitions_are_de_duplicated_in_machine_row(self):
+        row = next(r for r in RAW["rows"] if r["source_row_index"] == 16)
+        self.assertEqual(len(row["emission_codes"]), len(set(row["emission_codes"])))
+        self.assertIn("repeats F2B and J3F", row["notes"])
 
     def test_source_unit_typo_is_preserved_as_conflict(self):
         row = next(r for r in RAW["rows"] if r["frequency_min"] == 28000 and r["unit"] == "kHz")
