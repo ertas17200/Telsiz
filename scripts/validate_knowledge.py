@@ -17,6 +17,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ROOT / "data" / "sources.json"
 RULES = ROOT / "data" / "rules.json"
+FREQUENCY_TABLE = ROOT / "data" / "frequency_table.json"
 
 ALLOWED_TYPES = {
     "official_legal",
@@ -46,6 +47,33 @@ ALLOWED_RULE_TYPES = {
 ALLOWED_AUTHORITIES = {"legal", "official_technical", "amateur_practice"}
 ID_RE = re.compile(r"^[A-Z0-9][A-Z0-9._-]{2,95}$")
 SHA_RE = re.compile(r"^(sha256:)?[a-fA-F0-9]{64}$")
+ALLOWED_COVERAGE = {"partial", "complete"}
+ALLOWED_FREQ_UNITS = {"kHz", "MHz", "GHz"}
+ALLOWED_LICENSE_CLASSES = {"A", "B", "C"}
+FREQUENCY_ROW_FIELDS = {
+    "id",
+    "frequency_min",
+    "frequency_max",
+    "unit",
+    "license_class",
+    "maximum_output_power",
+    "power_unit",
+    "emission",
+    "bandwidth",
+    "station_type",
+    "allowed_use",
+    "prohibited_use",
+    "special_condition",
+    "secondary_allocation",
+    "satellite",
+    "repeater",
+    "beacon",
+    "emergency",
+    "footnote",
+    "source_id",
+    "source_locator",
+    "verification_status",
+}
 
 
 def fail(message: str) -> None:
@@ -248,6 +276,112 @@ def validate_rule(
         fail(f"{rule_id}: parameters must be an object")
 
 
+def validate_frequency_table(
+    table: dict,
+    sources_by_id: dict[str, dict],
+    rules_by_id: dict[str, dict],
+) -> None:
+    coverage = table.get("coverage_status")
+    if coverage not in ALLOWED_COVERAGE:
+        fail("frequency table: invalid coverage_status")
+
+    table_source = sources_by_id.get(table.get("source_id"))
+    if table_source is None:
+        fail("frequency table: unknown source_id")
+
+    if coverage == "partial":
+        blocker = table.get("coverage_blocker")
+        if not isinstance(blocker, str) or len(blocker.strip()) < 8:
+            fail("frequency table: partial coverage requires a coverage_blocker")
+    else:
+        if table.get("coverage_blocker") is not None:
+            fail("frequency table: complete coverage cannot carry a blocker")
+        if table_source["verification_status"] != "verified":
+            fail("frequency table: complete coverage requires a verified source")
+        if not table_source.get("content_sha256"):
+            fail("frequency table: complete coverage requires source content_sha256")
+
+    rows = table.get("rows")
+    if not isinstance(rows, list):
+        fail("frequency table: rows must be a list")
+
+    seen: set[str] = set()
+    for index, row in enumerate(rows):
+        if not isinstance(row, dict):
+            fail(f"frequency rows[{index}] must be an object")
+        missing = sorted(FREQUENCY_ROW_FIELDS - row.keys())
+        if missing:
+            fail(f"frequency rows[{index}] missing fields: {', '.join(missing)}")
+        row_id = row["id"]
+        if not isinstance(row_id, str) or not ID_RE.fullmatch(row_id):
+            fail(f"frequency rows[{index}].id is invalid: {row_id!r}")
+        if row_id in seen:
+            fail(f"duplicate frequency row id: {row_id}")
+        seen.add(row_id)
+
+        low, high = row["frequency_min"], row["frequency_max"]
+        if not all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in (low, high)):
+            fail(f"{row_id}: frequency bounds must be numbers")
+        if not 0 < low < high:
+            fail(f"{row_id}: frequency_min must be positive and below frequency_max")
+        if row["unit"] not in ALLOWED_FREQ_UNITS:
+            fail(f"{row_id}: invalid unit")
+
+        classes = row["license_class"]
+        if (
+            not isinstance(classes, list)
+            or not classes
+            or not set(classes) <= ALLOWED_LICENSE_CLASSES
+        ):
+            fail(f"{row_id}: license_class must be a non-empty subset of A/B/C")
+
+        power = row["maximum_output_power"]
+        if power is not None:
+            if not isinstance(power, (int, float)) or isinstance(power, bool) or power <= 0:
+                fail(f"{row_id}: maximum_output_power must be positive")
+            if row["power_unit"] not in {"W", "mW", "kW"}:
+                fail(f"{row_id}: power value requires a valid power_unit")
+
+        locator = row["source_locator"]
+        if not isinstance(locator, dict) or not any(
+            isinstance(v, str) and v.strip() for v in locator.values()
+        ):
+            fail(f"{row_id}: source_locator must contain a usable locator")
+
+        if row["verification_status"] not in ALLOWED_VERIFICATION:
+            fail(f"{row_id}: invalid verification_status")
+
+        source = sources_by_id.get(row["source_id"])
+        if source is None:
+            fail(f"{row_id}: unknown source_id")
+        if row["verification_status"] == "verified":
+            if source["verification_status"] != "verified":
+                fail(f"{row_id}: verified row cannot cite non-verified source")
+            if source["source_type"] != "official_legal":
+                fail(f"{row_id}: verified row must cite official_legal source")
+            if source.get("legal_status") != "current":
+                fail(f"{row_id}: verified row requires a current legal source")
+
+        rule_id = row.get("derived_from_rule")
+        if rule_id is not None:
+            rule = rules_by_id.get(rule_id)
+            if rule is None:
+                fail(f"{row_id}: unknown derived_from_rule {rule_id}")
+            params = rule.get("parameters") or {}
+            expected = {
+                "frequency_min_mhz": row["frequency_min"] if row["unit"] == "MHz" else None,
+                "frequency_max_mhz": row["frequency_max"] if row["unit"] == "MHz" else None,
+                "max_transmitter_output_power_w": power if row["power_unit"] == "W" else None,
+            }
+            for key, value in expected.items():
+                if key in params and params[key] != value:
+                    fail(f"{row_id}: {key} disagrees with rule {rule_id}")
+            if "license_class" in params and params["license_class"] not in classes:
+                fail(f"{row_id}: license_class disagrees with rule {rule_id}")
+            if row["verification_status"] == "verified" and rule["verification_status"] != "verified":
+                fail(f"{row_id}: verified row cannot derive from non-verified rule")
+
+
 def main() -> int:
     source_payload = load_json(SOURCES, "source registry")
     sources = source_payload.get("sources")
@@ -273,9 +407,15 @@ def main() -> int:
             fail(f"rules[{index}] must be an object")
         validate_rule(rule, index, seen_rule_ids, sources_by_id)
 
+    rules_by_id = {rule["id"]: rule for rule in rules}
+    table = load_json(FREQUENCY_TABLE, "frequency table")
+    validate_frequency_table(table, sources_by_id, rules_by_id)
+
     print(
-        f"PASS: validated {len(sources)} source record(s) "
-        f"and {len(rules)} grounded rule(s)"
+        f"PASS: validated {len(sources)} source record(s), "
+        f"{len(rules)} grounded rule(s) "
+        f"and {len(table['rows'])} frequency row(s) "
+        f"[coverage={table['coverage_status']}]"
     )
     return 0
 
