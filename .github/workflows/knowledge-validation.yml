@@ -6,6 +6,7 @@ on:
       - main
       - "bootstrap/**"
       - "knowledge/**"
+      - "feat/**"
   pull_request:
 
 permissions:
@@ -23,5 +24,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Validate knowledge registry
+      - name: Validate knowledge registries
         run: python scripts/validate_knowledge.py
+
+      - name: Test grounding contract
+        run: python -m unittest discover -s tests -p "test_*.py" -v

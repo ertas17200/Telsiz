@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ertas17200/Telsiz/schemas/rule.schema.json",
+  "title": "Telsiz Grounded Rule",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "jurisdiction",
+    "topic",
+    "rule_type",
+    "authority",
+    "claim",
+    "source_id",
+    "source_locator",
+    "verification_status",
+    "verified_at",
+    "conditions",
+    "answer_tags"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$"
+    },
+    "jurisdiction": {"type": "string", "minLength": 2},
+    "topic": {"type": "string", "minLength": 2},
+    "rule_type": {
+      "enum": [
+        "permission",
+        "prohibition",
+        "obligation",
+        "condition",
+        "definition",
+        "limit",
+        "guidance"
+      ]
+    },
+    "authority": {
+      "enum": ["legal", "official_technical", "amateur_practice"]
+    },
+    "claim": {"type": "string", "minLength": 8},
+    "source_id": {"type": "string", "minLength": 3},
+    "source_locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "article": {"type": ["string", "null"]},
+        "paragraph": {"type": ["string", "null"]},
+        "table": {"type": ["string", "null"]},
+        "document_page": {"type": ["string", "null"]},
+        "section": {"type": ["string", "null"]}
+      },
+      "minProperties": 1
+    },
+    "verification_status": {
+      "enum": ["verified", "pending", "unverified", "deprecated"]
+    },
+    "verified_at": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "conditions": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 2}
+    },
+    "parameters": {"type": "object"},
+    "answer_tags": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 2}
+    },
+    "notes": {"type": ["string", "null"]}
+  }
+}
