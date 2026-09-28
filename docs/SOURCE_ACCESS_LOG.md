@@ -44,3 +44,14 @@ Therefore P0 advances from **source-content blocked** to **raw transcription com
 | github.com/arch-yunus/Amator-Telsiz- | NOT_FOUND_OR_PRIVATE | GitHub add_repo "not found or no access"; WebFetch HTTP 404 |
 
 Result: no candidate in `data/source_candidates.json` could be verified; all remain `candidate_unverified` / `candidate_inaccessible`.
+
+
+## 2026-09-28 — independent access recheck
+
+| TARGET | ACCESS | EVIDENCE | CONSEQUENCE |
+|---|---|---|---|
+| BTK canonical Technical Criteria PDF | RENDER_REACHABLE | Canonical URL opened as a 47-page PDF; decision date `23.09.2022`, decision no. `2022/İK-SYD/245`; Article 22 and the amateur table are visible | Source-content reading is available, but this does **not** satisfy byte-level artifact verification |
+| BTK canonical PDF raw bytes | UNAVAILABLE_IN_RUNTIME | Direct raw-byte download failed in the working runtime | `artifact.sha256` remains unknown; P0 artifact gate stays fail-closed |
+| `github.com/arch-yunus/Amator-Telsiz-Rehberi` | REACHABLE | GitHub repository metadata, README, ROADMAP and root tree were read successfully; repository reports MIT license | Candidate status corrected from `candidate_inaccessible` to `candidate_unverified`; community content still cannot ground legal claims |
+
+This recheck supersedes only the earlier access-state observation for the community repository. It does not retroactively verify any claim copied from that repository.
