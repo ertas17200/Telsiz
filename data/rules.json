@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "rules": [
+    {
+      "id": "TR.AMATEUR.TECHNICAL_COMPLIANCE",
+      "jurisdiction": "TR",
+      "topic": "station_operation",
+      "rule_type": "condition",
+      "authority": "legal",
+      "claim": "Amatör telsiz istasyonları, BTK teknik ölçütlerindeki amatör istasyon tablosunda belirtilen teknik şartlara uygun olmak koşuluyla kullanılır.",
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "article": "MADDE 22",
+        "paragraph": "1",
+        "document_page": "40/47"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T18:37:00Z",
+      "conditions": ["İlgili frekans, güç, emisyon ve ilave kullanım kısıtlamaları birlikte değerlendirilmelidir."],
+      "answer_tags": ["frekans", "güç", "emisyon", "izin"],
+      "notes": "PDF metni Tablo-26'ya atıf yaparken görünen tablo başlığı Tablo 25'tir; numaralandırma uyuşmazlığı SOURCE_CONFLICTS.md dosyasında kayıtlıdır."
+    },
+    {
+      "id": "TR.AMATEUR.DUMMY_LOAD",
+      "jurisdiction": "TR",
+      "topic": "station_measurement",
+      "rule_type": "obligation",
+      "authority": "legal",
+      "claim": "Amatör telsiz istasyonundaki vericilerin ayar ve ölçümleri sırasında suni yük (dummy load) kullanılır.",
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "article": "MADDE 22",
+        "paragraph": "7",
+        "document_page": "40/47"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T18:37:00Z",
+      "conditions": [],
+      "answer_tags": ["dummy-load", "ayar", "ölçüm", "verici"],
+      "notes": null
+    },
+    {
+      "id": "TR.AMATEUR.A_CLASS_USE",
+      "jurisdiction": "TR",
+      "topic": "license_class",
+      "rule_type": "permission",
+      "authority": "legal",
+      "claim": "A sınıfı amatör telsizcilik belgesi sahibi, A sınıfına izin verilen frekansları ilgili tabloda belirtilen teknik ölçütlere uyarak kullanabilir.",
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "article": "MADDE 22",
+        "paragraph": "9",
+        "document_page": "40/47"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T18:37:00Z",
+      "conditions": ["Frekansın ve kullanım şeklinin ilgili teknik ölçüt satırındaki bütün kısıtlamaları ayrıca sağlanmalıdır."],
+      "answer_tags": ["A-sınıfı", "frekans", "belge"],
+      "notes": null
+    },
+    {
+      "id": "TR.AMATEUR.BC_SUPERVISED_USE",
+      "jurisdiction": "TR",
+      "topic": "license_class",
+      "rule_type": "condition",
+      "authority": "legal",
+      "claim": "B ve C sınıfı belge sahipleri belirtilen kurum veya A sınıfı amatöre ait istasyonda sorumlu operatör gözetimi ve sorumluluğunda bütün amatör frekans bantları ile emisyon tiplerini kullanabilir; gözetim dışında kendi belge sınıflarının izin verdiği frekanslarla sınırlıdır.",
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "article": "MADDE 22",
+        "paragraph": "10",
+        "document_page": "40/47"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T18:37:00Z",
+      "conditions": [
+        "Genişletilmiş kullanım yalnızca maddede sayılan istasyon türlerinde veya A sınıfı amatöre ait istasyonda geçerlidir.",
+        "Sorumlu operatörün gözetimi ve sorumluluğu gerekir."
+      ],
+      "answer_tags": ["B-sınıfı", "C-sınıfı", "gözetim", "sorumlu-operatör"],
+      "notes": null
+    },
+    {
+      "id": "TR.AMATEUR.TRAINING_THIRD_PARTY",
+      "jurisdiction": "TR",
+      "topic": "training",
+      "rule_type": "permission",
+      "authority": "legal",
+      "claim": "Belge sahibi olmayan üçüncü kişiler, maddede belirtilen istasyonlarda sorumlu operatör hazır bulunduğunda eğitim ve özendirme amacıyla amatör telsiz haberleşmesine katılabilir.",
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "article": "MADDE 22",
+        "paragraph": "11",
+        "document_page": "40/47"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T18:37:00Z",
+      "conditions": [
+        "Amaç eğitim ve özendirme olmalıdır.",
+        "Sorumlu operatör hazır bulunmalıdır.",
+        "İstasyon türü maddede sayılan istasyonlardan biri olmalıdır."
+      ],
+      "answer_tags": ["eğitim", "belgesiz-katılımcı", "sorumlu-operatör"],
+      "notes": null
+    },
+    {
+      "id": "TR.AMATEUR.REPEATER_AND_EXPERIMENTAL",
+      "jurisdiction": "TR",
+      "topic": "repeater_and_experimental",
+      "rule_type": "condition",
+      "authority": "legal",
+      "claim": "Amatör telsizciler derneklerce kurulan tekrarlayıcı sistemlerini ve deneysel veya internet-telsiz arayüzlü faaliyetleri kullanabilir; bu faaliyetlerde BTK frekans planlamasına uyulur.",
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "article": "MADDE 22",
+        "paragraph": "12",
+        "document_page": "40/47"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T18:37:00Z",
+      "conditions": ["Kurum tarafından yapılan frekans planlamasına uyulmalıdır."],
+      "answer_tags": ["role", "tekrarlayıcı", "internet-telsiz", "deneysel"],
+      "notes": "Dernek tekrarlayıcı sistemlerinin kurma/kullanma izin süreçleri ayrıca TR.BTK.RADIO.PROCEDURES kaynağıyla kontrol edilmelidir."
+    },
+    {
+      "id": "TR.AMATEUR.NO_OBSCURING_ENCRYPTION",
+      "jurisdiction": "TR",
+      "topic": "message_security",
+      "rule_type": "prohibition",
+      "authority": "legal",
+      "claim": "Uluslararası amatör haberleşmede kullanılan yöntem ve uygulamalar dışında, üçüncü kişilerin haberleşmeyi dinlemesini engellemek amacıyla özel sistem kullanılarak kriptolu amatör haberleşme gönderilemez veya alınamaz.",
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "article": "MADDE 22",
+        "paragraph": "13",
+        "document_page": "40-41/47"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T18:37:00Z",
+      "conditions": ["Q kodları, mors, RTTY, SSTV, FSTV, PSK, PACTOR, AMPR, APRS, TCP/IP ve benzeri uluslararası amatör yöntemler hükümde ayrıca anılır."],
+      "answer_tags": ["şifreleme", "kriptolu-haberleşme", "mesaj"],
+      "notes": "Claim hükmün işlevsel özetidir; cevapta mutlak 'her türlü dijital kodlama yasaktır' şeklinde genişletilmemelidir."
+    },
+    {
+      "id": "TR.AMATEUR.C_144_146_MAX_5W",
+      "jurisdiction": "TR",
+      "topic": "frequency_power_limit",
+      "rule_type": "limit",
+      "authority": "legal",
+      "claim": "C sınıfı amatör telsizcilerin 144-146 MHz bandındaki verici çıkış gücü 5 W seviyesini geçemez.",
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "table": "PDF heading: Tablo 25; internal references: Tablo-26 / Tablo 26-1",
+        "document_page": "43-44/47"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T18:37:00Z",
+      "conditions": ["Belge sınıfı C olmalıdır.", "Frekans 144-146 MHz aralığında olmalıdır."],
+      "parameters": {
+        "license_class": "C",
+        "frequency_min_mhz": 144,
+        "frequency_max_mhz": 146,
+        "max_transmitter_output_power_w": 5
+      },
+      "answer_tags": ["C-sınıfı", "144-146-MHz", "5-W", "güç-limiti"],
+      "notes": "Tablodaki diğer emisyon ve kullanım kısıtlamaları da ayrıca uygulanır."
+    },
+    {
+      "id": "TR.AMATEUR.C_430_440_MAX_5W",
+      "jurisdiction": "TR",
+      "topic": "frequency_power_limit",
+      "rule_type": "limit",
+      "authority": "legal",
+      "claim": "C sınıfı amatör telsizcilerin 430-440 MHz bandındaki verici çıkış gücü 5 W seviyesini geçemez.",
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "table": "PDF heading: Tablo 25; internal references: Tablo-26 / Tablo 26-1",
+        "document_page": "44/47"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T18:37:00Z",
+      "conditions": ["Belge sınıfı C olmalıdır.", "Frekans 430-440 MHz aralığında olmalıdır."],
+      "parameters": {
+        "license_class": "C",
+        "frequency_min_mhz": 430,
+        "frequency_max_mhz": 440,
+        "max_transmitter_output_power_w": 5
+      },
+      "answer_tags": ["C-sınıfı", "430-440-MHz", "5-W", "güç-limiti"],
+      "notes": "Alt bantlara ilişkin role, uydu, beacon ve diğer ilave kısıtlamalar ayrıca değerlendirilmelidir."
+    },
+    {
+      "id": "IARU.R1.NATIONAL_RULES_PREVAIL",
+      "jurisdiction": "IARU-REGION-1",
+      "topic": "band_plan_authority",
+      "rule_type": "guidance",
+      "authority": "amateur_practice",
+      "claim": "IARU band planı çalışma rehberidir; ulusal düzenlemelerle çelişen durumda ulusal düzenlemeye uyulmalıdır.",
+      "source_id": "IARU.R1.BANDPLANS",
+      "source_locator": {
+        "section": "Band Plans"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T18:37:00Z",
+      "conditions": [],
+      "answer_tags": ["IARU", "band-planı", "ulusal-mevzuat", "kaynak-önceliği"],
+      "notes": "Bu kayıt hukuki izin üretmez; AI kaynak önceliğini doğru kurmak için kullanır."
+    }
+  ]
+}
