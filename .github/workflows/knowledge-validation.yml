@@ -39,5 +39,8 @@ jobs:
       - name: Validate academy manifest
         run: python scripts/validate_academy.py
 
+      - name: Validate grounded practice exam
+        run: python scripts/validate_exam.py
+
       - name: Test grounding contract
         run: python -m unittest discover -s tests -p "test_*.py" -v
