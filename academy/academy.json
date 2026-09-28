@@ -112,6 +112,21 @@
       "rule_ids": [],
       "candidate_refs": [],
       "notes": "Computes free-space wavelength and 1/4, 1/2 and 1 wavelength electrical lengths from the exact SI speed of light, optionally scaled by a user-supplied velocity factor. It does not claim a physical antenna cut length or legal transmit permission."
+    },
+    {
+      "id": "ACADEMY.DEVICE.YAESU.FTM400",
+      "title": "Yaesu FTM-400 device manual and firmware compatibility guard",
+      "content_status": "source_grounded",
+      "legal_content": false,
+      "legal_verdicts": false,
+      "source_ids": [
+        "YAESU.FTM400.PRODUCT.ARCHIVE",
+        "YAESU.FTM400DRDE.FW.INFO.2020-12-22",
+        "YAESU.FTM400XDRXDE.FW.INFO.2020-12-22"
+      ],
+      "rule_ids": [],
+      "candidate_refs": [],
+      "notes": "Manufacturer-grounded compatibility and package-selection guard for DR/DE versus XDR/XDE. Operating manuals remain pending full-content verification and update steps are withheld until the package-specific firmware upgrade manual is verified."
     }
   ]
 }

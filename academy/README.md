@@ -24,6 +24,7 @@ Academy, mevcut güven zincirinin **üstünde** çalışır; onu atlamaz:
 - `ACADEMY.TOOL.QCODE-RST-TRAINER`
 - `ACADEMY.TOOL.QSO-LOG-ADIF`
 - `ACADEMY.TOOL.RF-WAVELENGTH`
+- `ACADEMY.DEVICE.YAESU.FTM400`
 
 Grounded pratik sınav katmanı için [EXAM.md](EXAM.md) ve `exam_questions.json` kullanılır. Bu banka yalnız verified source/rule zincirleri alınır ve banka `practice_only` kalır.
 
@@ -37,6 +38,8 @@ Kaynak-grounded QSO log/ADIF exporter: [QSO_LOG_ADIF.md](QSO_LOG_ADIF.md) / `scr
 
 Kaynak-grounded RF wavelength/electrical-length calculator: [RF_WAVELENGTH.md](RF_WAVELENGTH.md) / `scripts/rf_wavelength.py`; exact SI `c` değeri `BIPM.SI.DEFINING_CONSTANTS` kaynağından gelir ve fiziksel anten kesim boyu garantisi vermez.
 
+Yaesu FTM-400 cihaz/manual katmanı: [DEVICE_FTM400.md](DEVICE_FTM400.md) / `scripts/device_firmware_guard.py`; DR/DE ile XDR/XDE firmware aileleri fail-closed ayrılır ve package-specific upgrade manual doğrulanmadan update prosedürü verilmez.
+
 ## Doğrulama
 
 ```bash
@@ -46,6 +49,7 @@ python scripts/validate_morse.py
 python scripts/validate_operator_codes.py
 python scripts/validate_qso_log.py
 python scripts/validate_rf_calculator.py
+python scripts/validate_device_manuals.py
 python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
