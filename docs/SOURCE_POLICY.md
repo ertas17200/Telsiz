@@ -1,0 +1,97 @@
+# Source Policy
+
+## 1. Source classes
+
+### A. official_legal
+
+Primary legal or regulatory material published by a competent authority.
+
+Examples include legislation, regulations, official decisions, official gazette material and legally operative public-authority publications.
+
+### B. official_technical
+
+Technical or administrative information published by a competent public authority that is not itself the operative legal text.
+
+### C. amateur_association
+
+Material published by a recognized amateur-radio association or club.
+
+### D. technical_manual
+
+Manufacturer, standards-oriented or technically authoritative equipment/protocol documentation.
+
+### E. educational
+
+Training material from identifiable institutions or established amateur-radio education sources.
+
+### F. community
+
+Forums, personal websites, social media, mailing lists and other community-generated material.
+
+Community content is discovery material only unless independently corroborated.
+
+## 2. Authority order
+
+```
+official_legal
+    >
+official_technical
+    >
+amateur_association
+    >
+technical_manual / educational
+    >
+community
+```
+
+The order expresses answer authority, not absolute correctness in every domain. A radio manufacturer manual may be the strongest source for a device-specific specification, while it cannot override a legal requirement.
+
+## 3. Mandatory metadata
+
+Every indexed source must include:
+
+- unique source id;
+- title;
+- publisher;
+- source type;
+- jurisdiction;
+- canonical URL;
+- topic tags;
+- verification status;
+- verification timestamp;
+- content hash when a captured artifact is stored.
+
+Legal/regulatory records additionally require, where applicable:
+
+- publication date;
+- effective date;
+- current/superseded/repealed/unknown status;
+- legal instrument identifier;
+- article/section reference;
+- supersedes/superseded-by relationships.
+
+## 4. Verification states
+
+- `verified` — source origin and metadata checked.
+- `pending` — candidate source awaiting review.
+- `unverified` — insufficient evidence to rely on.
+- `deprecated` — retained for history but not for current answers.
+
+Only `verified` sources may support definitive current legal claims.
+
+## 5. Conflict handling
+
+When sources conflict:
+
+1. identify the subject and jurisdiction;
+2. compare authority level;
+3. compare publication/effective dates;
+4. check whether one source supersedes another;
+5. preserve both records when historically useful;
+6. present the conflict explicitly if it cannot be resolved.
+
+Do not silently choose the more convenient statement.
+
+## 6. AI grounding rule
+
+For a legal/regulatory answer, an AI must be able to identify the source record used. If no verified legal source supports the answer, the response must be framed as unverified or require current-source verification.
