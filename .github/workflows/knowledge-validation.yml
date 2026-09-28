@@ -51,5 +51,8 @@ jobs:
       - name: Validate QSO log and ADIF contract
         run: python scripts/validate_qso_log.py
 
+      - name: Validate RF wavelength calculator
+        run: python scripts/validate_rf_calculator.py
+
       - name: Test grounding contract
         run: python -m unittest discover -s tests -p "test_*.py" -v

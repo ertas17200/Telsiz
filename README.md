@@ -39,6 +39,7 @@ Telsiz/
 │   ├── MORSE_TRAINER.md
 │   ├── QCODE_RST_TRAINER.md
 │   ├── QSO_LOG_ADIF.md
+│   ├── RF_WAVELENGTH.md
 │   ├── README.md
 │   ├── academy.json
 │   └── exam_questions.json
@@ -46,6 +47,7 @@ Telsiz/
 │   ├── frequency_table.json
 │   ├── q_codes.json
 │   ├── qso_log_contract.json
+│   ├── rf_calculator_contract.json
 │   ├── rst_reports.json
 │   ├── rules.json
 │   └── sources.json
@@ -69,11 +71,13 @@ Telsiz/
 │   ├── morse_trainer.py
 │   ├── qcode_rst_trainer.py
 │   ├── qso_log_adif.py
+│   ├── rf_wavelength.py
 │   ├── validate_academy.py
 │   ├── validate_exam.py
 │   ├── validate_morse.py
 │   ├── validate_operator_codes.py
 │   ├── validate_qso_log.py
+│   ├── validate_rf_calculator.py
 │   └── validate_knowledge.py
 └── tests/
 ```
@@ -96,6 +100,7 @@ python scripts/validate_exam.py
 python scripts/validate_morse.py
 python scripts/validate_operator_codes.py
 python scripts/validate_qso_log.py
+python scripts/validate_rf_calculator.py
 python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
@@ -129,6 +134,7 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 - [Source-grounded Morse Trainer contract](academy/MORSE_TRAINER.md)
 - [Source-grounded Q-code/RS(T) Trainer contract](academy/QCODE_RST_TRAINER.md)
 - [Source-grounded QSO log / ADIF exporter contract](academy/QSO_LOG_ADIF.md)
+- [Source-grounded RF wavelength/electrical-length calculator](academy/RF_WAVELENGTH.md)
 
 ## Status
 

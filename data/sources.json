@@ -386,6 +386,32 @@
       "supersedes": [],
       "superseded_by": [],
       "notes": "ADIF 3.1.7 is the current released specification as of the verification date. The specification defines interchange formats rather than an application database schema. Telsiz uses a deliberately bounded internal QSO-record contract and exports a supported subset to ADI; this source does not create transmit permission."
+    },
+    {
+      "id": "BIPM.SI.DEFINING_CONSTANTS",
+      "title": "The International System of Units (SI) — defining constants",
+      "publisher": "Bureau International des Poids et Mesures",
+      "source_type": "official_technical",
+      "jurisdiction": "INTERNATIONAL",
+      "url": "https://www.bipm.org/en/measurement-units/si-defining-constants",
+      "topics": [
+        "speed of light",
+        "SI",
+        "wavelength",
+        "frequency",
+        "RF calculation"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T22:02:00Z",
+      "publication_date": null,
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": "SI defining constant c",
+      "reference": "speed of light in vacuum c = 299 792 458 m s^-1 exactly",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "BIPM defines the speed of light in vacuum as the exact SI defining constant 299 792 458 m/s. Telsiz uses it for deterministic wavelength/electrical-length calculations only; it is not a source of radio-frequency permission or antenna installation guidance."
     }
   ]
 }

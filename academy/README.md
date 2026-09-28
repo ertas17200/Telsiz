@@ -23,6 +23,7 @@ Academy, mevcut güven zincirinin **üstünde** çalışır; onu atlamaz:
 - `ACADEMY.TOOL.MORSE-TRAINER`
 - `ACADEMY.TOOL.QCODE-RST-TRAINER`
 - `ACADEMY.TOOL.QSO-LOG-ADIF`
+- `ACADEMY.TOOL.RF-WAVELENGTH`
 
 Grounded pratik sınav katmanı için [EXAM.md](EXAM.md) ve `exam_questions.json` kullanılır. Bu banka yalnız verified source/rule zincirleri alınır ve banka `practice_only` kalır.
 
@@ -34,6 +35,8 @@ Kaynak-grounded Q-code/RS(T) eğiticisi: [QCODE_RST_TRAINER.md](QCODE_RST_TRAINE
 
 Kaynak-grounded QSO log/ADIF exporter: [QSO_LOG_ADIF.md](QSO_LOG_ADIF.md) / `scripts/qso_log_adif.py`; bounded uygulama sözleşmesi `ADIF.SPEC.3.1.7` kaynağına bağlıdır.
 
+Kaynak-grounded RF wavelength/electrical-length calculator: [RF_WAVELENGTH.md](RF_WAVELENGTH.md) / `scripts/rf_wavelength.py`; exact SI `c` değeri `BIPM.SI.DEFINING_CONSTANTS` kaynağından gelir ve fiziksel anten kesim boyu garantisi vermez.
+
 ## Doğrulama
 
 ```bash
@@ -42,6 +45,7 @@ python scripts/validate_exam.py
 python scripts/validate_morse.py
 python scripts/validate_operator_codes.py
 python scripts/validate_qso_log.py
+python scripts/validate_rf_calculator.py
 python -m unittest discover -s tests -p "test_*.py" -v
 ```
 

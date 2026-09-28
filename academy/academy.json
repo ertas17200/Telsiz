@@ -99,6 +99,19 @@
       "rule_ids": [],
       "candidate_refs": [],
       "notes": "Bounded QSO record validation and ADI export based on ADIF 3.1.7. This module is data interchange tooling only and cannot decide whether a transmission was lawful."
+    },
+    {
+      "id": "ACADEMY.TOOL.RF-WAVELENGTH",
+      "title": "Source-grounded RF wavelength and electrical-length calculator",
+      "content_status": "source_grounded",
+      "legal_content": false,
+      "legal_verdicts": false,
+      "source_ids": [
+        "BIPM.SI.DEFINING_CONSTANTS"
+      ],
+      "rule_ids": [],
+      "candidate_refs": [],
+      "notes": "Computes free-space wavelength and 1/4, 1/2 and 1 wavelength electrical lengths from the exact SI speed of light, optionally scaled by a user-supplied velocity factor. It does not claim a physical antenna cut length or legal transmit permission."
     }
   ]
 }
