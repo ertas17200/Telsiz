@@ -104,8 +104,8 @@
     }
   ],
   "integrity_notes": [
-    "The 28 MHz-and-above emission cell visually lists J2C, but Tablo 26-1 contains no J2C definition.",
-    "The 28 MHz-and-above emission cell visually repeats F2B; the raw transcription de-duplicates the code list and records the repetition as a source conflict.",
+    "The 28 MHz-and-above source emission cell visually lists A3J and J2C, but Tablo 26-1 defines neither code; it defines A3C and J3C instead. No substitution is performed.",
+    "The same source emission cell visually repeats F2B and J3F. The machine-readable raw row de-duplicates repeated tokens while retaining this source anomaly in provenance.",
     "F3E and G3E rows state that below 29.7 MHz the maximum bandwidth is 6 kHz even though the table's nominal bandwidth column shows 16 kHz."
   ]
 }
