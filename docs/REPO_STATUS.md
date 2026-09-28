@@ -4,8 +4,8 @@ This file is the canonical human-readable **engineering closure snapshot** for T
 
 ## Canonical engineering baseline
 
-- Engineering baseline: `4d5f6b797218fffc6bc3729361232dfece15ea43`
-- Technical closure PR: **#10**
+- Engineering baseline: `0c2b5952b551d485f3530374447fbd2040605b03`
+- Technical closure PR: **#12**
 - Open pull requests at technical-closure snapshot: **0**
 - Main workflow: `Knowledge Validation`
 - Main exact-head run: `36477656205`
@@ -19,12 +19,13 @@ The exact-head main job proves:
 - tracked Python/cache artifact check: **PASS**
 - source/rule/frequency registry validation: **PASS**
 - BTK raw transcription validator: **PASS**
-- unit test suite: **65 tests, OK**
+- unit test suite: **75 tests, OK**
 - source registry: **11 records**
 - grounded rules: **10 records**
 - semantic frequency rows: **2 records**
 - raw BTK amateur source rows: **33 records**
 - Tablo 26-1 emission definitions: **24 records**
+- official artifact registry: **1 record, awaiting_bytes, fail-closed**
 - semantic frequency coverage: **partial**
 
 ## Closed PR chain
@@ -37,6 +38,7 @@ The exact-head main job proves:
 | #8 | Canonical repository closure-status document | `39fad23342d1a7faed409f4dd726a0277da60f4e` | `0085b3ad910fba86095edcf7f4cf5f598867c7a2` | MERGED |
 | #9 | Distinguish moving main from engineering baseline | `6f6b2fefc7a68e926a98a1455e2e317282afc9f6` | `b6c4a03bde0f6b71024a3065199c2989bcf35e0d` | MERGED |
 | #10 | Official BTK amateur-table raw extraction, emission map and raw-integrity gate | `341e74206a7adb42ed8d87b0d96af85d7dc010c2` | `4d5f6b797218fffc6bc3729361232dfece15ea43` | MERGED |
+| #12 | Byte-level official artifact registry, SHA-256/change-detection gate and tests | `28cb04215581fe629eafb1996d06ca30b7352038` | `0c2b5952b551d485f3530374447fbd2040605b03` | MERGED |
 
 ## P0 — BTK amateur frequency table
 
@@ -90,6 +92,8 @@ Current status:
 
 ```text
 P0=RAW_TRANSCRIPTION_COMPLETE_SEMANTIC_PROMOTION_HOLD
+P0_ARTIFACT_GATE=PASS
+P0_ARTIFACT_STATUS=AWAITING_BYTES
 P0_BLOCKER=ARTIFACT_SHA256_AND_SOURCE_CONFLICTS
 ```
 
@@ -134,7 +138,7 @@ MERGE_SHA=4d5f6b797218fffc6bc3729361232dfece15ea43
 MAIN_RUN=36477656205
 MAIN_RUNNER=GitHub Actions 1000014027
 MAIN_CI=PASS
-TESTS=65/65
+TESTS=75/75
 RAW_ROWS=33/33
 EMISSION_DEFINITIONS=24/24
 ```
@@ -159,7 +163,7 @@ Continue fail-closed in this order:
 ```text
 REPOSITORY_CONTROLS=PASS
 CI=PASS
-ENGINEERING_BASELINE=4d5f6b797218fffc6bc3729361232dfece15ea43
+ENGINEERING_BASELINE=0c2b5952b551d485f3530374447fbd2040605b03
 RAW_BTK_ROWS=33
 EMISSION_DEFINITIONS=24
 TESTS=65
@@ -169,3 +173,42 @@ P1=VERIFY_REQUIRED
 P2=VERIFY_REQUIRED
 P3=VERIFY_REQUIRED
 ```
+
+
+## PR #12 — official artifact gate closure
+
+The byte-level artifact workflow is now a first-class fail-closed control.
+
+```text
+PR12_HEAD=28cb04215581fe629eafb1996d06ca30b7352038
+PR12_PUSH_RUN=36478546832
+PR12_PUSH_RUNNER=GitHub Actions 1000014035
+PR12_PR_RUN=36478618168
+PR12_PR_RUNNER=GitHub Actions 1000014036
+PR12_MERGE_SHA=0c2b5952b551d485f3530374447fbd2040605b03
+PR12_MAIN_RUN=36478669415
+PR12_MAIN_RUNNER=GitHub Actions 1000014037
+PR12_CI=PASS
+TESTS=75/75
+ARTIFACT_RECORDS=1
+BTK_ARTIFACT_STATUS=awaiting_bytes
+BTK_ARTIFACT_SHA256=UNKNOWN
+```
+
+The gate distinguishes rendered/read content from byte-for-byte artifact verification. It calculates SHA-256 from local bytes, checks PDF signature/MIME/size, and produces `HASH_OBSERVED_BIND_REQUIRED`, `UNCHANGED`, or `SOURCE_CHANGED` + `REVERIFY_REQUIRED`.
+
+Infrastructure PASS is **not** evidence that the BTK artifact bytes have been verified. The current BTK artifact record intentionally remains `awaiting_bytes`.
+
+## P1 — Law No. 5809 status
+
+Fresh official BTK pages expose and attribute provisions from Articles 36, 37, 40 and 63 of Law No. 5809, which is useful corroborating evidence. The canonical `mevzuat.gov.tr` law artifact still could not be fetched in the current verification path.
+
+Therefore:
+
+```text
+P1=VERIFY_REQUIRED
+P1_CANONICAL_TEXT=UNAVAILABLE_IN_CURRENT_PATH
+P1_RULE_PROMOTION=HOLD
+```
+
+No pending EHK source is promoted to verified legal authority from a secondary official quotation alone.
