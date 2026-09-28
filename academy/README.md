@@ -21,10 +21,13 @@ Academy, mevcut güven zincirinin **üstünde** çalışır; onu atlamaz:
 - `ACADEMY.IARU.BANDPLAN-PRACTICE`
 - `ACADEMY.TOOL.GRID-LOCATOR`
 
+Grounded pratik sınav katmanı için [EXAM.md](EXAM.md) ve `exam_questions.json` kullanılır. Bu banka yalnız verified source/rule zincirleri alınır ve banka `practice_only` kalır.
+
 ## Doğrulama
 
 ```bash
 python scripts/validate_academy.py
+python scripts/validate_exam.py
 python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
