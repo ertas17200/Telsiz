@@ -4,25 +4,25 @@ This file is the canonical human-readable **engineering closure snapshot** for T
 
 ## Canonical engineering baseline
 
-- Engineering baseline: `0c2b5952b551d485f3530374447fbd2040605b03`
-- Technical closure PR: **#12**
+- Engineering baseline: `8765783514ba72569d7964aaf5ac19ae75b13e7f`
+- Technical closure PR: **#16**
 - Open pull requests at technical-closure snapshot: **0**
 - Main workflow: `Knowledge Validation`
-- Main exact-head run: `36477656205`
+- Main exact-head run: `36482477669`
 - Status: `completed`
 - Conclusion: `success`
-- Runner: `GitHub Actions 1000014027`
-- Completed workflow steps: **10**
+- Runner: `GitHub Actions 1000014052`
+- Completed workflow steps: **11**
 
 The exact-head main job proves:
 
 - tracked Python/cache artifact check: **PASS**
 - source/rule/frequency registry validation: **PASS**
 - BTK raw transcription validator: **PASS**
-- unit test suite: **75 tests, OK**
+- unit test suite: **104 tests, OK**
 - source registry: **11 records**
 - grounded rules: **10 records**
-- semantic frequency rows: **2 records**
+- semantic frequency rows: **7 records**
 - raw BTK amateur source rows: **33 records**
 - Tablo 26-1 emission definitions: **24 records**
 - official artifact registry: **1 record, awaiting_bytes, fail-closed**
@@ -39,6 +39,9 @@ The exact-head main job proves:
 | #9 | Distinguish moving main from engineering baseline | `6f6b2fefc7a68e926a98a1455e2e317282afc9f6` | `b6c4a03bde0f6b71024a3065199c2989bcf35e0d` | MERGED |
 | #10 | Official BTK amateur-table raw extraction, emission map and raw-integrity gate | `341e74206a7adb42ed8d87b0d96af85d7dc010c2` | `4d5f6b797218fffc6bc3729361232dfece15ea43` | MERGED |
 | #12 | Byte-level official artifact registry, SHA-256/change-detection gate and tests | `28cb04215581fe629eafb1996d06ca30b7352038` | `0c2b5952b551d485f3530374447fbd2040605b03` | MERGED |
+| #14 | Split C-class 430–440 MHz power condition into the six visible BTK source sub-bands and reject gap inference | `8fb4dbae0c2167a85ff86af87b07d3afde3df2db` | `fd3bf6bb6290da92dea8a2ce73cffee094271cc1` | MERGED |
+| #15 | Add fail-closed unverified source-candidate registry and candidate validation/tests | `9f645e2c9cd77daf46ab6ca85bdd02bab41d60da` | `3a8c2d5297907277b482b71eee63129e9e352ffa` | MERGED |
+| #16 | Correct community-reference identity/access state and add source-safe P11 adaptation backlog | `3d0aaa1adce6e0e56ea0de16ca0e737c9401517a` | `8765783514ba72569d7964aaf5ac19ae75b13e7f` | MERGED |
 
 ## P0 — BTK amateur frequency table
 
@@ -52,7 +55,7 @@ Current state:
 RAW_SOURCE_ROWS=33
 RAW_ROW_TRANSCRIPTION=PASS
 EMISSION_DEFINITIONS=24
-SEMANTIC_FREQUENCY_ROWS=2
+SEMANTIC_FREQUENCY_ROWS=7
 FREQUENCY_COVERAGE=PARTIAL
 ARTIFACT_SHA256=UNKNOWN
 SEMANTIC_PROMOTION=HOLD
@@ -65,7 +68,7 @@ The semantic table remains partial. Raw rows do **not** directly create an `ALLO
 Only the previously grounded semantic C-class limits remain decision-enabled:
 
 - 144–146 MHz → maximum transmitter output power 5 W
-- 430–440 MHz → maximum transmitter output power 5 W
+- 430–440 MHz C-class power condition → six visible BTK sub-bands are represented semantically at 5 W; gaps remain `UNKNOWN`
 
 For unextracted semantic dimensions:
 
@@ -121,6 +124,10 @@ The repository currently enforces these controls programmatically:
 10. source-only undefined emission anomalies are explicitly preserved rather than normalized;
 11. repeated source emission tokens are de-duplicated only in the machine list while provenance records the anomaly;
 12. tracked Python/cache artifacts fail CI.
+13. semantic frequency rows must lie inside a visible raw BTK row that lists the same licence class;
+14. source candidates are discovery-only and cannot ground rules/frequency rows;
+15. non-official source candidates must explicitly disclaim legal-claim authority;
+16. community reference material remains separate from legal/official source layers.
 
 ## CI learning from PR #10
 
@@ -157,16 +164,17 @@ Continue fail-closed in this order:
 4. **P2** — exact-text verification and atomization of the FTM Regulation.
 5. **P3** — exact-text verification and atomization of the KEGM amateur-radio examination/certification regulation.
 6. Expand licence/call-sign and technical knowledge only from source-grounded material.
+7. **P11** — implement academy/operator-tool features only on top of the grounded source/rule/data chain.
 
 ## Closure state
 
 ```text
 REPOSITORY_CONTROLS=PASS
 CI=PASS
-ENGINEERING_BASELINE=0c2b5952b551d485f3530374447fbd2040605b03
+ENGINEERING_BASELINE=8765783514ba72569d7964aaf5ac19ae75b13e7f
 RAW_BTK_ROWS=33
 EMISSION_DEFINITIONS=24
-TESTS=65
+TESTS=104
 FREQUENCY_COVERAGE=PARTIAL
 P0=RAW_TRANSCRIPTION_COMPLETE_SEMANTIC_PROMOTION_HOLD
 P1=VERIFY_REQUIRED
@@ -212,3 +220,48 @@ P1_RULE_PROMOTION=HOLD
 ```
 
 No pending EHK source is promoted to verified legal authority from a secondary official quotation alone.
+
+
+## PR #14–#16 — current closure delta
+
+The repository advanced beyond the PR #12 artifact-gate baseline.
+
+### PR #14 — C-class 430–440 MHz gap-safety correction
+
+The former continuous semantic row was split into the six visible BTK source sub-bands. Frequencies in the gaps no longer inherit a 5 W match merely because they lie numerically inside 430–440 MHz.
+
+### PR #15 — source candidate registry
+
+Unverified future sources are now isolated in `data/source_candidates.json`. Candidates cannot ground rules or semantic frequency rows and non-official candidates cannot support legal claims.
+
+### PR #16 — community reference correction / P11 backlog
+
+The exact public repository `arch-yunus/Amator-Telsiz-Rehberi` was independently rechecked as reachable and MIT-licensed. Its status was corrected from `candidate_inaccessible` to `candidate_unverified`; it remains community-level and cannot create Turkish permission or verified legal/technical claims.
+
+Exact-head evidence:
+
+```text
+PR16_HEAD=3d0aaa1adce6e0e56ea0de16ca0e737c9401517a
+PR16_RUN=36482367962
+PR16_JOB=109130864727
+PR16_CI=PASS
+PR16_TESTS=104/104
+
+PR16_MERGE_SHA=8765783514ba72569d7964aaf5ac19ae75b13e7f
+MAIN_RUN=36482477669
+MAIN_JOB=109131223968
+MAIN_RUNNER=GitHub Actions 1000014052
+MAIN_CI=PASS
+MAIN_TESTS=104/104
+```
+
+P0 artifact verification remains intentionally unresolved:
+
+```text
+BTK_PDF_RENDER_ACCESS=PASS
+BTK_PDF_RAW_BYTES=UNAVAILABLE_IN_RUNTIME
+BTK_ARTIFACT_SHA256=UNKNOWN
+P0_ARTIFACT_STATUS=AWAITING_BYTES
+```
+
+Render access is not treated as byte-level artifact verification.
