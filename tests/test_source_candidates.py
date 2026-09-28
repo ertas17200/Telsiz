@@ -75,7 +75,7 @@ class SourceCandidateTests(unittest.TestCase):
         with self.assertRaises(SystemExit):
             self.validate(self.mutate("CAND.COMMUNITY.ARCH-YUNUS.AMATOR-TELSIZ-REHBERI", cannot_support=[]))
         with self.assertRaises(SystemExit):
-            self.validate(self.mutate("CAND.TR.TRAC.REPEATER_LIST", cannot_support=["turkish_permission"]))
+            self.validate(self.mutate("CAND.TR.TRAC.EXAM_STUDY", cannot_support=["turkish_permission"]))
 
     def test_every_non_official_candidate_disclaims_legal_claims(self):
         for cand in CANDIDATES["candidates"]:

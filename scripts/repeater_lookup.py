@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -58,7 +59,13 @@ def search_repeaters(
     records = list(data["records"])
 
     def norm(value: str | None) -> str | None:
-        return value.strip().casefold() if isinstance(value, str) and value.strip() else None
+        if not isinstance(value, str) or not value.strip():
+            return None
+        # Search normalization is deliberately tolerant of Turkish I/İ/ı/i and
+        # diacritics without modifying the source values stored in the registry.
+        folded = value.strip().replace("İ", "I").replace("ı", "i")
+        decomposed = unicodedata.normalize("NFKD", folded)
+        return "".join(ch for ch in decomposed if not unicodedata.combining(ch)).casefold()
 
     q_branch = norm(branch)
     q_site = norm(site)
@@ -70,9 +77,9 @@ def search_repeaters(
 
     results = []
     for record in records:
-        if q_branch is not None and q_branch not in record["branch"].casefold():
+        if q_branch is not None and q_branch not in norm(record["branch"]):
             continue
-        if q_site is not None and q_site not in record["site"].casefold():
+        if q_site is not None and q_site not in norm(record["site"]):
             continue
         if q_band is not None and record["band"] != q_band:
             continue

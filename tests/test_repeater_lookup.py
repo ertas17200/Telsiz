@@ -26,6 +26,10 @@ class RepeaterLookupTests(unittest.TestCase):
         self.assertGreaterEqual(len(result["results"]), 2)
         self.assertEqual({r["band"] for r in result["results"]}, {"VHF", "UHF"})
 
+    def test_turkish_search_normalization_accepts_ascii_i_and_diacritic_free_text(self):
+        result = lookup.search_repeaters(branch="kadikoy", site="kayisdagi", registry=REGISTRY)
+        self.assertGreaterEqual(len(result["results"]), 2)
+
     def test_band_filter(self):
         result = lookup.search_repeaters(branch="KOCAELİ", band="UHF", registry=REGISTRY)
         self.assertTrue(result["results"])
