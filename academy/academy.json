@@ -71,6 +71,21 @@
       "rule_ids": [],
       "candidate_refs": [],
       "notes": "ITU-R M.1677-1 kaynağına bağlı A-Z/0-9 eğitim aracı; hukuki yayın izni veya sınav güncelliği iddiası üretmez."
+    },
+    {
+      "id": "ACADEMY.TOOL.QCODE-RST-TRAINER",
+      "title": "Source-grounded Q-code and RS(T) trainer",
+      "content_status": "source_grounded",
+      "legal_content": false,
+      "legal_verdicts": false,
+      "source_ids": [
+        "IARU.R1.EOP.4.2.0",
+        "ITU.R.M1172.0",
+        "IARU.R1.VHF.HANDBOOK.10.02"
+      ],
+      "rule_ids": [],
+      "candidate_refs": [],
+      "notes": "Q-code practice uses the current IARU EOP amateur subset with ITU-R M.1172 provenance; RS(T) practice uses current IARU EOP and VHF Handbook signal-reporting references. The tool cannot decide transmit legality."
     }
   ]
 }

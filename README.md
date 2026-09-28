@@ -37,11 +37,14 @@ Telsiz/
 │   ├── EXAM.md
 │   ├── GRID_LOCATOR.md
 │   ├── MORSE_TRAINER.md
+│   ├── QCODE_RST_TRAINER.md
 │   ├── README.md
 │   ├── academy.json
 │   └── exam_questions.json
 ├── data/
 │   ├── frequency_table.json
+│   ├── q_codes.json
+│   ├── rst_reports.json
 │   ├── rules.json
 │   └── sources.json
 ├── docs/
@@ -62,9 +65,11 @@ Telsiz/
 │   ├── frequency_lookup.py
 │   ├── grid_locator.py
 │   ├── morse_trainer.py
+│   ├── qcode_rst_trainer.py
 │   ├── validate_academy.py
 │   ├── validate_exam.py
 │   ├── validate_morse.py
+│   ├── validate_operator_codes.py
 │   └── validate_knowledge.py
 └── tests/
 ```
@@ -85,6 +90,7 @@ python scripts/validate_knowledge.py
 python scripts/validate_academy.py
 python scripts/validate_exam.py
 python scripts/validate_morse.py
+python scripts/validate_operator_codes.py
 python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
@@ -116,6 +122,7 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 - [Grounded practice exam contract](academy/EXAM.md)
 - [Maidenhead Grid Locator tool contract](academy/GRID_LOCATOR.md)
 - [Source-grounded Morse Trainer contract](academy/MORSE_TRAINER.md)
+- [Source-grounded Q-code/RS(T) Trainer contract](academy/QCODE_RST_TRAINER.md)
 
 ## Status
 

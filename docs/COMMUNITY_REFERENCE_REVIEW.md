@@ -75,11 +75,12 @@ Acceptance:
 
 ### P11.3 — Operator tools
 
-**Implementation status: IN PROGRESS. Grid Locator and source-grounded Morse Trainer sub-features implemented; remaining tools stay backlog items.**
+**Implementation status: IN PROGRESS. Grid Locator, source-grounded Morse Trainer, and source-grounded Q-code/RS(T) Trainer are implemented; remaining tools stay backlog items.**
 
 Implemented:
 - deterministic Maidenhead grid locator encoder;
 - source-grounded ITU-R M.1677-1 Morse Trainer (A-Z/0-9 subset, encode/decode, seeded quiz);
+- source-grounded Q-code/RS(T) Trainer with separate IARU/ITU provenance and deterministic practice prompts;
 - 2/4/6-character Grid Locator precision;
 - locator cell bounds/center decoder;
 - strict global coordinate bounds and invalid-input rejection;
@@ -87,7 +88,6 @@ Implemented:
 - CLI output explicitly returns `legal_verdict: null`.
 
 Remaining:
-- Q-code/RST trainer;
 - QSO log schema/export;
 - antenna/RF calculators.
 

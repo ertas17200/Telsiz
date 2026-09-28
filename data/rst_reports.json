@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "source_ids": [
+    "IARU.R1.EOP.4.2.0",
+    "IARU.R1.VHF.HANDBOOK.10.02"
+  ],
+  "coverage": "numeric_RS_for_phone_and_RST_for_CW",
+  "notes": "Training-only paraphrases of the common RS(T) scale. R and T are subjective; signal-strength reports can depend on receiver/S-meter behavior. V1 accepts only plain numeric 2-digit RS and 3-digit RST reports.",
+  "readability": {
+    "1": "unreadable",
+    "2": "barely readable",
+    "3": "readable with substantial difficulty",
+    "4": "readable with little difficulty",
+    "5": "fully readable"
+  },
+  "strength": {
+    "1": "barely detectable",
+    "2": "very weak",
+    "3": "weak",
+    "4": "fair",
+    "5": "fairly good",
+    "6": "good",
+    "7": "moderately strong",
+    "8": "strong",
+    "9": "very strong"
+  },
+  "tone": {
+    "1": "very rough tone",
+    "2": "rough AC-like tone",
+    "3": "rough rectified tone",
+    "4": "rough tone with some filtering",
+    "5": "filtered but strongly ripple-modulated tone",
+    "6": "filtered tone with noticeable ripple",
+    "7": "near-pure tone with slight ripple",
+    "8": "near-perfect tone with slight modulation",
+    "9": "clean, stable tone"
+  }
+}
