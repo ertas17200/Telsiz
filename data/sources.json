@@ -284,6 +284,31 @@
       "supersedes": [],
       "superseded_by": [],
       "notes": "Güncel TRAC çalışma/yarışma örneği. Sayfa katılımcıların kendi ülkelerinin düzenlemelerine uyması gerektiğini ve modların IARU Region 1 band planına göre yürütüldüğünü açıklar. Yarışma kuralları genel hukuki izin olarak yorumlanamaz."
+    },
+    {
+      "id": "ITU.R.M1677.1",
+      "title": "International Morse code — Recommendation ITU-R M.1677-1",
+      "publisher": "International Telecommunication Union",
+      "source_type": "official_technical",
+      "jurisdiction": "INTERNATIONAL",
+      "url": "https://www.itu.int/rec/R-REC-M.1677-1-200910-I/en",
+      "topics": [
+        "Morse code",
+        "radiocommunication",
+        "operating practice",
+        "training"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-28T21:15:00Z",
+      "publication_date": "2009-10-03",
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": "ITU-R M.1677-1 (10/2009)",
+      "reference": "Annex 1, Part I — International Morse code characters",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "ITU'nun resmî Recommendation sayfasında M.1677-1 (10/2009) 'In force (Main)' olarak listelenmektedir. Telsiz repo bu kaynağı yalnız Mors eğitim/teknik karakter eşlemeleri için kullanır; Türkiye'de hukuki yayın izni üretmez."
     }
   ]
 }
