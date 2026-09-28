@@ -24,6 +24,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Check tracked cache artifacts
+        run: python scripts/check_repo_hygiene.py
+
       - name: Validate knowledge registries
         run: python scripts/validate_knowledge.py
 

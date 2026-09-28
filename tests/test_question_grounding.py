@@ -8,6 +8,7 @@ or only part of it; partial questions must not be answered as complete.
 
 import importlib.util
 import json
+import sys
 import unittest
 from pathlib import Path
 
@@ -18,6 +19,7 @@ TABLE = json.loads((ROOT / "data" / "frequency_table.json").read_text("utf-8"))
 
 spec = importlib.util.spec_from_file_location("frequency_lookup", ROOT / "scripts" / "frequency_lookup.py")
 fl = importlib.util.module_from_spec(spec)
+sys.modules["frequency_lookup"] = fl
 assert spec.loader is not None
 spec.loader.exec_module(fl)
 
@@ -58,9 +60,12 @@ class QuestionGroundingTests(unittest.TestCase):
     def test_power_questions_give_limit_without_legal_verdict(self):
         for freq in (145.0, 433.0):
             with self.subTest(freq=freq):
-                result = fl.lookup(TABLE, freq, "C")
-                self.assertEqual(result["maximum_output_power"], [(5, "W")])
-                self.assertIsNone(result["legal_to_transmit"])
+                result = fl.evaluate(TABLE, SOURCES, fl.Request(license_class="C", frequency_mhz=freq))
+                self.assertEqual(
+                    [(l["max_output_power"], l["power_unit"]) for l in result["known_limits"]],
+                    [(5, "W")],
+                )
+                self.assertEqual(result["legal_status"], fl.UNKNOWN)
 
     def test_partial_questions_stay_partial_while_table_is_partial(self):
         partial = [q for q, _, coverage in QUESTIONS if coverage == "partial"]
