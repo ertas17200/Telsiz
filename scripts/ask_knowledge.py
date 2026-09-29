@@ -2,8 +2,9 @@
 
 Each route answers from an existing, source-grounded Academy tool
 (Q-codes, RS(T), Morse, RF wavelength, repeater snapshot, Maidenhead
-locator). None of them produces a legal verdict: every answer is
-technical or operating information with the tool's own source IDs.
+locator, FT8/FT4 parameters, APRS device identifiers). None of them
+produces a legal verdict: every answer is technical or operating
+information with the tool's own source IDs.
 
 A route returns ``None`` when the question does not concern it, or a dict
 ``{"topic", "short", "lines", "source_ids"}``.
@@ -36,6 +37,7 @@ rfw = _load_module("rf_wavelength")
 rep = _load_module("repeater_lookup")
 grid = _load_module("grid_locator")
 vdm = _load_module("validate_digital_modes")
+aprs = _load_module("aprs_deviceid")
 
 QCODE_RE = re.compile(r"(?<![a-z0-9])(q[a-z]{2})(?![a-z0-9])")
 RST_KEY_RE = re.compile(r"(?<![a-z0-9])(rst|rs|rapor\w*|sinyal raporu)(?![a-z0-9])")
@@ -49,6 +51,8 @@ GRID_KEY_RE = re.compile(r"(?<![a-z0-9])(locator|lokator\w*|grid|maidenhead|qth 
 GRID_CODE_RE = re.compile(r"(?<![a-z0-9])([a-r]{2}\d{2}(?:[a-x]{2})?)(?![a-z0-9])")
 COORD_RE = re.compile(r"(-?\d{1,2}\.\d+)\s*[,; ]\s*(-?\d{1,3}\.\d+)")
 DIGITAL_MODE_RE = re.compile(r"(?<![a-z0-9])(ft8|ft4)(?![a-z0-9])")
+APRS_KEY_RE = re.compile(r"(?<![a-z0-9])(aprs|tocall\w*)(?![a-z0-9])")
+TOCALL_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])([A-Za-z][A-Za-z0-9]{3,5})(?:-\d{1,2})?(?![A-Za-z0-9])")
 REPEATER_KEY_RE = re.compile(r"(?<![a-z0-9])(role\w*|tekrarlayici\w*|repeater\w*)")
 
 
@@ -232,6 +236,41 @@ def digital_mode_route(text: str, question: str) -> dict | None:
     return {"topic": "Dijital mod parametreleri", "short": short, "lines": lines, "source_ids": [payload["source_id"]]}
 
 
+def aprs_route(text: str, question: str) -> dict | None:
+    if not APRS_KEY_RE.search(text):
+        return None
+    payload = _json("aprs_deviceid.json")
+    classes = {c["class"]: c["shown"] for c in payload["classes"]}
+    short = []
+    for token in TOCALL_TOKEN_RE.findall(question):
+        if token.upper() in {"APRS", "TOCALL"} or not any(ch.isdigit() for ch in token) and not token.isupper():
+            continue
+        result = aprs.lookup(token, payload)
+        if result["status"] == "not_found":
+            short.append(f"{result['tocall']}: veritabanında eşleşen kayıt yok (tanımsız veya yeni tahsis; tahmin edilmez).")
+        elif result["status"] == "ambiguous":
+            options = "; ".join(aprs.describe(e, classes) for e in result["matches"])
+            short.append(f"{result['tocall']}: birden fazla eşit eşleşme, tek cihaz seçilmez — {options}.")
+        else:
+            how = "tam eşleşme" if result["status"] == "exact" else "joker eşleşme"
+            short.append(f"{result['tocall']}: {aprs.describe(result['matches'][0], classes)} ({how}; "
+                         f"{result['matches'][0]['locator']}).")
+    if not short:
+        short.append("APRS konusunda bilgi tabanı şu an yalnız cihaz kimliği (tocall) sorgusunu kaynaklı cevaplar; "
+                     "paketin hedef çağrı işaretini yazın, ör. \"APRS APDW16 hangi cihaz?\". "
+                     "APRS protokolü ve frekansları henüz kaynaklı olarak kapsanmıyor.")
+    prov = payload["provenance"]
+    lines = [
+        payload["trust_note"],
+        "Arama kuralı (kaynak README): önce jokersiz tam eşleşme, sonra en uzun joker eşleşme "
+        "(? = herhangi karakter, n = rakam, * = geri kalan).",
+        f"Kaynak: {payload['license']['attribution']}",
+        f"Commit: {prov['repository']} @ {prov['commit'][:12]}; uyarlama: data/aprs_deviceid.json (CC BY-SA 2.0).",
+    ]
+    return {"topic": "APRS cihaz kimliği (tocall)", "short": short, "lines": lines,
+            "source_ids": [payload["source_id"]]}
+
+
 def grid_route(text: str, question: str) -> dict | None:
     if not GRID_KEY_RE.search(text):
         return None
@@ -265,6 +304,7 @@ def technical_routes(text: str, question: str, frequencies_mhz: list[float]) -> 
         wavelength_route(text, frequencies_mhz),
         repeater_route(text, question),
         digital_mode_route(text, question),
+        aprs_route(text, question),
         grid_route(text, question),
     ]
     return [r for r in routes if r]

@@ -495,34 +495,6 @@
         "turkish_permission"
       ],
       "notes": "Adres ft8_lib README'sinden alındı. GitHub'daki WSJT-X aynaları resmî olarak doğrulanmadıkça kullanılmaz."
-    },
-    {
-      "id": "CAND.APRS.DEVICEID",
-      "title": "APRS device identification database (tocalls.yaml)",
-      "publisher": "OH7LZB ve gönüllüler (GitHub: aprsorg/aprs-deviceid)",
-      "expected_source_type": "amateur_association",
-      "jurisdiction": "INTERNATIONAL",
-      "search_entry_point": "https://github.com/aprsorg/aprs-deviceid",
-      "canonical_url": null,
-      "status": "candidate_unverified",
-      "required_access_domains": [
-        "github.com"
-      ],
-      "unlocks": {
-        "phases": [
-          "P11"
-        ],
-        "fields": [],
-        "conflicts": [],
-        "rules": [],
-        "purpose": "APRS cihaz/yazılım tanımlayıcıları (tocall) sorularına kaynaklı cevap"
-      },
-      "related_sources": [],
-      "cannot_support": [
-        "legal_claims",
-        "turkish_permission"
-      ],
-      "notes": "2026-09-29: depo okundu (commit 845e3f89d54402a9aa90e765e14c14b7e5710892). README'ye göre 2022-02-19'dan beri APRS cihaz tanımlayıcı tahsislerinin birincil veritabanıdır. Lisans CC BY-SA 2.0: veritabanının kopyalanması share-alike yükümlülüğü getirir; bu nedenle henüz Telsiz'e aktarılmadı (lisans kararı gerekli)."
     }
   ]
 }

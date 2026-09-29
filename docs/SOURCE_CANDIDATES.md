@@ -47,10 +47,10 @@ Açık GitHub depoları taranırken bulunan, bu turda doğrulanamayan veya lisan
 |---|---|---|---|
 | `CAND.QEX.FT4_FT8_PROTOCOLS` | technical_manual | FT8/FT4 parametrelerinin protokol yazarlarının makalesiyle doğrulanması | physics.princeton.edu erişilemedi |
 | `CAND.WSJTX.REFERENCE_SOURCE` | technical_manual | Referans uygulamayla çapraz doğrulama | Resmî depo erişimi yok; aynalar kullanılmaz |
-| `CAND.APRS.DEVICEID` | amateur_association | APRS cihaz tanımlayıcıları (tocall) | Depo okundu; CC BY-SA 2.0 lisans kararı bekliyor |
 
 Kaydedilen yeni kaynak: `OSS.KGOBA.FT8_LIB` (community, commit-pinned) — ayrıntı `data/digital_modes.json`.
 
 ## Promoted candidates
 
+- `CAND.APRS.DEVICEID` → `APRS.DEVICEID.TOCALLS` on 2026-09-29 after the user accepted the CC BY-SA 2.0 licence. The adapted tocall index (`data/aprs_deviceid.json`) is commit-pinned, keeps the attribution and change notice, omits personal contact fields and cannot prove legal permission.
 - `CAND.TR.TRAC.REPEATER_LIST` → `TR.TRAC.REPEATER.LIST` on 2026-09-28 after the live TRAC Röle Bilgileri page was read and registered. The promoted source remains `amateur_association` and cannot prove official permission.
