@@ -85,22 +85,22 @@ A missing or unresolved semantic field produces `UNKNOWN`, not fabricated permis
 
 The source-content access blocker has been reduced substantially: the official PDF content is available through a trusted renderer and the raw table is reconciled 33/33.
 
-P0 is **not** fully complete because byte-level artifact evidence is still missing and source-internal conflicts remain open:
+P0 is **not** fully complete even though byte-level artifact evidence is now verified. Remaining blockers are semantic/source-level:
 
-1. raw official PDF bytes must be acquired from the same canonical URL;
-2. file size and SHA-256 must be recorded;
-3. source registry must bind that hash;
-4. source-change detection must compare later downloads;
-5. raw rows must be promoted into conflict-aware semantic records;
-6. open source conflicts must not be silently normalized.
+1. all 33 raw rows must be promoted into conflict-aware semantic records where evidence is unambiguous;
+2. open source conflicts must not be silently normalized;
+3. required semantic dimensions must be extracted or explicitly held UNKNOWN;
+4. full-table completeness must pass validator + exact-head CI.
 
 Current status:
 
 ```text
 P0=RAW_TRANSCRIPTION_COMPLETE_SEMANTIC_PROMOTION_HOLD
 P0_ARTIFACT_GATE=PASS
-P0_ARTIFACT_STATUS=AWAITING_BYTES
-P0_BLOCKER=ARTIFACT_SHA256_AND_SOURCE_CONFLICTS
+P0_ARTIFACT_STATUS=VERIFIED_BYTES
+P0_ARTIFACT_SHA256=sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0
+P0_ARTIFACT_SIZE_BYTES=508766
+P0_BLOCKER=SOURCE_CONFLICTS_AND_INCOMPLETE_SEMANTIC_PROMOTION
 ```
 
 ## Open official-source conflicts
@@ -161,8 +161,8 @@ The `Telsiz_AI_Knowledge_Base` Drive tree is the human-readable companion store.
 
 Continue fail-closed in this order:
 
-1. **P0 artifact gate** — acquire the canonical official PDF bytes, calculate SHA-256/file size, bind the hash and activate source-change detection.
-2. **P0 semantic promotion** — map the 33 raw rows into semantic class/power/emission/context records without normalizing open conflicts.
+1. **P0 semantic promotion** — map the 33 raw rows into semantic class/power/emission/context records without normalizing open conflicts.
+2. **P0 source-drift gate** — keep the canonical byte probe reproducible; any hash change becomes SOURCE_CHANGED / REVERIFY_REQUIRED.
 3. **P1** — exact-text verification and atomization of relevant Law No. 5809 provisions.
 4. **P2** — exact-text verification and atomization of the FTM Regulation.
 5. **P3** — exact-text verification and atomization of the KEGM amateur-radio examination/certification regulation.
@@ -319,12 +319,43 @@ OPEN_PRS=0
 - Bilingual/English navigation remains subordinate to canonical Turkish/source-backed content.
 - Device firmware instructions remain region/family gated.
 - Academy/practice tools do not bypass the legal decision engine.
-- P0 remains partial while BTK byte-artifact SHA-256 is unknown.
+- P0 remains partial despite verified BTK byte-artifact SHA-256 because source conflicts and incomplete semantic promotion remain.
 - P1/P2/P3 remain fail-closed until canonical consolidated texts are verified.
 
 ## Current NEXT
 
-1. **P0 byte artifact** — acquire the canonical BTK PDF bytes, calculate file size + SHA-256, bind the hash and run source-change detection.
-2. **P0 semantic promotion** — continue mapping raw rows into semantic records only where source conflicts do not require silent correction.
+1. **P0 semantic promotion** — continue mapping raw rows into semantic records only where source conflicts do not require silent correction.
+2. **P0 drift monitoring** — rerun the isolated byte probe and fail closed if the canonical PDF hash changes.
 3. **P1–P3** — verify consolidated official legal texts before promoting legal rules.
 4. Continue P11/operator tooling only where it cannot weaken the authority hierarchy above.
+
+
+## P0 byte artifact closure — 2026-09-29
+
+The canonical BTK PDF byte-artifact blocker is closed.
+
+First byte observation:
+
+```text
+PROBE_RUN=36560262553
+PROBE_JOB=109379164582
+HTTP_STATUS=200
+CONTENT_TYPE=application/pdf
+SIZE_BYTES=508766
+SHA256=sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0
+CHANGE_STATUS=HASH_OBSERVED_BIND_REQUIRED
+```
+
+After binding the observed digest to the source registry, a second independent exact-head probe reproduced the same bytes:
+
+```text
+RECHECK_RUN=36560444675
+RECHECK_JOB=109379759074
+RECHECK_RUNNER=GitHub Actions 1000014195
+SIZE_BYTES=508766
+SHA256=sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0
+CHANGE_STATUS=UNCHANGED
+REVERIFY_REQUIRED=false
+```
+
+This closes the artifact acquisition/hash gate only. It does **not** make `coverage_status=complete`. The remaining P0 blockers are the open source conflicts plus incomplete semantic promotion.
