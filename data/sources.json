@@ -691,11 +691,11 @@
       "effective_date": null,
       "legal_status": "not_applicable",
       "instrument_id": "TAMP 2022 / RG 31954",
-      "reference": "AFAD TAMP sayfası: amaç, kapsam, 2022 yayımlanma bilgisi, ulusal/yerel afet grupları ve S1–S4 müdahale seviyeleri",
+      "reference": "AFAD TAMP sayfası: amaç, kapsam, 2022 yayımlanma bilgisi, ulusal/yerel afet grupları ve S1–S4; hukuk dayanağı satırı 2025/10809 sonrasında güncel değildir",
       "content_sha256": null,
       "supersedes": [],
       "superseded_by": [],
-      "notes": "AFAD'ın güncel resmî TAMP açıklama/indirme sayfasıdır. Sayfa TAMP'ın görev ve koordinasyon rollerini tanımladığını, 15.09.2022 tarihli 31954 sayılı Resmî Gazete'de yayımlanarak yürürlüğe girdiğini ve dayanak yönetmeliğin 24.02.2022 tarihli 31760 sayılı Resmî Gazete'de yayımlandığını açıklar. Bu kayıt planın resmî bağlamını verir; amatör telsizciye kendiliğinden görev, frekans veya yayın yetkisi verildiği sonucu çıkarılamaz. Yönetmelik ve planın tam hukuki metni ayrı resmî-yasal doğrulama gerektirir."
+      "notes": "AFAD'ın erişilebilir TAMP açıklama/indirme sayfasıdır. Sayfa TAMP'ın 15.09.2022 tarihli 31954 sayılı Resmî Gazete'de yayımlanan sürümünü ve o tarihteki 24.02.2022/31760 sayılı 5211 Yönetmeliğini dayanak olarak göstermektedir. [STALE_LEGAL_BASIS_METADATA] 31.12.2025 tarihli 10809 sayılı yeni Afet ve Acil Durum Müdahale Hizmetleri Yönetmeliği 2022/5211 düzenlemesini yürürlükten kaldırmıştır. Bu nedenle AFAD sayfasındaki 2022 dayanak satırı güncel hukuk kaynağı olarak kullanılmaz. Sayfa TAMP'ın amaç/kapsam/S1-S4 operasyonel bağlamı için kullanılabilir; amatör telsizciye kendiliğinden görev, frekans veya yayın yetkisi vermez."
     },
     {
       "id": "IARU.R1.EMCOMM.PROCEDURES",
@@ -722,6 +722,67 @@
       "supersedes": [],
       "superseded_by": [],
       "notes": "IARU Region 1 eğitim/işletme rehberidir. Sayfa, acil haberleşme rehberinin amatörlerin eğitimi ve acil olaylara katılım becerisini geliştirmek için hazırlandığını; mesaj aktarımında hız ve doğruluk hedefini ve ülkeler/gruplar arasında yerel prosedür farkları bulunduğunu açıklar. Sayfa ayrıca prosedürün bazı grupların isteyeceği kadar güncel olmadığını belirtir. Bu kaynak hukuki izin veya Türkiye'deki resmî görevlendirme kaynağı değildir."
+    },
+    {
+      "id": "TR.AFAD.MUDAHALE.REGULATION.2022-5211",
+      "title": "Afet ve Acil Durum Müdahale Hizmetleri Yönetmeliği — 5211 (mülga)",
+      "publisher": "T.C. Cumhurbaşkanlığı / resmî bakanlık arşiv nüshası",
+      "source_type": "official_legal",
+      "jurisdiction": "TR",
+      "url": "https://aile.gov.tr/media/197773/afet-ve-acil-durum-mudahale-hizmetleri-yonetmeligi.pdf",
+      "topics": [
+        "afet müdahalesi",
+        "TAMP",
+        "koordinasyon",
+        "görevlendirme",
+        "gönüllü çalışma",
+        "haberleşme"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-29T17:00:00Z",
+      "publication_date": "2022-02-24",
+      "effective_date": "2022-02-24",
+      "legal_status": "repealed",
+      "instrument_id": "5211",
+      "reference": "RG 24.02.2022/31760; tarihsel tam metin. Güncel 10809 Yönetmeliğinin 37 nci maddesiyle yürürlükten kaldırılmıştır.",
+      "content_sha256": null,
+      "supersedes": [
+        "TR.AFAD.MUDAHALE.REGULATION.2013-5703"
+      ],
+      "superseded_by": [
+        "TR.AFAD.MUDAHALE.REGULATION.2025-10809"
+      ],
+      "notes": "Resmî Aile ve Sosyal Hizmetler Bakanlığı alan adında barındırılan 25 sayfalık tarihsel tam metin incelendi. 5211 sayılı Cumhurbaşkanı Kararı 23.02.2022 tarihli, yayım 24.02.2022/31760'tır. Bu kayıt yalnız tarihsel/provenance amaçlıdır; güncel hukuk değildir. 31.12.2025 tarihli 10809 sayılı yeni Yönetmelik tarafından yürürlükten kaldırılmıştır."
+    },
+    {
+      "id": "TR.AFAD.MUDAHALE.REGULATION.2025-10809",
+      "title": "Afet ve Acil Durum Müdahale Hizmetleri Yönetmeliği — 10809",
+      "publisher": "T.C. Resmî Gazete / Cumhurbaşkanlığı",
+      "source_type": "official_legal",
+      "jurisdiction": "TR",
+      "url": "https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-15.pdf",
+      "topics": [
+        "afet müdahalesi",
+        "TAMP",
+        "koordinasyon",
+        "görevlendirme",
+        "gönüllü çalışma",
+        "haberleşme",
+        "BTK"
+      ],
+      "verification_status": "pending",
+      "verified_at": null,
+      "publication_date": "2025-12-31",
+      "effective_date": "2025-12-31",
+      "legal_status": "current",
+      "instrument_id": "10809",
+      "reference": "RG 31.12.2025/33124, 5. Mükerrer; exact-origin PDF body/bytes verification pending",
+      "content_sha256": null,
+      "supersedes": [
+        "TR.AFAD.MUDAHALE.REGULATION.2022-5211"
+      ],
+      "superseded_by": [],
+      "notes": "CURRENTNESS_METADATA_VERIFIED: Ulaştırma ve Altyapı Bakanlığının güncel afet/acil durum mevzuat listesi 31.12.2025 tarihli 10809 sayılı Yönetmeliği güncel düzenleme olarak listeler; Türkiye Belediyeler Birliği duyurusu exact Resmî Gazete PDF URL'sine bağlanır. CONSOLIDATED_TEXT_CORROBORATED_ONLY: güncel konsolide metin kopyaları 37 nci maddede 2022/5211 düzenlemesinin kaldırıldığını ve Geçici Madde 1'de TAMP'ın altı ay içinde uyarlanacağını gösterir. Ancak bu doğrulama ortamında origin Resmî Gazete PDF gövdesi/ham byte'ları alınamadığından verification_status fail-closed olarak pending tutulur; bu kayıt exact-text legal rule üretmez."
     }
   ]
 }
