@@ -40,6 +40,7 @@ vdm = _load_module("validate_digital_modes")
 aprs = _load_module("aprs_deviceid")
 vax = _load_module("validate_ax25")
 sat = _load_module("satellite_lookup")
+emc = _load_module("emergency_comms")
 
 QCODE_RE = re.compile(r"(?<![a-z0-9])(q[a-z]{2})(?![a-z0-9])")
 RST_KEY_RE = re.compile(r"(?<![a-z0-9])(rst|rs|rapor\w*|sinyal raporu)(?![a-z0-9])")
@@ -60,6 +61,7 @@ AX25_KEY_RE = re.compile(r"(?<![a-z0-9])(ax\.?25|hdlc|afsk|fcs|paket radyo\w*|pa
 TOCALL_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])([A-Za-z][A-Za-z0-9]{3,5})(?:-\d{1,2})?(?![A-Za-z0-9])")
 REPEATER_KEY_RE = re.compile(r"(?<![a-z0-9])(role\w*|tekrarlayici\w*|repeater\w*)")
 SATELLITE_KEY_RE = re.compile(r"(?<![a-z0-9])(uydu\w*|satellite\w*|transponder\w*|uplink\w*|downlink\w*)(?![a-z0-9])")
+EMERGENCY_KEY_RE = re.compile(r"(?<![a-z0-9])(afet\w*|acil(?:\s+durum)?\w*|emergency\w*|tamp|kriz\w*|s[1-4])(?![a-z0-9])")
 
 
 def _tr(value: float, digits: int = 3) -> str:
@@ -321,6 +323,25 @@ def ax25_route(text: str, question: str) -> dict | None:
 
 
 
+def emergency_route(text: str, question: str) -> dict | None:
+    if not EMERGENCY_KEY_RE.search(text):
+        return None
+    registry = emc.load_registry()
+    result = emc.answer_topic(question, registry)
+    lines = [
+        "AFAD/TAMP resmî koordinasyon bağlamı ile IARU amatör işletme/eğitim rehberi ayrı otorite katmanlarıdır.",
+        "IARU rehberi hukuki izin veya Türkiye'de resmî görevlendirme kaynağı değildir.",
+        registry["authority_contract"]["instruction_priority"],
+    ]
+    lines.extend(registry["unsupported_claims"])
+    return {
+        "topic": "Acil durum / afet haberleşmesi",
+        "short": result["short"],
+        "lines": lines,
+        "source_ids": result["source_ids"],
+    }
+
+
 def satellite_route(text: str, question: str) -> dict | None:
     registry = sat.load_registry()
     hits = sat.find_mentions(question, registry)
@@ -387,6 +408,7 @@ def technical_routes(text: str, question: str, frequencies_mhz: list[float]) -> 
         digital_mode_route(text, question),
         aprs_route(text, question),
         ax25_route(text, question),
+        emergency_route(text, question),
         satellite_route(text, question),
         grid_route(text, question),
     ]
