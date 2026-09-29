@@ -73,3 +73,31 @@ Fail-closed interpretation:
 - they do not replace the current consolidated legal text for rule promotion;
 - P1/P2/P3 remain on HOLD for exact-text verification;
 - work may proceed on source-independent engineering features without weakening these legal gates.
+
+
+## 2026-09-29 — AFAD current regulation recheck
+
+Current-law discovery corrected the prior P8 target.
+
+| TARGET | RESULT | EVIDENCE / CONSEQUENCE |
+|---|---|---|
+| AFAD TAMP page | REACHABLE | Still states 2022 TAMP publication and 24.02.2022/31760 legal basis; this legal-basis metadata is stale after the 2025 replacement |
+| UAB current emergency-law index | REACHABLE | Lists 31.12.2025 / 10809 Afet ve Acil Durum Müdahale Hizmetleri Yönetmeliği as current emergency legislation |
+| Exact Official Gazette origin URL | RESOLVED | `https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-15.pdf` |
+| Exact Official Gazette PDF body/raw bytes | INACCESSIBLE_IN_CURRENT_VERIFICATION_PATH | Web fetch returned origin failure and raw download also failed; no byte hash or origin screenshot could be produced |
+| 2022/5211 historical full text | REACHABLE_OFFICIAL_ARCHIVE | Official Aile ve Sosyal Hizmetler Bakanlığı PDF is readable; retained as historical/repealed only |
+| Current 10809 consolidated text | CORROBORATED_ONLY | Independent consolidated copies report Article 37 repeal of 5211, Geçici Madde 1 TAMP transition, and current 31.12.2025 effectiveness; not promoted as origin legal authority |
+
+Fail-closed result:
+
+```text
+CURRENT_INSTRUMENT=10809
+CURRENT_EFFECTIVE_DATE=2025-12-31
+OLD_INSTRUMENT=5211
+OLD_STATUS=REPEALED
+TAMP_PAGE_2022_LEGAL_BASIS_METADATA=STALE
+CURRENT_ORIGIN_EXACT_TEXT=PENDING
+LEGAL_RULE_PROMOTION=HOLD
+```
+
+The current-law metadata correction is accepted; exact legal-text promotion is not.

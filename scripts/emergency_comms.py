@@ -36,6 +36,7 @@ def answer_topic(question: str, registry: dict | None = None) -> dict:
     if "tamp" in q:
         short.append(official["TR.TAMP.PURPOSE"]["claim_tr"])
         short.append(official["TR.TAMP.SCOPE"]["claim_tr"])
+        short.append(registry["legal_status_guard"]["warning_tr"])
         add_source("TR.AFAD.TAMP.2022")
 
     levels = [level.upper() for level in re.findall(r"(?<![a-z0-9])(s[1-4])(?![a-z0-9])", q)]
