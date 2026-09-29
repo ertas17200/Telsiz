@@ -106,6 +106,9 @@ jobs:
       - name: Validate AX.25 packet parameters
         run: python scripts/validate_ax25.py
 
+      - name: Validate satellite transmitter snapshot
+        run: python scripts/validate_satellites.py
+
       - name: Validate answer engine intents
         run: python scripts/ask.py --self-check
 
