@@ -7,6 +7,7 @@ on:
       - "bootstrap/**"
       - "knowledge/**"
       - "feat/**"
+      - "ci/**"
   pull_request:
 
 permissions:
@@ -15,9 +16,36 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    env:
+      EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
-      - name: Checkout
+      - name: Checkout exact head
         uses: actions/checkout@v4
+        with:
+          ref: ${{ env.EXPECTED_SHA }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Evidence runner and exact head
+        run: |
+          set -euo pipefail
+          if [ -z "${RUNNER_NAME:-}" ]; then
+            echo "TELSiZ_RUNNER_IDENTITY=HOLD reason=RUNNER_NAME_EMPTY"
+            exit 1
+          fi
+          actual="$(git rev-parse HEAD)"
+          if [ "$actual" != "$EXPECTED_SHA" ]; then
+            echo "TELSiZ_EXACT_HEAD=HOLD expected=$EXPECTED_SHA actual=$actual"
+            exit 1
+          fi
+          if [ -n "$(git status --porcelain=v1 --untracked-files=all)" ]; then
+            echo "TELSiZ_WORKTREE=HOLD reason=DIRTY_AFTER_CHECKOUT"
+            git status --short
+            exit 1
+          fi
+          echo "TELSiZ_RUNNER_IDENTITY=PASS name=$RUNNER_NAME os=$RUNNER_OS arch=$RUNNER_ARCH"
+          echo "TELSiZ_EXACT_HEAD=PASS sha=$actual"
+          echo "TELSiZ_WORKTREE=PASS"
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -59,3 +87,20 @@ jobs:
 
       - name: Test grounding contract
         run: python -m unittest discover -s tests -p "test_*.py" -v
+
+      - name: Verify final exact head and clean worktree
+        if: always()
+        run: |
+          set -euo pipefail
+          actual="$(git rev-parse HEAD)"
+          if [ "$actual" != "$EXPECTED_SHA" ]; then
+            echo "TELSiZ_FINAL_EXACT_HEAD=HOLD expected=$EXPECTED_SHA actual=$actual"
+            exit 1
+          fi
+          if [ -n "$(git status --porcelain=v1 --untracked-files=all)" ]; then
+            echo "TELSiZ_FINAL_WORKTREE=HOLD reason=DIRTY"
+            git status --short
+            exit 1
+          fi
+          echo "TELSiZ_FINAL_EXACT_HEAD=PASS sha=$actual"
+          echo "TELSiZ_FINAL_WORKTREE=PASS"
