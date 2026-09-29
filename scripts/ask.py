@@ -44,6 +44,7 @@ def _load_module(name: str):
 
 fl = _load_module("frequency_lookup")
 fsl = _load_module("frequency_scope_lookup")
+akn = _load_module("ask_knowledge")
 
 TR_FOLD = str.maketrans("çğıöşüâîû", "cgiosuaiu")
 FREQ_RE = re.compile(r"(\d+(?:[.,]\d+)?)\s*(khz|mhz|ghz)(?![a-z])")
@@ -227,14 +228,21 @@ def answer(question: str, kb: Knowledge | None = None) -> dict:
             if item not in target:
                 target.append(item)
 
-    for freq in parsed["frequencies_mhz"]:
+    technical_knowledge = akn.technical_routes(parsed["normalized"], question, parsed["frequencies_mhz"])
+    wave_only = any(t["topic"].startswith("Dalga boyu") for t in technical_knowledge) and not (
+        parsed["license_classes"] or parsed["requested_power_w"] is not None
+    )
+    for item in technical_knowledge:
+        short.extend(item["short"])
+
+    for freq in [] if wave_only else parsed["frequencies_mhz"]:
         part = _frequency_answer(kb, freq, parsed["license_classes"], parsed)
         short.extend(part["lines"])
         technical.extend(part["limits"] + part["scope_notes"])
         add(legal_ids, part["rule_ids"] + ["TR.AMATEUR.TECHNICAL_COMPLIANCE"])
         add(practice_ids, ["IARU.R1.NATIONAL_RULES_PREVAIL"])
         conflicts.update(part["conflict_ids"])
-    if parsed["frequencies_mhz"] and not parsed["license_classes"]:
+    if parsed["frequencies_mhz"] and not parsed["license_classes"] and not wave_only:
         short.append("Belge sınıfı belirtilmedi; yukarıda A, B ve C için ayrı ayrı gösterildi.")
 
     for intent in intents:
@@ -245,7 +253,7 @@ def answer(question: str, kb: Knowledge | None = None) -> dict:
 
     legal = [r for r in (kb.usable_rule(i) for i in legal_ids) if r and r["authority"] == "legal"]
     practice = [r for r in (kb.usable_rule(i) for i in practice_ids) if r and r["authority"] == "amateur_practice"]
-    if not parsed["frequencies_mhz"]:
+    if not parsed["frequencies_mhz"] or wave_only:
         specific = [r for r in legal if r["id"] != "TR.AMATEUR.TECHNICAL_COMPLIANCE"]
         short.extend(r["claim"] for r in (specific or legal))
         short.extend(f"Amatör uygulama (hukuki izin değildir): {r['claim']}" for r in practice)
@@ -258,10 +266,14 @@ def answer(question: str, kb: Knowledge | None = None) -> dict:
             f"Bu konudaki resmî düzenleme ({src['title']}) henüz doğrulanmadı (durum: {src['verification_status']}); "
             "kesin hukuki hüküm verilemez."
         )
-    fail_closed = not short and not legal and not practice and not references
+    fail_closed = not short and not legal and not practice and not references and not technical_knowledge
 
     source_ids: list[str] = []
     add(source_ids, [r["source_id"] for r in legal + practice] + [s["id"] for s in references + pending])
+    add(source_ids, [
+        sid for item in technical_knowledge for sid in item["source_ids"]
+        if kb.sources.get(sid, {}).get("verification_status") == "verified"
+    ])
     return {
         "question": question,
         "parsed": {k: v for k, v in parsed.items() if k != "normalized"},
@@ -274,6 +286,10 @@ def answer(question: str, kb: Knowledge | None = None) -> dict:
             for r in legal
         ],
         "technical_limits": technical,
+        "technical_knowledge": [
+            {"topic": t["topic"], "summary": t["short"], "details": t["lines"], "source_ids": t["source_ids"]}
+            for t in technical_knowledge
+        ],
         "open_source_conflicts": sorted(conflicts),
         "amateur_practice": [
             {"rule_id": r["id"], "claim": r["claim"], "source_id": r["source_id"],
@@ -307,6 +323,12 @@ def render(result: dict) -> str:
     if result["technical_limits"] or result["open_source_conflicts"]:
         out += ["", "Teknik sınırlar:"] + [f"- {line}" for line in result["technical_limits"]]
         out += [f"- açık kaynak çatışması: {c} (sessizce düzeltilmez)" for c in result["open_source_conflicts"]]
+    detailed = [item for item in result["technical_knowledge"] if item["details"]]
+    if detailed:
+        out += ["", "Teknik / işletme bilgisi (hukuki izin değildir):"]
+        for item in detailed:
+            out.append(f"- {item['topic']}:")
+            out += [f"    {line}" for line in item["details"]]
     if result["amateur_practice"]:
         out += ["", "Amatör uygulama / IARU / TRAC tavsiyesi (hukuki izin değildir):"]
         out += [f"- {p['claim']} [{p['rule_id']}; {p['source_id']}]" for p in result["amateur_practice"]]
