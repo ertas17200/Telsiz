@@ -369,3 +369,46 @@ P0_BLOCKER=SOURCE_CONFLICTS_AND_SEMANTIC_PROMOTION
 ```
 
 Open source conflicts remain unchanged: `TR-BTK-NUMBERING-001`, `TR-BTK-EMISSION-001`, and `TR-BTK-UNIT-001`. No source anomaly is silently normalized.
+
+
+## 2026-09-29 — P0 scope + semantic-readiness integration closure
+
+This delta supersedes the earlier pre-integration status for the current engineering baseline.
+
+```text
+MAIN_SHA=c8bf5363a6732707fa279513521f0f47752d7833
+MERGED_PR=39
+MAIN_RUN=36561908930
+MAIN_JOB=109384529383
+MAIN_RUNNER=GitHub Actions 1000014214
+MAIN_CI=completed/success
+WORKFLOW_CORE_STEPS=21
+UNIT_TESTS=283/283 OK
+RAW_BTK_ROWS=33/33
+FREQUENCY_SCOPE_ENTRIES=33/33
+SEMANTIC_READINESS_ROWS=33/33
+PARTIAL_SEMANTIC_MAPPINGS=8
+ROWS_NOT_READY_CURRENT_SCHEMA=25
+OPEN_PRS=0
+```
+
+Current P0 status:
+
+```text
+P0_BYTE_BLOCKER=CLOSED
+P0_ARTIFACT_STATUS=VERIFIED_BYTES/UNCHANGED
+P0_SCOPE_INDEX=PASS
+P0_READINESS_MAP=PASS
+P0_SEMANTIC_COVERAGE=PARTIAL
+P0_OVERALL=HOLD
+```
+
+The scope index is evidence-only and cannot create a legal transmit verdict. The semantic readiness map preserves unresolved power-basis, multivalue/PEP, condition-model and source-conflict blockers. The 50–52 MHz A/B general 100 W limit is promoted only as a limited conflict-safe constraint: requests above 100 W can be rejected as exceeding the known verified limit, while requests at or below 100 W remain UNKNOWN until the remaining dimensions are modeled.
+
+Open source conflicts remain unchanged:
+
+- `TR-BTK-NUMBERING-001`
+- `TR-BTK-EMISSION-001`
+- `TR-BTK-UNIT-001`
+
+NEXT: continue P0 semantic modeling without silent normalization, then resume P1–P3 official consolidated-text verification.
