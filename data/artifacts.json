@@ -5,13 +5,13 @@
       "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
       "canonical_url": "https://www.btk.gov.tr/uploads/pages/ftm-teknik-olcutler-ek-5.pdf",
       "expected_mime_type": "application/pdf",
-      "artifact_status": "awaiting_bytes",
-      "fetched_at": null,
-      "size_bytes": null,
-      "sha256": null,
-      "change_status": "UNKNOWN",
-      "reverify_required": true,
-      "notes": "Official PDF content has been visually inspected and raw rows transcribed, but byte-for-byte artifact acquisition has not succeeded in the code execution runtime. Do not promote semantic coverage until bytes are verified and the observed hash is bound to the source registry."
+      "artifact_status": "verified_bytes",
+      "fetched_at": "2026-09-29T11:12:11.659540Z",
+      "size_bytes": 508766,
+      "sha256": "sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0",
+      "change_status": "UNCHANGED",
+      "reverify_required": false,
+      "notes": "Canonical BTK PDF bytes acquired by GitHub-hosted runner in Official Artifact Byte Probe run 36560262553, job 109379164582. HTTP 200, application/pdf, 508766 bytes, valid PDF signature. Observed SHA-256 is bound to data/sources.json; future byte probes must report UNCHANGED or fail closed with SOURCE_CHANGED/REVERIFY_REQUIRED."
     }
   ]
 }
