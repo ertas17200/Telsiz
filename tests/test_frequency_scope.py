@@ -75,10 +75,14 @@ class FrequencyScopeTests(unittest.TestCase):
         self.assertIn("TR-BTK-EMISSION-001", conflicts)
         self.assertIn("TR-BTK-UNIT-001", conflicts)
 
-    def test_high_band_a_b_scope_is_preserved(self):
+    def test_shared_high_band_boundary_preserves_both_source_rows(self):
         result = lookup.lookup_scope(SCOPE, 136000.0, "B")
         self.assertEqual(result["scope_status"], "SOURCE_LISTED")
-        self.assertEqual(result["matches"][0]["source_row_index"], 33)
+        self.assertEqual(
+            {match["source_row_index"] for match in result["matches"]},
+            {32, 33},
+        )
+        self.assertEqual(result["legal_status"], "UNKNOWN")
 
     def test_absence_is_never_a_prohibition(self):
         result = lookup.lookup_scope(SCOPE, 433.0, "A")
