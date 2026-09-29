@@ -101,3 +101,44 @@ LEGAL_RULE_PROMOTION=HOLD
 ```
 
 The current-law metadata correction is accepted; exact legal-text promotion is not.
+
+
+## 2026-09-29 — autonomous closure source-access recheck
+
+Probe path: trusted web renderer plus existing exact-head GitHub Actions artifact evidence. A domain result describes this access path only; it is not a statement that the public service is globally unavailable.
+
+| DOMAIN | ACCESS | HTTP_STATUS | ERROR_CLASS | TESTED_AT |
+|---|---|---|---|---|
+| www.btk.gov.tr | PASS | response status not exposed by renderer | NONE | 2026-09-29T21:10:00+03:00 |
+| www.mevzuat.gov.tr | BLOCKED | origin status not observed | TIMEOUT_FETCHING | 2026-09-29T21:10:00+03:00 |
+| www.resmigazete.gov.tr | BLOCKED | origin status not observed | TIMEOUT_FETCHING | 2026-09-29T21:10:00+03:00 |
+| resmigazete.gov.tr | BLOCKED | origin status not observed | TIMEOUT_FETCHING | 2026-09-29T21:10:00+03:00 |
+
+Canonical P0 PDF target:
+
+```text
+URL=https://www.btk.gov.tr/uploads/pages/ftm-teknik-olcutler-ek-5.pdf
+ACCESS=PASS
+CONTENT_TYPE=application/pdf
+PDF_PAGE_COUNT=47
+ARTICLE=MADDE 22
+VISIBLE_TABLE_HEADING=Tablo 25
+ARTICLE_REFERENCE=Tablo-26
+EMISSION_REFERENCE=Tablo 26-1
+```
+
+The current GitHub artifact registry already carries byte-level evidence from run `36559259435` / job `109375881365`:
+
+```text
+FETCHED_AT=2026-09-29T11:02:27Z
+SIZE_BYTES=508766
+SHA256=eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0
+CONTENT_TYPE=application/pdf
+FINAL_URL=https://www.btk.gov.tr/uploads/pages/ftm-teknik-olcutler-ek-5.pdf
+ARTIFACT_STATUS=verified_bytes
+CHANGE_STATUS=UNCHANGED
+```
+
+The old log statements saying that P0 still lacked raw bytes/hash are superseded by the byte-binding checkpoint. P0 is no longer blocked by artifact access; it remains partial because of structured semantic-model gaps and explicit source conflicts.
+
+P1/P2/P3 remain fail-closed: current consolidated texts on `www.mevzuat.gov.tr` were not retrievable in this recheck, and direct root probes for both Resmî Gazete hosts timed out. Search-index visibility of some Resmî Gazete pages is not treated as consolidated exact-text access.

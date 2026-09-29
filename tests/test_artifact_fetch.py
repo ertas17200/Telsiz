@@ -34,8 +34,9 @@ class FakeHeaders(dict):
 
 
 class FakeResponse:
-    def __init__(self, body, *, url=None, content_type="application/pdf", content_length=True):
+    def __init__(self, body, *, url=None, content_type="application/pdf", content_length=True, status=200):
         self._stream = io.BytesIO(body)
+        self.status = status
         self._url = url or SOURCE["url"]
         self.headers = FakeHeaders({"Content-Type": content_type})
         if content_length:
@@ -78,7 +79,18 @@ class ArtifactFetchTests(unittest.TestCase):
             meta = fetcher.fetch_registered_artifact(SOURCE, ARTIFACT, path)
             self.assertEqual(path.read_bytes(), body)
         self.assertEqual(meta["downloaded_bytes"], len(body))
+        self.assertEqual(meta["http_status"], 200)
         self.assertEqual(meta["http_content_type"], "application/pdf")
+
+    @patch("fetch_official_artifact.urlopen")
+    def test_non_200_http_status_rejected(self, mocked):
+        mocked.return_value = FakeResponse(b"%PDF-1.7\nX\n", status=206)
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaises(fetcher.gate.GateError):
+                fetcher.fetch_registered_artifact(
+                    SOURCE, ARTIFACT, Path(tmp) / "artifact.pdf"
+                )
 
     @patch("fetch_official_artifact.urlopen")
     def test_cross_origin_redirect_rejected(self, mocked):
@@ -171,6 +183,7 @@ class ArtifactFetchTests(unittest.TestCase):
         expected = "sha256:" + hashlib.sha256(body).hexdigest()
         self.assertEqual(observation["sha256"], expected)
         self.assertEqual(observation["size_bytes"], len(body))
+        self.assertEqual(observation["retrieval"]["http_status"], 200)
         self.assertEqual(observation["change_status"], "HASH_OBSERVED_BIND_REQUIRED")
         self.assertTrue(observation["reverify_required"])
         self.assertEqual(

@@ -9,10 +9,27 @@ Kaynak: `TR.BTK.FTM.TECH.2022-IK-SYD-245`, MADDE 22.
 
 `coverage_status = partial`
 
-Artık resmî BTK PDF içeriği doğrulanmış bir web-render yolu üzerinden okunmuş ve amatör frekans tablosundaki **33 görünür kaynak satırı** ham katmana aktarılmıştır. Ancak ham PDF byte'ları kod yürütme ortamına indirilemediği için artifact SHA-256 üretilememiştir. Ayrıca kaynak içindeki numaralandırma/emisyon/birim tutarsızlıkları açıktır.
+Resmî BTK PDF içeriği doğrulanmış bir web-render yolu üzerinden okunmuş ve amatör frekans tablosundaki **33 görünür kaynak satırı** ham katmana aktarılmıştır. Daha sonra kanonik URL aynı-origin GitHub Actions byte-observation koşusunda başarıyla indirilmiş ve artifact baseline byte seviyesinde bağlanmıştır.
+
+Kanonik artifact kanıtı:
+
+```text
+SOURCE_URL=https://www.btk.gov.tr/uploads/pages/ftm-teknik-olcutler-ek-5.pdf
+FETCHED_AT=2026-09-29T11:02:27Z
+CONTENT_TYPE=application/pdf
+FILE_SIZE=508766
+SHA256=eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0
+PDF_PAGE_COUNT=47
+SOURCE_ID=TR.BTK.FTM.TECH.2022-IK-SYD-245
+```
+
+Byte-observation koşusu mevcut fetcher sürümünden önce olduğu için HTTP durum kodunu observation JSON'una yazmamıştı; yeni fetcher HTTP 200'ü zorunlu kılar ve sonraki observation'larda `http_status` alanını kaydeder. Mevcut bound digest değişmiş sayılmaz; sonraki aynı-URL hash farkı `SOURCE_CHANGED / REVERIFY_REQUIRED` üretmelidir.
+
+Bununla birlikte kaynak içindeki numaralandırma/emisyon/birim tutarsızlıkları ve semantik model boşlukları açıktır.
 
 Bu nedenle:
 
+- **artifact bytes:** verified / hash-bound;
 - **raw transcription:** 33/33 satır, programatik olarak doğrulanır;
 - **emission reference:** 24 Tablo 26-1 tanımı;
 - **semantic decision table:** hâlâ partial;
@@ -88,7 +105,7 @@ Validator en az şunları kanıtlar:
 - locator sayfalarının 41–45/47 aralığında olması;
 - `J2C` tutarsızlığının korunması ve sessizce `J3C` yapılmaması;
 - semantic promotion'ın HOLD kalması;
-- artifact SHA-256'ın uydurulmaması.
+- raw transcription artifact SHA-256'ının bound canonical baseline ile eşleşmesi.
 
 ## Semantik satır modeli
 
@@ -130,8 +147,8 @@ Validator en az şunları kanıtlar:
 
 ## NEXT
 
-1. Resmî PDF'nin raw byte artifact'ını al.
-2. SHA-256 + file size kaydet.
-3. Raw 33 satırı semantik sınıf/güç/emisyon/özel-kullanım nesnelerine dönüştür.
-4. J2C/F2B ve 28000-29700 MHz uyuşmazlıklarını çözmeden pozitif izin üretme.
-5. Exact-head CI + merge + main CI sonrası ancak uygun ise `coverage_status=complete`.
+1. Raw 33 satırı, kaynak anlamını bozmadan yapılandırılmış çoklu-güç/PEP ve koşul modellerine dönüştür.
+2. Emisyon kodlarını Tablo 26-1 tanımlarıyla ilişkilendir; kaynakta tanımsız kalan A3J/J2C'yi sessizce normalize etme.
+3. Beacon / repeater / satellite / EME / emergency-cooperation / alt-bant koşullarını serbest metne indirgemeden modelle.
+4. `TR-BTK-NUMBERING-001`, `TR-BTK-EMISSION-001` ve `TR-BTK-UNIT-001` açıkken pozitif izin üretme.
+5. Bütün completeness koşulları, exact-head PR CI ve merge sonrası main CI geçmeden `coverage_status=complete` yapma.
