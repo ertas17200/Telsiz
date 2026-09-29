@@ -11,7 +11,11 @@
     "amateur_status_implies_official_assignment": false,
     "emergency_context_expands_transmit_permission": false,
     "frequency_inference": "PROHIBITED",
-    "instruction_priority": "Follow competent official/incident command instructions and applicable law; this dataset supplies context and operating practice only."
+    "instruction_priority": "Follow competent official/incident command instructions and applicable law; this dataset supplies context and operating practice only.",
+    "current_legal_source_id": "TR.AFAD.MUDAHALE.REGULATION.2025-10809",
+    "current_legal_exact_text_status": "PENDING_ORIGIN_FETCH",
+    "tamp_page_legal_basis_metadata": "STALE",
+    "historical_2022_regulation_status": "REPEALED"
   },
   "official_context": [
     {
@@ -34,7 +38,7 @@
       "id": "TR.TAMP.PUBLICATION",
       "source_id": "TR.AFAD.TAMP.2022",
       "kind": "official_context",
-      "claim_tr": "AFAD sayfasına göre TAMP'ın güncellenmiş hali 15.09.2022 tarihli ve 31954 sayılı Resmî Gazete'de yayımlanarak yürürlüğe girmiştir; dayanak yönetmeliğin 24.02.2022 tarihli ve 31760 sayılı Resmî Gazete'de yayımlandığı belirtilir.",
+      "claim_tr": "AFAD sayfası, TAMP'ın 15.09.2022 tarihli ve 31954 sayılı Resmî Gazete'de yayımlanan sürümünü ve o tarihteki 24.02.2022/31760 sayılı 5211 Yönetmeliğini dayanak olarak gösterir. Bu hukuk-dayanağı satırı 31.12.2025 tarihli 10809 sayılı yeni Yönetmelik sonrasında güncel değildir.",
       "locator": "AFAD TAMP page — publication/provenance paragraph",
       "legal_rule": false
     },
@@ -94,6 +98,19 @@
     "Bu katman tek başına herhangi bir afet/acil durum frekansını Türkiye için yetkili frekans ilan etmez.",
     "Amatör telsiz belgesine sahip olmak tek başına TAMP kapsamında resmî görevlendirme kanıtı değildir.",
     "AFAD TAMP web sayfası, dayanak yönetmeliğin tam konsolide hukuki metni yerine kullanılmaz.",
-    "IARU işletme rehberi ulusal mevzuat veya resmî olay komuta/koordinasyon talimatlarının yerine geçmez."
-  ]
+    "IARU işletme rehberi ulusal mevzuat veya resmî olay komuta/koordinasyon talimatlarının yerine geçmez.",
+    "AFAD TAMP web sayfasındaki 2022/5211 dayanak satırı güncel hukuk olarak kullanılamaz; current 10809 origin exact-text doğrulaması tamamlanmadan yeni hukuki kural üretilemez."
+  ],
+  "legal_status_guard": {
+    "current_source_id": "TR.AFAD.MUDAHALE.REGULATION.2025-10809",
+    "current_instrument_id": "10809",
+    "current_effective_date": "2025-12-31",
+    "historical_source_id": "TR.AFAD.MUDAHALE.REGULATION.2022-5211",
+    "historical_instrument_id": "5211",
+    "historical_status": "REPEALED",
+    "tamp_page_legal_basis_metadata": "STALE",
+    "current_exact_text_verification": "PENDING_ORIGIN_FETCH",
+    "legal_rule_promotion_enabled": false,
+    "warning_tr": "Hukuki dayanak güncelliği: AFAD TAMP sayfasındaki 2022/5211 atfı artık güncel değildir. 31.12.2025 tarihli 10809 sayılı Yönetmelik güncel düzenlemedir; ancak origin Resmî Gazete exact-text/byte doğrulaması bu repoda henüz tamamlanmadığı için bu katmandan yeni hukuki izin veya yetki kuralı üretilmez."
+  }
 }
