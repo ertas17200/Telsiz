@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "purpose": "Doğrulanmamış aday kaynaklar. Bu dosyadaki hiçbir kayıt kural, frekans satırı veya cevap için kaynak olarak kullanılamaz. Doğrulanan kayıt data/sources.json içine gerçek metadata ile taşınır ve buradan silinir.",
-  "last_access_probe": "2026-09-29 — IARU Region 1 Emergency Operating Procedures and AFAD TAMP pages were reachable and promoted to verified sources; AFAD dayanak yönetmeliğinin tam resmî metni ayrı aday olarak tutulur.",
+  "last_access_probe": "2026-09-29 — AFAD/TAMP legal-basis recheck: 2022/5211 is repealed; current instrument is 31.12.2025/10809. Exact Resmî Gazete PDF URL resolved, but origin PDF body/bytes remained inaccessible; no mirror was promoted to legal authority.",
   "candidates": [
     {
       "id": "CAND.TR.BTK.NATIONAL_FREQUENCY_PLAN",
@@ -529,14 +529,14 @@
       "notes": "2026-09-29: erişim denemesi 403 döndü. Aynalar kullanılmaz."
     },
     {
-      "id": "CAND.TR.AFAD.MUDAHALE_REGULATION.2022",
-      "title": "Afet ve Acil Durum Müdahale Hizmetleri Yönetmeliği — 24.02.2022 / 31760",
-      "publisher": "T.C. Resmî Gazete / Mevzuat Bilgi Sistemi",
+      "id": "CAND.TR.RG.AFAD.MUDAHALE.REGULATION.2025-10809",
+      "title": "Afet ve Acil Durum Müdahale Hizmetleri Yönetmeliği — 10809 / origin exact-text verification",
+      "publisher": "T.C. Resmî Gazete",
       "expected_source_type": "official_legal",
       "jurisdiction": "TR",
       "search_entry_point": "https://www.resmigazete.gov.tr/",
-      "canonical_url": null,
-      "status": "candidate_unverified",
+      "canonical_url": "https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-15.pdf",
+      "status": "candidate_inaccessible",
       "required_access_domains": [
         "www.resmigazete.gov.tr",
         "www.mevzuat.gov.tr"
@@ -548,13 +548,18 @@
         "fields": [],
         "conflicts": [],
         "rules": [],
-        "purpose": "TAMP'ın dayanak yönetmeliğini tam metin ve yürürlük zinciriyle doğrulamak; afet haberleşmesi katmanında hukuki görev/yetki iddiası üretmeden önce resmî norm metnini bağlamak"
+        "purpose": "10809 sayılı güncel Yönetmeliğin origin PDF gövdesi/byte doğrulamasını tamamlamak; güncel TAMP dayanağı, görev/gönüllülük ve haberleşme hükümlerini yalnız bundan sonra exact-text legal grounding'e açmak"
       },
       "related_sources": [
-        "TR.AFAD.TAMP.2022"
+        "TR.AFAD.MUDAHALE.REGULATION.2025-10809",
+        "TR.AFAD.TAMP.2022",
+        "TR.AFAD.MUDAHALE.REGULATION.2022-5211"
       ],
-      "cannot_support": [],
-      "notes": "AFAD'ın TAMP sayfası yönetmeliğin 24.02.2022 tarihli 31760 sayılı Resmî Gazete'de yayımlandığını belirtir. Bu aday kayıt yalnız provenance hedefidir; tam metin doğrulanmadan hukuki kural üretilemez."
+      "cannot_support": [
+        "legal_claims",
+        "turkish_permission"
+      ],
+      "notes": "2026-09-29: Exact Resmî Gazete PDF URL'si TBB mevzuat duyurusundan çözüldü; UAB güncel mevzuat sayfası 31.12.2025/10809 kaydını doğruluyor. Ancak origin PDF bu doğrulama ortamında fetch/download edilemedi. Mirror/konsolide kopyalar yalnız corroboration için kullanıldı; origin exact text alınana kadar aday inaccessible ve current source pending kalır."
     }
   ]
 }
