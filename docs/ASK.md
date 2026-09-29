@@ -57,6 +57,7 @@ Hukuki olmayan sorular mevcut, kaynaklı Academy araçlarından cevaplanır (`sc
 | "145 MHz için çeyrek dalga anten boyu" · "7,1 MHz dipol hız faktörü 0,95" | Dalga boyu hesabı — BIPM SI sabitleri (varsayımlar yazılır) |
 | "Ankara röleleri hangileri?" | TRAC röle anlık görüntüsü (dernek bilgisi; BTK izni değildir) |
 | "KN41 locator nerede?" · "41.0, 29.0 grid locator" | Maidenhead eğitim aracı |
+| "FT8 nedir?" · "FT8 ve FT4 farkı" | ft8_lib (commit-pinned) — **topluluk kaynağı**, her cevapta etiketlenir |
 
 Hangi alanların kapsandığı: [KNOWLEDGE_COVERAGE.md](KNOWLEDGE_COVERAGE.md).
 

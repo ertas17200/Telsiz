@@ -97,6 +97,9 @@ jobs:
       - name: Validate bilingual documentation
         run: python scripts/validate_translations.py
 
+      - name: Validate digital mode parameters
+        run: python scripts/validate_digital_modes.py
+
       - name: Validate answer engine intents
         run: python scripts/ask.py --self-check
 

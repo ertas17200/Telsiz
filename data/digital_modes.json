@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "source_id": "OSS.KGOBA.FT8_LIB",
+  "trust_tier": "community_independent_implementation",
+  "trust_note": "Değerler bağımsız bir açık kaynak FT8/FT4 uygulamasından (ft8_lib, MIT) alınmıştır; protokol yazarlarının resmî belgesi (QEX makalesi / WSJT-X) ile doğrulama bekler. Hukuki izin veya frekans tahsisi içermez.",
+  "provenance": {
+    "repository": "https://github.com/kgoba/ft8_lib",
+    "commit": "9fec6ca39886edbf96f4f5e71edc76da5074e871",
+    "commit_date": "2025-08-24T07:55:25+03:00",
+    "license": "MIT",
+    "retrieved_at": "2026-09-29",
+    "files": [
+      {
+        "path": "ft8/constants.h",
+        "git_blob_sha1": "eb50fca087790de7b8906a4c38877dfe7148394b",
+        "sha256": "655593d781bb8a46dffdd24480f08bff00c2db331224c2d726de7401bfe2ecc2"
+      },
+      {
+        "path": "ft4_ft8_public/gen_crc14.f90",
+        "git_blob_sha1": "e4ec12294d207faf7a7016d094df96e94ec3e549",
+        "sha256": "e57618cd80031072d9751bce26e8fd43ce6167749b22e893356669e50d7796f6"
+      }
+    ]
+  },
+  "modes": [
+    {
+      "id": "FT8",
+      "symbol_period_s": 0.16,
+      "slot_time_s": 15.0,
+      "bits_per_symbol": 3,
+      "data_symbols": 58,
+      "sync_groups": 3,
+      "sync_group_length": 7,
+      "ramp_symbols": 0,
+      "total_symbols": 79,
+      "locators": {
+        "symbol_period_s": "ft8/constants.h#L11",
+        "slot_time_s": "ft8/constants.h#L12",
+        "bits_per_symbol": "ft8/constants.h#L21",
+        "data_symbols": "ft8/constants.h#L22",
+        "total_symbols": "ft8/constants.h#L23",
+        "sync_group_length": "ft8/constants.h#L24",
+        "sync_groups": "ft8/constants.h#L25"
+      }
+    },
+    {
+      "id": "FT4",
+      "symbol_period_s": 0.048,
+      "slot_time_s": 7.5,
+      "bits_per_symbol": 2,
+      "data_symbols": 87,
+      "sync_groups": 4,
+      "sync_group_length": 4,
+      "ramp_symbols": 2,
+      "total_symbols": 105,
+      "locators": {
+        "symbol_period_s": "ft8/constants.h#L14",
+        "slot_time_s": "ft8/constants.h#L15",
+        "bits_per_symbol": "ft8/constants.h#L33",
+        "data_symbols": "ft8/constants.h#L34",
+        "ramp_symbols": "ft8/constants.h#L35",
+        "total_symbols": "ft8/constants.h#L36",
+        "sync_group_length": "ft8/constants.h#L37",
+        "sync_groups": "ft8/constants.h#L38"
+      }
+    }
+  ],
+  "shared": {
+    "ldpc_n": 174,
+    "ldpc_k": 91,
+    "crc_width": 14,
+    "crc_polynomial_without_msb": "0x2757",
+    "crc_polynomial_full": "0x6757",
+    "locators": {
+      "ldpc_n": "ft8/constants.h#L42",
+      "ldpc_k": "ft8/constants.h#L43",
+      "crc_polynomial_without_msb": "ft8/constants.h#L49",
+      "crc_width": "ft8/constants.h#L50",
+      "crc_polynomial_full": "ft4_ft8_public/gen_crc14.f90#L6-L7"
+    }
+  },
+  "not_stated_by_source": [
+    "işgal edilen bant genişliği (modülasyon şekillendirmesine bağlıdır)",
+    "önerilen çalışma frekansları",
+    "Türkiye'de hangi bantta hangi sınıfın kullanabileceği (bkz. BTK tablosu)"
+  ]
+}

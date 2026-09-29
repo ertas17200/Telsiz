@@ -35,6 +35,7 @@ morse = _load_module("morse_trainer")
 rfw = _load_module("rf_wavelength")
 rep = _load_module("repeater_lookup")
 grid = _load_module("grid_locator")
+vdm = _load_module("validate_digital_modes")
 
 QCODE_RE = re.compile(r"(?<![a-z0-9])(q[a-z]{2})(?![a-z0-9])")
 RST_KEY_RE = re.compile(r"(?<![a-z0-9])(rst|rs|rapor\w*|sinyal raporu)(?![a-z0-9])")
@@ -47,6 +48,7 @@ VF_RE = re.compile(r"(?:vf|hiz faktor\w*|velocity factor)\s*[:=]?\s*(0[.,]\d+|1(
 GRID_KEY_RE = re.compile(r"(?<![a-z0-9])(locator|lokator\w*|grid|maidenhead|qth locator)")
 GRID_CODE_RE = re.compile(r"(?<![a-z0-9])([a-r]{2}\d{2}(?:[a-x]{2})?)(?![a-z0-9])")
 COORD_RE = re.compile(r"(-?\d{1,2}\.\d+)\s*[,; ]\s*(-?\d{1,3}\.\d+)")
+DIGITAL_MODE_RE = re.compile(r"(?<![a-z0-9])(ft8|ft4)(?![a-z0-9])")
 REPEATER_KEY_RE = re.compile(r"(?<![a-z0-9])(role\w*|tekrarlayici\w*|repeater\w*)")
 
 
@@ -195,6 +197,41 @@ def repeater_route(text: str, question: str) -> dict | None:
             "source_ids": [registry["operational_source_id"]]}
 
 
+def digital_mode_route(text: str, question: str) -> dict | None:
+    wanted = []
+    for mode in DIGITAL_MODE_RE.findall(text):
+        if mode.upper() not in wanted:
+            wanted.append(mode.upper())
+    if not wanted:
+        return None
+    payload = _json("digital_modes.json")
+    shared = payload["shared"]
+    message_bits = shared["ldpc_k"] - shared["crc_width"]
+    short = []
+    for mode in payload["modes"]:
+        if mode["id"] not in wanted:
+            continue
+        d = vdm.derived(mode)
+        ramp = f" + {mode['ramp_symbols']} rampa" if mode["ramp_symbols"] else ""
+        short.append(
+            f"{mode['id']}: {d['tones']}-FSK ({mode['bits_per_symbol']} bit/sembol); sembol süresi "
+            f"{_tr(mode['symbol_period_s'])} s → ton aralığı {_tr(d['tone_spacing_hz'], 3)} Hz, sembol hızı "
+            f"{_tr(d['symbol_rate_baud'], 3)} baud; {mode['total_symbols']} sembol ({mode['data_symbols']} veri + "
+            f"{mode['sync_groups']}×{mode['sync_group_length']} Costas senkron{ramp}); yayın süresi "
+            f"{_tr(d['transmission_s'], 2)} s, zaman dilimi {_tr(mode['slot_time_s'], 1)} s; {message_bits} bit mesaj + "
+            f"{shared['crc_width']} bit CRC, LDPC({shared['ldpc_n']},{shared['ldpc_k']}) "
+            "[topluluk kaynağı; resmî protokol belgesiyle doğrulama bekliyor]."
+        )
+    prov = payload["provenance"]
+    lines = [
+        "Güven seviyesi: topluluk (bağımsız açık kaynak uygulama) — " + payload["trust_note"],
+        f"Kaynak commit: {prov['repository']} @ {prov['commit'][:12]} ({prov['license']}); değerler satır "
+        "numaralarıyla data/digital_modes.json içinde.",
+    ]
+    lines.extend(f"Bu kaynağın belirtmediği: {item}" for item in payload["not_stated_by_source"])
+    return {"topic": "Dijital mod parametreleri", "short": short, "lines": lines, "source_ids": [payload["source_id"]]}
+
+
 def grid_route(text: str, question: str) -> dict | None:
     if not GRID_KEY_RE.search(text):
         return None
@@ -227,6 +264,7 @@ def technical_routes(text: str, question: str, frequencies_mhz: list[float]) -> 
         morse_route(text, question),
         wavelength_route(text, frequencies_mhz),
         repeater_route(text, question),
+        digital_mode_route(text, question),
         grid_route(text, question),
     ]
     return [r for r in routes if r]

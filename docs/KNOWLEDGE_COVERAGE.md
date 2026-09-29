@@ -29,7 +29,8 @@ Durum anlamları: **VAR** = doğrulanmış kaynakla cevaplanıyor · **KISMİ** 
 | Cihaz bilgisi | KISMİ | Yaesu FTM-400 yazılım uyumluluğu (`device_firmware_guard.py`) | Diğer cihazlar |
 | IARU band planı | KISMİ | "Ulusal kural esastır" ilkesi | Sürümlü HF/VHF band planı içeriği (aday kaynak) |
 | Propagasyon | YOK | — | Güvenilir eğitim kaynağı |
-| Dijital modlar (FT8, APRS, DMR, …) | YOK | — | Protokol/standart kaynakları |
+| Dijital modlar (FT8, FT4) | KISMİ | FT8/FT4 modülasyon, sembol, zamanlama ve kodlama parametreleri — **topluluk katmanı** (`OSS.KGOBA.FT8_LIB`, commit-pinned) | Protokol yazarlarının belgesiyle doğrulama (`CAND.QEX.FT4_FT8_PROTOCOLS`, `CAND.WSJTX.REFERENCE_SOURCE`); bant genişliği ve çalışma frekansları kaynakta yok |
+| Dijital modlar (APRS, DMR, …) | YOK | — | APRS cihaz kimlikleri: `CAND.APRS.DEVICEID` (lisans kararı bekliyor); diğer protokol kaynakları |
 | Uydu haberleşmesi | YOK | — | AMSAT/IARU uydu kaynakları |
 | Acil durum haberleşmesi | YOK | — | IARU R1 acil durum rehberi (aday kaynak) |
 | RF güvenliği / EMF | YOK | — | Resmî sınır değer kaynakları |
