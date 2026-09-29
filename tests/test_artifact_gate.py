@@ -28,8 +28,8 @@ SOURCE_ID = "TR.BTK.FTM.TECH.2022-IK-SYD-245"
 
 class ArtifactRegistryTests(unittest.TestCase):
     def test_repository_registry_is_fail_closed_and_valid(self):
-        self.assertEqual(gate.validate_registry(ARTIFACTS, SOURCES_PAYLOAD), 1)
-        record = ARTIFACTS["artifacts"][0]
+        self.assertEqual(gate.validate_registry(ARTIFACTS, SOURCES_PAYLOAD), 4)
+        record = next(x for x in ARTIFACTS["artifacts"] if x["source_id"] == SOURCE_ID)
         self.assertEqual(record["artifact_status"], "verified_bytes")
         self.assertEqual(
             record["sha256"],
@@ -39,6 +39,40 @@ class ArtifactRegistryTests(unittest.TestCase):
         self.assertEqual(record["change_status"], "UNCHANGED")
         self.assertFalse(record["reverify_required"])
         self.assertEqual(record["sha256"], SOURCES[SOURCE_ID]["content_sha256"])
+
+    def test_p1_p2_p3_remain_fail_closed_awaiting_bytes(self):
+        pending_ids = {
+            "TR.BTK.EHK.5809",
+            "TR.BTK.FTM.REGULATION.2018",
+            "TR.KEGM.AMATEUR.EXAM.REGULATION",
+        }
+        records = {x["source_id"]: x for x in ARTIFACTS["artifacts"]}
+        self.assertTrue(pending_ids.issubset(records))
+        for source_id in pending_ids:
+            with self.subTest(source_id=source_id):
+                record = records[source_id]
+                self.assertEqual(record["artifact_status"], "awaiting_bytes")
+                self.assertIsNone(record["fetched_at"])
+                self.assertIsNone(record["size_bytes"])
+                self.assertIsNone(record["sha256"])
+                self.assertEqual(record["change_status"], "UNKNOWN")
+                self.assertTrue(record["reverify_required"])
+                self.assertEqual(record["canonical_url"], SOURCES[source_id]["url"])
+                self.assertEqual(record["expected_mime_type"], "text/html")
+
+    def test_pending_record_rejects_fake_hash(self):
+        payload = copy.deepcopy(ARTIFACTS)
+        record = next(x for x in payload["artifacts"] if x["source_id"] == "TR.BTK.EHK.5809")
+        record["sha256"] = "sha256:" + "a" * 64
+        with self.assertRaises(gate.GateError):
+            gate.validate_registry(payload, SOURCES_PAYLOAD)
+
+    def test_pending_record_rejects_false_reverify(self):
+        payload = copy.deepcopy(ARTIFACTS)
+        record = next(x for x in payload["artifacts"] if x["source_id"] == "TR.BTK.EHK.5809")
+        record["reverify_required"] = False
+        with self.assertRaises(gate.GateError):
+            gate.validate_registry(payload, SOURCES_PAYLOAD)
 
     def test_awaiting_record_rejects_fake_hash(self):
         payload = copy.deepcopy(ARTIFACTS)

@@ -142,3 +142,42 @@ CHANGE_STATUS=UNCHANGED
 The old log statements saying that P0 still lacked raw bytes/hash are superseded by the byte-binding checkpoint. P0 is no longer blocked by artifact access; it remains partial because of structured semantic-model gaps and explicit source conflicts.
 
 P1/P2/P3 remain fail-closed: current consolidated texts on `www.mevzuat.gov.tr` were not retrievable in this recheck, and direct root probes for both Resmî Gazete hosts timed out. Search-index visibility of some Resmî Gazete pages is not treated as consolidated exact-text access.
+
+
+## 2026-09-29 — P1/P2/P3 fail-closed artifact acquisition gates
+
+The pending official legal sources are now registered in `data/artifacts.json` without fabricated byte evidence:
+
+| SOURCE_ID | EXPECTED_MIME | ARTIFACT_STATUS | HASH | REVERIFY |
+|---|---|---|---|---|
+| `TR.BTK.EHK.5809` | `text/html` | `awaiting_bytes` | null | true |
+| `TR.BTK.FTM.REGULATION.2018` | `text/html` | `awaiting_bytes` | null | true |
+| `TR.KEGM.AMATEUR.EXAM.REGULATION` | `text/html` | `awaiting_bytes` | null | true |
+
+No pending record may carry `fetched_at`, `size_bytes`, or `sha256` before a successful official fetch and provenance review. `change_status` remains `UNKNOWN`.
+
+The observation client now derives its temporary file suffix from `expected_mime_type`, not from URL path syntax. This is required for Mevzuat URLs ending in `.Aspx` or without a file extension: valid `text/html` responses must be inspected as HTML rather than misclassified from a temporary `.Aspx`/`.bin` filename.
+
+The generalized workflow `.github/workflows/official-artifact-observation.yml` can observe P0, P1, P2 or P3 by `source_id`. It enforces:
+
+- exact-head checkout and nonblank runner identity;
+- clean worktree before/after observation;
+- tracked Python-cache hygiene;
+- artifact-registry validation;
+- HTTPS canonical URL and same-origin final URL;
+- HTTP 200;
+- exact expected Content-Type;
+- bounded nonzero byte stream;
+- SHA-256 observation and change classification;
+- review-only binding: no automatic source hash mutation.
+
+A failed fetch, wrong MIME, non-200 response, cross-origin redirect, size violation, zero-byte result or `SOURCE_CHANGED` cannot be reported as PASS.
+
+Current legal-content state is unchanged:
+
+```text
+TR.BTK.EHK.5809=PENDING / BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
+TR.BTK.FTM.REGULATION.2018=PENDING / BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
+TR.KEGM.AMATEUR.EXAM.REGULATION=PENDING / BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
+RULE_PROMOTION=PROHIBITED_UNTIL_EXACT_OFFICIAL_TEXT_VERIFIED
+```

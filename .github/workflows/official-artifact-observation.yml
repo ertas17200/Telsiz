@@ -1,0 +1,70 @@
+name: Official Artifact Observation
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_id:
+        description: Official source to fetch and observe
+        required: true
+        type: choice
+        options:
+          - TR.BTK.FTM.TECH.2022-IK-SYD-245
+          - TR.BTK.EHK.5809
+          - TR.BTK.FTM.REGULATION.2018
+          - TR.KEGM.AMATEUR.EXAM.REGULATION
+
+permissions:
+  contents: read
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    env:
+      EXPECTED_SHA: ${{ github.sha }}
+      SOURCE_ID: ${{ inputs.source_id }}
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          ref: ${{ env.EXPECTED_SHA }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Evidence runner and exact head
+        run: |
+          set -euo pipefail
+          test -n "${RUNNER_NAME:-}"
+          actual="$(git rev-parse HEAD)"
+          test "$actual" = "$EXPECTED_SHA"
+          test -z "$(git status --porcelain=v1 --untracked-files=all)"
+          echo "TELSiZ_OFFICIAL_ARTIFACT_RUNNER=PASS name=$RUNNER_NAME os=$RUNNER_OS arch=$RUNNER_ARCH"
+          echo "TELSiZ_OFFICIAL_ARTIFACT_EXACT_HEAD=PASS sha=$actual"
+          echo "TELSiZ_OFFICIAL_ARTIFACT_SOURCE_ID=$SOURCE_ID"
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Check tracked cache artifacts
+        run: python scripts/check_repo_hygiene.py
+
+      - name: Validate fail-closed artifact registry
+        run: python scripts/artifact_gate.py validate-registry
+
+      - name: Observe selected official artifact bytes
+        run: |
+          set -euo pipefail
+          fetched_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          python scripts/fetch_official_artifact.py             --source-id "$SOURCE_ID"             --fetched-at "$fetched_at"             --output /tmp/official-artifact-observation.json
+          cat /tmp/official-artifact-observation.json
+
+      - name: Verify final exact head and clean worktree
+        if: always()
+        run: |
+          set -euo pipefail
+          actual="$(git rev-parse HEAD)"
+          test "$actual" = "$EXPECTED_SHA"
+          test -z "$(git status --porcelain=v1 --untracked-files=all)"
+          echo "TELSiZ_OFFICIAL_ARTIFACT_FINAL_EXACT_HEAD=PASS sha=$actual"
+          echo "TELSiZ_OFFICIAL_ARTIFACT_FINAL_WORKTREE=PASS"

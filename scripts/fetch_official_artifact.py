@@ -18,6 +18,19 @@ import artifact_gate as gate
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MAX_BYTES = 25 * 1024 * 1024
+
+MIME_SUFFIX = {
+    "application/pdf": ".pdf",
+    "text/html": ".html",
+    "application/json": ".json",
+}
+
+
+def suffix_for_mime(mime_type: str) -> str:
+    try:
+        return MIME_SUFFIX[mime_type]
+    except KeyError as exc:
+        raise gate.GateError(f"unsupported artifact MIME type for suffix: {mime_type}") from exc
 USER_AGENT = "TelsizArtifactGate/1.0 (+https://github.com/ertas17200/Telsiz)"
 
 
@@ -166,7 +179,7 @@ def observe_source(
     if artifact is None:
         raise gate.GateError(f"source has no artifact registry record: {source_id}")
 
-    suffix = Path(urlsplit(source["url"]).path).suffix or ".bin"
+    suffix = suffix_for_mime(artifact["expected_mime_type"])
     with tempfile.TemporaryDirectory(prefix="telsiz-artifact-") as tmp:
         local_path = Path(tmp) / f"artifact{suffix}"
         retrieval = fetch_registered_artifact(
