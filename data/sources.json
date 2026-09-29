@@ -47,10 +47,10 @@
       "legal_status": "current",
       "instrument_id": "2022/İK-SYD/245",
       "reference": "MADDE 22; amatör telsiz cihaz ve sistemleri teknik ölçütleri tablosu",
-      "content_sha256": null,
+      "content_sha256": "sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0",
       "supersedes": [],
       "superseded_by": [],
-      "notes": "BTK'nın güncel FTM kaynak sayfasından erişilen resmî Teknik Ölçütler PDF'si. Karar tarihi 23.09.2022, karar sayısı 2022/İK-SYD/245. PDF'de Amatör telsiz istasyonu Madde 22'dir. Madde metninde Tablo-26 atfı bulunurken takip eden tablonun başlığı Tablo 25 olarak görünmektedir; numaralandırma tutarsızlığı ayrıca çatışma kaydında tutulur."
+      "notes": "BTK'nın güncel FTM kaynak sayfasından erişilen resmî Teknik Ölçütler PDF'si. Karar tarihi 23.09.2022, karar sayısı 2022/İK-SYD/245. PDF'de Amatör telsiz istasyonu Madde 22'dir. Madde metninde Tablo-26 atfı bulunurken takip eden tablonun başlığı Tablo 25 olarak görünmektedir; numaralandırma tutarsızlığı ayrıca çatışma kaydında tutulur. Byte-level baseline bound on 2026-09-29 from GitHub Actions P0 Artifact Byte Observation run 36559259435 / job 109375881365: canonical URL returned 508766 bytes with SHA-256 eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0."
     },
     {
       "id": "TR.KEGM.AMATEUR.FAQ",

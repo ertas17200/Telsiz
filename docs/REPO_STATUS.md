@@ -328,3 +328,44 @@ OPEN_PRS=0
 2. **P0 semantic promotion** — continue mapping raw rows into semantic records only where source conflicts do not require silent correction.
 3. **P1–P3** — verify consolidated official legal texts before promoting legal rules.
 4. Continue P11/operator tooling only where it cannot weaken the authority hierarchy above.
+
+
+## 2026-09-29 — P0 byte-artifact baseline closure delta
+
+The historical sections above preserve earlier closure snapshots. This delta supersedes only the BTK byte-artifact status.
+
+Exact observation evidence:
+
+```text
+PROBE_HEAD=5472204e5f9fcf9beee5219c724814259cbee42c
+KNOWLEDGE_RUN=36559259428
+KNOWLEDGE_JOB=109375881490
+KNOWLEDGE_CI=PASS
+TESTS=254/254
+
+ARTIFACT_RUN=36559259435
+ARTIFACT_JOB=109375881365
+ARTIFACT_RUNNER=GitHub Actions 1000014181
+ARTIFACT_EXACT_HEAD=PASS
+BTK_FETCHED_AT=2026-09-29T11:02:27Z
+BTK_SIZE_BYTES=508766
+BTK_SHA256=eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0
+INITIAL_CHANGE_STATUS=HASH_OBSERVED_BIND_REQUIRED
+FINAL_BOUND_STATUS=verified_bytes/UNCHANGED
+REVERIFY_REQUIRED=false
+```
+
+The registered canonical HTTPS URL and final download URL were identical. The byte baseline was reviewed and explicitly bound to `TR.BTK.FTM.TECH.2022-IK-SYD-245`; no PDF binary is committed to GitHub.
+
+Current P0 state after this delta:
+
+```text
+P0_ARTIFACT_GATE=PASS
+P0_ARTIFACT_STATUS=VERIFIED_BYTES
+P0_ARTIFACT_SHA256=BOUND
+P0_BYTE_BLOCKER=CLOSED
+P0_SEMANTIC_PROMOTION=HOLD
+P0_BLOCKER=SOURCE_CONFLICTS_AND_SEMANTIC_PROMOTION
+```
+
+Open source conflicts remain unchanged: `TR-BTK-NUMBERING-001`, `TR-BTK-EMISSION-001`, and `TR-BTK-UNIT-001`. No source anomaly is silently normalized.
