@@ -535,7 +535,7 @@
       "expected_source_type": "official_legal",
       "jurisdiction": "TR",
       "search_entry_point": "https://www.resmigazete.gov.tr/",
-      "canonical_url": "https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-15.pdf",
+      "canonical_url": null,
       "status": "candidate_inaccessible",
       "required_access_domains": [
         "www.resmigazete.gov.tr",
@@ -559,7 +559,7 @@
         "legal_claims",
         "turkish_permission"
       ],
-      "notes": "2026-09-29: Exact Resmî Gazete PDF URL'si TBB mevzuat duyurusundan çözüldü; UAB güncel mevzuat sayfası 31.12.2025/10809 kaydını doğruluyor. Ancak origin PDF bu doğrulama ortamında fetch/download edilemedi. Mirror/konsolide kopyalar yalnız corroboration için kullanıldı; origin exact text alınana kadar aday inaccessible ve current source pending kalır."
+      "notes": "2026-09-29: Exact Resmî Gazete PDF URL'si current source recordında çözüldü: https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-15.pdf . UAB güncel mevzuat sayfası 31.12.2025/10809 kaydını doğruluyor. Candidate policy gereği canonical_url burada null kalır; origin PDF bu doğrulama ortamında fetch/download edilemedi. Mirror/konsolide kopyalar yalnız corroboration için kullanıldı; origin exact text alınana kadar aday inaccessible ve current source pending kalır."
     }
   ]
 }
