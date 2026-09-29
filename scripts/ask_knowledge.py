@@ -41,8 +41,9 @@ aprs = _load_module("aprs_deviceid")
 vax = _load_module("validate_ax25")
 sat = _load_module("satellite_lookup")
 emc = _load_module("emergency_comms")
+adif = _load_module("qso_log_adif")
 
-QCODE_RE = re.compile(r"(?<![a-z0-9])(q[a-z]{2})(?![a-z0-9])")
+QCODE_RE = re.compile(r"(?<![a-z0-9_<])(q[a-z]{2})(?![a-z0-9_])")
 RST_KEY_RE = re.compile(r"(?<![a-z0-9])(rst|rs|rapor\w*|sinyal raporu)(?![a-z0-9])")
 RST_DIGITS_RE = re.compile(r"(?<!\d)([1-5][1-9][1-9]?)(?![\d,.])")
 MORSE_KEY_RE = re.compile(r"(?<![a-z0-9])mors\w*")
@@ -59,6 +60,7 @@ MICE_KEY_RE = re.compile(r"(?<![a-z0-9])mic-?e(?![a-z0-9])")
 MICE_CODE_RE = re.compile(r"[\"“”«»`']([^\"“”«»`']{1,2})[\"“”«»`']")
 AX25_KEY_RE = re.compile(r"(?<![a-z0-9])(ax\.?25|hdlc|afsk|fcs|paket radyo\w*|packet radio|bit doldurma|bit stuffing)(?![a-z0-9])")
 TOCALL_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])([A-Za-z][A-Za-z0-9]{3,5})(?:-\d{1,2})?(?![A-Za-z0-9])")
+ADIF_KEY_RE = re.compile(r"(?<![a-z0-9])(adif|adi dosya\w*|<eor>|qso kayd\w*|log kayd\w*|log dosya\w*)")
 REPEATER_KEY_RE = re.compile(r"(?<![a-z0-9])(role\w*|tekrarlayici\w*|repeater\w*)")
 SATELLITE_KEY_RE = re.compile(r"(?<![a-z0-9])(uydu\w*|satellite\w*|transponder\w*|uplink\w*|downlink\w*)(?![a-z0-9])")
 EMERGENCY_KEY_RE = re.compile(r"(?<![a-z0-9])(afet\w*|acil(?:\s+durum)?\w*|emergency\w*|tamp|kriz\w*|s[1-4])(?![a-z0-9])")
@@ -373,6 +375,45 @@ def satellite_route(text: str, question: str) -> dict | None:
     }
 
 
+def adif_route(text: str, question: str) -> dict | None:
+    if not ADIF_KEY_RE.search(text) and "<EOR>" not in question.upper():
+        return None
+    contract = adif.load_contract()
+    required = ", ".join(contract["required_fields"])
+    either = " veya ".join(contract["at_least_one_of"])
+    short = []
+    if "<" in question and ">" in question:
+        try:
+            parsed = adif.parse_adi(question[question.find("<"):])
+        except ValueError as exc:
+            short.append(f"ADI metni ayrıştırılamadı: {exc}.")
+            parsed = {"header": {}, "records": []}
+        for number, record in enumerate(parsed["records"], start=1):
+            fields = ", ".join(f"{k}={v}" for k, v in record.items())
+            try:
+                adif.validate_record(record, contract)
+                verdict = ("Telsiz QSO sözleşmesine uygun (denetlenen: zorunlu alanlar, QSO_DATE, TIME_ON, FREQ, "
+                           "ASCII; BAND/MODE değer listeleri denetlenmedi)")
+            except ValueError as exc:
+                verdict = f"Telsiz QSO sözleşmesine uymuyor: {exc}"
+            short.append(f"Kayıt {number}: {fields} — {verdict}.")
+        if parsed["header"]:
+            short.append("Başlık: " + ", ".join(f"{k}={v}" for k, v in parsed["header"].items()) + ".")
+    if not short:
+        short.append(
+            f"ADI biçiminde her alan <ALAN:uzunluk>değer şeklinde yazılır; kayıt <EOR>, başlık <EOH> ile biter. "
+            f"Telsiz QSO sözleşmesinde zorunlu alanlar: {required}; ayrıca {either} alanlarından en az biri. "
+            f"Kurallar: QSO_DATE {contract['rules']['QSO_DATE']}, TIME_ON {contract['rules']['TIME_ON']}."
+        )
+    lines = [
+        f"Kaynak: ADIF {contract['adif_version']} ({contract['export_format']} biçimi). Bu kontrol Telsiz'in sınırlı "
+        "uygulama sözleşmesidir; ADIF spesifikasyonunun tamamı değildir.",
+        "Kayıt aracı: python scripts/qso_log_adif.py <qso.json> (JSON listesi → ADI).",
+        contract["trust_boundary"]["notes"],
+    ]
+    return {"topic": "QSO kaydı / ADIF", "short": short, "lines": lines, "source_ids": [contract["source_id"]]}
+
+
 def grid_route(text: str, question: str) -> dict | None:
     if not GRID_KEY_RE.search(text):
         return None
@@ -410,6 +451,7 @@ def technical_routes(text: str, question: str, frequencies_mhz: list[float]) -> 
         ax25_route(text, question),
         emergency_route(text, question),
         satellite_route(text, question),
+        adif_route(text, question),
         grid_route(text, question),
     ]
     return [r for r in routes if r]

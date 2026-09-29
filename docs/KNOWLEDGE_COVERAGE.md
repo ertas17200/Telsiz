@@ -25,7 +25,7 @@ Durum anlamları: **VAR** = doğrulanmış kaynakla cevaplanıyor · **KISMİ** 
 | Dalga boyu / anten elektriksel uzunluğu | VAR | λ, λ/2, λ/4, hız faktörü (BIPM sabitleri) | Fiziksel anten kesim boyu (varsayımlar açıkça yazılır) |
 | Maidenhead locator | VAR | Locator ↔ koordinat (eğitim aracı) | — |
 | Röle listesi | KISMİ | TRAC anlık görüntüsündeki şubeler (dernek bilgisi, izin kanıtı değil) | Diğer şehirler; güncel liste |
-| QSO kaydı / ADIF | VAR (araç) | `scripts/qso_log_adif.py` (ask.py'ye henüz bağlı değil) | ask.py entegrasyonu |
+| QSO kaydı / ADIF | VAR | Sözleşme özeti; soruda verilen ADI kaydının ayrıştırılıp Telsiz QSO sözleşmesine göre denetlenmesi (`ADIF.SPEC.3.1.7`) | BAND/MODE değer listeleri (enumeration) denetimi |
 | Cihaz bilgisi | KISMİ | Yaesu FTM-400 yazılım uyumluluğu (`device_firmware_guard.py`) | Diğer cihazlar |
 | IARU band planı | KISMİ | "Ulusal kural esastır" ilkesi | Sürümlü HF/VHF band planı içeriği (aday kaynak) |
 | Propagasyon | YOK | — | Güvenilir eğitim kaynağı |
