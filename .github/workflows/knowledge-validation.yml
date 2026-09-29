@@ -70,6 +70,9 @@ jobs:
       - name: Validate BTK semantic promotion readiness
         run: python scripts/validate_semantic_promotion.py
 
+      - name: Validate BTK structured source facts
+        run: python scripts/validate_btk_source_facts.py
+
       - name: Validate academy manifest
         run: python scripts/validate_academy.py
 
