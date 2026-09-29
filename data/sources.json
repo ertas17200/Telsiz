@@ -618,6 +618,32 @@
       "supersedes": [],
       "superseded_by": [],
       "notes": "CAND.APRS.DEVICEID adayından 2026-09-29'da kullanıcının CC BY-SA 2.0 lisans onayıyla terfi etti. Doğrulanan: depo kimliği, sabitlenmiş commit, lisans ve dosya hash'leri (data/aprs_deviceid.json). Uyarlanmış veri aynı lisansla dağıtılır; kişisel iletişim alanları alınmadı. Teknik tanımlama bilgisidir; hukuki izin üretmez."
+    },
+    {
+      "id": "OSS.WB2OSZ.DIREWOLF",
+      "title": "Dire Wolf — software soundcard AX.25 packet modem/TNC and APRS encoder/decoder",
+      "publisher": "John Langner, WB2OSZ (GitHub: wb2osz/direwolf)",
+      "source_type": "community",
+      "jurisdiction": "INTERNATIONAL",
+      "url": "https://github.com/wb2osz/direwolf/tree/eda1383f5fa9d8ba3cb27f99db1d2c79494404c9",
+      "topics": [
+        "AX.25",
+        "HDLC",
+        "APRS",
+        "1200 baud AFSK",
+        "paket radyo"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-29T16:00:00Z",
+      "publication_date": null,
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": null,
+      "reference": "src/hdlc_send.c; src/fcs_calc.c; src/ax25_pad.h; src/audio.h @ eda1383",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "Bağımsız açık kaynak uygulama (GPL-2.0). Doğrulanan: depo kimliği, sabitlenmiş commit, lisans ve dosya hash'leri (data/ax25_parameters.json). Yalnız olgusal parametreler kaydedildi; kod kopyalanmadı. AX.25 2.2 / APRS protokol belgesi değildir; topluluk katmanındadır. Hukuki izin üretmez."
     }
   ]
 }

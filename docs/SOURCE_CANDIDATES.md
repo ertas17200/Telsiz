@@ -47,8 +47,10 @@ Açık GitHub depoları taranırken bulunan, bu turda doğrulanamayan veya lisan
 |---|---|---|---|
 | `CAND.QEX.FT4_FT8_PROTOCOLS` | technical_manual | FT8/FT4 parametrelerinin protokol yazarlarının makalesiyle doğrulanması | physics.princeton.edu erişilemedi |
 | `CAND.WSJTX.REFERENCE_SOURCE` | technical_manual | Referans uygulamayla çapraz doğrulama | Resmî depo erişimi yok; aynalar kullanılmaz |
+| `CAND.TAPR.AX25_2_2` | technical_manual | AX.25 2.2 standardı — Dire Wolf parametrelerinin doğrulanması | www.tapr.org erişimi reddedildi (403) |
+| `CAND.APRS.PROTOCOL_1_0_1` | technical_manual | APRS 1.0.1 protokol belgesi — UI/PID ve Mic-E doğrulaması | www.aprs.org erişimi reddedildi (403) |
 
-Kaydedilen yeni kaynak: `OSS.KGOBA.FT8_LIB` (community, commit-pinned) — ayrıntı `data/digital_modes.json`.
+Kaydedilen yeni kaynaklar: `OSS.KGOBA.FT8_LIB` (community, commit-pinned) — ayrıntı `data/digital_modes.json`; `OSS.WB2OSZ.DIREWOLF` (community, commit-pinned) — ayrıntı `data/ax25_parameters.json`.
 
 ## Promoted candidates
 
