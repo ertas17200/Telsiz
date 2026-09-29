@@ -39,6 +39,18 @@ Erişim durumu: `docs/SOURCE_ACCESS_LOG.md`.
 
 `arch-yunus/Amator-Telsiz-Rehberi` 2026-09-28 tarihinde GitHub üzerinden erişilebilir olarak yeniden doğrulandı. Depo yapısı ve lisansı incelendi; buna rağmen `community` güven seviyesinde kalır. İçeriklerinden hukuki izin, Türkiye frekans yetkisi veya doğrulanmış teknik hüküm türetilemez. Uygulanabilecek fikirler `docs/COMMUNITY_REFERENCE_REVIEW.md` içinde ayrı backlog olarak tutulur.
 
+## Açık kaynak depo adayları (2026-09-29)
+
+Açık GitHub depoları taranırken bulunan, bu turda doğrulanamayan veya lisans kararı bekleyen kaynaklar:
+
+| ID | Beklenen tür | Ne sağlar | Durum |
+|---|---|---|---|
+| `CAND.QEX.FT4_FT8_PROTOCOLS` | technical_manual | FT8/FT4 parametrelerinin protokol yazarlarının makalesiyle doğrulanması | physics.princeton.edu erişilemedi |
+| `CAND.WSJTX.REFERENCE_SOURCE` | technical_manual | Referans uygulamayla çapraz doğrulama | Resmî depo erişimi yok; aynalar kullanılmaz |
+| `CAND.APRS.DEVICEID` | amateur_association | APRS cihaz tanımlayıcıları (tocall) | Depo okundu; CC BY-SA 2.0 lisans kararı bekliyor |
+
+Kaydedilen yeni kaynak: `OSS.KGOBA.FT8_LIB` (community, commit-pinned) — ayrıntı `data/digital_modes.json`.
+
 ## Promoted candidates
 
 - `CAND.TR.TRAC.REPEATER_LIST` → `TR.TRAC.REPEATER.LIST` on 2026-09-28 after the live TRAC Röle Bilgileri page was read and registered. The promoted source remains `amateur_association` and cannot prove official permission.

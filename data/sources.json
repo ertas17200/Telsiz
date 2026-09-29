@@ -569,6 +569,31 @@
       "supersedes": [],
       "superseded_by": [],
       "notes": "TRAC'ın güncel operasyonel röle listesidir. Aktif/Bakımda durumu ve RX/TX bilgileri amatör işletme pratiği için kullanılabilir; resmî BTK frekans tahsisi, ruhsat veya kullanma izni kanıtı değildir."
+    },
+    {
+      "id": "OSS.KGOBA.FT8_LIB",
+      "title": "ft8_lib — FT8/FT4 encoder/decoder (C implementation)",
+      "publisher": "Kārlis Goba, YL3JG (GitHub: kgoba/ft8_lib)",
+      "source_type": "community",
+      "jurisdiction": "INTERNATIONAL",
+      "url": "https://github.com/kgoba/ft8_lib/tree/9fec6ca39886edbf96f4f5e71edc76da5074e871",
+      "topics": [
+        "FT8",
+        "FT4",
+        "dijital modlar",
+        "WSJT-X uyumlu protokol parametreleri"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-29T14:15:19Z",
+      "publication_date": null,
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": null,
+      "reference": "ft8/constants.h; ft4_ft8_public/gen_crc14.f90 @ 9fec6ca",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "Bağımsız açık kaynak uygulama (MIT). Doğrulanan: depo kimliği, sabitlenmiş commit, lisans ve dosya hash'leri (data/digital_modes.json). Protokol yazarlarının belgesi değildir; değerler topluluk katmanındadır ve QEX makalesi / WSJT-X kaynağıyla bağımsız doğrulama bekler. Hukuki izin üretmez."
     }
   ]
 }

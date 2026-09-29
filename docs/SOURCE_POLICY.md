@@ -110,3 +110,15 @@ A new fetch of the same URL whose SHA-256 differs from the recorded value means 
 ## 8. Candidate sources
 
 Sources that are known to be needed but not yet verified live in `data/source_candidates.json` (human view: `docs/SOURCE_CANDIDATES.md`). A candidate never carries a canonical URL, never has a verified status and can never be cited by a rule or frequency row. On verification it is promoted to `data/sources.json` with real metadata and removed from the candidate file.
+
+## 9. Open-source repository sources
+
+Public repositories (e.g. GitHub) may be used as sources only under these conditions:
+
+1. the exact commit is pinned, and every cited file carries its Git blob SHA-1 and SHA-256;
+2. every value has a `path#Lnn` locator, and a validator can re-check the values against a clone of the pinned commit (`--verify-clone`);
+3. the licence is recorded; share-alike licensed data is not copied into this repository without an explicit decision;
+4. an independent implementation is a `community` source: it is labelled as such in every answer and never upgraded without corroboration from the protocol's authoritative publication;
+5. mirrors of other projects are not used unless their authority is verified;
+6. no open-source repository can create legal permission or a Turkish frequency entitlement.
+
