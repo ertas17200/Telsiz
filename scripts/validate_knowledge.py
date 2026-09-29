@@ -87,6 +87,7 @@ FREQUENCY_ROW_FIELDS = {
     "unit",
     "license_class",
     "power_unit",
+    "power_basis",
     "source_id",
     "source_locator",
     "verification_status",
@@ -94,6 +95,12 @@ FREQUENCY_ROW_FIELDS = {
 }
 UNIT_TO_MHZ = {"kHz": 0.001, "MHz": 1.0, "GHz": 1000.0}
 POWER_TO_W = {"mW": 0.001, "W": 1.0, "kW": 1000.0}
+# The basis a power limit is stated in. Values on different bases are never
+# compared or converted (e.i.r.p. depends on antenna gain and feed loss).
+POWER_BASIS_RULE_PARAM = {
+    "transmitter_output": "max_transmitter_output_power_w",
+    "eirp": "max_eirp_w",
+}
 FREQ_EPSILON_MHZ = 1e-9
 
 
@@ -327,6 +334,10 @@ def validate_frequency_row(row: dict, index: int, sources_by_id: dict, rules_by_
             fail(f"{row_id}: maximum_output_power must be positive")
         if row["power_unit"] not in POWER_TO_W:
             fail(f"{row_id}: power value requires a valid power_unit")
+        if row["power_basis"] not in POWER_BASIS_RULE_PARAM:
+            fail(f"{row_id}: power value requires power_basis transmitter_output or eirp")
+    elif row["power_basis"] is not None:
+        fail(f"{row_id}: power_basis must be null when maximum_output_power is not extracted")
 
     for field in LIST_FIELDS:
         value = row[field]
@@ -377,8 +388,13 @@ def validate_frequency_row(row: dict, index: int, sources_by_id: dict, rules_by_
         if "frequency_max_mhz" in params and row_high_mhz > params["frequency_max_mhz"] + FREQ_EPSILON_MHZ:
             fail(f"{row_id}: frequency range extends above rule {rule_id} scope")
         row_power_w = power * POWER_TO_W[row["power_unit"]] if power is not None else None
-        if "max_transmitter_output_power_w" in params and params["max_transmitter_output_power_w"] != row_power_w:
-            fail(f"{row_id}: max_transmitter_output_power_w disagrees with rule {rule_id}")
+        for basis, key in POWER_BASIS_RULE_PARAM.items():
+            if key not in params:
+                continue
+            if row["power_basis"] != basis:
+                fail(f"{row_id}: power_basis disagrees with rule {rule_id} ({key})")
+            if params[key] != row_power_w:
+                fail(f"{row_id}: {key} disagrees with rule {rule_id}")
         if "license_class" in params and params["license_class"] not in classes:
             fail(f"{row_id}: license_class disagrees with rule {rule_id}")
         if row["verification_status"] == "verified" and rule["verification_status"] != "verified":
@@ -425,6 +441,8 @@ def check_row_conflicts(rows: list[dict]) -> None:
             if not set(a["license_class"]) & set(b["license_class"]):
                 continue
             if a["maximum_output_power"] is None or b["maximum_output_power"] is None:
+                continue
+            if a["power_basis"] != b["power_basis"]:
                 continue
             a_w = a["maximum_output_power"] * POWER_TO_W[a["power_unit"]]
             b_w = b["maximum_output_power"] * POWER_TO_W[b["power_unit"]]

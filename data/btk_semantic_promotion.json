@@ -13,7 +13,7 @@
     "purpose": "Inventory exactly which raw fields can be promoted without inventing semantics. This file does not create a legal permission verdict.",
     "does_not_create_permission": true,
     "current_model_limits": [
-      "e.i.r.p. requires an explicit power-basis model before it can be represented as transmitter output power.",
+      "e.i.r.p. limits are modelled with power_basis=eirp and are never converted to transmitter output power; a request is only compared on the same basis. Mixed-basis or non-single e.i.r.p. values still need review.",
       "Rows containing two power values require a structured multivalue/PEP model before general power promotion.",
       "A3J and J2C remain source-listed but undefined by Tablo 26-1 and are blocked from semantic emission promotion.",
       "Conditional use such as beacon, EME, emergency/cooperation and sub-range emission restrictions requires structured condition modeling rather than free-text flattening."
@@ -21,8 +21,8 @@
   },
   "summary": {
     "rows_mapped": 33,
-    "rows_with_partial_semantic_promotion": 8,
-    "rows_not_ready_current_schema": 25
+    "rows_with_partial_semantic_promotion": 11,
+    "rows_not_ready_current_schema": 22
   },
   "rows": [
     {
@@ -35,19 +35,19 @@
           "A"
         ]
       },
-      "current_semantic_row_ids": [],
+      "current_semantic_row_ids": [
+        "TR.FTM.AMATEUR.ROW.A.135.7-137.8-KHZ"
+      ],
       "field_readiness": {
         "frequency_range": "PROMOTABLE_EXACT",
         "license_classes": "PROMOTABLE_EXACT",
-        "power": "NEEDS_POWER_BASIS_MODEL",
+        "power": "PROMOTABLE_EIRP_W",
         "emissions": "PROMOTABLE_EXACT",
         "conditions": "PROMOTABLE_EMPTY_VERIFIED"
       },
       "emission_conflict_codes": [],
-      "blockers": [
-        "SEMANTIC_POWER_BASIS_MODEL_GAP"
-      ],
-      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+      "blockers": [],
+      "overall_status": "PARTIAL_PROMOTION_PRESENT"
     },
     {
       "source_row_index": 2,
@@ -59,19 +59,19 @@
           "A"
         ]
       },
-      "current_semantic_row_ids": [],
+      "current_semantic_row_ids": [
+        "TR.FTM.AMATEUR.ROW.A.472-479-KHZ"
+      ],
       "field_readiness": {
         "frequency_range": "PROMOTABLE_EXACT",
         "license_classes": "PROMOTABLE_EXACT",
-        "power": "NEEDS_POWER_BASIS_MODEL",
+        "power": "PROMOTABLE_EIRP_W",
         "emissions": "PROMOTABLE_EXACT",
         "conditions": "PROMOTABLE_EMPTY_VERIFIED"
       },
       "emission_conflict_codes": [],
-      "blockers": [
-        "SEMANTIC_POWER_BASIS_MODEL_GAP"
-      ],
-      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+      "blockers": [],
+      "overall_status": "PARTIAL_PROMOTION_PRESENT"
     },
     {
       "source_row_index": 3,
@@ -189,11 +189,13 @@
           "A"
         ]
       },
-      "current_semantic_row_ids": [],
+      "current_semantic_row_ids": [
+        "TR.FTM.AMATEUR.ROW.A.5351.5-5366.5-KHZ"
+      ],
       "field_readiness": {
         "frequency_range": "PROMOTABLE_EXACT",
         "license_classes": "PROMOTABLE_EXACT",
-        "power": "NEEDS_POWER_BASIS_MODEL",
+        "power": "PROMOTABLE_EIRP_W",
         "emissions": "BLOCKED_SOURCE_CONFLICT",
         "conditions": "PROMOTABLE_EMPTY_VERIFIED"
       },
@@ -201,10 +203,9 @@
         "A3J"
       ],
       "blockers": [
-        "TR-BTK-EMISSION-001",
-        "SEMANTIC_POWER_BASIS_MODEL_GAP"
+        "TR-BTK-EMISSION-001"
       ],
-      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+      "overall_status": "PARTIAL_PROMOTION_PRESENT"
     },
     {
       "source_row_index": 8,

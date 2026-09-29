@@ -38,6 +38,7 @@ def full_row(**overrides):
         "license_class": ["A"],
         "maximum_output_power": 100,
         "power_unit": "W",
+        "power_basis": "transmitter_output",
         "emission": ["F3E"],
         "bandwidth": "12.5 kHz",
         "station_type": ["fixed"],
@@ -214,6 +215,40 @@ class FrequencyTableValidationTests(unittest.TestCase):
         with self.assertRaises(SystemExit):
             self.validate(table)
 
+    # power basis
+    def test_power_requires_basis(self):
+        table = copy.deepcopy(TABLE)
+        table["rows"][0]["power_basis"] = None
+        with self.assertRaises(SystemExit):
+            self.validate(table)
+
+    def test_unknown_power_basis_rejected(self):
+        table = copy.deepcopy(TABLE)
+        table["rows"][0]["power_basis"] = "pep"
+        with self.assertRaises(SystemExit):
+            self.validate(table)
+
+    def test_basis_without_power_rejected(self):
+        table = copy.deepcopy(TABLE)
+        table["rows"][0].update(maximum_output_power=None, power_unit=None, derived_from_rule=None)
+        with self.assertRaises(SystemExit):
+            self.validate(table)
+
+    def test_row_basis_must_match_rule_basis(self):
+        table = copy.deepcopy(TABLE)
+        eirp_row = next(r for r in table["rows"] if r["power_basis"] == "eirp")
+        eirp_row["power_basis"] = "transmitter_output"
+        with self.assertRaises(SystemExit):
+            self.validate(table)
+
+    def test_different_basis_rows_are_not_power_conflicts(self):
+        table = copy.deepcopy(TABLE)
+        clone = copy.deepcopy(next(r for r in table["rows"] if r["id"] == "TR.FTM.AMATEUR.ROW.A.472-479-KHZ"))
+        clone.update(id="TR.FTM.AMATEUR.ROW.A.472-479-KHZ.TX", power_basis="transmitter_output",
+                     maximum_output_power=50, derived_from_rule=None)
+        table["rows"].append(clone)
+        self.validate(table)
+
     def test_row_cannot_extend_beyond_rule_scope(self):
         table = copy.deepcopy(TABLE)
         table["rows"][1].update(frequency_min=429.0)
@@ -290,6 +325,48 @@ class EvaluateContractTests(unittest.TestCase):
         result = self.evaluate(license_class="C", frequency_mhz=51.0)
         self.assertEqual(result["rows"], [])
         self.assertEqual(result["legal_status"], fl.UNKNOWN)
+
+    def test_eirp_limit_not_compared_with_transmitter_output_request(self):
+        result = self.evaluate(license_class="A", frequency_mhz=0.136, requested_power_w=5)
+        self.assertEqual(result["rows"], ["TR.FTM.AMATEUR.ROW.A.135.7-137.8-KHZ"])
+        self.assertEqual(result["legal_status"], fl.UNKNOWN)
+        self.assertEqual(result["known_limits"][0]["power_basis"], "eirp")
+
+    def test_eirp_request_above_eirp_limit_is_not_allowed(self):
+        for freq, watts in ((0.136, 2), (0.475, 6), (5.36, 20)):
+            with self.subTest(freq=freq):
+                result = self.evaluate(license_class="A", frequency_mhz=freq,
+                                       requested_power_w=watts, requested_power_basis="eirp")
+                self.assertEqual(result["legal_status"], fl.NOT_ALLOWED)
+
+    def test_eirp_request_within_limit_stays_unknown_on_partial_table(self):
+        result = self.evaluate(license_class="A", frequency_mhz=0.136,
+                               requested_power_w=1, requested_power_basis="eirp")
+        self.assertEqual(result["legal_status"], fl.UNKNOWN)
+
+    def test_eirp_rows_are_class_a_only(self):
+        for cls in ("B", "C"):
+            with self.subTest(cls=cls):
+                result = self.evaluate(license_class=cls, frequency_mhz=0.475,
+                                       requested_power_w=100, requested_power_basis="eirp")
+                self.assertEqual(result["rows"], [])
+                self.assertEqual(result["legal_status"], fl.UNKNOWN)
+
+    def test_eirp_request_not_compared_with_transmitter_output_limit(self):
+        result = self.evaluate(license_class="B", frequency_mhz=51,
+                               requested_power_w=150, requested_power_basis="eirp")
+        self.assertEqual(result["legal_status"], fl.UNKNOWN)
+
+    def test_unknown_request_basis_never_compared(self):
+        result = self.evaluate(license_class="B", frequency_mhz=51,
+                               requested_power_w=150, requested_power_basis=None)
+        self.assertEqual(result["legal_status"], fl.UNKNOWN)
+
+    def test_complete_table_basis_mismatch_is_not_allowed_verdict(self):
+        table = complete_table([full_row(power_basis="eirp")])
+        result = self.evaluate(table, hashed_sources(), **self.full_request())
+        self.assertEqual(result["legal_status"], fl.UNKNOWN)
+        self.assertIn("power_basis_not_comparable", result["missing"])
 
     def test_gaps_between_430_440_subbands_have_no_row(self):
         for freq in (430.0, 431.0, 433.0, 434.0, 438.5, 439.9):

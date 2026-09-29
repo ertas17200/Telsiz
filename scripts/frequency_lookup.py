@@ -12,12 +12,17 @@ conditions, and returns one of:
                                (e.g. requested power above a verified limit)
 - ``UNKNOWN``                  anything else — including "no row found"
 
+Power limits carry a basis (``transmitter_output`` or ``eirp``). A requested
+power is only compared with a limit on the same basis; the two are never
+converted, so a mismatch leaves the verdict ``UNKNOWN``.
+
 A missing row is never ``NOT_ALLOWED``. Only rows whose source is a verified,
 current ``official_legal`` record can contribute; IARU/TRAC material cannot
 create Turkish legal permission.
 
 Usage:
     python scripts/frequency_lookup.py --class C --frequency 145 [--power 5] [--emission F3E]
+    python scripts/frequency_lookup.py --class A --frequency 0.136 --power 1 --power-basis eirp
 """
 
 from __future__ import annotations
@@ -49,6 +54,9 @@ RESTRICTION_FIELDS = (
     "footnotes",
 )
 CONTEXT_FLAGS = {"satellite", "repeater", "beacon", "emergency"}
+# A limit is only compared with a request stated on the same basis; e.i.r.p.
+# and transmitter output are never converted into each other.
+POWER_BASES = {"transmitter_output", "eirp"}
 
 ALLOWED = "ALLOWED"
 ALLOWED_WITH_CONDITIONS = "ALLOWED_WITH_CONDITIONS"
@@ -64,6 +72,7 @@ class Request:
     emission: str | None = None
     bandwidth: str | None = None
     requested_power_w: float | None = None
+    requested_power_basis: str | None = "transmitter_output"
     station_type: str | None = None
     context: str | None = None  # simplex / repeater / satellite / beacon / emergency
     acknowledged_conditions: list[str] = field(default_factory=list)
@@ -110,11 +119,26 @@ def _row_power_w(row: dict) -> float | None:
     return power * unit
 
 
+def _same_power_basis(row: dict, request: Request) -> bool:
+    return (
+        request.requested_power_basis in POWER_BASES
+        and row.get("power_basis") == request.requested_power_basis
+    )
+
+
 def _explicit_block(row: dict, request: Request, complete: bool) -> str | None:
     """Reason the row explicitly forbids the request, or None."""
     limit = _row_power_w(row)
-    if request.requested_power_w is not None and limit is not None and request.requested_power_w > limit:
-        return f"requested power {request.requested_power_w} W exceeds verified limit {limit} W ({row['id']})"
+    if (
+        request.requested_power_w is not None
+        and limit is not None
+        and _same_power_basis(row, request)
+        and request.requested_power_w > limit
+    ):
+        return (
+            f"requested power {request.requested_power_w} W ({row['power_basis']}) exceeds "
+            f"verified limit {limit} W ({row['power_basis']}) ({row['id']})"
+        )
     prohibited = row.get("prohibited_use")
     if prohibited and request.context and request.context in prohibited:
         return f"context '{request.context}' is explicitly prohibited ({row['id']})"
@@ -135,6 +159,8 @@ def _full_match(row: dict, request: Request) -> list[str]:
             gaps.append(f"input:{name}")
     if gaps:
         return gaps
+    if not _same_power_basis(row, request):
+        gaps.append("power_basis_not_comparable")
     if request.emission not in row["emission"]:
         gaps.append("emission_not_listed")
     if request.bandwidth != row["bandwidth"]:
@@ -174,7 +200,12 @@ def evaluate(table: dict, sources: dict[str, dict], request: Request) -> dict:
     rows = lookup(table, sources, request.frequency_mhz, request.license_class)
     result["rows"] = [row["id"] for row in rows]
     result["known_limits"] = [
-        {"row": row["id"], "max_output_power": row["maximum_output_power"], "power_unit": row["power_unit"]}
+        {
+            "row": row["id"],
+            "max_output_power": row["maximum_output_power"],
+            "power_unit": row["power_unit"],
+            "power_basis": row.get("power_basis"),
+        }
         for row in rows
         if row.get("maximum_output_power") is not None
     ]
@@ -217,6 +248,13 @@ def main() -> int:
     parser.add_argument("--class", dest="license_class")
     parser.add_argument("--frequency", type=float, dest="frequency_mhz", help="MHz")
     parser.add_argument("--power", type=float, dest="requested_power_w", help="W")
+    parser.add_argument(
+        "--power-basis",
+        dest="requested_power_basis",
+        choices=sorted(POWER_BASES),
+        default="transmitter_output",
+        help="basis of --power (default: transmitter_output)",
+    )
     parser.add_argument("--emission")
     parser.add_argument("--bandwidth")
     parser.add_argument("--station-type", dest="station_type")

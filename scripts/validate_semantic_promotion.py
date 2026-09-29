@@ -48,6 +48,8 @@ def load(path: Path, label: str) -> dict:
 def expected_power_status(power_text: str) -> str:
     if re.fullmatch(r"\d+(?:\.\d+)? W", power_text):
         return "PROMOTABLE_OUTPUT_W"
+    if re.fullmatch(r"\d+(?:\.\d+)? W \(e\.i\.r\.p\.\)", power_text):
+        return "PROMOTABLE_EIRP_W"
     if "e.i.r.p." in power_text:
         return "NEEDS_POWER_BASIS_MODEL"
     if "," in power_text:
