@@ -3,25 +3,29 @@
   "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
   "table_locator": "MADDE 22 amatör istasyon tablosu (PDF başlığı: Tablo 25; madde içi atıf: Tablo-26 / Tablo 26-1)",
   "coverage_status": "partial",
-  "coverage_blocker": "SEMANTIC_PROMOTION_HOLD: Official BTK PDF content was read and visually verified on 2026-09-28 and all 33 visible source rows were transcribed to data/btk_amateur_table_raw.json. Raw artifact bytes are not available in this execution runtime, so the required artifact SHA-256 cannot be recorded. Source-internal conflicts TR-BTK-NUMBERING-001, TR-BTK-EMISSION-001 and TR-BTK-UNIT-001 remain open. The semantic decision table therefore stays partial.",
+  "coverage_blocker": "SEMANTIC_PROMOTION_HOLD: Canonical BTK PDF bytes are now verified and hash-bound. All 33 visible source rows are transcribed and mapped in data/btk_semantic_promotion.json, but source conflicts TR-BTK-NUMBERING-001, TR-BTK-EMISSION-001 and TR-BTK-UNIT-001 plus unresolved multivalue-power and conditional-use modeling keep decision coverage partial.",
   "null_field_semantics": "null = NOT_EXTRACTED. null hiçbir zaman 'kısıtlama yok' veya 'izin var' anlamına gelmez. Liste alanlarında [] yalnız kaynak satırında ilgili hüküm bulunmadığı doğrulandıktan sonra kullanılabilir.",
   "artifact": {
     "source_url": "https://www.btk.gov.tr/uploads/pages/ftm-teknik-olcutler-ek-5.pdf",
-    "access_method": "trusted web PDF text layer + visual page screenshots",
-    "accessed_date": "2026-09-28",
+    "access_method": "trusted web PDF text layer + visual page screenshots + GitHub Actions canonical byte observation",
+    "accessed_date": "2026-09-29",
+    "fetched_at": "2026-09-29T11:02:27Z",
+    "http_status": 200,
     "content_type": "application/pdf",
+    "file_size": 508766,
     "pdf_page_count": 47,
-    "sha256": null,
+    "sha256": "sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0",
     "raw_transcription": "data/btk_amateur_table_raw.json",
-    "emission_reference": "data/btk_emission_types.json"
+    "emission_reference": "data/btk_emission_types.json",
+    "semantic_promotion_map": "data/btk_semantic_promotion.json"
   },
   "row_count_reconciliation": {
     "table_start_locator": "PDF 41/47 — visible heading 'Tablo 25: Amatör telsiz cihaz ve sistemleri teknik ölçütleri'",
     "table_end_locator": "PDF 45/47 — final visible amateur frequency row 136-142 GHz",
     "source_rows_counted": 33,
     "raw_rows_recorded": 33,
-    "semantic_rows_recorded": 7,
-    "status": "RAW_TRANSCRIPTION_RECONCILED_SEMANTIC_TABLE_PARTIAL"
+    "semantic_rows_recorded": 8,
+    "status": "RAW_TRANSCRIPTION_RECONCILED_ARTIFACT_BOUND_SEMANTIC_TABLE_PARTIAL"
   },
   "rows": [
     {
@@ -247,6 +251,39 @@
       "derived_from_rule": "TR.AMATEUR.C_430_440_MAX_5W",
       "verification_status": "verified",
       "notes": "Tablodaki 430-440 MHz grubunun görünür alt bantlarından biri; C sınıfı 5 W sınırı tablonun 430-440 MHz koşulundan gelir (güç sınırıdır, tahsis değildir). Ham satır bu alt bandı amatör telsiz derneklerince kurulan tekrarlayıcılara ayrılmış olarak gösterir; semantik repeater alanı henüz çıkarılmadı. Emisyon, bant genişliği ve diğer kısıtlama alanları henüz çıkarılmadı."
+    },
+    {
+      "id": "TR.FTM.AMATEUR.ROW.AB.50-52",
+      "frequency_min": 50,
+      "frequency_max": 52,
+      "unit": "MHz",
+      "license_class": [
+        "A",
+        "B"
+      ],
+      "maximum_output_power": 100,
+      "power_unit": "W",
+      "emission": null,
+      "bandwidth": null,
+      "station_type": null,
+      "allowed_use": null,
+      "prohibited_use": null,
+      "special_conditions": null,
+      "allocation_status": null,
+      "satellite": null,
+      "repeater": null,
+      "beacon": null,
+      "emergency": null,
+      "footnotes": null,
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "table": "PDF heading: Tablo 25; internal references: Tablo-26 / Tablo 26-1",
+        "document_page": "43/47",
+        "raw_row": "data/btk_amateur_table_raw.json#source_row_index=17"
+      },
+      "derived_from_rule": "TR.AMATEUR.AB_50_52_MAX_100W",
+      "verification_status": "verified",
+      "notes": "Yalnız kaynakta açık olan frekans/sınıf/genel güç alanları promote edildi. Satır A ve B sınıflarını ve 100 W genel cihaz çıkış gücünü gösterir. Aynı kaynakta beacon için ayrı 25 W koşulu ve EME kullanımı vardır; emisyon, beacon, EME ve diğer koşullar bu turda decision semantics'e taşınmadığından null kalır ve izin sonucu üretmez."
     }
   ]
 }

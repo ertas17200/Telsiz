@@ -2,8 +2,8 @@
 """Validate the raw visual transcription of the official BTK amateur table.
 
 This validator proves transcription integrity only. It does not promote the
-semantic frequency table to complete and does not substitute for an artifact
-SHA-256.
+semantic frequency table to complete. The canonical artifact SHA-256 is now
+bound separately and must match the raw transcription metadata.
 """
 
 from __future__ import annotations
@@ -19,6 +19,8 @@ EMISSIONS = ROOT / "data" / "btk_emission_types.json"
 EXPECTED_SOURCE = "TR.BTK.FTM.TECH.2022-IK-SYD-245"
 EXPECTED_ROWS = 33
 EXPECTED_EMISSION_DEFINITIONS = 24
+EXPECTED_ARTIFACT_SHA256 = "sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0"
+EXPECTED_PROMOTION_STATUS = "HOLD_SOURCE_CONFLICTS_AND_SEMANTIC_MODEL"
 ALLOWED_UNITS = {"kHz", "MHz", "GHz"}
 ALLOWED_CLASSES = {"A", "B", "C"}
 ALLOWED_PAGES = {"41/47", "42/47", "43/47", "44/47", "45/47"}
@@ -61,10 +63,10 @@ def validate_payloads(raw: dict, emission_map: dict) -> None:
         fail(f"source_rows_counted must be {EXPECTED_ROWS}")
     if raw.get("transcription_status") != "visual_official_source_complete_rows":
         fail("unexpected transcription_status")
-    if raw.get("artifact_sha256") is not None:
-        fail("raw transcription must not invent an artifact SHA-256")
-    if raw.get("semantic_promotion_status") != "HOLD_ARTIFACT_HASH_AND_SOURCE_CONFLICTS":
-        fail("semantic promotion must remain on HOLD")
+    if raw.get("artifact_sha256") != EXPECTED_ARTIFACT_SHA256:
+        fail("raw transcription artifact_sha256 must match the bound canonical baseline")
+    if raw.get("semantic_promotion_status") != EXPECTED_PROMOTION_STATUS:
+        fail("semantic promotion must remain on HOLD for source conflicts/model gaps")
     if set(raw.get("known_source_conflicts", [])) != EXPECTED_CONFLICTS:
         fail("known_source_conflicts mismatch")
 
@@ -155,7 +157,7 @@ def validate_payloads(raw: dict, emission_map: dict) -> None:
     print(
         f"PASS: validated {len(rows)} raw BTK amateur source row(s), "
         f"{len(definitions)} emission definition(s); "
-        "semantic promotion remains HOLD pending artifact SHA-256/source conflicts"
+        "artifact SHA-256 is bound; semantic promotion remains HOLD for source conflicts/model gaps"
     )
 
 

@@ -71,10 +71,16 @@ class RawBtkExtractionTests(unittest.TestCase):
         self.assertIn((431.55, 431.825), repeater_ranges)
         self.assertIn((439.15, 439.425), repeater_ranges)
 
-    def test_semantic_table_remains_partial(self):
+    def test_semantic_table_remains_partial_after_artifact_binding(self):
         self.assertEqual(SEMANTIC["coverage_status"], "partial")
-        self.assertIsNone(RAW["artifact_sha256"])
-        self.assertEqual(RAW["semantic_promotion_status"], "HOLD_ARTIFACT_HASH_AND_SOURCE_CONFLICTS")
+        self.assertEqual(RAW["artifact_sha256"], v.EXPECTED_ARTIFACT_SHA256)
+        self.assertEqual(RAW["semantic_promotion_status"], v.EXPECTED_PROMOTION_STATUS)
+
+    def test_raw_hash_drift_fails(self):
+        raw = copy.deepcopy(RAW)
+        raw["artifact_sha256"] = "sha256:" + "0" * 64
+        with self.assertRaises(SystemExit):
+            v.validate_payloads(raw, EMISSIONS)
 
     def test_missing_raw_row_fails(self):
         raw = copy.deepcopy(RAW)

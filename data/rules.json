@@ -16,8 +16,15 @@
       },
       "verification_status": "verified",
       "verified_at": "2026-09-28T18:37:00Z",
-      "conditions": ["İlgili frekans, güç, emisyon ve ilave kullanım kısıtlamaları birlikte değerlendirilmelidir."],
-      "answer_tags": ["frekans", "güç", "emisyon", "izin"],
+      "conditions": [
+        "İlgili frekans, güç, emisyon ve ilave kullanım kısıtlamaları birlikte değerlendirilmelidir."
+      ],
+      "answer_tags": [
+        "frekans",
+        "güç",
+        "emisyon",
+        "izin"
+      ],
       "notes": "PDF metni Tablo-26'ya atıf yaparken görünen tablo başlığı Tablo 25'tir; numaralandırma uyuşmazlığı SOURCE_CONFLICTS.md dosyasında kayıtlıdır."
     },
     {
@@ -36,7 +43,12 @@
       "verification_status": "verified",
       "verified_at": "2026-09-28T18:37:00Z",
       "conditions": [],
-      "answer_tags": ["dummy-load", "ayar", "ölçüm", "verici"],
+      "answer_tags": [
+        "dummy-load",
+        "ayar",
+        "ölçüm",
+        "verici"
+      ],
       "notes": null
     },
     {
@@ -54,8 +66,14 @@
       },
       "verification_status": "verified",
       "verified_at": "2026-09-28T18:37:00Z",
-      "conditions": ["Frekansın ve kullanım şeklinin ilgili teknik ölçüt satırındaki bütün kısıtlamaları ayrıca sağlanmalıdır."],
-      "answer_tags": ["A-sınıfı", "frekans", "belge"],
+      "conditions": [
+        "Frekansın ve kullanım şeklinin ilgili teknik ölçüt satırındaki bütün kısıtlamaları ayrıca sağlanmalıdır."
+      ],
+      "answer_tags": [
+        "A-sınıfı",
+        "frekans",
+        "belge"
+      ],
       "notes": null
     },
     {
@@ -77,7 +95,12 @@
         "Genişletilmiş kullanım yalnızca maddede sayılan istasyon türlerinde veya A sınıfı amatöre ait istasyonda geçerlidir.",
         "Sorumlu operatörün gözetimi ve sorumluluğu gerekir."
       ],
-      "answer_tags": ["B-sınıfı", "C-sınıfı", "gözetim", "sorumlu-operatör"],
+      "answer_tags": [
+        "B-sınıfı",
+        "C-sınıfı",
+        "gözetim",
+        "sorumlu-operatör"
+      ],
       "notes": null
     },
     {
@@ -100,7 +123,11 @@
         "Sorumlu operatör hazır bulunmalıdır.",
         "İstasyon türü maddede sayılan istasyonlardan biri olmalıdır."
       ],
-      "answer_tags": ["eğitim", "belgesiz-katılımcı", "sorumlu-operatör"],
+      "answer_tags": [
+        "eğitim",
+        "belgesiz-katılımcı",
+        "sorumlu-operatör"
+      ],
       "notes": null
     },
     {
@@ -118,8 +145,15 @@
       },
       "verification_status": "verified",
       "verified_at": "2026-09-28T18:37:00Z",
-      "conditions": ["Kurum tarafından yapılan frekans planlamasına uyulmalıdır."],
-      "answer_tags": ["role", "tekrarlayıcı", "internet-telsiz", "deneysel"],
+      "conditions": [
+        "Kurum tarafından yapılan frekans planlamasına uyulmalıdır."
+      ],
+      "answer_tags": [
+        "role",
+        "tekrarlayıcı",
+        "internet-telsiz",
+        "deneysel"
+      ],
       "notes": "Dernek tekrarlayıcı sistemlerinin kurma/kullanma izin süreçleri ayrıca TR.BTK.RADIO.PROCEDURES kaynağıyla kontrol edilmelidir."
     },
     {
@@ -137,8 +171,14 @@
       },
       "verification_status": "verified",
       "verified_at": "2026-09-28T18:37:00Z",
-      "conditions": ["Q kodları, mors, RTTY, SSTV, FSTV, PSK, PACTOR, AMPR, APRS, TCP/IP ve benzeri uluslararası amatör yöntemler hükümde ayrıca anılır."],
-      "answer_tags": ["şifreleme", "kriptolu-haberleşme", "mesaj"],
+      "conditions": [
+        "Q kodları, mors, RTTY, SSTV, FSTV, PSK, PACTOR, AMPR, APRS, TCP/IP ve benzeri uluslararası amatör yöntemler hükümde ayrıca anılır."
+      ],
+      "answer_tags": [
+        "şifreleme",
+        "kriptolu-haberleşme",
+        "mesaj"
+      ],
       "notes": "Claim hükmün işlevsel özetidir; cevapta mutlak 'her türlü dijital kodlama yasaktır' şeklinde genişletilmemelidir."
     },
     {
@@ -155,14 +195,22 @@
       },
       "verification_status": "verified",
       "verified_at": "2026-09-28T18:37:00Z",
-      "conditions": ["Belge sınıfı C olmalıdır.", "Frekans 144-146 MHz aralığında olmalıdır."],
+      "conditions": [
+        "Belge sınıfı C olmalıdır.",
+        "Frekans 144-146 MHz aralığında olmalıdır."
+      ],
       "parameters": {
         "license_class": "C",
         "frequency_min_mhz": 144,
         "frequency_max_mhz": 146,
         "max_transmitter_output_power_w": 5
       },
-      "answer_tags": ["C-sınıfı", "144-146-MHz", "5-W", "güç-limiti"],
+      "answer_tags": [
+        "C-sınıfı",
+        "144-146-MHz",
+        "5-W",
+        "güç-limiti"
+      ],
       "notes": "Tablodaki diğer emisyon ve kullanım kısıtlamaları da ayrıca uygulanır."
     },
     {
@@ -179,14 +227,22 @@
       },
       "verification_status": "verified",
       "verified_at": "2026-09-28T18:37:00Z",
-      "conditions": ["Belge sınıfı C olmalıdır.", "Frekans 430-440 MHz aralığında olmalıdır."],
+      "conditions": [
+        "Belge sınıfı C olmalıdır.",
+        "Frekans 430-440 MHz aralığında olmalıdır."
+      ],
       "parameters": {
         "license_class": "C",
         "frequency_min_mhz": 430,
         "frequency_max_mhz": 440,
         "max_transmitter_output_power_w": 5
       },
-      "answer_tags": ["C-sınıfı", "430-440-MHz", "5-W", "güç-limiti"],
+      "answer_tags": [
+        "C-sınıfı",
+        "430-440-MHz",
+        "5-W",
+        "güç-limiti"
+      ],
       "notes": "Alt bantlara ilişkin role, uydu, beacon ve diğer ilave kısıtlamalar ayrıca değerlendirilmelidir. Bu kural bir güç sınırıdır, tahsis değildir: tablo 430-440 MHz aralığında yalnız görünür alt bantları listeler (bkz. data/frequency_table.json 430 alt bant satırları); alt bant boşlukları bu kuraldan izin almaz."
     },
     {
@@ -203,8 +259,50 @@
       "verification_status": "verified",
       "verified_at": "2026-09-28T18:37:00Z",
       "conditions": [],
-      "answer_tags": ["IARU", "band-planı", "ulusal-mevzuat", "kaynak-önceliği"],
+      "answer_tags": [
+        "IARU",
+        "band-planı",
+        "ulusal-mevzuat",
+        "kaynak-önceliği"
+      ],
       "notes": "Bu kayıt hukuki izin üretmez; AI kaynak önceliğini doğru kurmak için kullanır."
+    },
+    {
+      "id": "TR.AMATEUR.AB_50_52_MAX_100W",
+      "jurisdiction": "TR",
+      "topic": "frequency_power_limit",
+      "rule_type": "limit",
+      "authority": "legal",
+      "claim": "A ve B sınıfı amatör telsizciler için 50-52 MHz satırında genel azami cihaz çıkış gücü 100 W'tır.",
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "table": "PDF heading: Tablo 25; internal references: Tablo-26 / Tablo 26-1",
+        "document_page": "43/47"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-29T11:12:00Z",
+      "conditions": [
+        "Belge sınıfı A veya B olmalıdır.",
+        "Frekans 50-52 MHz aralığında olmalıdır.",
+        "Beacon vericileri için kaynak tabloda ayrıca 25 W özel sınırı bulunduğundan beacon bağlamı ayrıca değerlendirilmelidir."
+      ],
+      "parameters": {
+        "frequency_min_mhz": 50,
+        "frequency_max_mhz": 52,
+        "max_transmitter_output_power_w": 100,
+        "license_classes": [
+          "A",
+          "B"
+        ]
+      },
+      "answer_tags": [
+        "A-sınıfı",
+        "B-sınıfı",
+        "50-52-MHz",
+        "100-W",
+        "güç-limiti"
+      ],
+      "notes": "Bu kural genel satır güç değerini temsil eder. Emisyon hücresindeki A3J/J2C kaynak anomalisi ve beacon/EME özel koşulları ayrı semantic alanlar olarak henüz promote edilmemiştir; bu nedenle frequency lookup fail-closed kalır."
     }
   ]
 }
