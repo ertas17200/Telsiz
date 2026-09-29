@@ -23,7 +23,7 @@ Kurallar:
 | `CAND.TR.KEGM.CALLSIGN_POLICY` | official_technical | P5 | Çağrı işareti yapısı, önekler, özel çağrı işaretleri | www.kiyiemniyeti.gov.tr |
 | `CAND.TR.BTK.AMATEUR_REPEATER_LIST` | official_technical | P7 | Kurulu dernek tekrarlayıcılarının resmî listesi | www.btk.gov.tr |
 | `CAND.IARU.R1.HF_BANDPLAN_DOC` | amateur_association | P8 | HF alt bant/mod tavsiyeleri (yalnız çalışma pratiği) | www.iaru-r1.org |
-| `CAND.TR.AFAD.MUDAHALE_REGULATION.2022` | official_legal | P8 | TAMP dayanak yönetmeliğinin tam resmî metin/yürürlük zinciri | www.resmigazete.gov.tr, www.mevzuat.gov.tr |
+| `CAND.TR.RG.AFAD.MUDAHALE.REGULATION.2025-10809` | official_legal | P8 | 31.12.2025/10809 current Yönetmeliğin origin exact-text/byte doğrulaması; 2022/5211 supersession ve güncel TAMP dayanağı | www.resmigazete.gov.tr, www.mevzuat.gov.tr |
 | `CAND.TR.TRAC.EXAM_STUDY` | amateur_association | P9 | Eğitim içeriği ve teknik açıklamalar | trac.org.tr |
 | `CAND.COMMUNITY.ARCH-YUNUS.AMATOR-TELSIZ-REHBERI` — *erişilebilir / doğrulanmamış* | community | P11 | Eğitim/araç fikirleri ve çapraz kontrol; tek başına kural üretmez | github.com |
 
@@ -58,3 +58,13 @@ Kaydedilen yeni kaynaklar: `OSS.KGOBA.FT8_LIB` (community, commit-pinned) — ay
 - `CAND.TR.TRAC.REPEATER_LIST` → `TR.TRAC.REPEATER.LIST` on 2026-09-28 after the live TRAC Röle Bilgileri page was read and registered. The promoted source remains `amateur_association` and cannot prove official permission.
 
 - `CAND.IARU.R1.EMCOMM_GUIDE` → `IARU.R1.EMCOMM.PROCEDURES` on 2026-09-29 after the IARU Region 1 Emergency Operating Procedures page was verified. The promoted source remains `amateur_association` and cannot create Turkish legal permission or official assignment.
+
+
+## AFAD legal-basis correction — 2026-09-29
+
+- `CAND.TR.AFAD.MUDAHALE_REGULATION.2022` was retired as the wrong current-law target.
+- The 2022/5211 text is now retained as historical/repealed source `TR.AFAD.MUDAHALE.REGULATION.2022-5211`.
+- Current instrument metadata points to 31.12.2025/10809, RG 33124 5. Mükerrer.
+- Exact Official Gazette PDF URL was resolved, but origin body/raw bytes were inaccessible in this verification environment.
+- Therefore `TR.AFAD.MUDAHALE.REGULATION.2025-10809` remains `pending` and `CAND.TR.RG.AFAD.MUDAHALE.REGULATION.2025-10809` remains `candidate_inaccessible`.
+- No mirror or consolidated copy is promoted to legal authority.
