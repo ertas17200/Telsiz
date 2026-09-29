@@ -4,6 +4,23 @@
 
 Source-grounded AI knowledge base for amateur radio, initially focused on Türkiye.
 
+## Quick start — ask Telsiz
+
+```bash
+python scripts/ask.py "C sınıfı belgeyle 145 MHz'te 10 W kullanabilir miyim?"
+```
+
+```text
+Kısa cevap:
+- C sınıfı, 145 MHz: HAYIR — istenen 10 W (verici çıkış gücü), doğrulanmış sınırı (5 W (verici çıkış gücü)) aşıyor.
+
+Resmî / hukuki dayanak:
+- C sınıfı amatör telsizcilerin 144-146 MHz bandındaki verici çıkış gücü 5 W seviyesini geçemez.
+  [TR.AMATEUR.C_144_146_MAX_5W; TR.BTK.FTM.TECH.2022-IK-SYD-245; document_page=43-44/47]
+```
+
+Every sentence is traceable to a verified rule, source and page. Questions the knowledge base cannot ground are refused instead of guessed; `--json` emits the same answer as a grounding bundle for LLMs. See [docs/ASK.md](docs/ASK.md).
+
 ## Goal
 
 When an amateur-radio operator asks an AI a question, the answer should be grounded in traceable information from two clearly separated layers:
@@ -48,6 +65,7 @@ Telsiz/
 │   ├── academy.json
 │   └── exam_questions.json
 ├── data/
+│   ├── answer_intents.json
 │   ├── device_manuals.json
 │   ├── frequency_table.json
 │   ├── q_codes.json
@@ -70,6 +88,7 @@ Telsiz/
 │   ├── rule.schema.json
 │   └── source.schema.json
 ├── scripts/
+│   ├── ask.py
 │   ├── check_repo_hygiene.py
 │   ├── device_firmware_guard.py
 │   ├── exam_simulator.py
@@ -105,6 +124,7 @@ Run:
 ```bash
 python scripts/check_repo_hygiene.py
 python scripts/validate_knowledge.py
+python scripts/ask.py --self-check
 python scripts/validate_academy.py
 python scripts/validate_exam.py
 python scripts/validate_morse.py
@@ -131,6 +151,7 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 ## Project documents
 
 - [Current repository status](docs/REPO_STATUS.md)
+- [Grounded answer engine (`ask.py`)](docs/ASK.md)
 - [Project scope](docs/PROJECT_SCOPE.md)
 - [Source policy](docs/SOURCE_POLICY.md)
 - [AI answer policy](docs/AI_ANSWER_POLICY.md)
@@ -152,6 +173,6 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 
 ## Status
 
-Repository controls and CI are operational. The amateur frequency table is intentionally **partial**. The canonical BTK PDF is render-readable, but byte-level artifact evidence (including SHA-256) is still unavailable in the current runtime; P0 therefore remains fail-closed. P1–P3 also remain fail-closed pending exact-text verification of their canonical legal sources.
+Repository controls and CI are operational. The amateur frequency table is intentionally **partial**. The canonical BTK PDF bytes are verified and SHA-256 bound (`data/artifacts.json`), but semantic promotion of the 33 raw rows is still partial; P0 therefore remains fail-closed. P1–P3 also remain fail-closed pending exact-text verification of their canonical legal sources.
 
 See [REPO_STATUS.md](docs/REPO_STATUS.md) for the exact baseline, CI evidence, blockers and next sequence.

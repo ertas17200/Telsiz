@@ -97,6 +97,9 @@ jobs:
       - name: Validate bilingual documentation
         run: python scripts/validate_translations.py
 
+      - name: Validate answer engine intents
+        run: python scripts/ask.py --self-check
+
       - name: Test grounding contract
         run: python -m unittest discover -s tests -p "test_*.py" -v
 

@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "purpose": "Keyword intents for scripts/ask.py. An intent only selects already verified rules or sources; it never carries its own legal text. Keywords are matched after Turkish lower-casing and ASCII folding, at word starts.",
+  "intents": [
+    {
+      "id": "INTENT.ENCRYPTION",
+      "keywords": ["şifreli", "şifreleme", "şifre", "kriptolu", "kripto", "encrypt", "gizli haberleşme"],
+      "legal_rule_ids": ["TR.AMATEUR.NO_OBSCURING_ENCRYPTION"],
+      "practice_rule_ids": [],
+      "reference_source_ids": [],
+      "pending_source_ids": []
+    },
+    {
+      "id": "INTENT.DUMMY_LOAD",
+      "keywords": ["dummy load", "dummy", "suni yük", "yapay yük"],
+      "legal_rule_ids": ["TR.AMATEUR.DUMMY_LOAD"],
+      "practice_rule_ids": [],
+      "reference_source_ids": [],
+      "pending_source_ids": []
+    },
+    {
+      "id": "INTENT.UNLICENSED_TRAINING",
+      "keywords": ["belgesiz", "belgesi olmayan", "belgesi yok", "lisanssız", "eğitim"],
+      "legal_rule_ids": ["TR.AMATEUR.TRAINING_THIRD_PARTY"],
+      "practice_rule_ids": [],
+      "reference_source_ids": [],
+      "pending_source_ids": []
+    },
+    {
+      "id": "INTENT.SUPERVISED_USE",
+      "keywords": ["gözetim", "gözetiminde", "sorumlu operatör", "sorumluluğunda"],
+      "legal_rule_ids": ["TR.AMATEUR.BC_SUPERVISED_USE"],
+      "practice_rule_ids": [],
+      "reference_source_ids": [],
+      "pending_source_ids": []
+    },
+    {
+      "id": "INTENT.CLASS_PRIVILEGES",
+      "keywords": ["sınıfı frekans", "sınıf frekans", "frekanslarını kullan", "sınıfının frekans"],
+      "legal_rule_ids": ["TR.AMATEUR.A_CLASS_USE", "TR.AMATEUR.BC_SUPERVISED_USE"],
+      "practice_rule_ids": [],
+      "reference_source_ids": [],
+      "pending_source_ids": []
+    },
+    {
+      "id": "INTENT.REPEATER",
+      "keywords": ["röle", "tekrarlayıcı", "repeater", "echolink", "internet-telsiz", "internet telsiz", "deneysel"],
+      "legal_rule_ids": ["TR.AMATEUR.REPEATER_AND_EXPERIMENTAL"],
+      "practice_rule_ids": [],
+      "reference_source_ids": ["TR.BTK.RADIO.PROCEDURES"],
+      "pending_source_ids": []
+    },
+    {
+      "id": "INTENT.BANDPLAN_AUTHORITY",
+      "keywords": ["iaru", "band plan", "bant plan", "bandplan", "trac"],
+      "legal_rule_ids": ["TR.AMATEUR.TECHNICAL_COMPLIANCE"],
+      "practice_rule_ids": ["IARU.R1.NATIONAL_RULES_PREVAIL"],
+      "reference_source_ids": [],
+      "pending_source_ids": []
+    },
+    {
+      "id": "INTENT.LICENSING_CALLSIGN",
+      "keywords": ["çağrı işaret", "sınav", "belge yenile", "belge al", "belgemi", "lisans al", "callsign"],
+      "legal_rule_ids": [],
+      "practice_rule_ids": [],
+      "reference_source_ids": ["TR.KEGM.AMATEUR.FAQ"],
+      "pending_source_ids": ["TR.KEGM.AMATEUR.EXAM.REGULATION"]
+    }
+  ]
+}

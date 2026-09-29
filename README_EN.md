@@ -14,6 +14,14 @@ Telsiz is a source-grounded AI knowledge base for amateur radio, initially focus
 
 When the English navigation differs from the canonical Turkish/source records, the canonical Turkish/source-backed record controls.
 
+## Quick start — ask Telsiz
+
+```bash
+python scripts/ask.py "C sınıfı belgeyle 145 MHz'te 10 W kullanabilir miyim?"
+```
+
+`scripts/ask.py` answers Turkish questions in the canonical answer format. Every sentence is traceable to a verified rule, source and page; questions that cannot be grounded are refused. It does not create legal permission: verdicts come from the fail-closed frequency decision engine. See [docs/ASK.md](docs/ASK.md) (Turkish).
+
 ## Authority order
 
 ```text
@@ -35,7 +43,7 @@ A lower-authority source cannot create a Turkish legal permission or override a 
 The repository intentionally refuses to invent missing legal facts.
 
 - The BTK amateur table has a validated 33-row raw transcription, but semantic coverage is still partial.
-- The byte-level BTK PDF artifact SHA-256 is still unknown in the current evidence chain.
+- The BTK PDF bytes are verified and SHA-256 bound (`data/artifacts.json`); semantic promotion of the raw rows is still partial.
 - Open source-internal conflicts remain recorded.
 - P1–P3 legal-source work remains subject to exact-text verification.
 - TRAC repeater status is operational association information; it is not proof of BTK permission.
@@ -62,6 +70,7 @@ These identifiers are references to the machine-readable canonical registries; t
 ### Repository policy and evidence
 
 - [Current repository status](docs/REPO_STATUS.md)
+- [Grounded answer engine (`ask.py`)](docs/ASK.md)
 - [Project scope](docs/PROJECT_SCOPE.md)
 - [Source policy](docs/SOURCE_POLICY.md)
 - [AI answer policy](docs/AI_ANSWER_POLICY.md)
