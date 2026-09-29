@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "purpose": "Doğrulanmamış aday kaynaklar. Bu dosyadaki hiçbir kayıt kural, frekans satırı veya cevap için kaynak olarak kullanılamaz. Doğrulanan kayıt data/sources.json içine gerçek metadata ile taşınır ve buradan silinir.",
-  "last_access_probe": "2026-09-28 — TRAC repeater list was reachable and promoted to verified source TR.TRAC.REPEATER.LIST; other candidates retain their independent verification states.",
+  "last_access_probe": "2026-09-29 — IARU Region 1 Emergency Operating Procedures and AFAD TAMP pages were reachable and promoted to verified sources; AFAD dayanak yönetmeliğinin tam resmî metni ayrı aday olarak tutulur.",
   "candidates": [
     {
       "id": "CAND.TR.BTK.NATIONAL_FREQUENCY_PLAN",
@@ -353,34 +353,6 @@
       "notes": "Registry'de yalnız band planı giriş sayfası var; sürümlü doküman ayrıca kaydedilmeli."
     },
     {
-      "id": "CAND.IARU.R1.EMCOMM_GUIDE",
-      "title": "IARU Region 1 acil durum haberleşmesi rehberi",
-      "publisher": "International Amateur Radio Union Region 1",
-      "expected_source_type": "amateur_association",
-      "jurisdiction": "IARU-REGION-1",
-      "search_entry_point": "https://www.iaru-r1.org/",
-      "canonical_url": null,
-      "status": "candidate_unverified",
-      "required_access_domains": [
-        "www.iaru-r1.org"
-      ],
-      "unlocks": {
-        "phases": [
-          "P8"
-        ],
-        "fields": [],
-        "conflicts": [],
-        "rules": [],
-        "purpose": "Acil durum işletme pratiği"
-      },
-      "related_sources": [],
-      "cannot_support": [
-        "legal_claims",
-        "turkish_permission"
-      ],
-      "notes": "Aday kayıt; güncel sürüm doğrulanmadı."
-    },
-    {
       "id": "CAND.TR.TRAC.EXAM_STUDY",
       "title": "TRAC sınav hazırlık / eğitim materyali",
       "publisher": "Türkiye Radyo Amatörleri Cemiyeti",
@@ -555,6 +527,34 @@
         "purpose": "APRS çerçeve (UI, PID 0xF0) ve Mic-E kodlamasının protokol belgesiyle doğrulanması"
       },
       "notes": "2026-09-29: erişim denemesi 403 döndü. Aynalar kullanılmaz."
+    },
+    {
+      "id": "CAND.TR.AFAD.MUDAHALE_REGULATION.2022",
+      "title": "Afet ve Acil Durum Müdahale Hizmetleri Yönetmeliği — 24.02.2022 / 31760",
+      "publisher": "T.C. Resmî Gazete / Mevzuat Bilgi Sistemi",
+      "expected_source_type": "official_legal",
+      "jurisdiction": "TR",
+      "search_entry_point": "https://www.resmigazete.gov.tr/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.resmigazete.gov.tr",
+        "www.mevzuat.gov.tr"
+      ],
+      "unlocks": {
+        "phases": [
+          "P12"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "TAMP'ın dayanak yönetmeliğini tam metin ve yürürlük zinciriyle doğrulamak; afet haberleşmesi katmanında hukuki görev/yetki iddiası üretmeden önce resmî norm metnini bağlamak"
+      },
+      "related_sources": [
+        "TR.AFAD.TAMP.2022"
+      ],
+      "cannot_support": [],
+      "notes": "AFAD'ın TAMP sayfası yönetmeliğin 24.02.2022 tarihli 31760 sayılı Resmî Gazete'de yayımlandığını belirtir. Bu aday kayıt yalnız provenance hedefidir; tam metin doğrulanmadan hukuki kural üretilemez."
     }
   ]
 }
