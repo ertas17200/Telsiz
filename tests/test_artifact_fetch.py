@@ -56,6 +56,13 @@ class FakeResponse:
 
 
 class ArtifactFetchTests(unittest.TestCase):
+    def test_suffix_is_derived_from_expected_mime(self):
+        self.assertEqual(fetcher.suffix_for_mime("application/pdf"), ".pdf")
+        self.assertEqual(fetcher.suffix_for_mime("text/html"), ".html")
+        self.assertEqual(fetcher.suffix_for_mime("application/json"), ".json")
+        with self.assertRaises(fetcher.gate.GateError):
+            fetcher.suffix_for_mime("application/octet-stream")
+
     def test_artifact_map_rejects_duplicates(self):
         payload = {"artifacts": [ARTIFACT, ARTIFACT]}
         with self.assertRaises(fetcher.gate.GateError):
@@ -184,6 +191,44 @@ class ArtifactFetchTests(unittest.TestCase):
         self.assertEqual(observation["sha256"], expected)
         self.assertEqual(observation["size_bytes"], len(body))
         self.assertEqual(observation["retrieval"]["http_status"], 200)
+        self.assertEqual(observation["change_status"], "HASH_OBSERVED_BIND_REQUIRED")
+        self.assertTrue(observation["reverify_required"])
+        self.assertEqual(
+            observation["binding_action"],
+            "REVIEW_REQUIRED_NO_AUTOMATIC_REGISTRY_MUTATION",
+        )
+
+
+    @patch("fetch_official_artifact.urlopen")
+    def test_pending_html_source_observation_uses_html_artifact(self, mocked):
+        source_id = "TR.BTK.EHK.5809"
+        source = next(x for x in SOURCES_PAYLOAD["sources"] if x["id"] == source_id)
+        artifact = next(x for x in ARTIFACTS_PAYLOAD["artifacts"] if x["source_id"] == source_id)
+        body = b"<!doctype html><html><body>official</body></html>"
+        mocked.return_value = FakeResponse(
+            body,
+            url=source["url"],
+            content_type="text/html",
+        )
+
+        def fake_load(path):
+            if path == fetcher.gate.SOURCES:
+                return SOURCES_PAYLOAD
+            if path == fetcher.gate.ARTIFACTS:
+                return ARTIFACTS_PAYLOAD
+            raise AssertionError(f"unexpected path: {path}")
+
+        with patch.object(fetcher.gate, "load_json", side_effect=fake_load):
+            observation = fetcher.observe_source(
+                source_id,
+                "2026-09-29T18:40:00Z",
+            )
+
+        self.assertEqual(observation["source_id"], source_id)
+        self.assertEqual(observation["expected_mime_type"], "text/html")
+        self.assertEqual(observation["observed_mime_type"], "text/html")
+        self.assertEqual(observation["retrieval"]["http_status"], 200)
+        self.assertEqual(observation["retrieval"]["http_content_type"], "text/html")
         self.assertEqual(observation["change_status"], "HASH_OBSERVED_BIND_REQUIRED")
         self.assertTrue(observation["reverify_required"])
         self.assertEqual(
