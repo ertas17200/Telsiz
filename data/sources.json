@@ -102,7 +102,7 @@
       "content_sha256": null,
       "supersedes": [],
       "superseded_by": [],
-      "notes": "BTK'nın güncel resmî FTM ve amatör telsizcilik sayfaları 5809 sayılı Kanuna ve Mevzuat Bilgi Sistemi hedef URL'sine doğrudan atıf yapıyor. Bu oturumda Mevzuat Bilgi Sistemi hedefi zaman aşımına uğradığı için kayıt fail-closed olarak pending tutulur; tam metin alınmadan kesin madde içeriği bu kayıttan üretilmemelidir."
+      "notes": "Kanonik güncel metin Mevzuat Bilgi Sistemi kaydıdır ve bu doğrulama yolunda 2026-09-29 itibarıyla hâlâ alınamamıştır; kayıt fail-closed olarak pending kalır. BTK'nın güncel resmî FTM ve telsiz kurulum/kullanım sayfalarında 36, 37, 40 ve 63. maddelere ilişkin resmî alıntı/atıflar data/legal_corroborations.json altında audit amaçlı tutulur. Bu corroboration kayıtları kanonik kaynağı verified yapmaz ve verified legal rule üretemez."
     },
     {
       "id": "TR.BTK.FTM.REGULATION.2018",
@@ -127,7 +127,7 @@
       "content_sha256": null,
       "supersedes": [],
       "superseded_by": [],
-      "notes": "BTK'nın güncel resmî FTM sayfası bu Yönetmeliği 27.11.2018 tarihli ve 30608 sayılı Resmî Gazete kaydıyla tanımlar ve Mevzuat Bilgi Sistemi hedefini doğrudan verir. Hedef metin bu oturumda zaman aşımına uğradığı için exact-text verification tamamlanana kadar pending tutulur."
+      "notes": "Kanonik güncel metin Mevzuat Bilgi Sistemi kaydıdır ve bu doğrulama yolunda 2026-09-29 itibarıyla hâlâ alınamamıştır; exact-text verification tamamlanana kadar pending kalır. BTK'nın güncel resmî FTM sayfasındaki 27.11.2018 / RG 30608 yayın bilgisi ve Madde 6/1 alıntısı data/legal_corroborations.json altında yalnız corroboration olarak tutulur; verified legal authority terfisi sağlamaz."
     },
     {
       "id": "TR.KEGM.AMATEUR.EXAM.REGULATION",
