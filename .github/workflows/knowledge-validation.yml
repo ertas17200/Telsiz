@@ -61,6 +61,9 @@ jobs:
       - name: Validate BTK raw transcription
         run: python scripts/validate_btk_raw.py
 
+      - name: Validate BTK frequency scope index
+        run: python scripts/validate_frequency_scope.py
+
       - name: Validate official artifact registry
         run: python scripts/artifact_gate.py validate-registry
 
