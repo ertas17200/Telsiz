@@ -299,6 +299,13 @@ class EvaluateContractTests(unittest.TestCase):
                 self.assertEqual(result["known_limits"], [])
                 self.assertEqual(result["legal_status"], fl.UNKNOWN)
 
+    def test_frequency_doc_lists_exactly_the_semantic_rows(self):
+        import re
+
+        doc = (ROOT / "docs" / "FREQUENCY_TABLE.md").read_text("utf-8")
+        documented = set(re.findall(r"`(TR\.FTM\.AMATEUR\.ROW\.[^`]+)`", doc))
+        self.assertEqual(documented, {row["id"] for row in TABLE["rows"]})
+
     def test_430_group_rows_match_raw_subbands_exactly(self):
         raw = json.loads((ROOT / "data" / "btk_amateur_table_raw.json").read_text("utf-8"))
         raw_430 = sorted(
