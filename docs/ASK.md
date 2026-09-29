@@ -59,6 +59,8 @@ Hukuki olmayan sorular mevcut, kaynaklı Academy araçlarından cevaplanır (`sc
 | "KN41 locator nerede?" · "41.0, 29.0 grid locator" | Maidenhead eğitim aracı |
 | "FT8 nedir?" · "FT8 ve FT4 farkı" | ft8_lib (commit-pinned) — **topluluk kaynağı**, her cevapta etiketlenir |
 | "APRS APDW16 hangi cihaz?" | APRS cihaz kimliği veritabanı (aprsorg/aprs-deviceid, commit-pinned, CC BY-SA 2.0); kaynak README'nin arama kuralı: tam eşleşme → en uzun joker eşleşme, eşit eşleşmede tek cihaz seçilmez |
+| `Mic-E "_3" hangi cihaz?` · `Mic-E ">="` | Aynı veritabanının Mic-E dizinleri (yeni tip sonek / eski Kenwood önek+sonek); yalnız tam eşleşme |
+| "AX.25 FCS nasıl hesaplanır?" · "paket radyo AFSK tonları" | Dire Wolf (commit-pinned, GPL-2.0; yalnız olgusal değerler) — **topluluk kaynağı**, her cevapta etiketlenir |
 
 Hangi alanların kapsandığı: [KNOWLEDGE_COVERAGE.md](KNOWLEDGE_COVERAGE.md).
 

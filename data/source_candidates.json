@@ -495,6 +495,66 @@
         "turkish_permission"
       ],
       "notes": "Adres ft8_lib README'sinden alındı. GitHub'daki WSJT-X aynaları resmî olarak doğrulanmadıkça kullanılmaz."
+    },
+    {
+      "jurisdiction": "INTERNATIONAL",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "cannot_support": [
+        "legal_claims",
+        "turkish_permission"
+      ],
+      "related_sources": [
+        "OSS.WB2OSZ.DIREWOLF"
+      ],
+      "id": "CAND.TAPR.AX25_2_2",
+      "title": "AX.25 Link Access Protocol for Amateur Packet Radio, Version 2.2",
+      "publisher": "TAPR / ARRL",
+      "expected_source_type": "technical_manual",
+      "search_entry_point": "https://www.tapr.org/pdf/AX25.2.2.pdf",
+      "required_access_domains": [
+        "www.tapr.org"
+      ],
+      "unlocks": {
+        "phases": [
+          "P11"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "AX.25/HDLC parametrelerinin (OSS.WB2OSZ.DIREWOLF) standart metniyle bağımsız doğrulanması"
+      },
+      "notes": "2026-09-29: erişim denemesi proxy tarafından reddedildi (CONNECT 403). Aynalar kullanılmaz; yayın tarihi/sürüm bilgisi doğrulanmadan eklenmedi."
+    },
+    {
+      "jurisdiction": "INTERNATIONAL",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "cannot_support": [
+        "legal_claims",
+        "turkish_permission"
+      ],
+      "related_sources": [
+        "OSS.WB2OSZ.DIREWOLF"
+      ],
+      "id": "CAND.APRS.PROTOCOL_1_0_1",
+      "title": "APRS Protocol Reference, Protocol Version 1.0.1",
+      "publisher": "APRS Working Group",
+      "expected_source_type": "technical_manual",
+      "search_entry_point": "https://www.aprs.org/doc/APRS101.PDF",
+      "required_access_domains": [
+        "www.aprs.org"
+      ],
+      "unlocks": {
+        "phases": [
+          "P11"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "APRS çerçeve (UI, PID 0xF0) ve Mic-E kodlamasının protokol belgesiyle doğrulanması"
+      },
+      "notes": "2026-09-29: erişim denemesi 403 döndü. Aynalar kullanılmaz."
     }
   ]
 }

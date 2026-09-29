@@ -96,6 +96,34 @@ class AprsLookupTests(unittest.TestCase):
             aprs.normalize_tocall("AP DW")
 
 
+class MiceLookupTests(unittest.TestCase):
+    def test_new_style_suffix(self):
+        result = aprs.lookup_mice("_3", PAYLOAD)
+        self.assertEqual(result["status"], "found")
+        self.assertEqual([(m["kind"], m["model"]) for m in result["matches"]], [("mice", "FT5D")])
+
+    def test_legacy_prefix_and_pair(self):
+        self.assertEqual([m["model"] for m in aprs.lookup_mice(">", PAYLOAD)["matches"]], ["TH-D7A"])
+        self.assertEqual([m["model"] for m in aprs.lookup_mice(">=", PAYLOAD)["matches"]], ["TH-D72"])
+
+    def test_unknown_code_not_guessed(self):
+        self.assertEqual(aprs.lookup_mice("zz", PAYLOAD)["status"], "not_found")
+        with self.assertRaises(ValueError):
+            aprs.lookup_mice("abc", PAYLOAD)
+
+    def test_mice_validation(self):
+        def rejected(mutate):
+            payload = copy.deepcopy(PAYLOAD)
+            mutate(payload)
+            with self.assertRaises(aprs.AprsDeviceIdError):
+                aprs.validate(payload, SOURCES)
+        rejected(lambda p: p["mice"][0].update(suffix="_"))
+        rejected(lambda p: p["mice"][0].update(contact="x@example.org"))
+        rejected(lambda p: p["micelegacy"][0].pop("prefix"))
+        rejected(lambda p: p["mice"].append(copy.deepcopy(p["mice"][0])))
+        rejected(lambda p: p.update(mice=[]))
+
+
 class AprsAnswerTests(unittest.TestCase):
     kb = ask.Knowledge()
 
@@ -114,6 +142,10 @@ class AprsAnswerTests(unittest.TestCase):
     def test_unknown_tocall_is_not_guessed(self):
         _, routes = self.route("APRS APY03 nedir?")
         self.assertIn("eşleşen kayıt yok", " ".join(routes[0]["summary"]))
+
+    def test_mice_answer(self):
+        _, routes = self.route('Mic-E "_3" hangi cihaz?')
+        self.assertIn("FT5D", " ".join(routes[0]["summary"]))
 
     def test_no_route_without_aprs_keyword(self):
         _, routes = self.route("APDW16 nedir?")

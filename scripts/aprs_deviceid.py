@@ -4,19 +4,23 @@
 ``data/aprs_deviceid.json`` is a CC BY-SA 2.0 adaptation of
 ``tocalls.yaml`` from the APRS device identification database
 (aprsorg/aprs-deviceid), pinned to an exact commit. Adaptation: YAML to
-JSON, the tocall and class indexes only, per-person ``contact`` fields
-omitted, a ``path#Lnn`` locator added to every entry.
+JSON; the class, tocall and Mic-E (new-style ``mice`` and Kenwood
+``micelegacy``) indexes; per-person ``contact`` fields omitted; a
+``path#Lnn`` locator added to every entry.
 
 Lookup follows the source README's algorithm: an exact match against
 non-wildcard tocalls first, then the wildcard entry with the longest
 match (``?`` = any character, lower-case ``n`` = digit, ``*`` = any rest).
 When two wildcard entries match equally well the result is ambiguous and
-no single device is claimed.
+no single device is claimed. Mic-E codes are matched exactly (new-style
+2-character comment suffix, or legacy 1-character prefix with optional
+1-character suffix); every exact match is returned.
 
 Usage::
 
     python scripts/aprs_deviceid.py                 # validate
     python scripts/aprs_deviceid.py APDW16          # look up a tocall
+    python scripts/aprs_deviceid.py --mice "_3"     # look up a Mic-E code
     python scripts/aprs_deviceid.py --verify-clone /path/to/aprs-deviceid
 """
 
@@ -91,8 +95,42 @@ def lookup(tocall: str, payload: dict) -> dict:
     return {"status": "wildcard" if len(top) == 1 else "ambiguous", "tocall": base, "matches": top}
 
 
+def lookup_mice(code: str, payload: dict) -> dict:
+    """Exact Mic-E device match. status: ``found`` | ``not_found``.
+
+    A 2-character code is compared with new-style suffixes and with legacy
+    prefix+suffix pairs; a 1-character code with legacy prefix-only entries.
+    """
+    if not 1 <= len(code) <= 2:
+        raise ValueError(f"Mic-E device code must be 1 or 2 characters: {code!r}")
+    matches = [dict(e, kind="mice") for e in payload["mice"] if e["suffix"] == code]
+    for entry in payload["micelegacy"]:
+        if entry["prefix"] + entry.get("suffix", "") == code:
+            matches.append(dict(entry, kind="micelegacy"))
+    return {"status": "found" if matches else "not_found", "code": code, "matches": matches}
+
+
+def _section_item_lines(yaml_lines: list[str], section: str) -> list[int]:
+    """Line numbers of the list items of one top-level YAML section, in order."""
+    numbers, inside, indent = [], False, None
+    for number, line in enumerate(yaml_lines, start=1):
+        if re.match(r"^[A-Za-z_]+:", line):
+            inside = line.startswith(f"{section}:")
+            continue
+        item = re.match(r"^(\s*)-\s", line) if inside else None
+        if item:
+            indent = len(item.group(1)) if indent is None else indent
+            if len(item.group(1)) == indent:
+                numbers.append(number)
+    return numbers
+
+
+def _keep(item: dict, keys: tuple[str, ...]) -> dict:
+    return {k: item[k] for k in keys if k in item}
+
+
 def extract(document: dict, yaml_lines: list[str], source_path: str) -> dict:
-    """Build the adapted classes/tocalls indexes from the parsed source YAML."""
+    """Build the adapted classes/tocalls/Mic-E indexes from the parsed source YAML."""
     line_of = {}
     for number, line in enumerate(yaml_lines, start=1):
         match = re.match(r"^\s*-\s*tocall:\s*\"?([^\"\s]+)\"?\s*$", line)
@@ -108,7 +146,14 @@ def extract(document: dict, yaml_lines: list[str], source_path: str) -> dict:
         tocalls.append(entry)
     classes = [{"class": c["class"], "shown": c["shown"], "description": c["description"]}
                for c in document["classes"]]
-    return {"classes": classes, "tocalls": tocalls}
+    result = {"classes": classes, "tocalls": tocalls}
+    for section, keys in (("mice", ("suffix",)), ("micelegacy", ("prefix", "suffix"))):
+        lines = _section_item_lines(yaml_lines, section)
+        if len(lines) != len(document[section]):
+            raise AprsDeviceIdError(f"cannot locate every {section} entry in {source_path}")
+        result[section] = [dict(_keep(item, keys + KEPT_FIELDS), locator=f"{source_path}#L{line}")
+                           for item, line in zip(document[section], lines)]
+    return result
 
 
 def validate(payload: dict, sources: dict) -> None:
@@ -178,6 +223,33 @@ def validate(payload: dict, sources: dict) -> None:
     if len(seen) < 100:
         fail("tocall index looks truncated")
 
+    codes = set()
+    for section, shape in (("mice", {"suffix": 2}), ("micelegacy", {"prefix": 1, "suffix": 1})):
+        entries = payload.get(section)
+        if not entries:
+            fail(f"{section} index is required")
+        for entry in entries:
+            owner = f"{section}:{entry.get('prefix', '')}{entry.get('suffix', '')}"
+            for key, length in shape.items():
+                value = entry.get(key)
+                required = section == "mice" or key == "prefix"
+                if (value is None and required) or (value is not None and (not isinstance(value, str) or len(value) != length)):
+                    fail(f"{owner}: {key} must be a {length}-character string")
+            if "contact" in entry:
+                fail(f"{owner}: contact fields must not be copied")
+            extra = set(entry) - {"locator", *shape, *KEPT_FIELDS}
+            if extra:
+                fail(f"{owner}: unexpected fields {sorted(extra)}")
+            if "class" in entry and entry["class"] not in classes:
+                fail(f"{owner}: class {entry['class']} is not in the classes index")
+            if not entry.get("vendor") or not entry.get("model"):
+                fail(f"{owner}: vendor and model are required")
+            key = (section, entry.get("prefix"), entry.get("suffix"))
+            if key in codes:
+                fail(f"duplicate {owner}")
+            codes.add(key)
+            check_locator(entry.get("locator"), owner)
+
 
 def verify_clone(payload: dict, clone: Path) -> None:
     """Re-derive the adaptation from a clone at the pinned commit."""
@@ -194,7 +266,7 @@ def verify_clone(payload: dict, clone: Path) -> None:
             fail(f"{item['path']}: file hash differs from pinned provenance")
     text = (clone / "tocalls.yaml").read_text(encoding="utf-8")
     rebuilt = extract(yaml.safe_load(text), text.splitlines(), "tocalls.yaml")
-    if rebuilt["classes"] != payload["classes"] or rebuilt["tocalls"] != payload["tocalls"]:
+    if any(rebuilt[k] != payload[k] for k in ("classes", "tocalls", "mice", "micelegacy")):
         fail("adapted indexes differ from a fresh extraction of the pinned tocalls.yaml")
     readme = (clone / "README.md").read_text(encoding="utf-8").splitlines()
     match = LOCATOR_RE.fullmatch(payload["lookup_algorithm_locator"])
@@ -217,9 +289,19 @@ def describe(entry: dict, classes: dict) -> str:
     return f"{entry['tocall']} → {who}" + (f" ({', '.join(extra)})" if extra else "")
 
 
+def describe_mice(entry: dict, classes: dict) -> str:
+    code = f"{entry.get('prefix', '')}{entry.get('suffix', '')}"
+    label = "Mic-E sonek" if entry["kind"] == "mice" else "Mic-E (eski Kenwood) önek/sonek"
+    extra = [classes.get(entry["class"], entry["class"])] if entry.get("class") else []
+    if "messaging" in entry.get("features", []):
+        extra.append("mesajlaşma")
+    return f"{label} \"{code}\" → {entry['vendor']} {entry['model']}" + (f" ({', '.join(extra)})" if extra else "")
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("tocall", nargs="?", help="APRS destination callsign to look up")
+    parser.add_argument("--mice", help="Mic-E device code (1-2 characters) to look up")
     parser.add_argument("--verify-clone", type=Path, help="local clone of the pinned repository")
     args = parser.parse_args(argv)
     payload, sources = load()
@@ -230,6 +312,13 @@ def main(argv: list[str] | None = None) -> int:
     except AprsDeviceIdError as exc:
         print(f"FAIL: {exc}", file=sys.stderr)
         return 1
+    if args.mice is not None:
+        classes = {c["class"]: c["shown"] for c in payload["classes"]}
+        result = lookup_mice(args.mice, payload)
+        print(f"{result['code']!r}: {result['status']}")
+        for entry in result["matches"]:
+            print(f"- {describe_mice(entry, classes)} [{entry['locator']}]")
+        return 0
     if args.tocall:
         classes = {c["class"]: c["shown"] for c in payload["classes"]}
         result = lookup(args.tocall, payload)
@@ -238,7 +327,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"- {describe(entry, classes)} [{entry['locator']}]")
         return 0
     extra = " and matched the pinned clone" if args.verify_clone else ""
-    print(f"PASS: validated {len(payload['tocalls'])} APRS tocall entries (CC BY-SA 2.0, commit-pinned){extra}")
+    print(f"PASS: validated {len(payload['tocalls'])} APRS tocall + {len(payload['mice']) + len(payload['micelegacy'])} Mic-E entries (CC BY-SA 2.0, commit-pinned){extra}")
     return 0
 
 

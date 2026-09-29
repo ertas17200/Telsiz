@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "source_id": "OSS.WB2OSZ.DIREWOLF",
+  "trust_tier": "community_independent_implementation",
+  "trust_note": "Değerler bağımsız bir açık kaynak TNC/APRS uygulamasından (Dire Wolf, GPL-2.0) alınmıştır; yalnız olgusal parametreler kaydedilir, kaynak kod kopyalanmaz. AX.25 2.2 ve APRS protokol belgeleriyle doğrulama bekler. Hukuki izin veya frekans tahsisi içermez.",
+  "provenance": {
+    "repository": "https://github.com/wb2osz/direwolf",
+    "commit": "eda1383f5fa9d8ba3cb27f99db1d2c79494404c9",
+    "commit_date": "2026-05-19T13:27:49-04:00",
+    "license": "GPL-2.0",
+    "retrieved_at": "2026-09-29",
+    "files": [
+      {
+        "path": "src/hdlc_send.c",
+        "git_blob_sha1": "5b2008d3e78882f126d97e4fbe25df35ebde82f9",
+        "sha256": "e3f8bc114e947b296e0774b9709042cd30be61a9f2d9b9332a0937b6fdc510ca"
+      },
+      {
+        "path": "src/fcs_calc.c",
+        "git_blob_sha1": "f49a2f55d84055051e87fb0daf4e0971882922a6",
+        "sha256": "c6fa259b6132228ca2437e403172e89fff26b4fbb31a2fe41054eee03b0af4bd"
+      },
+      {
+        "path": "src/ax25_pad.h",
+        "git_blob_sha1": "de574cf0ce210a38fae7169175052658ac422655",
+        "sha256": "50f9d34e05b70f619ec43f320f1b27c370cd5de564ee4898d8e154aa7300415c"
+      },
+      {
+        "path": "src/audio.h",
+        "git_blob_sha1": "279408657f385abc16b4ef7a9b9dbb3ce45021ab",
+        "sha256": "90e18ebde60cd317171287c9a9c991e3ba15d7580246bafc54997bcd06fa9a37"
+      }
+    ]
+  },
+  "fcs_table_locator": "src/fcs_calc.c#L36-L67",
+  "parameters": [
+    {
+      "id": "hdlc_flag",
+      "value": 126,
+      "topic": "hdlc",
+      "meaning": "Çerçeve başı/sonu bayrağı (01111110); bit doldurma uygulanmaz",
+      "locator": "src/hdlc_send.c#L131",
+      "token": "send_control_nrzi (chan,",
+      "literal": "0x7e"
+    },
+    {
+      "id": "bit_stuffing_run",
+      "value": 5,
+      "topic": "hdlc",
+      "meaning": "Art arda bu kadar 1 bitinden sonra bir 0 biti eklenir (bit doldurma)",
+      "locator": "src/hdlc_send.c#L268",
+      "token": "stuff[chan] ==",
+      "literal": "5"
+    },
+    {
+      "id": "bit_order",
+      "value": "lsb_first",
+      "topic": "hdlc",
+      "meaning": "Her bayt en düşük anlamlı bitten başlayarak gönderilir",
+      "locator": "src/hdlc_send.c#L265",
+      "token": "send_bit_nrzi (chan,",
+      "literal": "x & 1"
+    },
+    {
+      "id": "line_coding",
+      "value": "nrzi",
+      "topic": "hdlc",
+      "meaning": "Bitler NRZI kodlamasıyla gönderilir",
+      "locator": "src/hdlc_send.c#L265",
+      "token": "send_bit_",
+      "literal": "nrzi"
+    },
+    {
+      "id": "fcs_init",
+      "value": 65535,
+      "topic": "fcs",
+      "meaning": "FCS (CRC-16) başlangıç değeri",
+      "locator": "src/fcs_calc.c#L78",
+      "token": "unsigned short crc =",
+      "literal": "0xffff"
+    },
+    {
+      "id": "fcs_final_xor",
+      "value": 65535,
+      "topic": "fcs",
+      "meaning": "FCS son XOR değeri",
+      "locator": "src/fcs_calc.c#L86",
+      "token": "crc ^",
+      "literal": "0xffff"
+    },
+    {
+      "id": "fcs_polynomial_reflected",
+      "value": 33800,
+      "topic": "fcs",
+      "meaning": "FCS için yansıtılmış CCITT polinomu (tablo girdisi 128)",
+      "locator": "src/fcs_calc.c#L52",
+      "token": "0x8408",
+      "literal": "0x8408"
+    },
+    {
+      "id": "fcs_byte_order",
+      "value": "low_byte_first",
+      "topic": "fcs",
+      "meaning": "FCS'nin önce düşük, sonra yüksek baytı gönderilir",
+      "locator": "src/hdlc_send.c#L145-L146",
+      "token": "fcs & 0xff",
+      "literal": "(fcs >> 8) & 0xff"
+    },
+    {
+      "id": "address_field_bytes",
+      "value": 7,
+      "topic": "ax25",
+      "meaning": "Her adres alanı (çağrı işareti + SSID) 7 bayttır",
+      "locator": "src/ax25_pad.h#L55",
+      "token": "AX25_MIN_PACKET_LEN",
+      "literal": "2 * 7"
+    },
+    {
+      "id": "min_addresses",
+      "value": 2,
+      "topic": "ax25",
+      "meaning": "En az adres sayısı (hedef + kaynak)",
+      "locator": "src/ax25_pad.h#L14",
+      "token": "AX25_MIN_ADDRS",
+      "literal": "2"
+    },
+    {
+      "id": "max_repeaters",
+      "value": 8,
+      "topic": "ax25",
+      "meaning": "En fazla digipeater adresi",
+      "locator": "src/ax25_pad.h#L13",
+      "token": "AX25_MAX_REPEATERS",
+      "literal": "8"
+    },
+    {
+      "id": "max_addresses",
+      "value": 10,
+      "topic": "ax25",
+      "meaning": "En fazla adres sayısı (hedef + kaynak + 8 digipeater)",
+      "locator": "src/ax25_pad.h#L15",
+      "token": "AX25_MAX_ADDRS",
+      "literal": "10"
+    },
+    {
+      "id": "ui_frame_control",
+      "value": 3,
+      "topic": "ax25",
+      "meaning": "UI çerçevesi kontrol alanı değeri",
+      "locator": "src/ax25_pad.h#L66",
+      "token": "AX25_UI_FRAME",
+      "literal": "3"
+    },
+    {
+      "id": "aprs_pid",
+      "value": 240,
+      "topic": "ax25",
+      "meaning": "APRS için kullanılan protokol kimliği (katman 3 yok)",
+      "locator": "src/ax25_pad.h#L68",
+      "token": "AX25_PID_NO_LAYER_3",
+      "literal": "0xf0"
+    },
+    {
+      "id": "max_info_bytes_implementation",
+      "value": 2048,
+      "topic": "ax25",
+      "meaning": "Direwolf'un kabul ettiği en büyük bilgi alanı; uygulama sınırıdır, AX.25 varsayılanı değildir",
+      "locator": "src/ax25_pad.h#L36",
+      "token": "AX25_MAX_INFO_LEN",
+      "literal": "2048",
+      "scope": "implementation_limit"
+    },
+    {
+      "id": "afsk1200_mark_hz",
+      "value": 1200,
+      "topic": "afsk",
+      "meaning": "1200 baud AFSK mark tonu (Direwolf varsayılanı)",
+      "locator": "src/audio.h#L470",
+      "token": "DEFAULT_MARK_FREQ",
+      "literal": "1200",
+      "scope": "implementation_default"
+    },
+    {
+      "id": "afsk1200_space_hz",
+      "value": 2200,
+      "topic": "afsk",
+      "meaning": "1200 baud AFSK space tonu (Direwolf varsayılanı)",
+      "locator": "src/audio.h#L471",
+      "token": "DEFAULT_SPACE_FREQ",
+      "literal": "2200",
+      "scope": "implementation_default"
+    },
+    {
+      "id": "afsk1200_baud",
+      "value": 1200,
+      "topic": "afsk",
+      "meaning": "Varsayılan veri hızı (baud)",
+      "locator": "src/audio.h#L472",
+      "token": "DEFAULT_BAUD",
+      "literal": "1200",
+      "scope": "implementation_default"
+    }
+  ],
+  "not_stated_by_source": [
+    "APRS çalışma frekansları (ör. bölgesel APRS frekansı) — bu kaynak belirtmez",
+    "Türkiye'de APRS/paket yayınının hangi bantta ve hangi sınıfla yapılabileceği (bkz. BTK tablosu)",
+    "AX.25 2.2 standardının resmî metni (aday kaynak)"
+  ]
+}

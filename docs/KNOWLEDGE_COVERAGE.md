@@ -30,7 +30,8 @@ Durum anlamları: **VAR** = doğrulanmış kaynakla cevaplanıyor · **KISMİ** 
 | IARU band planı | KISMİ | "Ulusal kural esastır" ilkesi | Sürümlü HF/VHF band planı içeriği (aday kaynak) |
 | Propagasyon | YOK | — | Güvenilir eğitim kaynağı |
 | Dijital modlar (FT8, FT4) | KISMİ | FT8/FT4 modülasyon, sembol, zamanlama ve kodlama parametreleri — **topluluk katmanı** (`OSS.KGOBA.FT8_LIB`, commit-pinned) | Protokol yazarlarının belgesiyle doğrulama (`CAND.QEX.FT4_FT8_PROTOCOLS`, `CAND.WSJTX.REFERENCE_SOURCE`); bant genişliği ve çalışma frekansları kaynakta yok |
-| APRS | KISMİ | Cihaz/yazılım kimliği (tocall) sorgusu — 417 kayıt (`APRS.DEVICEID.TOCALLS`, commit-pinned, CC BY-SA 2.0) | APRS protokolü, frekanslar, Mic-E cihaz kimlikleri |
+| APRS | KISMİ | Cihaz/yazılım kimliği: 417 tocall + 32 Mic-E kaydı (`APRS.DEVICEID.TOCALLS`, commit-pinned, CC BY-SA 2.0) | APRS protokol belgesi (`CAND.APRS.PROTOCOL_1_0_1`), Mic-E konum kodlaması, frekanslar |
+| AX.25 / paket radyo | KISMİ | HDLC bayrağı, bit doldurma, bit sırası, FCS (CRC-16) ve 1200 baud AFSK tonları — **topluluk katmanı** (`OSS.WB2OSZ.DIREWOLF`, commit-pinned) | AX.25 2.2 standardıyla doğrulama (`CAND.TAPR.AX25_2_2`); 9600 baud ve diğer modemler |
 | Dijital modlar (DMR, D-STAR, …) | YOK | — | Protokol kaynakları |
 | Uydu haberleşmesi | YOK | — | AMSAT/IARU uydu kaynakları |
 | Acil durum haberleşmesi | YOK | — | IARU R1 acil durum rehberi (aday kaynak) |

@@ -2,9 +2,9 @@
 
 Each route answers from an existing, source-grounded Academy tool
 (Q-codes, RS(T), Morse, RF wavelength, repeater snapshot, Maidenhead
-locator, FT8/FT4 parameters, APRS device identifiers). None of them
-produces a legal verdict: every answer is technical or operating
-information with the tool's own source IDs.
+locator, FT8/FT4 parameters, APRS device identifiers, AX.25 parameters).
+None of them produces a legal verdict: every answer is technical or
+operating information with the tool's own source IDs.
 
 A route returns ``None`` when the question does not concern it, or a dict
 ``{"topic", "short", "lines", "source_ids"}``.
@@ -38,6 +38,7 @@ rep = _load_module("repeater_lookup")
 grid = _load_module("grid_locator")
 vdm = _load_module("validate_digital_modes")
 aprs = _load_module("aprs_deviceid")
+vax = _load_module("validate_ax25")
 
 QCODE_RE = re.compile(r"(?<![a-z0-9])(q[a-z]{2})(?![a-z0-9])")
 RST_KEY_RE = re.compile(r"(?<![a-z0-9])(rst|rs|rapor\w*|sinyal raporu)(?![a-z0-9])")
@@ -51,7 +52,10 @@ GRID_KEY_RE = re.compile(r"(?<![a-z0-9])(locator|lokator\w*|grid|maidenhead|qth 
 GRID_CODE_RE = re.compile(r"(?<![a-z0-9])([a-r]{2}\d{2}(?:[a-x]{2})?)(?![a-z0-9])")
 COORD_RE = re.compile(r"(-?\d{1,2}\.\d+)\s*[,; ]\s*(-?\d{1,3}\.\d+)")
 DIGITAL_MODE_RE = re.compile(r"(?<![a-z0-9])(ft8|ft4)(?![a-z0-9])")
-APRS_KEY_RE = re.compile(r"(?<![a-z0-9])(aprs|tocall\w*)(?![a-z0-9])")
+APRS_KEY_RE = re.compile(r"(?<![a-z0-9])(aprs|tocall\w*|mic-?e)(?![a-z0-9])")
+MICE_KEY_RE = re.compile(r"(?<![a-z0-9])mic-?e(?![a-z0-9])")
+MICE_CODE_RE = re.compile(r"[\"“”«»`']([^\"“”«»`']{1,2})[\"“”«»`']")
+AX25_KEY_RE = re.compile(r"(?<![a-z0-9])(ax\.?25|hdlc|afsk|fcs|paket radyo\w*|packet radio|bit doldurma|bit stuffing)(?![a-z0-9])")
 TOCALL_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])([A-Za-z][A-Za-z0-9]{3,5})(?:-\d{1,2})?(?![A-Za-z0-9])")
 REPEATER_KEY_RE = re.compile(r"(?<![a-z0-9])(role\w*|tekrarlayici\w*|repeater\w*)")
 
@@ -242,8 +246,19 @@ def aprs_route(text: str, question: str) -> dict | None:
     payload = _json("aprs_deviceid.json")
     classes = {c["class"]: c["shown"] for c in payload["classes"]}
     short = []
+    if MICE_KEY_RE.search(text):
+        for code in MICE_CODE_RE.findall(question):
+            result = aprs.lookup_mice(code, payload)
+            if result["status"] == "not_found":
+                short.append(f"Mic-E \"{code}\": veritabanında eşleşen kayıt yok (tahmin edilmez).")
+            for entry in result["matches"]:
+                short.append(f"{aprs.describe_mice(entry, classes)} ({entry['locator']}).")
+        if not short:
+            short.append("Mic-E cihaz kodunu tırnak içinde yazın: yeni tip 2 karakterlik yorum soneki (ör. \"_3\") "
+                         "veya eski Kenwood 1 karakterlik önek (+ isteğe bağlı sonek, ör. \">=\"). "
+                         "Mic-E konum kodlamasının kendisi henüz kaynaklı olarak kapsanmıyor.")
     for token in TOCALL_TOKEN_RE.findall(question):
-        if token.upper() in {"APRS", "TOCALL"} or not any(ch.isdigit() for ch in token) and not token.isupper():
+        if token.upper() in {"APRS", "TOCALL", "MIC-E"} or not any(ch.isdigit() for ch in token) and not token.isupper():
             continue
         result = aprs.lookup(token, payload)
         if result["status"] == "not_found":
@@ -263,11 +278,42 @@ def aprs_route(text: str, question: str) -> dict | None:
     lines = [
         payload["trust_note"],
         "Arama kuralı (kaynak README): önce jokersiz tam eşleşme, sonra en uzun joker eşleşme "
-        "(? = herhangi karakter, n = rakam, * = geri kalan).",
+        "(? = herhangi karakter, n = rakam, * = geri kalan); Mic-E kodları yalnız tam eşleşir.",
         f"Kaynak: {payload['license']['attribution']}",
         f"Commit: {prov['repository']} @ {prov['commit'][:12]}; uyarlama: data/aprs_deviceid.json (CC BY-SA 2.0).",
     ]
-    return {"topic": "APRS cihaz kimliği (tocall)", "short": short, "lines": lines,
+    return {"topic": "APRS cihaz kimliği (tocall / Mic-E)", "short": short, "lines": lines,
+            "source_ids": [payload["source_id"]]}
+
+
+def ax25_route(text: str, question: str) -> dict | None:
+    if not AX25_KEY_RE.search(text):
+        return None
+    payload = _json("ax25_parameters.json")
+    v = vax.values(payload)
+    d = vax.derived(v)
+    label = "[topluluk kaynağı; AX.25 2.2 / APRS belgesiyle doğrulama bekliyor]"
+    short = [
+        f"Çerçeve: bayrak 0x{v['hdlc_flag']:02X} ile başlar ve biter; adres alanı adres başına "
+        f"{v['address_field_bytes']} bayt, {v['min_addresses']}–{v['max_addresses']} adres (hedef + kaynak + en fazla "
+        f"{v['max_repeaters']} digipeater); APRS UI çerçevesinde kontrol 0x{v['ui_frame_control']:02X}, PID "
+        f"0x{v['aprs_pid']:02X} {label}.",
+        f"Bit düzeyi: baytlar en düşük bitten başlayarak (LSB önce) NRZI ile gönderilir; art arda "
+        f"{v['bit_stuffing_run']} adet 1'den sonra bir 0 eklenir (bayrakta uygulanmaz) {label}.",
+        f"FCS: CRC-16, yansıtılmış polinom 0x{v['fcs_polynomial_reflected']:04X} (CCITT x^16+x^12+x^5+1), başlangıç "
+        f"0x{v['fcs_init']:04X}, son XOR 0x{v['fcs_final_xor']:04X}; önce düşük bayt gönderilir. "
+        f"\"123456789\" için hesap: 0x{vax.fcs(b'123456789', v):04X} {label}.",
+        f"1200 baud AFSK (Dire Wolf varsayılanı): mark {v['afsk1200_mark_hz']} Hz, space {v['afsk1200_space_hz']} Hz "
+        f"(fark {d['afsk_shift_hz']} Hz), bit süresi {_tr(d['bit_time_us'], 1)} µs {label}.",
+    ]
+    prov = payload["provenance"]
+    lines = [
+        "Güven seviyesi: topluluk (bağımsız açık kaynak uygulama) — " + payload["trust_note"],
+        f"Kaynak commit: {prov['repository']} @ {prov['commit'][:12]} ({prov['license']}); her değer satır "
+        "numarasıyla data/ax25_parameters.json içinde.",
+    ]
+    lines.extend(f"Bu kaynağın belirtmediği: {item}" for item in payload["not_stated_by_source"])
+    return {"topic": "AX.25 / paket radyo parametreleri", "short": short, "lines": lines,
             "source_ids": [payload["source_id"]]}
 
 
@@ -305,6 +351,7 @@ def technical_routes(text: str, question: str, frequencies_mhz: list[float]) -> 
         repeater_route(text, question),
         digital_mode_route(text, question),
         aprs_route(text, question),
+        ax25_route(text, question),
         grid_route(text, question),
     ]
     return [r for r in routes if r]

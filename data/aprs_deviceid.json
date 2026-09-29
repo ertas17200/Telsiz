@@ -6,7 +6,7 @@
     "id": "CC-BY-SA-2.0",
     "url": "https://creativecommons.org/licenses/by-sa/2.0/",
     "attribution": "APRS device identification database — maintained by Hessu, OH7LZB, for aprs.fi; aprsorg/aprs-deviceid (https://github.com/aprsorg/aprs-deviceid). Licensed CC BY-SA 2.0.",
-    "adaptation": "Telsiz uyarlaması: tocalls.yaml YAML'den JSON'a çevrildi; yalnız classes ve tocalls dizinleri alındı (mice/micelegacy alınmadı); kişisel contact alanları çıkarıldı; her kayda kaynak satır konumu (locator) eklendi. Bu dosya (data/aprs_deviceid.json) aynı CC BY-SA 2.0 lisansıyla dağıtılır."
+    "adaptation": "Telsiz uyarlaması: tocalls.yaml YAML'den JSON'a çevrildi; classes, tocalls, mice ve micelegacy dizinleri alındı; kişisel contact alanları çıkarıldı; her kayda kaynak satır konumu (locator) eklendi. Bu dosya (data/aprs_deviceid.json) aynı CC BY-SA 2.0 lisansıyla dağıtılır."
   },
   "provenance": {
     "repository": "https://github.com/aprsorg/aprs-deviceid",
@@ -29,10 +29,6 @@
   "lookup_algorithm_locator": "README.md#L158-L166",
   "omitted_fields": [
     "contact"
-  ],
-  "not_included": [
-    "mice (Mic-E yeni tip cihaz sonekleri)",
-    "micelegacy (Kenwood eski Mic-E önek/sonekleri)"
   ],
   "classes": [
     {
@@ -3160,6 +3156,256 @@
       "model": "PSKmail",
       "class": "software",
       "locator": "tocalls.yaml#L2620"
+    }
+  ],
+  "mice": [
+    {
+      "suffix": "_ ",
+      "vendor": "Yaesu",
+      "model": "VX-8",
+      "class": "ht",
+      "locator": "tocalls.yaml#L82"
+    },
+    {
+      "suffix": "_\"",
+      "vendor": "Yaesu",
+      "model": "FTM-350",
+      "class": "rig",
+      "locator": "tocalls.yaml#L87"
+    },
+    {
+      "suffix": "_#",
+      "vendor": "Yaesu",
+      "model": "VX-8G",
+      "class": "ht",
+      "locator": "tocalls.yaml#L92"
+    },
+    {
+      "suffix": "_$",
+      "vendor": "Yaesu",
+      "model": "FT1D",
+      "class": "ht",
+      "locator": "tocalls.yaml#L97"
+    },
+    {
+      "suffix": "_(",
+      "vendor": "Yaesu",
+      "model": "FT2D",
+      "class": "ht",
+      "locator": "tocalls.yaml#L102"
+    },
+    {
+      "suffix": "_0",
+      "vendor": "Yaesu",
+      "model": "FT3D",
+      "class": "ht",
+      "locator": "tocalls.yaml#L107"
+    },
+    {
+      "suffix": "_3",
+      "vendor": "Yaesu",
+      "model": "FT5D",
+      "class": "ht",
+      "locator": "tocalls.yaml#L112"
+    },
+    {
+      "suffix": "_1",
+      "vendor": "Yaesu",
+      "model": "FTM-300D",
+      "class": "rig",
+      "locator": "tocalls.yaml#L117"
+    },
+    {
+      "suffix": "_2",
+      "vendor": "Yaesu",
+      "model": "FTM-200D",
+      "class": "rig",
+      "locator": "tocalls.yaml#L122"
+    },
+    {
+      "suffix": "_4",
+      "vendor": "Yaesu",
+      "model": "FTM-500D",
+      "class": "rig",
+      "locator": "tocalls.yaml#L127"
+    },
+    {
+      "suffix": "_5",
+      "vendor": "Yaesu",
+      "model": "FTM-510D",
+      "class": "rig",
+      "locator": "tocalls.yaml#L132"
+    },
+    {
+      "suffix": "_6",
+      "vendor": "Yaesu",
+      "model": "FTX-1",
+      "class": "rig",
+      "locator": "tocalls.yaml#L137"
+    },
+    {
+      "suffix": "_7",
+      "vendor": "Yaesu",
+      "model": "FTM-310D",
+      "class": "rig",
+      "locator": "tocalls.yaml#L142"
+    },
+    {
+      "suffix": "_)",
+      "vendor": "Yaesu",
+      "model": "FTM-100D",
+      "class": "rig",
+      "locator": "tocalls.yaml#L147"
+    },
+    {
+      "suffix": "_%",
+      "vendor": "Yaesu",
+      "model": "FTM-400DR",
+      "class": "rig",
+      "locator": "tocalls.yaml#L152"
+    },
+    {
+      "suffix": "(5",
+      "vendor": "Anytone",
+      "model": "D578UV",
+      "class": "ht",
+      "locator": "tocalls.yaml#L157"
+    },
+    {
+      "suffix": "(8",
+      "vendor": "Anytone",
+      "model": "D878UV",
+      "class": "ht",
+      "locator": "tocalls.yaml#L162"
+    },
+    {
+      "suffix": "|3",
+      "vendor": "Byonics",
+      "model": "TinyTrak3",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L167"
+    },
+    {
+      "suffix": "|4",
+      "vendor": "Byonics",
+      "model": "TinyTrak4",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L172"
+    },
+    {
+      "suffix": "^A",
+      "vendor": "AxelStack LLC",
+      "model": "APRS Connect",
+      "class": "app",
+      "locator": "tocalls.yaml#L177"
+    },
+    {
+      "suffix": "^v",
+      "vendor": "HinzTec",
+      "model": "anyfrog",
+      "locator": "tocalls.yaml#L183"
+    },
+    {
+      "suffix": "*v",
+      "vendor": "KissOZ",
+      "model": "Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L187"
+    },
+    {
+      "suffix": "*9",
+      "vendor": "NOR",
+      "model": "AVRT9",
+      "class": "ht",
+      "locator": "tocalls.yaml#L192"
+    },
+    {
+      "suffix": ":2",
+      "vendor": "SQ8L",
+      "model": "VP-Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L197"
+    },
+    {
+      "suffix": " X",
+      "vendor": "SainSonic",
+      "model": "AP510",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L202"
+    },
+    {
+      "suffix": "[1",
+      "vendor": "Open Source",
+      "model": "APRSdroid",
+      "class": "app",
+      "os": "Android",
+      "locator": "tocalls.yaml#L207"
+    }
+  ],
+  "micelegacy": [
+    {
+      "prefix": ">",
+      "vendor": "Kenwood",
+      "model": "TH-D7A",
+      "class": "ht",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L218"
+    },
+    {
+      "prefix": ">",
+      "suffix": "=",
+      "vendor": "Kenwood",
+      "model": "TH-D72",
+      "class": "ht",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L225"
+    },
+    {
+      "prefix": ">",
+      "suffix": "^",
+      "vendor": "Kenwood",
+      "model": "TH-D74",
+      "class": "ht",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L233"
+    },
+    {
+      "prefix": ">",
+      "suffix": "&",
+      "vendor": "Kenwood",
+      "model": "TH-D75",
+      "class": "ht",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L241"
+    },
+    {
+      "prefix": "]",
+      "vendor": "Kenwood",
+      "model": "TM-D700",
+      "class": "rig",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L249"
+    },
+    {
+      "prefix": "]",
+      "suffix": "=",
+      "vendor": "Kenwood",
+      "model": "TM-D710",
+      "class": "rig",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L256"
     }
   ]
 }
