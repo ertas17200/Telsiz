@@ -52,7 +52,22 @@ Bu nedenle:
 
 Bu katman karar vermek için tek başına kullanılmaz.
 
-### 2. Semantic decision table
+### 2. Structured source facts
+
+`data/btk_source_facts.json` ham transkripsiyon ile karar tablosu arasında kanıt-koruyucu bir ara katmandır.
+
+Bu katman:
+
+- 33/33 ham satırı aynı sırada korur;
+- kaynak güç metnini değiştirmeden tekli / çift-değerli güç terimlerine ayırır;
+- e.i.r.p. değerlerini verici çıkış gücüne dönüştürmez;
+- `75 W, 400 W (PEP)` gibi 29 çift-değerli satırda ilişkinin anlamını **çözülmemiş** bırakır;
+- 60 koşul transkripsiyonunu beacon, repeater, satellite, EME, emergency-cooperation, sınıf güç sınırı vb. tarama kategorileriyle indeksler;
+- her koşul için `decision_effect=NOT_EVALUATED` ve her satır için `permission_effect=NONE` zorunlu tutar.
+
+Bu yapı arama/inceleme ve sonraki semantik modelleme için kullanılabilir; **tek başına ALLOWED / NOT_ALLOWED üretmez**.
+
+### 3. Semantic decision table
 
 `data/frequency_table.json` AI karar motorunun fail-closed katmanıdır. Şimdilik yalnız atomik kurallarla doğrulanmış güç sınırlarını taşır: A sınıfı üç e.i.r.p. sınırı, ham tablonun görünür alt bantlarına bölünmüş C sınıfı 5 W sınırları ve A/B sınıfı 50–52 MHz genel 100 W sınırı. Her güç değeri bir `power_basis` taşır:
 
@@ -147,8 +162,9 @@ Validator en az şunları kanıtlar:
 
 ## NEXT
 
-1. Raw 33 satırı, kaynak anlamını bozmadan yapılandırılmış çoklu-güç/PEP ve koşul modellerine dönüştür.
-2. Emisyon kodlarını Tablo 26-1 tanımlarıyla ilişkilendir; kaynakta tanımsız kalan A3J/J2C'yi sessizce normalize etme.
+1. Yapılandırılmış source-fact katmanındaki 29 çift-değerli güç kaydının karar semantiğini, kaynakta bulunmayan ilişkiyi uydurmadan çözmek için resmî açıklama/değişiklik provenance'ını doğrula.
+2. 60 koşul transkripsiyonundan karar açısından güvenle atomikleştirilebilenleri yalnız açık kaynak dayanağıyla decision modeline promote et.
+3. Emisyon kodlarını Tablo 26-1 tanımlarıyla ilişkilendir; kaynakta tanımsız kalan A3J/J2C'yi sessizce normalize etme.
 3. Beacon / repeater / satellite / EME / emergency-cooperation / alt-bant koşullarını serbest metne indirgemeden modelle.
 4. `TR-BTK-NUMBERING-001`, `TR-BTK-EMISSION-001` ve `TR-BTK-UNIT-001` açıkken pozitif izin üretme.
 5. Bütün completeness koşulları, exact-head PR CI ve merge sonrası main CI geçmeden `coverage_status=complete` yapma.
