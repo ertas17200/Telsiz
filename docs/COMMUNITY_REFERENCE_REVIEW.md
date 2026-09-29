@@ -136,11 +136,24 @@ Acceptance:
 
 ### P11.6 — Bilingual documentation
 
-Add English navigation only after canonical Turkish source-backed content exists.
+**Implementation status: IMPLEMENTED BASELINE with fail-closed translation drift detection.**
+
+Implemented:
+- root English navigation at `README_EN.md`;
+- Academy English navigation at `academy/README_EN.md`;
+- `docs/translations.json` mapping every English navigation page to its canonical Turkish document;
+- canonical Turkish Git blob SHA-1 pinning so a Turkish-document edit produces `RETRANSLATION_REQUIRED`;
+- explicit source/rule ID carry-over into each English page;
+- rejection of pending/unverified sources from the English navigation authority list;
+- mandatory `legal_verdicts=false` and canonical-controls semantics;
+- CI validator and negative regression tests.
 
 Acceptance:
 - translations link to the same underlying source IDs;
-- translation cannot silently alter legal meaning.
+- translations identify their canonical Turkish path;
+- canonical Turkish/source-backed records control on disagreement;
+- translation cannot silently alter legal meaning;
+- a changed canonical Turkish blob fails CI until the English page is reviewed.
 
 ## Decision
 

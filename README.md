@@ -1,5 +1,7 @@
 # Telsiz
 
+> English navigation: [README_EN.md](README_EN.md). The Turkish/source-backed records remain canonical.
+
 Source-grounded AI knowledge base for amateur radio, initially focused on Türkiye.
 
 ## Goal

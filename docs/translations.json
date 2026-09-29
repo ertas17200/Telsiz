@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "canonical_language": "tr",
+  "policy": "English navigation is derivative only; canonical Turkish/source-backed records control. Translation drift is fail-closed.",
+  "translations": [
+    {
+      "id": "DOC.ROOT.README.EN",
+      "canonical_path": "README.md",
+      "translation_path": "README_EN.md",
+      "language": "en",
+      "translation_kind": "navigation",
+      "canonical_blob_sha1": "a328c69e153fc16a6361bda53b2e836c503db646",
+      "source_ids": [
+        "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+        "TR.BTK.RADIO.PROCEDURES",
+        "TR.KEGM.AMATEUR.FAQ",
+        "IARU.R1.BANDPLANS",
+        "TR.TRAC.REPEATER.LIST"
+      ],
+      "rule_ids": [
+        "TR.AMATEUR.TECHNICAL_COMPLIANCE",
+        "IARU.R1.NATIONAL_RULES_PREVAIL"
+      ],
+      "legal_verdicts": false,
+      "canonical_controls": true
+    },
+    {
+      "id": "DOC.ACADEMY.README.EN",
+      "canonical_path": "academy/README.md",
+      "translation_path": "academy/README_EN.md",
+      "language": "en",
+      "translation_kind": "navigation",
+      "canonical_blob_sha1": "e3618c49e4a711e807363456ca04797b35fd622f",
+      "source_ids": [
+        "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+        "TR.KEGM.AMATEUR.FAQ",
+        "IARU.R1.BANDPLANS",
+        "ITU.R.M1677.1",
+        "IARU.R1.EOP.4.2.0",
+        "ITU.R.M1172.0",
+        "IARU.R1.VHF.HANDBOOK.10.02",
+        "ADIF.SPEC.3.1.7",
+        "BIPM.SI.DEFINING_CONSTANTS",
+        "YAESU.FTM400.PRODUCT.ARCHIVE",
+        "YAESU.FTM400DRDE.FW.INFO.2020-12-22",
+        "YAESU.FTM400XDRXDE.FW.INFO.2020-12-22",
+        "TR.TRAC.REPEATER.LIST",
+        "TR.BTK.RADIO.PROCEDURES"
+      ],
+      "rule_ids": [
+        "TR.AMATEUR.TECHNICAL_COMPLIANCE",
+        "TR.AMATEUR.DUMMY_LOAD",
+        "IARU.R1.NATIONAL_RULES_PREVAIL"
+      ],
+      "legal_verdicts": false,
+      "canonical_controls": true
+    }
+  ]
+}
