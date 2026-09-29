@@ -67,6 +67,9 @@ jobs:
       - name: Validate official artifact registry
         run: python scripts/artifact_gate.py validate-registry
 
+      - name: Validate BTK semantic promotion readiness
+        run: python scripts/validate_semantic_promotion.py
+
       - name: Validate academy manifest
         run: python scripts/validate_academy.py
 
