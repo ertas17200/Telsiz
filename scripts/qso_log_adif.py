@@ -104,6 +104,50 @@ def export_record(record: dict, contract: dict | None = None) -> str:
     return "".join(parts) + "<EOR>"
 
 
+TAG_RE = re.compile(r"<([A-Za-z0-9_]+)(?::(\d+)(?::([A-Za-z]))?)?>")
+
+
+def parse_adi(text: str) -> dict:
+    """Parse ADI data specifiers back into ``{"header": {...}, "records": [...]}``.
+
+    Inverse of :func:`export_log` for the specifier shape it writes
+    (``<FIELD:length>value``, optional ``:type``, ``<EOH>``, ``<EOR>``).
+    Text before the first ``<`` is ignored; a length that runs past the
+    end of the input is rejected. Field names are compared upper-cased.
+    Parsed records are not validated here; use :func:`validate_record`.
+    """
+    header: dict[str, str] = {}
+    records: list[dict[str, str]] = []
+    current: dict[str, str] = {}
+    pos = text.find("<")
+    if pos < 0:
+        raise ValueError("no ADI data specifier found")
+    while True:
+        match = TAG_RE.search(text, pos)
+        if not match:
+            break
+        name = match.group(1).upper()
+        if match.group(2) is None:
+            if name == "EOH":
+                header, current = current, {}
+            elif name == "EOR":
+                records.append(current)
+                current = {}
+            else:
+                raise ValueError(f"<{name}> has no length")
+            pos = match.end()
+            continue
+        length = int(match.group(2))
+        value = text[match.end():match.end() + length]
+        if len(value) != length:
+            raise ValueError(f"{name}: declared length {length} runs past the end of the input")
+        current[name] = value
+        pos = match.end() + length
+    if current:
+        raise ValueError("record without closing <EOR>")
+    return {"header": header, "records": records}
+
+
 def export_log(
     records: list[dict],
     program_id: str = "TELSIZ",
