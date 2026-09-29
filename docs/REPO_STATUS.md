@@ -369,3 +369,54 @@ P0_BLOCKER=SOURCE_CONFLICTS_AND_SEMANTIC_PROMOTION
 ```
 
 Open source conflicts remain unchanged: `TR-BTK-NUMBERING-001`, `TR-BTK-EMISSION-001`, and `TR-BTK-UNIT-001`. No source anomaly is silently normalized.
+
+
+## 2026-09-29 — P0 semantic-promotion readiness delta
+
+The BTK byte-artifact blocker remains closed. This delta advances the semantic layer without declaring complete coverage.
+
+```text
+FEATURE_HEAD=84e914174777889362c495b73bb34124b894fabe
+PUSH_RUN=36561023042
+PUSH_JOB=109381646523
+RUNNER=GitHub Actions 1000014200
+EXACT_HEAD=PASS
+RAW_ROWS=33/33
+EMISSION_DEFINITIONS=24/24
+ARTIFACT_SHA256=BOUND
+SEMANTIC_READINESS_ROWS=33/33
+PARTIAL_SEMANTIC_MAPPINGS=8
+NOT_READY_CURRENT_SCHEMA=25
+UNIT_TESTS=273/273
+FINAL_EXACT_HEAD=PASS
+```
+
+New conflict-safe limited promotion:
+
+```text
+RAW_ROW=17
+SEMANTIC_ROW=TR.FTM.AMATEUR.ROW.AB.50-52
+FREQUENCY=50-52 MHz
+LICENSE_CLASSES=A,B
+GENERAL_MAX_OUTPUT_POWER=100 W
+EMISSION=null
+BEACON=null
+SATELLITE=null
+SPECIAL_CONDITIONS=null
+TABLE_COVERAGE=partial
+```
+
+Only the visually explicit frequency/class/general-power fields were promoted. The same source row's beacon/EME context and the inherited emission cell remain unmodeled because the current schema cannot safely flatten those conditions and the emission source conflict remains open.
+
+Current P0 state:
+
+```text
+P0_ARTIFACT_GATE=PASS
+P0_BYTE_BLOCKER=CLOSED
+P0_READINESS_MAP=PASS_33_OF_33
+P0_SEMANTIC_TABLE=PARTIAL_8_MAPPINGS
+P0_SEMANTIC_PROMOTION=HOLD
+P0_BLOCKER=SOURCE_CONFLICTS_AND_SEMANTIC_MODEL_GAPS
+```
+
+The open source conflicts remain `TR-BTK-NUMBERING-001`, `TR-BTK-EMISSION-001`, and `TR-BTK-UNIT-001`.
