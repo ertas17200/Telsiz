@@ -101,8 +101,8 @@ def main() -> int:
         fail("current 10809 exact-text candidate missing")
     if cand.get("status") != "candidate_inaccessible":
         fail("current 10809 candidate must remain inaccessible until origin fetch succeeds")
-    if cand.get("canonical_url") != CURRENT_RG_URL:
-        fail("current 10809 candidate canonical URL mismatch")
+    if cand.get("canonical_url") is not None:
+        fail("current 10809 candidate canonical_url must remain null until promotion")
 
     contract = data.get("authority_contract", {})
     if contract.get("current_legal_source_id") != CURRENT_LEGAL_ID:
