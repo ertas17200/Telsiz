@@ -442,3 +442,45 @@ DECISION_AUTHORITY=technical_reference_only
 Curated v1 covers ISS, SO-50, AO-73 and AO-91. The snapshot is mutable community/open technical data; a listed uplink/downlink never establishes Turkish transmit permission, licence authority, or regulatory compliance. Exact alias/NORAD matching is required and fuzzy invention is disabled.
 
 NEXT: extend the satellite layer only with source-pinned, licence-compatible records and explicit freshness boundaries; separately continue P0/P1–P3 legal work without allowing satellite operational data to override legal authority.
+
+
+## 2026-09-29 — Emergency communications source layer closure
+
+PR #50 added an authority-separated, fail-closed emergency/disaster communications knowledge layer.
+
+```text
+ENGINEERING_BASELINE=0527b1dab90427768db5115817844ed304eaf5cd
+PR=50
+PR_HEAD=777a59733c9c1fa866e30cccbaf9bd4944c4c774
+PUSH_RUN=36599247213
+PUSH_JOB=109512046114
+PUSH_RUNNER=GitHub Actions 1000014260
+PUSH_CI=PASS
+PR_RUN=36599522523
+PR_JOB=109512991387
+PR_RUNNER=GitHub Actions 1000014261
+PR_CI=PASS
+MAIN_RUN=36599606656
+MAIN_JOB=109513284784
+MAIN_RUNNER=GitHub Actions 1000014262
+MAIN_CI=PASS
+TESTS=413/413
+AFAD_CONTEXT_ITEMS=5
+IARU_PRACTICE_ITEMS=4
+LEGAL_PERMISSION_FROM_EMERGENCY_LAYER=PROHIBITED
+FREQUENCY_INFERENCE=PROHIBITED
+AMATEUR_STATUS_IMPLIES_OFFICIAL_ASSIGNMENT=false
+EMERGENCY_CONTEXT_EXPANDS_TRANSMIT_PERMISSION=false
+```
+
+Verified contextual sources are `TR.AFAD.TAMP.2022` (official technical/coordination context) and `IARU.R1.EMCOMM.PROCEDURES` (amateur-association training/operating practice). The full consolidated legal text and provenance chain of the 2022 Afet ve Acil Durum Müdahale Hizmetleri Yönetmeliği is intentionally not promoted; it remains tracked as `CAND.TR.AFAD.MUDAHALE_REGULATION.2022`.
+
+The layer answers TAMP/S1–S4 and emergency operating-practice questions without inventing a universal Turkish emergency frequency, extra transmit authority, or official assignment. Numeric frequency questions still pass through the existing BTK-grounded legal/frequency engine.
+
+Failure-learning controls added during closure:
+
+1. the source-candidate validator rejected a noncanonical `P12` phase; the candidate was moved to canonical `P8`;
+2. the unit suite exposed a Turkish dotted-I brittle assertion; it was replaced with a semantic verdict marker assertion;
+3. the source-candidate documentation drift test exposed a stale promoted-candidate entry; `docs/SOURCE_CANDIDATES.md` was synchronized with the registry.
+
+NEXT: verify the full official 2022 intervention-regulation text and amendment/provenance chain before creating any legal rule; separately extend emergency operating guidance only with source/freshness/authority boundaries preserved.
