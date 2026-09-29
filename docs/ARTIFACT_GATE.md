@@ -16,16 +16,21 @@ CONTENT_INSPECTED != BYTE_ARTIFACT_VERIFIED
 
 `data/artifacts.json` is the byte-evidence registry.
 
-For the BTK Technical Criteria PDF it currently says:
+For the BTK Technical Criteria PDF the first canonical byte acquisition completed on 2026-09-29:
 
 ```text
-artifact_status=awaiting_bytes
-sha256=null
-change_status=UNKNOWN
-reverify_required=true
+artifact_status=verified_bytes
+http_status=200
+content_type=application/pdf
+size_bytes=508766
+sha256=sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0
+change_status=UNCHANGED
+reverify_required=false
+probe_run=36560262553
+probe_job=109379164582
 ```
 
-This is intentional and fail-closed.
+The observed hash is bound to the matching source record in `data/sources.json`. Future probes must reproduce the same digest or fail closed as `SOURCE_CHANGED` / `REVERIFY_REQUIRED`.
 
 ## Validate registry
 
@@ -86,6 +91,6 @@ The official PDF does not need to be committed to GitHub. The project can store 
 
 ## P0 relationship
 
-The current BTK raw transcription is 33/33 rows with 24/24 emission definitions, but P0 semantic promotion remains on HOLD until the artifact byte evidence is acquired and source conflicts are handled.
+The current BTK raw transcription is 33/33 rows with 24/24 emission definitions and byte-level artifact evidence is now verified. P0 semantic promotion remains on HOLD only because source conflicts and unpromoted semantic dimensions still remain.
 
-The artifact gate is infrastructure. Its own CI PASS must never be reported as the official BTK artifact itself being verified.
+The artifact gate infrastructure and the artifact observation are distinct. The BTK artifact is now byte-verified because the canonical URL itself returned HTTP 200 PDF bytes whose size and SHA-256 were recorded and rebound successfully; future source drift must fail closed.
