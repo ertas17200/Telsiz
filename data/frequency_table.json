@@ -3,17 +3,22 @@
   "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
   "table_locator": "MADDE 22 amatör istasyon tablosu (PDF başlığı: Tablo 25; madde içi atıf: Tablo-26 / Tablo 26-1)",
   "coverage_status": "partial",
-  "coverage_blocker": "SEMANTIC_PROMOTION_HOLD: Official BTK PDF content was read and visually verified on 2026-09-28 and all 33 visible source rows were transcribed to data/btk_amateur_table_raw.json. Raw artifact bytes are not available in this execution runtime, so the required artifact SHA-256 cannot be recorded. Source-internal conflicts TR-BTK-NUMBERING-001, TR-BTK-EMISSION-001 and TR-BTK-UNIT-001 remain open. The semantic decision table therefore stays partial.",
+  "coverage_blocker": "SEMANTIC_PROMOTION_HOLD: Official BTK PDF byte artifact is now verified and hash-bound. All 33 visible source rows are transcribed, but source-internal conflicts TR-BTK-NUMBERING-001, TR-BTK-EMISSION-001 and TR-BTK-UNIT-001 remain open and semantic dimensions are still only partially promoted. The decision table therefore remains partial.",
   "null_field_semantics": "null = NOT_EXTRACTED. null hiçbir zaman 'kısıtlama yok' veya 'izin var' anlamına gelmez. Liste alanlarında [] yalnız kaynak satırında ilgili hüküm bulunmadığı doğrulandıktan sonra kullanılabilir.",
   "artifact": {
     "source_url": "https://www.btk.gov.tr/uploads/pages/ftm-teknik-olcutler-ek-5.pdf",
-    "access_method": "trusted web PDF text layer + visual page screenshots",
-    "accessed_date": "2026-09-28",
+    "access_method": "GitHub-hosted runner byte-for-byte canonical URL acquisition + trusted web PDF visual verification",
+    "accessed_date": "2026-09-29",
     "content_type": "application/pdf",
     "pdf_page_count": 47,
-    "sha256": null,
+    "sha256": "sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0",
     "raw_transcription": "data/btk_amateur_table_raw.json",
-    "emission_reference": "data/btk_emission_types.json"
+    "emission_reference": "data/btk_emission_types.json",
+    "fetched_at": "2026-09-29T11:12:11.659540Z",
+    "http_status": 200,
+    "size_bytes": 508766,
+    "byte_evidence_run": "36560262553",
+    "byte_evidence_job": "109379164582"
   },
   "row_count_reconciliation": {
     "table_start_locator": "PDF 41/47 — visible heading 'Tablo 25: Amatör telsiz cihaz ve sistemleri teknik ölçütleri'",
