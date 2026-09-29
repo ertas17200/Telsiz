@@ -12,9 +12,9 @@
   },
   "transcription_status": "visual_official_source_complete_rows",
   "source_rows_counted": 33,
-  "artifact_sha256": null,
-  "semantic_promotion_status": "HOLD_ARTIFACT_HASH_AND_SOURCE_CONFLICTS",
-  "method": "Official BTK PDF text layer plus visual screenshot verification of pages 40-45 (PDF indices 39-44); merged-cell inheritance is recorded explicitly. Machine emission-code lists are de-duplicated across all rows while source repetitions remain documented in TR-BTK-EMISSION-001.",
+  "artifact_sha256": "sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0",
+  "semantic_promotion_status": "HOLD_SOURCE_CONFLICTS_AND_SEMANTIC_MODEL",
+  "method": "Official BTK PDF text layer plus visual screenshot verification of pages 40-45 (PDF indices 39-44); merged-cell inheritance is recorded explicitly. The canonical PDF byte baseline is bound to SHA-256 eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0 from GitHub Actions observation run 36559259435. Machine emission-code lists are de-duplicated across all rows while source repetitions remain documented in TR-BTK-EMISSION-001.",
   "known_source_conflicts": [
     "TR-BTK-NUMBERING-001",
     "TR-BTK-EMISSION-001",

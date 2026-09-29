@@ -1,0 +1,992 @@
+{
+  "schema_version": 1,
+  "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+  "artifact_sha256": "sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0",
+  "source_rows_counted": 33,
+  "mapping_status": "COMPLETE_33_ROW_READINESS_MAP_SEMANTIC_PROMOTION_PARTIAL",
+  "global_source_conflicts": [
+    "TR-BTK-NUMBERING-001",
+    "TR-BTK-EMISSION-001",
+    "TR-BTK-UNIT-001"
+  ],
+  "policy": {
+    "purpose": "Inventory exactly which raw fields can be promoted without inventing semantics. This file does not create a legal permission verdict.",
+    "does_not_create_permission": true,
+    "current_model_limits": [
+      "e.i.r.p. requires an explicit power-basis model before it can be represented as transmitter output power.",
+      "Rows containing two power values require a structured multivalue/PEP model before general power promotion.",
+      "A3J and J2C remain source-listed but undefined by Tablo 26-1 and are blocked from semantic emission promotion.",
+      "Conditional use such as beacon, EME, emergency/cooperation and sub-range emission restrictions requires structured condition modeling rather than free-text flattening."
+    ]
+  },
+  "summary": {
+    "rows_mapped": 33,
+    "rows_with_partial_semantic_promotion": 8,
+    "rows_not_ready_current_schema": 25
+  },
+  "rows": [
+    {
+      "source_row_index": 1,
+      "raw_identity": {
+        "frequency_min": 135.7,
+        "frequency_max": 137.8,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_POWER_BASIS_MODEL",
+        "emissions": "PROMOTABLE_EXACT",
+        "conditions": "PROMOTABLE_EMPTY_VERIFIED"
+      },
+      "emission_conflict_codes": [],
+      "blockers": [
+        "SEMANTIC_POWER_BASIS_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 2,
+      "raw_identity": {
+        "frequency_min": 472,
+        "frequency_max": 479,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_POWER_BASIS_MODEL",
+        "emissions": "PROMOTABLE_EXACT",
+        "conditions": "PROMOTABLE_EMPTY_VERIFIED"
+      },
+      "emission_conflict_codes": [],
+      "blockers": [
+        "SEMANTIC_POWER_BASIS_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 3,
+      "raw_identity": {
+        "frequency_min": 1810,
+        "frequency_max": 1840,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "PROMOTABLE_EXACT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [],
+      "blockers": [
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 4,
+      "raw_identity": {
+        "frequency_min": 1840,
+        "frequency_max": 1850,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "PROMOTABLE_EXACT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [],
+      "blockers": [
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 5,
+      "raw_identity": {
+        "frequency_min": 3500,
+        "frequency_max": 3610,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 6,
+      "raw_identity": {
+        "frequency_min": 3610,
+        "frequency_max": 3800,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 7,
+      "raw_identity": {
+        "frequency_min": 5351.5,
+        "frequency_max": 5366.5,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_POWER_BASIS_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "PROMOTABLE_EMPTY_VERIFIED"
+      },
+      "emission_conflict_codes": [
+        "A3J"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_POWER_BASIS_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 8,
+      "raw_identity": {
+        "frequency_min": 7000,
+        "frequency_max": 7200,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 9,
+      "raw_identity": {
+        "frequency_min": 10100,
+        "frequency_max": 10150,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 10,
+      "raw_identity": {
+        "frequency_min": 14000,
+        "frequency_max": 14250,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 11,
+      "raw_identity": {
+        "frequency_min": 14250,
+        "frequency_max": 14350,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 12,
+      "raw_identity": {
+        "frequency_min": 18068,
+        "frequency_max": 18168,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 13,
+      "raw_identity": {
+        "frequency_min": 21000,
+        "frequency_max": 21150,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 14,
+      "raw_identity": {
+        "frequency_min": 21151,
+        "frequency_max": 21450,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 15,
+      "raw_identity": {
+        "frequency_min": 24890,
+        "frequency_max": 24990,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 16,
+      "raw_identity": {
+        "frequency_min": 28000,
+        "frequency_max": 29700,
+        "unit": "kHz",
+        "license_classes": [
+          "A"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "TR-BTK-UNIT-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 17,
+      "raw_identity": {
+        "frequency_min": 50,
+        "frequency_max": 52,
+        "unit": "MHz",
+        "license_classes": [
+          "A",
+          "B"
+        ]
+      },
+      "current_semantic_row_ids": [
+        "TR.FTM.AMATEUR.ROW.AB.50-52"
+      ],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "PROMOTABLE_OUTPUT_W",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "PARTIAL_PROMOTION_PRESENT"
+    },
+    {
+      "source_row_index": 18,
+      "raw_identity": {
+        "frequency_min": 144,
+        "frequency_max": 146,
+        "unit": "MHz",
+        "license_classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "current_semantic_row_ids": [
+        "TR.FTM.AMATEUR.ROW.C.144-146"
+      ],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "PARTIAL_PROMOTION_PRESENT"
+    },
+    {
+      "source_row_index": 19,
+      "raw_identity": {
+        "frequency_min": 430.2,
+        "frequency_max": 430.7,
+        "unit": "MHz",
+        "license_classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "current_semantic_row_ids": [
+        "TR.FTM.AMATEUR.ROW.C.430.2-430.7"
+      ],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "PARTIAL_PROMOTION_PRESENT"
+    },
+    {
+      "source_row_index": 20,
+      "raw_identity": {
+        "frequency_min": 431.55,
+        "frequency_max": 431.825,
+        "unit": "MHz",
+        "license_classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "current_semantic_row_ids": [
+        "TR.FTM.AMATEUR.ROW.C.431.55-431.825"
+      ],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "PARTIAL_PROMOTION_PRESENT"
+    },
+    {
+      "source_row_index": 21,
+      "raw_identity": {
+        "frequency_min": 432,
+        "frequency_max": 432.975,
+        "unit": "MHz",
+        "license_classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "current_semantic_row_ids": [
+        "TR.FTM.AMATEUR.ROW.C.432-432.975"
+      ],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "PARTIAL_PROMOTION_PRESENT"
+    },
+    {
+      "source_row_index": 22,
+      "raw_identity": {
+        "frequency_min": 433.4,
+        "frequency_max": 433.575,
+        "unit": "MHz",
+        "license_classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "current_semantic_row_ids": [
+        "TR.FTM.AMATEUR.ROW.C.433.4-433.575"
+      ],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "PARTIAL_PROMOTION_PRESENT"
+    },
+    {
+      "source_row_index": 23,
+      "raw_identity": {
+        "frequency_min": 435,
+        "frequency_max": 437.975,
+        "unit": "MHz",
+        "license_classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "current_semantic_row_ids": [
+        "TR.FTM.AMATEUR.ROW.C.435-437.975"
+      ],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "PARTIAL_PROMOTION_PRESENT"
+    },
+    {
+      "source_row_index": 24,
+      "raw_identity": {
+        "frequency_min": 439.15,
+        "frequency_max": 439.425,
+        "unit": "MHz",
+        "license_classes": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "current_semantic_row_ids": [
+        "TR.FTM.AMATEUR.ROW.C.439.15-439.425"
+      ],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "PARTIAL_PROMOTION_PRESENT"
+    },
+    {
+      "source_row_index": 25,
+      "raw_identity": {
+        "frequency_min": 1240,
+        "frequency_max": 1300,
+        "unit": "MHz",
+        "license_classes": [
+          "A",
+          "B"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 26,
+      "raw_identity": {
+        "frequency_min": 5650,
+        "frequency_max": 5670,
+        "unit": "MHz",
+        "license_classes": [
+          "A",
+          "B"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "PROMOTABLE_EMPTY_VERIFIED"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 27,
+      "raw_identity": {
+        "frequency_min": 5820,
+        "frequency_max": 5850,
+        "unit": "MHz",
+        "license_classes": [
+          "A",
+          "B"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "PROMOTABLE_EMPTY_VERIFIED"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 28,
+      "raw_identity": {
+        "frequency_min": 10450,
+        "frequency_max": 10452,
+        "unit": "MHz",
+        "license_classes": [
+          "A",
+          "B"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 29,
+      "raw_identity": {
+        "frequency_min": 24000,
+        "frequency_max": 24050,
+        "unit": "MHz",
+        "license_classes": [
+          "A",
+          "B"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 30,
+      "raw_identity": {
+        "frequency_min": 47,
+        "frequency_max": 47.2,
+        "unit": "GHz",
+        "license_classes": [
+          "A",
+          "B"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 31,
+      "raw_identity": {
+        "frequency_min": 75.5,
+        "frequency_max": 76,
+        "unit": "GHz",
+        "license_classes": [
+          "A",
+          "B"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "PROMOTABLE_EMPTY_VERIFIED"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 32,
+      "raw_identity": {
+        "frequency_min": 134,
+        "frequency_max": 136,
+        "unit": "GHz",
+        "license_classes": [
+          "A",
+          "B"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "NEEDS_CONDITION_MODEL"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP",
+        "SEMANTIC_CONDITION_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    },
+    {
+      "source_row_index": 33,
+      "raw_identity": {
+        "frequency_min": 136,
+        "frequency_max": 142,
+        "unit": "GHz",
+        "license_classes": [
+          "A",
+          "B"
+        ]
+      },
+      "current_semantic_row_ids": [],
+      "field_readiness": {
+        "frequency_range": "PROMOTABLE_EXACT",
+        "license_classes": "PROMOTABLE_EXACT",
+        "power": "NEEDS_MULTIVALUE_POWER_MODEL",
+        "emissions": "BLOCKED_SOURCE_CONFLICT",
+        "conditions": "PROMOTABLE_EMPTY_VERIFIED"
+      },
+      "emission_conflict_codes": [
+        "A3J",
+        "J2C"
+      ],
+      "blockers": [
+        "TR-BTK-EMISSION-001",
+        "SEMANTIC_MULTIVALUE_POWER_MODEL_GAP"
+      ],
+      "overall_status": "NOT_READY_CURRENT_SCHEMA"
+    }
+  ]
+}
