@@ -39,6 +39,7 @@ grid = _load_module("grid_locator")
 vdm = _load_module("validate_digital_modes")
 aprs = _load_module("aprs_deviceid")
 vax = _load_module("validate_ax25")
+sat = _load_module("satellite_lookup")
 
 QCODE_RE = re.compile(r"(?<![a-z0-9])(q[a-z]{2})(?![a-z0-9])")
 RST_KEY_RE = re.compile(r"(?<![a-z0-9])(rst|rs|rapor\w*|sinyal raporu)(?![a-z0-9])")
@@ -58,6 +59,7 @@ MICE_CODE_RE = re.compile(r"[\"“”«»`']([^\"“”«»`']{1,2})[\"“”«�
 AX25_KEY_RE = re.compile(r"(?<![a-z0-9])(ax\.?25|hdlc|afsk|fcs|paket radyo\w*|packet radio|bit doldurma|bit stuffing)(?![a-z0-9])")
 TOCALL_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])([A-Za-z][A-Za-z0-9]{3,5})(?:-\d{1,2})?(?![A-Za-z0-9])")
 REPEATER_KEY_RE = re.compile(r"(?<![a-z0-9])(role\w*|tekrarlayici\w*|repeater\w*)")
+SATELLITE_KEY_RE = re.compile(r"(?<![a-z0-9])(uydu\w*|satellite\w*|transponder\w*|uplink\w*|downlink\w*)(?![a-z0-9])")
 
 
 def _tr(value: float, digits: int = 3) -> str:
@@ -317,6 +319,39 @@ def ax25_route(text: str, question: str) -> dict | None:
             "source_ids": [payload["source_id"]]}
 
 
+
+
+def satellite_route(text: str, question: str) -> dict | None:
+    registry = sat.load_registry()
+    hits = sat.find_mentions(question, registry)
+    if not hits:
+        return None
+    if not SATELLITE_KEY_RE.search(text):
+        # Exact known aliases such as ISS/SO-50/AO-73/AO-91 are strong enough
+        # to route only when the question also asks a radio-specific field.
+        if not re.search(r"(?<![a-z0-9])(aprs|frekans\w*|fm|ssb|lsb|usb|bpsk|afsk|telemetr\w*)(?![a-z0-9])", text):
+            return None
+    short = []
+    lines = [
+        registry["trust_note"],
+        f"Snapshot: {registry['snapshot_id']} (observed {registry['observed_at']}); upstream mutable.",
+        f"Lisans/atıf: {registry['license']['attribution']} — {registry['license']['name']}.",
+        "Uydu verisi teknik referanstır; Türkiye'de yayın izni, frekans tahsisi veya belge yetkisi oluşturmaz.",
+    ]
+    for item in hits:
+        aliases = ", ".join(item["aliases"])
+        sat_label = f"{item['name']} ({aliases}; NORAD {item['norad_id']})" if aliases else f"{item['name']} (NORAD {item['norad_id']})"
+        for tx in item["transmitters"]:
+            short.append(f"{sat_label}: {sat.describe_transmitter(tx)}.")
+        short.append("Uydu verisi teknik referanstır; hukuki izin sonucu UNKNOWN kalır.")
+    return {
+        "topic": "Uydu haberleşmesi (SatNOGS teknik snapshot)",
+        "short": short,
+        "lines": lines,
+        "source_ids": [registry["source_id"]],
+    }
+
+
 def grid_route(text: str, question: str) -> dict | None:
     if not GRID_KEY_RE.search(text):
         return None
@@ -352,6 +387,7 @@ def technical_routes(text: str, question: str, frequencies_mhz: list[float]) -> 
         digital_mode_route(text, question),
         aprs_route(text, question),
         ax25_route(text, question),
+        satellite_route(text, question),
         grid_route(text, question),
     ]
     return [r for r in routes if r]
