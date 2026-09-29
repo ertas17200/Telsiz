@@ -484,3 +484,53 @@ Failure-learning controls added during closure:
 3. the source-candidate documentation drift test exposed a stale promoted-candidate entry; `docs/SOURCE_CANDIDATES.md` was synchronized with the registry.
 
 NEXT: verify the full official 2022 intervention-regulation text and amendment/provenance chain before creating any legal rule; separately extend emergency operating guidance only with source/freshness/authority boundaries preserved.
+
+
+## 2026-09-29 — AFAD current regulation / TAMP legal-basis verification
+
+This delta corrects the emergency-law provenance chain discovered after the emergency communications layer closure.
+
+```text
+ENGINEERING_BASELINE=e6d415087d8e89eea8b724e17434aa52d0ca40b7
+PR=52
+PR_HEAD=fdedf0482a44f2c3ba563c6a08e688605ddd470d
+PR_RUN=36601747331
+PR_JOB=109520598043
+PR_RUNNER=GitHub Actions 1000014266
+PR_CI=PASS
+TESTS=414/414
+TECHNICAL_MAIN_RUN=36602041554
+TECHNICAL_MAIN_JOB=109521572615
+TECHNICAL_MAIN_RUNNER=GitHub Actions 1000014267
+TECHNICAL_MAIN_CI=PASS
+TECHNICAL_MAIN_TESTS=414/414
+CURRENT_INSTRUMENT=10809
+CURRENT_EFFECTIVE_DATE=2025-12-31
+HISTORICAL_INSTRUMENT=5211
+HISTORICAL_STATUS=REPEALED
+TAMP_PAGE_2022_LEGAL_BASIS_METADATA=STALE
+CURRENT_ORIGIN_EXACT_TEXT=PENDING_ORIGIN_FETCH
+LEGAL_RULE_PROMOTION=HOLD
+```
+
+The former P8 target `CAND.TR.AFAD.MUDAHALE_REGULATION.2022` was incorrect as a current-law target. The 2022/5211 instrument is now retained only as historical/repealed source `TR.AFAD.MUDAHALE.REGULATION.2022-5211`.
+
+The current instrument is recorded as `TR.AFAD.MUDAHALE.REGULATION.2025-10809`. Its currentness, publication date and exact Official Gazette URL were independently resolved, but the origin Official Gazette PDF body/raw bytes could not be retrieved through the active verification path. For that reason the current source intentionally remains `verification_status=pending`; no mirror or consolidated copy was promoted into exact-text legal authority.
+
+The AFAD TAMP page remains useful for TAMP purpose/scope and S1-S4 operational context, but its 2022/5211 legal-basis paragraph is explicitly marked stale and cannot support a current legal-rule verdict.
+
+### Failure learning
+
+The first PR exact-head run correctly failed because the new candidate attempted to populate `canonical_url`. Repository policy requires candidates to keep that field null until promotion. The exact Resmî Gazete URL is therefore kept on the pending current source record, while the candidate remains fail-closed.
+
+```text
+FAILED_HEAD=df2ac413fec0039e3cb5b22f891d6813b6aca6f8
+FAILED_RUN=36601666185
+FAILED_JOB=109520322229
+FAILED_RUNNER=GitHub Actions 1000014265
+FAILURE_CLASS=CANDIDATE_CANONICAL_URL_INVARIANT
+FIXED_HEAD=fdedf0482a44f2c3ba563c6a08e688605ddd470d
+PREVENTION=existing candidate validator + emergency current-law validator
+```
+
+NEXT: fetch and byte-verify the origin 31.12.2025/10809 Official Gazette PDF, bind size/SHA-256, verify exact Article 37 / Geçici Madde 1 / relevant operational provisions from the origin artifact, then and only then consider legal-rule promotion.
