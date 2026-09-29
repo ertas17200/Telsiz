@@ -27,21 +27,42 @@ SOURCE_ID = "TR.BTK.FTM.TECH.2022-IK-SYD-245"
 
 
 class ArtifactRegistryTests(unittest.TestCase):
-    def test_repository_registry_is_fail_closed_and_valid(self):
+    def test_repository_registry_has_verified_bound_btk_bytes(self):
         self.assertEqual(gate.validate_registry(ARTIFACTS, SOURCES_PAYLOAD), 1)
         record = ARTIFACTS["artifacts"][0]
-        self.assertEqual(record["artifact_status"], "awaiting_bytes")
-        self.assertIsNone(record["sha256"])
-        self.assertTrue(record["reverify_required"])
+        self.assertEqual(record["artifact_status"], "verified_bytes")
+        self.assertEqual(record["sha256"], "sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0")
+        self.assertEqual(record["size_bytes"], 508766)
+        self.assertEqual(record["change_status"], "UNCHANGED")
+        self.assertFalse(record["reverify_required"])
+        self.assertEqual(SOURCES[SOURCE_ID]["content_sha256"], record["sha256"])
+
+    def awaiting_payload(self):
+        source = SOURCES[SOURCE_ID]
+        return {
+            "schema_version": 1,
+            "artifacts": [{
+                "source_id": SOURCE_ID,
+                "canonical_url": source["url"],
+                "expected_mime_type": "application/pdf",
+                "artifact_status": "awaiting_bytes",
+                "fetched_at": None,
+                "size_bytes": None,
+                "sha256": None,
+                "change_status": "UNKNOWN",
+                "reverify_required": True,
+                "notes": "test",
+            }],
+        }
 
     def test_awaiting_record_rejects_fake_hash(self):
-        payload = copy.deepcopy(ARTIFACTS)
+        payload = self.awaiting_payload()
         payload["artifacts"][0]["sha256"] = "sha256:" + "a" * 64
         with self.assertRaises(gate.GateError):
             gate.validate_registry(payload, SOURCES_PAYLOAD)
 
     def test_awaiting_record_rejects_false_reverify(self):
-        payload = copy.deepcopy(ARTIFACTS)
+        payload = self.awaiting_payload()
         payload["artifacts"][0]["reverify_required"] = False
         with self.assertRaises(gate.GateError):
             gate.validate_registry(payload, SOURCES_PAYLOAD)
@@ -64,8 +85,10 @@ class ArtifactRegistryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "official.pdf"
             path.write_bytes(content)
+            source = copy.deepcopy(SOURCES[SOURCE_ID])
+            source["content_sha256"] = None
             record = gate.build_observation(
-                SOURCES[SOURCE_ID],
+                source,
                 path,
                 "2026-09-28T20:00:00Z",
                 "application/pdf",
