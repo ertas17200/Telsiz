@@ -23,6 +23,8 @@ The command:
 
 A first observed hash is review evidence, not an automatic source binding.
 
+The first BTK baseline observation completed on GitHub Actions run `36559259435`, job `109375881365`: `508766` bytes, SHA-256 `eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0`. The observation was explicitly reviewed before binding.
+
 ## GitHub Actions
 
-`.github/workflows/p0-artifact-observation.yml` is the dedicated live observation workflow. The temporary P0 probe branch trigger is used only while establishing the first byte observation. Before merge, the workflow must be reduced to manual `workflow_dispatch` so normal CI does not depend on external source availability.
+`.github/workflows/p0-artifact-observation.yml` is the dedicated live observation workflow and is manual-only via `workflow_dispatch`. Normal validation stays network-independent; live source availability cannot make ordinary repository CI flaky.

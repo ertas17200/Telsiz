@@ -2,9 +2,6 @@ name: P0 Artifact Byte Observation
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - "knowledge/p0-artifact-byte-evidence-*"
 
 permissions:
   contents: read
@@ -44,7 +41,10 @@ jobs:
         run: |
           set -euo pipefail
           fetched_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          python scripts/fetch_official_artifact.py             --source-id TR.BTK.FTM.TECH.2022-IK-SYD-245             --fetched-at "$fetched_at"             --output /tmp/btk-artifact-observation.json
+          python scripts/fetch_official_artifact.py \
+            --source-id TR.BTK.FTM.TECH.2022-IK-SYD-245 \
+            --fetched-at "$fetched_at" \
+            --output /tmp/btk-artifact-observation.json
           cat /tmp/btk-artifact-observation.json
 
       - name: Verify final exact head and clean worktree

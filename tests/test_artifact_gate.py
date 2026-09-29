@@ -30,9 +30,15 @@ class ArtifactRegistryTests(unittest.TestCase):
     def test_repository_registry_is_fail_closed_and_valid(self):
         self.assertEqual(gate.validate_registry(ARTIFACTS, SOURCES_PAYLOAD), 1)
         record = ARTIFACTS["artifacts"][0]
-        self.assertEqual(record["artifact_status"], "awaiting_bytes")
-        self.assertIsNone(record["sha256"])
-        self.assertTrue(record["reverify_required"])
+        self.assertEqual(record["artifact_status"], "verified_bytes")
+        self.assertEqual(
+            record["sha256"],
+            "sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0",
+        )
+        self.assertEqual(record["size_bytes"], 508766)
+        self.assertEqual(record["change_status"], "UNCHANGED")
+        self.assertFalse(record["reverify_required"])
+        self.assertEqual(record["sha256"], SOURCES[SOURCE_ID]["content_sha256"])
 
     def test_awaiting_record_rejects_fake_hash(self):
         payload = copy.deepcopy(ARTIFACTS)
@@ -64,8 +70,10 @@ class ArtifactRegistryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "official.pdf"
             path.write_bytes(content)
+            source = copy.deepcopy(SOURCES[SOURCE_ID])
+            source["content_sha256"] = None
             record = gate.build_observation(
-                SOURCES[SOURCE_ID],
+                source,
                 path,
                 "2026-09-28T20:00:00Z",
                 "application/pdf",

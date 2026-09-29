@@ -16,16 +16,17 @@ CONTENT_INSPECTED != BYTE_ARTIFACT_VERIFIED
 
 `data/artifacts.json` is the byte-evidence registry.
 
-For the BTK Technical Criteria PDF it currently says:
+For the BTK Technical Criteria PDF the first reviewed byte baseline is now bound:
 
 ```text
-artifact_status=awaiting_bytes
-sha256=null
-change_status=UNKNOWN
-reverify_required=true
+artifact_status=verified_bytes
+size_bytes=508766
+sha256=sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0
+change_status=UNCHANGED
+reverify_required=false
 ```
 
-This is intentional and fail-closed.
+The baseline was observed from the registered canonical HTTPS URL by GitHub Actions run `36559259435`, job `109375881365`, at `2026-09-29T11:02:27Z`. The initial observation correctly returned `HASH_OBSERVED_BIND_REQUIRED`; the digest was then explicitly reviewed and bound in the source registry.
 
 ## Validate registry
 
@@ -86,6 +87,8 @@ The official PDF does not need to be committed to GitHub. The project can store 
 
 ## P0 relationship
 
-The current BTK raw transcription is 33/33 rows with 24/24 emission definitions, but P0 semantic promotion remains on HOLD until the artifact byte evidence is acquired and source conflicts are handled.
+The current BTK raw transcription is 33/33 rows with 24/24 emission definitions. Byte-level artifact evidence is now bound, so the artifact-byte blocker is closed.
 
-The artifact gate is infrastructure. Its own CI PASS must never be reported as the official BTK artifact itself being verified.
+P0 semantic promotion still remains on HOLD because source-internal conflicts and unextracted semantic dimensions must be handled without silent normalization.
+
+The artifact gate remains separate from semantic correctness: a matching PDF hash proves source-version continuity, not that every semantic interpretation is complete.

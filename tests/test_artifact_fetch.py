@@ -1,3 +1,4 @@
+import copy
 import hashlib
 import importlib.util
 import io
@@ -138,10 +139,35 @@ class ArtifactFetchTests(unittest.TestCase):
     def test_observation_is_hash_evidence_but_not_auto_binding(self, mocked):
         body = b"%PDF-1.7\ncanonical-test\n%%EOF\n"
         mocked.return_value = FakeResponse(body)
-        observation = fetcher.observe_source(
-            SOURCE_ID,
-            "2026-09-29T10:30:00Z",
+
+        sources_payload = copy.deepcopy(SOURCES_PAYLOAD)
+        source = next(x for x in sources_payload["sources"] if x["id"] == SOURCE_ID)
+        source["content_sha256"] = None
+
+        artifacts_payload = copy.deepcopy(ARTIFACTS_PAYLOAD)
+        artifact = next(x for x in artifacts_payload["artifacts"] if x["source_id"] == SOURCE_ID)
+        artifact.update(
+            artifact_status="awaiting_bytes",
+            fetched_at=None,
+            size_bytes=None,
+            sha256=None,
+            change_status="UNKNOWN",
+            reverify_required=True,
         )
+
+        def fake_load(path):
+            if path == fetcher.gate.SOURCES:
+                return sources_payload
+            if path == fetcher.gate.ARTIFACTS:
+                return artifacts_payload
+            raise AssertionError(f"unexpected path: {path}")
+
+        with patch.object(fetcher.gate, "load_json", side_effect=fake_load):
+            observation = fetcher.observe_source(
+                SOURCE_ID,
+                "2026-09-29T10:30:00Z",
+            )
+
         expected = "sha256:" + hashlib.sha256(body).hexdigest()
         self.assertEqual(observation["sha256"], expected)
         self.assertEqual(observation["size_bytes"], len(body))
