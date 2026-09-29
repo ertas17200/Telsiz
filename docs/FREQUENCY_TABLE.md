@@ -37,7 +37,7 @@ Bu katman karar vermek için tek başına kullanılmaz.
 
 ### 2. Semantic decision table
 
-`data/frequency_table.json` AI karar motorunun fail-closed katmanıdır. Şimdilik yalnız daha önce atomik kurallarla doğrulanmış C sınıfı güç sınırlarını, ham tablonun görünür alt bantlarına bölünmüş olarak taşır:
+`data/frequency_table.json` AI karar motorunun fail-closed katmanıdır. Şimdilik yalnız atomik kurallarla doğrulanmış güç sınırlarını taşır: ham tablonun görünür alt bantlarına bölünmüş C sınıfı 5 W sınırları ve A/B sınıfı 50–52 MHz genel 100 W sınırı:
 
 | Satır | Sınıf | Aralık | Doğrulanmış limit | Ham satır |
 |---|---|---|---|---|
@@ -48,6 +48,7 @@ Bu katman karar vermek için tek başına kullanılmaz.
 | `TR.FTM.AMATEUR.ROW.C.433.4-433.575` | C | 433,4–433,575 MHz | 5 W | 22 |
 | `TR.FTM.AMATEUR.ROW.C.435-437.975` | C | 435–437,975 MHz | 5 W | 23 |
 | `TR.FTM.AMATEUR.ROW.C.439.15-439.425` | C | 439,15–439,425 MHz (dernek tekrarlayıcı alt bandı) | 5 W | 24 |
+| `TR.FTM.AMATEUR.ROW.AB.50-52` | A, B | 50–52 MHz | 100 W (genel; beacon için ayrı 25 W koşulu henüz modellenmedi) | 17 |
 
 Tablodaki "C sınıfı 430–440 MHz'te 5 W" ifadesi bir **güç sınırıdır, tahsis değildir**. Ham tabloda 430–440 MHz arası tek parça değil, yukarıdaki altı görünür alt banttır. Alt bantlar arasındaki boşluklar (ör. 433,0 MHz, 434 MHz, 438,5 MHz) için semantik satır yoktur ve karar `UNKNOWN` olur.
 
