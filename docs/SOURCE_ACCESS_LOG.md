@@ -73,3 +73,44 @@ Fail-closed interpretation:
 - they do not replace the current consolidated legal text for rule promotion;
 - P1/P2/P3 remain on HOLD for exact-text verification;
 - work may proceed on source-independent engineering features without weakening these legal gates.
+
+
+## 2026-09-29 — GitHub-hosted canonical BTK byte acquisition
+
+The local/container path still could not download the BTK PDF, so an isolated GitHub-hosted byte probe was executed against the same canonical URL without weakening the normal validation workflow.
+
+First successful byte observation:
+
+| FIELD | VALUE |
+|---|---|
+| URL | `https://www.btk.gov.tr/uploads/pages/ftm-teknik-olcutler-ek-5.pdf` |
+| Run / job | `36560262553` / `109379164582` |
+| HTTP | 200 |
+| MIME | `application/pdf` |
+| Size | 508766 bytes |
+| SHA-256 | `sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0` |
+| Initial gate state | `HASH_OBSERVED_BIND_REQUIRED` |
+
+The digest was then bound to `TR.BTK.FTM.TECH.2022-IK-SYD-245` in the source registry.
+
+Independent re-fetch after binding:
+
+| FIELD | VALUE |
+|---|---|
+| Run / job | `36560444675` / `109379759074` |
+| Runner | `GitHub Actions 1000014195` |
+| Size | 508766 bytes |
+| SHA-256 | `sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0` |
+| Gate state | `UNCHANGED` |
+| Reverify required | `false` |
+
+Consequence:
+
+```text
+P0_ARTIFACT_ACCESS=PASS
+P0_ARTIFACT_HASH_BINDING=PASS
+P0_SOURCE_DRIFT_RECHECK=PASS
+P0_SEMANTIC_PROMOTION=HOLD
+```
+
+The artifact blocker is closed. The semantic table remains partial because source-internal conflicts and unpromoted dimensions remain.
