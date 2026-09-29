@@ -303,6 +303,114 @@
         "güç-limiti"
       ],
       "notes": "Bu kural genel satır güç değerini temsil eder. Emisyon hücresindeki A3J/J2C kaynak anomalisi ve beacon/EME özel koşulları ayrı semantic alanlar olarak henüz promote edilmemiştir; bu nedenle frequency lookup fail-closed kalır."
+    },
+    {
+      "id": "TR.AMATEUR.A_135_7_137_8_KHZ_MAX_1W_EIRP",
+      "jurisdiction": "TR",
+      "topic": "frequency_power_limit",
+      "rule_type": "limit",
+      "authority": "legal",
+      "claim": "A sınıfı amatör telsizciler için 135.7-137.8 kHz satırında azami güç 1 W e.i.r.p.'dir.",
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "table": "PDF heading: Tablo 25; internal references: Tablo-26 / Tablo 26-1",
+        "document_page": "41/47"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-29T13:44:59Z",
+      "conditions": [
+        "Belge sınıfı A olmalıdır.",
+        "Frekans 135.7-137.8 kHz aralığında olmalıdır.",
+        "Sınır e.i.r.p. esaslıdır; verici çıkış gücü olarak yorumlanamaz."
+      ],
+      "parameters": {
+        "frequency_min_mhz": 0.1357,
+        "frequency_max_mhz": 0.1378,
+        "max_eirp_w": 1,
+        "license_classes": [
+          "A"
+        ]
+      },
+      "answer_tags": [
+        "A-sınıfı",
+        "135.7-137.8-kHz",
+        "1-W-eirp",
+        "güç-limiti",
+        "eirp"
+      ],
+      "notes": "Doğrulanmış ham transkripsiyon satırı 1'den ('1 W (e.i.r.p.)') türetildi; kaynak artifact SHA-256'sı bağlı. Bu kural ham satırın ötesinde yeni bir okuma içermez."
+    },
+    {
+      "id": "TR.AMATEUR.A_472_479_KHZ_MAX_5W_EIRP",
+      "jurisdiction": "TR",
+      "topic": "frequency_power_limit",
+      "rule_type": "limit",
+      "authority": "legal",
+      "claim": "A sınıfı amatör telsizciler için 472-479 kHz satırında azami güç 5 W e.i.r.p.'dir.",
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "table": "PDF heading: Tablo 25; internal references: Tablo-26 / Tablo 26-1",
+        "document_page": "41/47"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-29T13:44:59Z",
+      "conditions": [
+        "Belge sınıfı A olmalıdır.",
+        "Frekans 472-479 kHz aralığında olmalıdır.",
+        "Sınır e.i.r.p. esaslıdır; verici çıkış gücü olarak yorumlanamaz."
+      ],
+      "parameters": {
+        "frequency_min_mhz": 0.472,
+        "frequency_max_mhz": 0.479,
+        "max_eirp_w": 5,
+        "license_classes": [
+          "A"
+        ]
+      },
+      "answer_tags": [
+        "A-sınıfı",
+        "472-479-kHz",
+        "5-W-eirp",
+        "güç-limiti",
+        "eirp"
+      ],
+      "notes": "Doğrulanmış ham transkripsiyon satırı 2'den ('5 W (e.i.r.p.)') türetildi; kaynak artifact SHA-256'sı bağlı. Bu kural ham satırın ötesinde yeni bir okuma içermez."
+    },
+    {
+      "id": "TR.AMATEUR.A_5351_5_5366_5_KHZ_MAX_15W_EIRP",
+      "jurisdiction": "TR",
+      "topic": "frequency_power_limit",
+      "rule_type": "limit",
+      "authority": "legal",
+      "claim": "A sınıfı amatör telsizciler için 5351.5-5366.5 kHz satırında azami güç 15 W e.i.r.p.'dir.",
+      "source_id": "TR.BTK.FTM.TECH.2022-IK-SYD-245",
+      "source_locator": {
+        "table": "PDF heading: Tablo 25; internal references: Tablo-26 / Tablo 26-1",
+        "document_page": "41/47"
+      },
+      "verification_status": "verified",
+      "verified_at": "2026-09-29T13:44:59Z",
+      "conditions": [
+        "Belge sınıfı A olmalıdır.",
+        "Frekans 5351.5-5366.5 kHz aralığında olmalıdır.",
+        "Sınır e.i.r.p. esaslıdır; verici çıkış gücü olarak yorumlanamaz."
+      ],
+      "parameters": {
+        "frequency_min_mhz": 5.3515,
+        "frequency_max_mhz": 5.3665,
+        "max_eirp_w": 15,
+        "license_classes": [
+          "A"
+        ]
+      },
+      "answer_tags": [
+        "A-sınıfı",
+        "5351.5-5366.5-kHz",
+        "15-W-eirp",
+        "güç-limiti",
+        "eirp"
+      ],
+      "notes": "Doğrulanmış ham transkripsiyon satırı 7'den ('15 W (e.i.r.p.)') türetildi; kaynak artifact SHA-256'sı bağlı. Bu kural ham satırın ötesinde yeni bir okuma içermez."
     }
   ]
 }

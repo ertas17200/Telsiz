@@ -36,9 +36,9 @@ class SemanticPromotionTests(unittest.TestCase):
             list(range(1, 34)),
         )
 
-    def test_partial_promotion_count_is_eight(self):
-        self.assertEqual(PROMOTION["summary"]["rows_with_partial_semantic_promotion"], 8)
-        self.assertEqual(PROMOTION["summary"]["rows_not_ready_current_schema"], 25)
+    def test_partial_promotion_count_is_eleven(self):
+        self.assertEqual(PROMOTION["summary"]["rows_with_partial_semantic_promotion"], 11)
+        self.assertEqual(PROMOTION["summary"]["rows_not_ready_current_schema"], 22)
 
     def test_row_17_is_limited_promotion_only(self):
         mapped = PROMOTION["rows"][16]
@@ -64,11 +64,31 @@ class SemanticPromotionTests(unittest.TestCase):
         row17 = PROMOTION["rows"][16]
         self.assertEqual(row17["emission_conflict_codes"], ["A3J", "J2C"])
 
-    def test_eirp_rows_require_power_basis_model(self):
-        for index in (1, 2, 7):
+    def test_eirp_rows_are_promoted_on_eirp_basis_only(self):
+        expected = {1: ("TR.FTM.AMATEUR.ROW.A.135.7-137.8-KHZ", 1), 2: ("TR.FTM.AMATEUR.ROW.A.472-479-KHZ", 5),
+                    7: ("TR.FTM.AMATEUR.ROW.A.5351.5-5366.5-KHZ", 15)}
+        for index, (row_id, watts) in expected.items():
             with self.subTest(index=index):
                 mapped = PROMOTION["rows"][index - 1]
-                self.assertEqual(mapped["field_readiness"]["power"], "NEEDS_POWER_BASIS_MODEL")
+                self.assertEqual(mapped["field_readiness"]["power"], "PROMOTABLE_EIRP_W")
+                self.assertNotIn("SEMANTIC_POWER_BASIS_MODEL_GAP", mapped["blockers"])
+                self.assertEqual(mapped["current_semantic_row_ids"], [row_id])
+                row = next(x for x in TABLE["rows"] if x["id"] == row_id)
+                self.assertEqual(row["power_basis"], "eirp")
+                self.assertEqual(row["maximum_output_power"], watts)
+                self.assertEqual(row["license_class"], ["A"])
+                self.assertIsNone(row["emission"])
+
+    def test_row_7_eirp_promotion_keeps_emission_conflict(self):
+        mapped = PROMOTION["rows"][6]
+        self.assertEqual(mapped["blockers"], ["TR-BTK-EMISSION-001"])
+        self.assertEqual(mapped["field_readiness"]["emissions"], "BLOCKED_SOURCE_CONFLICT")
+
+    def test_eirp_readiness_cannot_be_downgraded_silently(self):
+        payload = copy.deepcopy(PROMOTION)
+        payload["rows"][0]["field_readiness"]["power"] = "NEEDS_POWER_BASIS_MODEL"
+        with self.assertRaises(SystemExit):
+            self.validate(promotion=payload)
 
     def test_dual_power_rows_require_multivalue_model(self):
         for index in (3, 10, 18, 25, 33):
