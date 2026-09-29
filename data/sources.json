@@ -594,6 +594,30 @@
       "supersedes": [],
       "superseded_by": [],
       "notes": "Bağımsız açık kaynak uygulama (MIT). Doğrulanan: depo kimliği, sabitlenmiş commit, lisans ve dosya hash'leri (data/digital_modes.json). Protokol yazarlarının belgesi değildir; değerler topluluk katmanındadır ve QEX makalesi / WSJT-X kaynağıyla bağımsız doğrulama bekler. Hukuki izin üretmez."
+    },
+    {
+      "id": "APRS.DEVICEID.TOCALLS",
+      "title": "APRS device identification database (tocalls.yaml)",
+      "publisher": "Hessu OH7LZB ve gönüllüler (GitHub: aprsorg/aprs-deviceid)",
+      "source_type": "amateur_association",
+      "jurisdiction": "INTERNATIONAL",
+      "url": "https://github.com/aprsorg/aprs-deviceid/tree/845e3f89d54402a9aa90e765e14c14b7e5710892",
+      "topics": [
+        "APRS",
+        "tocall",
+        "cihaz tanımlayıcıları"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-29T15:35:00Z",
+      "publication_date": null,
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": null,
+      "reference": "tocalls.yaml; README.md @ 845e3f8",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "CAND.APRS.DEVICEID adayından 2026-09-29'da kullanıcının CC BY-SA 2.0 lisans onayıyla terfi etti. Doğrulanan: depo kimliği, sabitlenmiş commit, lisans ve dosya hash'leri (data/aprs_deviceid.json). Uyarlanmış veri aynı lisansla dağıtılır; kişisel iletişim alanları alınmadı. Teknik tanımlama bilgisidir; hukuki izin üretmez."
     }
   ]
 }

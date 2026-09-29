@@ -1,0 +1,3165 @@
+{
+  "schema_version": 1,
+  "source_id": "APRS.DEVICEID.TOCALLS",
+  "trust_note": "APRS cihaz/yazılım tanımlayıcı (tocall) tahsis veritabanı; README'ye göre 2022-02-19'dan beri birincil tahsis kaydıdır. Teknik tanımlama bilgisidir: hukuki izin, frekans yetkisi veya cihaz uygunluk belgesi üretmez.",
+  "license": {
+    "id": "CC-BY-SA-2.0",
+    "url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "attribution": "APRS device identification database — maintained by Hessu, OH7LZB, for aprs.fi; aprsorg/aprs-deviceid (https://github.com/aprsorg/aprs-deviceid). Licensed CC BY-SA 2.0.",
+    "adaptation": "Telsiz uyarlaması: tocalls.yaml YAML'den JSON'a çevrildi; yalnız classes ve tocalls dizinleri alındı (mice/micelegacy alınmadı); kişisel contact alanları çıkarıldı; her kayda kaynak satır konumu (locator) eklendi. Bu dosya (data/aprs_deviceid.json) aynı CC BY-SA 2.0 lisansıyla dağıtılır."
+  },
+  "provenance": {
+    "repository": "https://github.com/aprsorg/aprs-deviceid",
+    "commit": "845e3f89d54402a9aa90e765e14c14b7e5710892",
+    "commit_date": "2026-09-18T00:25:21+03:00",
+    "retrieved_at": "2026-09-29",
+    "files": [
+      {
+        "path": "tocalls.yaml",
+        "git_blob_sha1": "b19067d483e1833c6ea7aab8b6d8c9570acab90f",
+        "sha256": "03eaa1b224cefa8404162a7dea592c62bdfbe960e7607d03735c56253fcb9c91"
+      },
+      {
+        "path": "README.md",
+        "git_blob_sha1": "ffd8f56e2dca9a5ce98d2ee90d7d4e9dbf05dba2",
+        "sha256": "655e171b09bfec64de9c3848b20faa82819c6d47b2e9e0de448044d7422b3a7d"
+      }
+    ]
+  },
+  "lookup_algorithm_locator": "README.md#L158-L166",
+  "omitted_fields": [
+    "contact"
+  ],
+  "not_included": [
+    "mice (Mic-E yeni tip cihaz sonekleri)",
+    "micelegacy (Kenwood eski Mic-E önek/sonekleri)"
+  ],
+  "classes": [
+    {
+      "class": "wx",
+      "shown": "Weather station",
+      "description": "Dedicated weather station"
+    },
+    {
+      "class": "tracker",
+      "shown": "Tracker",
+      "description": "Tracker device"
+    },
+    {
+      "class": "gadget",
+      "shown": "Gadget",
+      "description": "Small non-tracker APRS device"
+    },
+    {
+      "class": "rig",
+      "shown": "Rig",
+      "description": "Mobile or desktop radio"
+    },
+    {
+      "class": "ht",
+      "shown": "HT",
+      "description": "Hand-held radio"
+    },
+    {
+      "class": "app",
+      "shown": "Mobile app",
+      "description": "Mobile phone or tablet app"
+    },
+    {
+      "class": "software",
+      "shown": "Desktop software",
+      "description": "Desktop software"
+    },
+    {
+      "class": "daemon",
+      "shown": "Background software",
+      "description": "Computer software without user interface"
+    },
+    {
+      "class": "service",
+      "shown": "Service",
+      "description": "Software running as a web service or a message bot"
+    },
+    {
+      "class": "network",
+      "shown": "APRS network hardware appliance",
+      "description": "A hardware appliance with self-contained APRS networking features"
+    },
+    {
+      "class": "digi",
+      "shown": "Digipeater",
+      "description": "Digipeater software"
+    },
+    {
+      "class": "igate",
+      "shown": "iGate",
+      "description": "iGate software"
+    },
+    {
+      "class": "dstar",
+      "shown": "D-Star",
+      "description": "D-Star radio"
+    },
+    {
+      "class": "satellite",
+      "shown": "Satellite",
+      "description": "Satellite-based station"
+    }
+  ],
+  "tocalls": [
+    {
+      "tocall": "AP1WWX",
+      "vendor": "TAPR",
+      "model": "T-238+",
+      "class": "wx",
+      "locator": "tocalls.yaml#L268"
+    },
+    {
+      "tocall": "AP3VSS",
+      "vendor": "Artur Schreiber, SP3VSS",
+      "model": "Active APRS tracker",
+      "class": "app",
+      "os": "Android",
+      "locator": "tocalls.yaml#L273"
+    },
+    {
+      "tocall": "AP4R??",
+      "vendor": "Open Source",
+      "model": "APRS4R",
+      "class": "software",
+      "locator": "tocalls.yaml#L280"
+    },
+    {
+      "tocall": "AP9BBL",
+      "vendor": "BI9BBL",
+      "model": "APRS Beacon Bot",
+      "class": "daemon",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L285"
+    },
+    {
+      "tocall": "AP9UAG",
+      "vendor": "Stefendy Handoko, YF9UAG",
+      "model": "NusaAPRS",
+      "class": "app",
+      "os": "Android",
+      "locator": "tocalls.yaml#L292"
+    },
+    {
+      "tocall": "APAEP1",
+      "vendor": "Paraguay Space Agency (AEP)",
+      "model": "EIRUAPRSDIGIS&FV1",
+      "class": "satellite",
+      "locator": "tocalls.yaml#L299"
+    },
+    {
+      "tocall": "APAF??",
+      "model": "AFilter",
+      "locator": "tocalls.yaml#L304"
+    },
+    {
+      "tocall": "APAG??",
+      "model": "AGate",
+      "locator": "tocalls.yaml#L307"
+    },
+    {
+      "tocall": "APAGW",
+      "vendor": "SV2AGW",
+      "model": "AGWtracker",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L310"
+    },
+    {
+      "tocall": "APAGW?",
+      "vendor": "SV2AGW",
+      "model": "AGWtracker",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L316"
+    },
+    {
+      "tocall": "APAH??",
+      "model": "AHub",
+      "locator": "tocalls.yaml#L322"
+    },
+    {
+      "tocall": "APAIOR",
+      "vendor": "J. Angelo Racoma DU2XXR/N2RAC",
+      "model": "APRSPH net bot based on Ioreth",
+      "class": "service",
+      "os": "Linux",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L325"
+    },
+    {
+      "tocall": "APALH*",
+      "vendor": "Retevis",
+      "locator": "tocalls.yaml#L334"
+    },
+    {
+      "tocall": "APALH1",
+      "vendor": "Retevis",
+      "model": "Ailunce H1",
+      "class": "ht",
+      "locator": "tocalls.yaml#L337"
+    },
+    {
+      "tocall": "APALHA",
+      "vendor": "Retevis",
+      "model": "Ailunce HA2",
+      "class": "ht",
+      "locator": "tocalls.yaml#L342"
+    },
+    {
+      "tocall": "APAM??",
+      "vendor": "Altus Metrum",
+      "model": "AltOS",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L347"
+    },
+    {
+      "tocall": "APANC?",
+      "vendor": "John Rokicki, KC1VMZ",
+      "model": "APRS Net Central",
+      "class": "service",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L352"
+    },
+    {
+      "tocall": "APAND?",
+      "vendor": "Open Source",
+      "model": "APRSdroid",
+      "class": "app",
+      "os": "Android",
+      "locator": "tocalls.yaml#L360"
+    },
+    {
+      "tocall": "APAR??",
+      "vendor": "Øyvind, LA7ECA",
+      "model": "Arctic Tracker",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L366"
+    },
+    {
+      "tocall": "APAT16",
+      "vendor": "AnyTone",
+      "model": "AT-D168UV",
+      "class": "ht",
+      "locator": "tocalls.yaml#L372"
+    },
+    {
+      "tocall": "APAT51",
+      "vendor": "AnyTone",
+      "model": "AT-D578",
+      "class": "rig",
+      "locator": "tocalls.yaml#L377"
+    },
+    {
+      "tocall": "APAT81",
+      "vendor": "AnyTone",
+      "model": "AT-D878",
+      "class": "ht",
+      "locator": "tocalls.yaml#L382"
+    },
+    {
+      "tocall": "APAT89",
+      "vendor": "AnyTone",
+      "model": "AT-D890UV",
+      "class": "ht",
+      "locator": "tocalls.yaml#L387"
+    },
+    {
+      "tocall": "APAT??",
+      "vendor": "AnyTone",
+      "locator": "tocalls.yaml#L392"
+    },
+    {
+      "tocall": "APATAR",
+      "vendor": "TA7W/OH2UDS Baris Dinc, TA6AD Emre Keles",
+      "model": "ATA-R APRS Digipeater",
+      "class": "digi",
+      "locator": "tocalls.yaml#L395"
+    },
+    {
+      "tocall": "APAVR9",
+      "vendor": "NOR",
+      "model": "AVRT9",
+      "class": "ht",
+      "locator": "tocalls.yaml#L400"
+    },
+    {
+      "tocall": "APAVT5",
+      "vendor": "SainSonic",
+      "model": "AP510",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L405"
+    },
+    {
+      "tocall": "APAW??",
+      "vendor": "SV2AGW",
+      "model": "AGWPE",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L410"
+    },
+    {
+      "tocall": "APAX??",
+      "model": "AFilterX",
+      "locator": "tocalls.yaml#L416"
+    },
+    {
+      "tocall": "APB2MF",
+      "vendor": "Mike, DL2MF",
+      "model": "MF2APRS Radiosonde tracking tool",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L419"
+    },
+    {
+      "tocall": "APBCNF",
+      "vendor": "Daniel Redetzke, M0LII",
+      "model": "BEACONFIRE",
+      "class": "software",
+      "os": "Multiple",
+      "locator": "tocalls.yaml#L425"
+    },
+    {
+      "tocall": "APBK??",
+      "vendor": "PY5BK",
+      "model": "Bravo Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L432"
+    },
+    {
+      "tocall": "APBL??",
+      "vendor": "BigRedBee",
+      "model": "BeeLine GPS",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L437"
+    },
+    {
+      "tocall": "APBM??",
+      "vendor": "R3ABM",
+      "model": "BrandMeister DMR",
+      "locator": "tocalls.yaml#L442"
+    },
+    {
+      "tocall": "APBOX0",
+      "vendor": "SQ9MDD Ryszard Labus",
+      "model": "APRSBox",
+      "class": "daemon",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L446"
+    },
+    {
+      "tocall": "APBPQ?",
+      "vendor": "John Wiseman, G8BPQ",
+      "model": "BPQ32",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L453"
+    },
+    {
+      "tocall": "APBSD?",
+      "vendor": "hambsd.org",
+      "model": "HamBSD",
+      "locator": "tocalls.yaml#L459"
+    },
+    {
+      "tocall": "APBT*",
+      "vendor": "BTECH",
+      "locator": "tocalls.yaml#L463"
+    },
+    {
+      "tocall": "APBT62",
+      "vendor": "BTECH",
+      "model": "DMR 6x2",
+      "class": "ht",
+      "locator": "tocalls.yaml#L467"
+    },
+    {
+      "tocall": "APBT72",
+      "vendor": "BTECH",
+      "model": "DA 7X2",
+      "class": "ht",
+      "locator": "tocalls.yaml#L473"
+    },
+    {
+      "tocall": "APBTUV",
+      "vendor": "BTECH",
+      "model": "UV-PRO",
+      "class": "ht",
+      "locator": "tocalls.yaml#L479"
+    },
+    {
+      "tocall": "APC???",
+      "vendor": "Rob Wittner, KZ5RW",
+      "model": "APRS/CE",
+      "class": "app",
+      "locator": "tocalls.yaml#L485"
+    },
+    {
+      "tocall": "APCDS0",
+      "vendor": "ZS6LMG",
+      "model": "cell tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L490"
+    },
+    {
+      "tocall": "APCHP?",
+      "vendor": "Chip Cuccio, W0CHP",
+      "model": "Digital Voice & APRS Software",
+      "class": "software",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L495"
+    },
+    {
+      "tocall": "APCLEY",
+      "vendor": "ZS6EY",
+      "model": "EYTraker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L501"
+    },
+    {
+      "tocall": "APCLEZ",
+      "vendor": "ZS6EY",
+      "model": "Telit EZ10 GSM application",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L506"
+    },
+    {
+      "tocall": "APCLUB",
+      "model": "Brazil APRS network",
+      "locator": "tocalls.yaml#L511"
+    },
+    {
+      "tocall": "APCLWX",
+      "vendor": "ZS6EY",
+      "model": "EYWeather",
+      "class": "wx",
+      "locator": "tocalls.yaml#L514"
+    },
+    {
+      "tocall": "APCMD?",
+      "vendor": "James Rospopo, KE4CON",
+      "model": "APRS Command",
+      "class": "software",
+      "os": "Multiple",
+      "locator": "tocalls.yaml#L519"
+    },
+    {
+      "tocall": "APCN??",
+      "vendor": "DG5OAW",
+      "model": "carNET",
+      "locator": "tocalls.yaml#L526"
+    },
+    {
+      "tocall": "APCSMS",
+      "vendor": "USNA",
+      "model": "Cosmos",
+      "locator": "tocalls.yaml#L530"
+    },
+    {
+      "tocall": "APCSS",
+      "vendor": "AMSAT",
+      "model": "CubeSatSim CubeSat Simulator",
+      "locator": "tocalls.yaml#L534"
+    },
+    {
+      "tocall": "APCTLK",
+      "vendor": "Open Source",
+      "model": "Codec2Talkie",
+      "class": "app",
+      "locator": "tocalls.yaml#L538"
+    },
+    {
+      "tocall": "APCWP8",
+      "vendor": "GM7HHB",
+      "model": "WinphoneAPRS",
+      "class": "app",
+      "locator": "tocalls.yaml#L543"
+    },
+    {
+      "tocall": "APD5T?",
+      "vendor": "Geoffrey, F4FXL",
+      "model": "Open Source DStarGateway",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L548"
+    },
+    {
+      "tocall": "APDAGW",
+      "vendor": "Diego Guevara, HJ3DAG",
+      "model": "NodeJS APRS WX",
+      "class": "wx",
+      "locator": "tocalls.yaml#L554"
+    },
+    {
+      "tocall": "APDDRW",
+      "vendor": "Ralph, DD5RW",
+      "model": "Dynamic Mobile Multi-Band Tracker & Bidirectional iGate",
+      "class": "igate",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L560"
+    },
+    {
+      "tocall": "APDF??",
+      "model": "Automatic DF units",
+      "locator": "tocalls.yaml#L566"
+    },
+    {
+      "tocall": "APDG??",
+      "vendor": "Jonathan, G4KLX",
+      "model": "ircDDB Gateway",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L569"
+    },
+    {
+      "tocall": "APDI??",
+      "vendor": "Bela, HA5DI",
+      "model": "DIXPRS",
+      "class": "software",
+      "locator": "tocalls.yaml#L574"
+    },
+    {
+      "tocall": "APDMPS",
+      "vendor": "Douglas Pervine",
+      "model": "DMP APRS Simulator",
+      "class": "software",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L579"
+    },
+    {
+      "tocall": "APDNO?",
+      "vendor": "DO3SWW",
+      "model": "APRSduino",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L585"
+    },
+    {
+      "tocall": "APDP25",
+      "vendor": "vk44.net",
+      "model": "Project 25 (P25)",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L591"
+    },
+    {
+      "tocall": "APDPRS",
+      "vendor": "unknown",
+      "model": "D-Star APDPRS",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L598"
+    },
+    {
+      "tocall": "APDR??",
+      "vendor": "Open Source",
+      "model": "APRSdroid",
+      "class": "app",
+      "os": "Android",
+      "locator": "tocalls.yaml#L603"
+    },
+    {
+      "tocall": "APDS??",
+      "vendor": "SP9UOB",
+      "model": "dsDIGI",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L609"
+    },
+    {
+      "tocall": "APDST?",
+      "vendor": "SP9UOB",
+      "model": "dsTracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L614"
+    },
+    {
+      "tocall": "APDT??",
+      "vendor": "unknown",
+      "model": "APRStouch Tone (DTMF)",
+      "locator": "tocalls.yaml#L619"
+    },
+    {
+      "tocall": "APDU??",
+      "vendor": "JA7UDE",
+      "model": "U2APRS",
+      "class": "app",
+      "os": "Android",
+      "locator": "tocalls.yaml#L623"
+    },
+    {
+      "tocall": "APDV??",
+      "vendor": "OE6PLD",
+      "model": "SSTV with APRS",
+      "class": "software",
+      "locator": "tocalls.yaml#L629"
+    },
+    {
+      "tocall": "APDW??",
+      "vendor": "WB2OSZ",
+      "model": "DireWolf",
+      "locator": "tocalls.yaml#L634"
+    },
+    {
+      "tocall": "APDnnn",
+      "vendor": "Open Source",
+      "model": "aprsd",
+      "class": "software",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L638"
+    },
+    {
+      "tocall": "APE2A?",
+      "vendor": "NoseyNick, VA3NNW",
+      "model": "Email-2-APRS gateway",
+      "class": "software",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L644"
+    },
+    {
+      "tocall": "APE32I",
+      "vendor": "Hiperion",
+      "model": "esp32idf_APRS",
+      "class": "igate",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L650"
+    },
+    {
+      "tocall": "APE???",
+      "model": "Telemetry devices",
+      "locator": "tocalls.yaml#L657"
+    },
+    {
+      "tocall": "APECAN",
+      "vendor": "KT5TK/DL7AD",
+      "model": "Pecan Pico APRS Balloon Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L660"
+    },
+    {
+      "tocall": "APECWB",
+      "vendor": "Tomas Voboril, KC0EQQ",
+      "model": "ecowitt-to-aprs-bridge",
+      "class": "daemon",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L665"
+    },
+    {
+      "tocall": "APELK?",
+      "vendor": "WB8ELK",
+      "model": "Balloon tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L672"
+    },
+    {
+      "tocall": "APEML?",
+      "vendor": "Leszek, SP9MLI",
+      "model": "SP9MLI for WX, Telemetry",
+      "class": "software",
+      "locator": "tocalls.yaml#L677"
+    },
+    {
+      "tocall": "APEP??",
+      "vendor": "Patrick EGLOFF, TK5EP",
+      "model": "LoRa WX station",
+      "class": "wx",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L683"
+    },
+    {
+      "tocall": "APERHX",
+      "vendor": "Damian, SQ9RHX",
+      "model": "WX, Telemetry Scripts",
+      "class": "software",
+      "locator": "tocalls.yaml#L690"
+    },
+    {
+      "tocall": "APERRB",
+      "vendor": "KG5JNC",
+      "model": "APRS Backend for Errbot",
+      "class": "service",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L696"
+    },
+    {
+      "tocall": "APERS?",
+      "vendor": "Jason, KG7YKZ",
+      "model": "Runner tracking",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L704"
+    },
+    {
+      "tocall": "APERXQ",
+      "vendor": "PE1RXQ",
+      "model": "PE1RXQ APRS Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L709"
+    },
+    {
+      "tocall": "APESP1",
+      "vendor": "LY3PH",
+      "model": "APRS-ESP",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L714"
+    },
+    {
+      "tocall": "APESPG",
+      "vendor": "OH2TH",
+      "model": "ESP SmartBeacon APRS-IS Client",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L719"
+    },
+    {
+      "tocall": "APESPW",
+      "vendor": "OH2TH",
+      "model": "ESP Weather Station APRS-IS Client",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L724"
+    },
+    {
+      "tocall": "APETBT",
+      "vendor": "PD7R",
+      "model": "TBTracker Balloon Telemetry Tracker",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L729"
+    },
+    {
+      "tocall": "APFG??",
+      "vendor": "KP4DJT",
+      "model": "Flood Gage",
+      "class": "software",
+      "locator": "tocalls.yaml#L736"
+    },
+    {
+      "tocall": "APFI??",
+      "vendor": "aprs.fi",
+      "class": "app",
+      "locator": "tocalls.yaml#L741"
+    },
+    {
+      "tocall": "APFIAN",
+      "vendor": "aprs.fi",
+      "model": "Android app",
+      "class": "app",
+      "os": "Android",
+      "locator": "tocalls.yaml#L745"
+    },
+    {
+      "tocall": "APFII?",
+      "vendor": "aprs.fi",
+      "model": "iPhone/iPad app",
+      "class": "app",
+      "os": "ios",
+      "locator": "tocalls.yaml#L751"
+    },
+    {
+      "tocall": "APFLIP",
+      "vendor": "LU3ARN",
+      "model": "818 APRS Transceiver",
+      "class": "gadget",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L757"
+    },
+    {
+      "tocall": "APFLPZ",
+      "vendor": "YO3GND",
+      "model": "Flipper Zero standalone beacon",
+      "class": "gadget",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L764"
+    },
+    {
+      "tocall": "APFMN?",
+      "vendor": "Thomas Beiderwieden, DL3EL",
+      "model": "FM-Funknetz HS Dashboard",
+      "class": "service",
+      "locator": "tocalls.yaml#L771"
+    },
+    {
+      "tocall": "APFMO?",
+      "vendor": "BG5ESN",
+      "model": "FMO (NFM Over Internet)",
+      "class": "gadget",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L777"
+    },
+    {
+      "tocall": "APFSYC",
+      "vendor": "David McKenzie, K1FSY",
+      "model": "FSY Packet Console",
+      "class": "software",
+      "locator": "tocalls.yaml#L784"
+    },
+    {
+      "tocall": "APGBLN",
+      "vendor": "NW5W",
+      "model": "GoBalloon",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L790"
+    },
+    {
+      "tocall": "APGDT?",
+      "vendor": "VK4FAST",
+      "model": "Graphic Data Terminal",
+      "locator": "tocalls.yaml#L795"
+    },
+    {
+      "tocall": "APGKEY",
+      "vendor": "Mohammad Zaki, 9W2KEY",
+      "model": "9W2KEY iGate",
+      "class": "igate",
+      "locator": "tocalls.yaml#L799"
+    },
+    {
+      "tocall": "APGLDG",
+      "vendor": "AI7BQ",
+      "model": "GoldenGate AREDN MeshChat gateway",
+      "class": "service",
+      "locator": "tocalls.yaml#L805"
+    },
+    {
+      "tocall": "APGO??",
+      "vendor": "AA3NJ",
+      "model": "APRS-Go",
+      "class": "app",
+      "locator": "tocalls.yaml#L810"
+    },
+    {
+      "tocall": "APGRW?",
+      "vendor": "Chris Snell, NW5W",
+      "model": "NW5W Graywolf",
+      "class": "software",
+      "os": "Multiple",
+      "locator": "tocalls.yaml#L815"
+    },
+    {
+      "tocall": "APHAX?",
+      "vendor": "PY2UEP",
+      "model": "SM2APRS SondeMonitor",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L821"
+    },
+    {
+      "tocall": "APHBL?",
+      "vendor": "KF7EEL",
+      "model": "HBLink D-APRS Gateway",
+      "class": "software",
+      "locator": "tocalls.yaml#L827"
+    },
+    {
+      "tocall": "APHH?",
+      "vendor": "Steven D. Bragg, KA9MVA",
+      "model": "HamHud",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L832"
+    },
+    {
+      "tocall": "APHK??",
+      "vendor": "LA1BR",
+      "model": "Digipeater/tracker",
+      "locator": "tocalls.yaml#L837"
+    },
+    {
+      "tocall": "APHMEY",
+      "vendor": "Tapio Heiskanen, OH2TH",
+      "model": "APRS-IS Client for Athom Homey",
+      "locator": "tocalls.yaml#L841"
+    },
+    {
+      "tocall": "APHPIA",
+      "vendor": "HP3ICC",
+      "model": "Arduino APRS",
+      "locator": "tocalls.yaml#L846"
+    },
+    {
+      "tocall": "APHPIB",
+      "vendor": "HP3ICC",
+      "model": "Python APRS Beacon",
+      "locator": "tocalls.yaml#L850"
+    },
+    {
+      "tocall": "APHPIW",
+      "vendor": "HP3ICC",
+      "model": "Python APRS WX",
+      "locator": "tocalls.yaml#L854"
+    },
+    {
+      "tocall": "APHRM?",
+      "vendor": "Giovanni, IW1CGW",
+      "model": "Meteo",
+      "class": "wx",
+      "locator": "tocalls.yaml#L858"
+    },
+    {
+      "tocall": "APHRT?",
+      "vendor": "Giovanni, IW1CGW",
+      "model": "Telemetry",
+      "locator": "tocalls.yaml#L864"
+    },
+    {
+      "tocall": "APHT??",
+      "vendor": "IU0AAC",
+      "model": "HMTracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L869"
+    },
+    {
+      "tocall": "APHW??",
+      "vendor": "HamWAN",
+      "locator": "tocalls.yaml#L874"
+    },
+    {
+      "tocall": "API282",
+      "vendor": "Icom",
+      "model": "IC-2820",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L877"
+    },
+    {
+      "tocall": "API31",
+      "vendor": "Icom",
+      "model": "IC-31",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L882"
+    },
+    {
+      "tocall": "API410",
+      "vendor": "Icom",
+      "model": "IC-4100",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L887"
+    },
+    {
+      "tocall": "API51",
+      "vendor": "Icom",
+      "model": "IC-51",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L892"
+    },
+    {
+      "tocall": "API510",
+      "vendor": "Icom",
+      "model": "IC-5100",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L897"
+    },
+    {
+      "tocall": "API710",
+      "vendor": "Icom",
+      "model": "IC-7100",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L902"
+    },
+    {
+      "tocall": "API80",
+      "vendor": "Icom",
+      "model": "IC-80",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L907"
+    },
+    {
+      "tocall": "API880",
+      "vendor": "Icom",
+      "model": "IC-880",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L912"
+    },
+    {
+      "tocall": "API910",
+      "vendor": "Icom",
+      "model": "IC-9100",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L917"
+    },
+    {
+      "tocall": "API92",
+      "vendor": "Icom",
+      "model": "IC-92",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L922"
+    },
+    {
+      "tocall": "API970",
+      "vendor": "Icom",
+      "model": "IC-9700",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L927"
+    },
+    {
+      "tocall": "API???",
+      "vendor": "Icom",
+      "model": "unknown",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L932"
+    },
+    {
+      "tocall": "APIC??",
+      "vendor": "HA9MCQ",
+      "model": "PICiGATE",
+      "locator": "tocalls.yaml#L937"
+    },
+    {
+      "tocall": "APIE??",
+      "vendor": "W7KMV",
+      "model": "PiAPRS",
+      "locator": "tocalls.yaml#L941"
+    },
+    {
+      "tocall": "APIN??",
+      "vendor": "AB0WV",
+      "model": "PinPoint",
+      "locator": "tocalls.yaml#L945"
+    },
+    {
+      "tocall": "APIZCI",
+      "vendor": "TA7W/OH2UDS Baris Dinc, TA6AD Emre Keles",
+      "model": "hymTR IZCI Tracker",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L949"
+    },
+    {
+      "tocall": "APJ8??",
+      "vendor": "KN4CRD",
+      "model": "JS8Call",
+      "class": "software",
+      "locator": "tocalls.yaml#L955"
+    },
+    {
+      "tocall": "APJA??",
+      "vendor": "K4HG & AE5PL",
+      "model": "JavAPRS",
+      "locator": "tocalls.yaml#L960"
+    },
+    {
+      "tocall": "APJE??",
+      "vendor": "Gregg Wonderly, W5GGW",
+      "model": "JeAPRS",
+      "locator": "tocalls.yaml#L964"
+    },
+    {
+      "tocall": "APJI??",
+      "vendor": "Peter Loveall, AE5PL",
+      "model": "jAPRSIgate",
+      "class": "software",
+      "locator": "tocalls.yaml#L968"
+    },
+    {
+      "tocall": "APJID2",
+      "vendor": "Peter Loveall, AE5PL",
+      "model": "D-Star APJID2",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L973"
+    },
+    {
+      "tocall": "APJS??",
+      "vendor": "Peter Loveall, AE5PL",
+      "model": "javAPRSSrvr",
+      "locator": "tocalls.yaml#L978"
+    },
+    {
+      "tocall": "APJY??",
+      "vendor": "KA2DDO",
+      "model": "YAAC",
+      "class": "software",
+      "locator": "tocalls.yaml#L982"
+    },
+    {
+      "tocall": "APK003",
+      "vendor": "Kenwood",
+      "model": "TH-D72",
+      "class": "ht",
+      "locator": "tocalls.yaml#L987"
+    },
+    {
+      "tocall": "APK004",
+      "vendor": "Kenwood",
+      "model": "TH-D74",
+      "class": "ht",
+      "locator": "tocalls.yaml#L992"
+    },
+    {
+      "tocall": "APK005",
+      "vendor": "Kenwood",
+      "model": "TH-D75",
+      "class": "ht",
+      "locator": "tocalls.yaml#L997"
+    },
+    {
+      "tocall": "APK0??",
+      "vendor": "Kenwood",
+      "model": "TH-D7",
+      "class": "ht",
+      "locator": "tocalls.yaml#L1002"
+    },
+    {
+      "tocall": "APK1??",
+      "vendor": "Kenwood",
+      "model": "TM-D700",
+      "class": "rig",
+      "locator": "tocalls.yaml#L1007"
+    },
+    {
+      "tocall": "APKDXn",
+      "vendor": "KelateDX, 9M2D",
+      "model": "LAHKHUANO APRS",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1012"
+    },
+    {
+      "tocall": "APKEYn",
+      "vendor": "9W2KEY",
+      "model": "ESP8266 APRS",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1019"
+    },
+    {
+      "tocall": "APKHTW",
+      "vendor": "Kip, W3SN",
+      "model": "Tempest Weather Bridge",
+      "class": "wx",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1026"
+    },
+    {
+      "tocall": "APKJH?",
+      "vendor": "VA3KJH",
+      "model": "TD-H9 BLE KISS",
+      "class": "app",
+      "os": "Android",
+      "locator": "tocalls.yaml#L1033"
+    },
+    {
+      "tocall": "APKRAM",
+      "vendor": "kramstuff.com",
+      "model": "Ham Tracker",
+      "class": "app",
+      "os": "ios",
+      "locator": "tocalls.yaml#L1039"
+    },
+    {
+      "tocall": "APKTY1",
+      "vendor": "Kirby Frugia, W7TTY",
+      "model": "KISSTTY",
+      "class": "software",
+      "os": "Multiple",
+      "locator": "tocalls.yaml#L1045"
+    },
+    {
+      "tocall": "APKVPA",
+      "vendor": "kv4p HT open source project",
+      "model": "kv4p HT (Android)",
+      "class": "app",
+      "os": "Android",
+      "features": [
+        "item-in-msg"
+      ],
+      "locator": "tocalls.yaml#L1052"
+    },
+    {
+      "tocall": "APKVPI",
+      "vendor": "kv4p HT open source project",
+      "model": "kv4p HT (iOS)",
+      "class": "app",
+      "os": "iOS",
+      "features": [
+        "item-in-msg"
+      ],
+      "locator": "tocalls.yaml#L1061"
+    },
+    {
+      "tocall": "APLC??",
+      "vendor": "DL3DCW",
+      "model": "APRScube",
+      "locator": "tocalls.yaml#L1070"
+    },
+    {
+      "tocall": "APLDAG",
+      "vendor": "Inigo, EA2CQ",
+      "model": "DAGA LoRa/APRS SOTA spotting",
+      "class": "service",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L1074"
+    },
+    {
+      "tocall": "APLDG?",
+      "vendor": "Eddie, 9W2LWK",
+      "model": "LoRAIGate",
+      "class": "igate",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1082"
+    },
+    {
+      "tocall": "APLDH?",
+      "vendor": "Eddie, 9W2LWK",
+      "model": "LoraTracker",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1089"
+    },
+    {
+      "tocall": "APLDI?",
+      "vendor": "David, OK2DDS",
+      "model": "LoRa IGate/Digipeater",
+      "class": "digi",
+      "locator": "tocalls.yaml#L1096"
+    },
+    {
+      "tocall": "APLDL1",
+      "vendor": "ORARI Lokal KTS, Handiko Gesang, YB1SDL",
+      "model": "LoRa Digipeater",
+      "class": "digi",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1101"
+    },
+    {
+      "tocall": "APLDM?",
+      "vendor": "David, OK2DDS",
+      "model": "LoRa Meteostation",
+      "class": "wx",
+      "locator": "tocalls.yaml#L1108"
+    },
+    {
+      "tocall": "APLER?",
+      "vendor": "Ercan, TA3OER",
+      "model": "TROY LoRa Tracker/iGate",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1113"
+    },
+    {
+      "tocall": "APLETK",
+      "vendor": "DL5TKL",
+      "model": "T-Echo",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1119"
+    },
+    {
+      "tocall": "APLFG?",
+      "vendor": "Gabor, HG3FUG",
+      "model": "LoRa WX station",
+      "class": "wx",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1126"
+    },
+    {
+      "tocall": "APLFL?",
+      "vendor": "Damian, SQ2CPA",
+      "model": "LoRa/APRS Balloon",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1133"
+    },
+    {
+      "tocall": "APLFM?",
+      "vendor": "DO1MA",
+      "model": "FemtoAPRS",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1140"
+    },
+    {
+      "tocall": "APLG??",
+      "vendor": "OE5BPA",
+      "model": "LoRa Gateway/Digipeater",
+      "class": "digi",
+      "locator": "tocalls.yaml#L1146"
+    },
+    {
+      "tocall": "APLHB9",
+      "vendor": "SWISS-ARTG",
+      "model": "LoRa iGate RPI",
+      "class": "igate",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L1151"
+    },
+    {
+      "tocall": "APLHI?",
+      "vendor": "Giovanni, IW1CGW",
+      "model": "LoRa IGate/Digipeater/Telemetry",
+      "class": "digi",
+      "locator": "tocalls.yaml#L1158"
+    },
+    {
+      "tocall": "APLHM?",
+      "vendor": "Giovanni, IW1CGW",
+      "model": "LoRa Meteostation",
+      "class": "wx",
+      "locator": "tocalls.yaml#L1164"
+    },
+    {
+      "tocall": "APLHT1",
+      "vendor": "HA8LHT",
+      "model": "LoRa Gateway",
+      "class": "igate",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1170"
+    },
+    {
+      "tocall": "APLHT2",
+      "vendor": "HA8LHT",
+      "model": "LoRa Tracker",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1176"
+    },
+    {
+      "tocall": "APLIF?",
+      "vendor": "TA5Y",
+      "model": "TIF LORA APRS I-GATE",
+      "class": "igate",
+      "locator": "tocalls.yaml#L1182"
+    },
+    {
+      "tocall": "APLIG?",
+      "vendor": "TA2MUN/TA9OHC",
+      "model": "LightAPRS Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L1187"
+    },
+    {
+      "tocall": "APLLO?",
+      "vendor": "HB4LO",
+      "model": "HAB BOT",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L1192"
+    },
+    {
+      "tocall": "APLLT?",
+      "vendor": "George K. Scott, K6GKS (Technology Integrators)",
+      "model": "LoRa Tracker",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1198"
+    },
+    {
+      "tocall": "APLM??",
+      "vendor": "WA0TQG",
+      "class": "software",
+      "locator": "tocalls.yaml#L1205"
+    },
+    {
+      "tocall": "APLO??",
+      "vendor": "SQ9MDD",
+      "model": "LoRa KISS TNC/Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L1209"
+    },
+    {
+      "tocall": "APLP0?",
+      "vendor": "SQ9P",
+      "model": "fajne digi",
+      "class": "digi",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1214"
+    },
+    {
+      "tocall": "APLP1?",
+      "vendor": "SQ9P",
+      "model": "LORA/FSK/AFSK fajny tracker",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1221"
+    },
+    {
+      "tocall": "APLPS?",
+      "vendor": "Jose, XE3JAC",
+      "model": "ESP-32 LoRa",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1228"
+    },
+    {
+      "tocall": "APLRF?",
+      "vendor": "Damian, SQ2CPA",
+      "model": "LoRa APRS",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1234"
+    },
+    {
+      "tocall": "APLRG?",
+      "vendor": "Ricardo, CA2RXU",
+      "model": "ESP32 LoRa iGate",
+      "class": "igate",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1240"
+    },
+    {
+      "tocall": "APLRM?",
+      "vendor": "Railab Srl, IU2TZK",
+      "model": "Railab LoRa board",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1247"
+    },
+    {
+      "tocall": "APLRS?",
+      "vendor": "Railab Srl, IU2TZK",
+      "model": "Railab LoRa board",
+      "class": "igate",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1254"
+    },
+    {
+      "tocall": "APLRT?",
+      "vendor": "Ricardo, CA2RXU",
+      "model": "ESP32 LoRa Tracker",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1261"
+    },
+    {
+      "tocall": "APLS??",
+      "vendor": "SARIMESH",
+      "model": "SARIMESH",
+      "class": "software",
+      "locator": "tocalls.yaml#L1268"
+    },
+    {
+      "tocall": "APLT??",
+      "vendor": "OE5BPA",
+      "model": "LoRa Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L1273"
+    },
+    {
+      "tocall": "APLU0?",
+      "vendor": "SP9UP",
+      "model": "ESP32/SX12xx LoRa iGate / Digi",
+      "class": "digi",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1278"
+    },
+    {
+      "tocall": "APLU1?",
+      "vendor": "SP9UP",
+      "model": "ESP32/SX12xx LoRa Tracker",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1285"
+    },
+    {
+      "tocall": "APLUL?",
+      "vendor": "Alex YO2LDK",
+      "locator": "tocalls.yaml#L1292"
+    },
+    {
+      "tocall": "APLULD",
+      "vendor": "Alex YO2LDK",
+      "model": "ESP32S3 UltimateLoRa iGate+Digi",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1296"
+    },
+    {
+      "tocall": "APLULT",
+      "vendor": "Alex YO2LDK",
+      "model": "ESP32S3 UltimateLoRa Tracker",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1303"
+    },
+    {
+      "tocall": "APLXY1",
+      "vendor": "2E0LXY",
+      "model": "2E0LXY LoRa APRS iGate",
+      "class": "igate",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1310"
+    },
+    {
+      "tocall": "APLZA?",
+      "vendor": "Huang Xuewu, BD5HTY",
+      "model": "LoRa",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1317"
+    },
+    {
+      "tocall": "APLZX?",
+      "vendor": "N1AF",
+      "model": "LoRa-APRS",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1323"
+    },
+    {
+      "tocall": "APM2A?",
+      "vendor": "ZR1RF",
+      "model": "Meshtastic to APRS (mesh2aprs)",
+      "class": "daemon",
+      "locator": "tocalls.yaml#L1329"
+    },
+    {
+      "tocall": "APMAA?",
+      "vendor": "Terje Husby, LA3MAA",
+      "model": "LA3MAA messaging projects",
+      "locator": "tocalls.yaml#L1335"
+    },
+    {
+      "tocall": "APMAIL",
+      "vendor": "Mike, NA7Q",
+      "model": "APRS Mailbox",
+      "class": "service",
+      "locator": "tocalls.yaml#L1339"
+    },
+    {
+      "tocall": "APMBL3",
+      "vendor": "Mobilinkd LLC",
+      "model": "TNC3",
+      "class": "digi",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1345"
+    },
+    {
+      "tocall": "APMBL4",
+      "vendor": "Mobilinkd LLC",
+      "model": "TNC4",
+      "class": "digi",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1352"
+    },
+    {
+      "tocall": "APMBL?",
+      "vendor": "Mobilinkd LLC",
+      "locator": "tocalls.yaml#L1359"
+    },
+    {
+      "tocall": "APMBLN",
+      "vendor": "Mobilinkd LLC",
+      "model": "NucleoTNC",
+      "class": "digi",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1363"
+    },
+    {
+      "tocall": "APMDN?",
+      "vendor": "Eric Pasch, KM4TJO",
+      "model": "Meridian APRS",
+      "locator": "tocalls.yaml#L1370"
+    },
+    {
+      "tocall": "APMG??",
+      "vendor": "Alex, AB0TJ",
+      "model": "PiCrumbs and MiniGate",
+      "class": "software",
+      "locator": "tocalls.yaml#L1375"
+    },
+    {
+      "tocall": "APMI01",
+      "vendor": "Microsat",
+      "model": "WX3in1",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1380"
+    },
+    {
+      "tocall": "APMI02",
+      "vendor": "Microsat",
+      "model": "WXEth",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1385"
+    },
+    {
+      "tocall": "APMI03",
+      "vendor": "Microsat",
+      "model": "PLXDigi",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1390"
+    },
+    {
+      "tocall": "APMI04",
+      "vendor": "Microsat",
+      "model": "WX3in1 Mini",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1395"
+    },
+    {
+      "tocall": "APMI05",
+      "vendor": "Microsat",
+      "model": "PLXTracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1400"
+    },
+    {
+      "tocall": "APMI06",
+      "vendor": "Microsat",
+      "model": "WX3in1 Plus 2.0",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1405"
+    },
+    {
+      "tocall": "APMI??",
+      "vendor": "Microsat",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1410"
+    },
+    {
+      "tocall": "APMON?",
+      "vendor": "Amon Schumann, DL9AS",
+      "model": "APRS Balloon Tracker",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1414"
+    },
+    {
+      "tocall": "APMPAD",
+      "vendor": "DF1JSL",
+      "model": "Multi-Purpose APRS Daemon",
+      "class": "service",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L1420"
+    },
+    {
+      "tocall": "APMQ??",
+      "vendor": "WB2OSZ",
+      "model": "Ham Radio of Things",
+      "locator": "tocalls.yaml#L1428"
+    },
+    {
+      "tocall": "APMT??",
+      "vendor": "LZ1PPL",
+      "model": "Micro APRS Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L1432"
+    },
+    {
+      "tocall": "APN0A?",
+      "vendor": "Jeremy Cooper, KE6JJJ",
+      "model": "N0ARY Full Service Packet BBS",
+      "class": "daemon",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L1437"
+    },
+    {
+      "tocall": "APN102",
+      "vendor": "Gregg Wonderly, W5GGW",
+      "model": "APRSNow",
+      "class": "app",
+      "os": "ipad",
+      "locator": "tocalls.yaml#L1444"
+    },
+    {
+      "tocall": "APN2??",
+      "vendor": "VE4KLM",
+      "model": "NOSaprs for JNOS 2.0",
+      "locator": "tocalls.yaml#L1450"
+    },
+    {
+      "tocall": "APN3??",
+      "vendor": "Kantronics",
+      "model": "KPC-3",
+      "locator": "tocalls.yaml#L1454"
+    },
+    {
+      "tocall": "APN9??",
+      "vendor": "Kantronics",
+      "model": "KPC-9612",
+      "locator": "tocalls.yaml#L1458"
+    },
+    {
+      "tocall": "APNCM",
+      "vendor": "Keith Kaiser, WA0TJT",
+      "model": "Net Control Manager",
+      "class": "software",
+      "os": "browser",
+      "locator": "tocalls.yaml#L1462"
+    },
+    {
+      "tocall": "APND??",
+      "vendor": "PE1MEW",
+      "model": "DIGI_NED",
+      "locator": "tocalls.yaml#L1469"
+    },
+    {
+      "tocall": "APNEO?",
+      "vendor": "chevybowtie",
+      "model": "nesdr-aprs-igate",
+      "class": "daemon",
+      "os": "Linux",
+      "locator": "tocalls.yaml#L1473"
+    },
+    {
+      "tocall": "APNIC4",
+      "vendor": "SQ5EKU",
+      "model": "BidaTrak",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1480"
+    },
+    {
+      "tocall": "APNIFC",
+      "vendor": "Mike, NA7Q",
+      "model": "National Interagency Fire Center Alerts",
+      "class": "service",
+      "locator": "tocalls.yaml#L1486"
+    },
+    {
+      "tocall": "APNJS?",
+      "vendor": "Julien Sansonnens, HB9HRD",
+      "model": "Web messaging service",
+      "class": "service",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L1491"
+    },
+    {
+      "tocall": "APNK01",
+      "vendor": "Kenwood",
+      "model": "TM-D700",
+      "class": "rig",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L1499"
+    },
+    {
+      "tocall": "APNK80",
+      "vendor": "Kantronics",
+      "model": "KAM",
+      "locator": "tocalls.yaml#L1506"
+    },
+    {
+      "tocall": "APNKMP",
+      "vendor": "Kantronics",
+      "model": "KAM+",
+      "locator": "tocalls.yaml#L1510"
+    },
+    {
+      "tocall": "APNKMX",
+      "vendor": "Kantronics",
+      "model": "KAM-XL",
+      "locator": "tocalls.yaml#L1514"
+    },
+    {
+      "tocall": "APNL??",
+      "vendor": "OE5DXL, OE5HPM",
+      "model": "dxlAPRS",
+      "class": "daemon",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L1518"
+    },
+    {
+      "tocall": "APNM??",
+      "vendor": "MFJ",
+      "model": "TNC",
+      "locator": "tocalls.yaml#L1524"
+    },
+    {
+      "tocall": "APNP??",
+      "vendor": "PacComm",
+      "model": "TNC",
+      "locator": "tocalls.yaml#L1528"
+    },
+    {
+      "tocall": "APNT??",
+      "vendor": "SV2AGW",
+      "model": "TNT TNC as a digipeater",
+      "class": "digi",
+      "locator": "tocalls.yaml#L1532"
+    },
+    {
+      "tocall": "APNU??",
+      "vendor": "IW3FQG",
+      "model": "UIdigi",
+      "class": "digi",
+      "locator": "tocalls.yaml#L1537"
+    },
+    {
+      "tocall": "APNV0?",
+      "vendor": "SQ8L",
+      "model": "VP-Digi",
+      "class": "digi",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1542"
+    },
+    {
+      "tocall": "APNV1?",
+      "vendor": "SQ8L",
+      "model": "VP-Node",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1548"
+    },
+    {
+      "tocall": "APNV2?",
+      "vendor": "SQ8L",
+      "model": "VP-Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L1553"
+    },
+    {
+      "tocall": "APNV??",
+      "vendor": "SQ8L",
+      "locator": "tocalls.yaml#L1558"
+    },
+    {
+      "tocall": "APNW??",
+      "vendor": "SQ3FYK",
+      "model": "WX3in1",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1561"
+    },
+    {
+      "tocall": "APNX??",
+      "vendor": "K6DBG",
+      "model": "TNC-X",
+      "locator": "tocalls.yaml#L1566"
+    },
+    {
+      "tocall": "APOA??",
+      "vendor": "OpenAPRS",
+      "model": "app",
+      "class": "app",
+      "os": "ios",
+      "locator": "tocalls.yaml#L1570"
+    },
+    {
+      "tocall": "APOCSG",
+      "vendor": "N0AGI",
+      "model": "POCSAG",
+      "locator": "tocalls.yaml#L1576"
+    },
+    {
+      "tocall": "APODOT",
+      "vendor": "Mike, NA7Q",
+      "model": "Oregon Department of Transportion Traffic Alerts",
+      "class": "service",
+      "locator": "tocalls.yaml#L1580"
+    },
+    {
+      "tocall": "APOFA?",
+      "vendor": "OffARO",
+      "model": "OffARO — Offline APRS Radio Operation",
+      "class": "software",
+      "os": "Multiple",
+      "locator": "tocalls.yaml#L1585"
+    },
+    {
+      "tocall": "APOG7?",
+      "vendor": "OpenGD77",
+      "model": "OpenGD77",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1592"
+    },
+    {
+      "tocall": "APOLU?",
+      "vendor": "AMSAT-LU",
+      "model": "Oscar",
+      "class": "satellite",
+      "locator": "tocalls.yaml#L1598"
+    },
+    {
+      "tocall": "APOMTR",
+      "vendor": "Adrian Craig, M0GLJ",
+      "model": "OZ-TRAK APRS Mobile Tracker",
+      "class": "tracker",
+      "os": "Linux",
+      "locator": "tocalls.yaml#L1603"
+    },
+    {
+      "tocall": "APONE?",
+      "vendor": "aprs.one",
+      "locator": "tocalls.yaml#L1610"
+    },
+    {
+      "tocall": "APONEA",
+      "vendor": "aprs.one",
+      "model": "Mobile app tracker",
+      "class": "app",
+      "locator": "tocalls.yaml#L1613"
+    },
+    {
+      "tocall": "APONET",
+      "vendor": "aprs.one",
+      "model": "Hardware tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L1618"
+    },
+    {
+      "tocall": "APOPEN",
+      "vendor": "David Platt, AE6EO",
+      "model": "OpenTNC",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1623"
+    },
+    {
+      "tocall": "APOPYT",
+      "vendor": "Mike, NA7Q",
+      "model": "NA7Q Messenger",
+      "class": "software",
+      "locator": "tocalls.yaml#L1629"
+    },
+    {
+      "tocall": "APORT?",
+      "vendor": "OpenRTX Contributors",
+      "model": "OpenRTX",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1635"
+    },
+    {
+      "tocall": "APOSAT",
+      "vendor": "Mike, NA7Q",
+      "model": "Open Source Satellite Gateway",
+      "class": "service",
+      "locator": "tocalls.yaml#L1640"
+    },
+    {
+      "tocall": "APOSB",
+      "vendor": "SharkRF",
+      "model": "openSPOT3",
+      "class": "gadget",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1646"
+    },
+    {
+      "tocall": "APOSB4",
+      "vendor": "SharkRF",
+      "model": "openSPOT4",
+      "class": "gadget",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1653"
+    },
+    {
+      "tocall": "APOSB?",
+      "vendor": "SharkRF",
+      "locator": "tocalls.yaml#L1660"
+    },
+    {
+      "tocall": "APOSBM",
+      "vendor": "SharkRF",
+      "model": "M1KE",
+      "class": "gadget",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1664"
+    },
+    {
+      "tocall": "APOSMS",
+      "vendor": "Mike, NA7Q",
+      "model": "Open Source SMS Gateway",
+      "class": "service",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L1671"
+    },
+    {
+      "tocall": "APOSW?",
+      "vendor": "SharkRF",
+      "model": "openSPOT2",
+      "class": "gadget",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1679"
+    },
+    {
+      "tocall": "APOT??",
+      "vendor": "Argent Data Systems",
+      "model": "OpenTracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L1686"
+    },
+    {
+      "tocall": "APOVK5",
+      "vendor": "Buğra Canata, TA1JS",
+      "model": "UV-K5 TA1JS",
+      "class": "ht",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1691"
+    },
+    {
+      "tocall": "APOVU?",
+      "vendor": "K J Somaiya Institute",
+      "model": "BeliefSat",
+      "locator": "tocalls.yaml#L1698"
+    },
+    {
+      "tocall": "APOZ??",
+      "vendor": "OZ1EKD, OZ7HVO",
+      "model": "KissOZ",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L1702"
+    },
+    {
+      "tocall": "APP6??",
+      "model": "APRSlib",
+      "locator": "tocalls.yaml#L1707"
+    },
+    {
+      "tocall": "APPCO?",
+      "vendor": "RadCommSoft, LLC",
+      "model": "PicoAPRSTracker",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1710"
+    },
+    {
+      "tocall": "APPIC?",
+      "vendor": "DB1NTO",
+      "model": "PicoAPRS",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L1717"
+    },
+    {
+      "tocall": "APPM??",
+      "vendor": "DL1MX",
+      "model": "rtl-sdr Python iGate",
+      "class": "software",
+      "locator": "tocalls.yaml#L1722"
+    },
+    {
+      "tocall": "APPRIS",
+      "vendor": "DF1JSL",
+      "model": "Apprise APRS plugin",
+      "class": "service",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L1727"
+    },
+    {
+      "tocall": "APPRJ?",
+      "vendor": "Custom Digital Services, LLC",
+      "model": "Traveler's ptFlex and ptSolar trackers",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1735"
+    },
+    {
+      "tocall": "APPRO?",
+      "vendor": "KO6IKR",
+      "model": "PyTNC Pro",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L1742"
+    },
+    {
+      "tocall": "APPRPV",
+      "vendor": "Wicker Made, LLC",
+      "model": "APRS PropView",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L1749"
+    },
+    {
+      "tocall": "APPS??",
+      "vendor": "Øyvind, LA7ECA (for the Norwegian Radio Relay League)",
+      "model": "Polaric Server",
+      "class": "software",
+      "os": "Linux",
+      "locator": "tocalls.yaml#L1756"
+    },
+    {
+      "tocall": "APPT??",
+      "vendor": "JF6LZE",
+      "model": "KetaiTracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L1762"
+    },
+    {
+      "tocall": "APPYTT",
+      "vendor": "Lorenzo \"vash\" IU1BOT",
+      "model": "PyttiAPRS",
+      "class": "software",
+      "os": "Multiple",
+      "locator": "tocalls.yaml#L1767"
+    },
+    {
+      "tocall": "APQCA?",
+      "vendor": "Míra Svoboda, OK1IRY",
+      "model": "ClassicAPRS",
+      "class": "software",
+      "os": "macOS",
+      "locator": "tocalls.yaml#L1774"
+    },
+    {
+      "tocall": "APQRX",
+      "vendor": "Jesse Forkum, N0JLF",
+      "model": "QRX - APRS Missed Message Mailbox",
+      "class": "service",
+      "locator": "tocalls.yaml#L1781"
+    },
+    {
+      "tocall": "APQTH?",
+      "vendor": "Weston Bustraan, W8WJB",
+      "model": "QTH.app",
+      "class": "software",
+      "os": "macOS",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L1787"
+    },
+    {
+      "tocall": "APQUIZ",
+      "vendor": "John Rokicki, KC1VMZ",
+      "model": "QUIZME APRS Quizmaster",
+      "class": "service",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L1795"
+    },
+    {
+      "tocall": "APR2MF",
+      "vendor": "Mike, DL2MF",
+      "model": "MF2wxAPRS Tinkerforge gateway",
+      "class": "wx",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L1803"
+    },
+    {
+      "tocall": "APR8??",
+      "vendor": "Bob Bruninga, WB4APR",
+      "model": "APRSdos",
+      "class": "software",
+      "locator": "tocalls.yaml#L1809"
+    },
+    {
+      "tocall": "APRARX",
+      "vendor": "Open Source",
+      "model": "radiosonde_auto_rx",
+      "class": "software",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L1814"
+    },
+    {
+      "tocall": "APREAL",
+      "vendor": "HA8LHT",
+      "model": "Real Packet",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L1820"
+    },
+    {
+      "tocall": "APREST",
+      "vendor": "cwop.rest",
+      "model": "HTTP - TCP CWOP Packet Submission",
+      "class": "service",
+      "locator": "tocalls.yaml#L1826"
+    },
+    {
+      "tocall": "APRFG?",
+      "vendor": "RF.Guru",
+      "locator": "tocalls.yaml#L1832"
+    },
+    {
+      "tocall": "APRFGB",
+      "vendor": "RF.Guru",
+      "model": "APRS LoRa Pager",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1836"
+    },
+    {
+      "tocall": "APRFGD",
+      "vendor": "RF.Guru",
+      "model": "APRS Digipeater",
+      "class": "digi",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1842"
+    },
+    {
+      "tocall": "APRFGH",
+      "vendor": "RF.Guru",
+      "model": "Hotspot",
+      "class": "rig",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1849"
+    },
+    {
+      "tocall": "APRFGI",
+      "vendor": "RF.Guru",
+      "model": "LoRa APRS iGate",
+      "class": "igate",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1856"
+    },
+    {
+      "tocall": "APRFGL",
+      "vendor": "RF.Guru",
+      "model": "Lora APRS Digipeater",
+      "class": "digi",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1863"
+    },
+    {
+      "tocall": "APRFGM",
+      "vendor": "RF.Guru",
+      "model": "Mobile Radio",
+      "class": "rig",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1870"
+    },
+    {
+      "tocall": "APRFGP",
+      "vendor": "RF.Guru",
+      "model": "Portable Radio",
+      "class": "ht",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1877"
+    },
+    {
+      "tocall": "APRFGR",
+      "vendor": "RF.Guru",
+      "model": "Repeater",
+      "class": "rig",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1884"
+    },
+    {
+      "tocall": "APRFGT",
+      "vendor": "RF.Guru",
+      "model": "LoRa APRS Tracker",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1891"
+    },
+    {
+      "tocall": "APRFGW",
+      "vendor": "RF.Guru",
+      "model": "LoRa APRS Weather Station",
+      "class": "wx",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1898"
+    },
+    {
+      "tocall": "APRFTH",
+      "vendor": "Xian Stannard 2E1IPS & Chung Poon M7UNG",
+      "model": "Treasure Hunt Service",
+      "class": "service",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L1905"
+    },
+    {
+      "tocall": "APRG??",
+      "vendor": "OH2GVE",
+      "model": "aprsg",
+      "class": "software",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L1913"
+    },
+    {
+      "tocall": "APRHH?",
+      "vendor": "Steven D. Bragg, KA9MVA",
+      "model": "HamHud",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L1919"
+    },
+    {
+      "tocall": "APRKEY",
+      "vendor": "Mohammad Zaki, 9W2KEY",
+      "model": "MYANET APRS Bot",
+      "class": "service",
+      "os": "Linux",
+      "locator": "tocalls.yaml#L1924"
+    },
+    {
+      "tocall": "APRM20",
+      "vendor": "Open Source",
+      "model": "M20 radiosonde",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1931"
+    },
+    {
+      "tocall": "APRMI?",
+      "vendor": "Island Magic Co.",
+      "model": "iPhone/iPad app",
+      "class": "app",
+      "os": "ios",
+      "locator": "tocalls.yaml#L1938"
+    },
+    {
+      "tocall": "APRNFW",
+      "vendor": "Franek SP5FRA",
+      "model": "RS41-NFW",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L1945"
+    },
+    {
+      "tocall": "APRNOW",
+      "vendor": "Gregg Wonderly, W5GGW",
+      "model": "APRSNow",
+      "class": "app",
+      "os": "ipad",
+      "locator": "tocalls.yaml#L1952"
+    },
+    {
+      "tocall": "APRPI?",
+      "vendor": "TA2KVC",
+      "model": "Raspberry Pi APRS / Pico W APRS",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L1958"
+    },
+    {
+      "tocall": "APRPJB",
+      "vendor": "Piju, 9M2PJU",
+      "model": "9M2PJU APRS BBS Bot",
+      "class": "service",
+      "locator": "tocalls.yaml#L1964"
+    },
+    {
+      "tocall": "APRPJC",
+      "vendor": "Piju, 9M2PJU",
+      "model": "9M2PJU Malaysia Callsign Database Bot",
+      "class": "service",
+      "locator": "tocalls.yaml#L1970"
+    },
+    {
+      "tocall": "APRPJE",
+      "vendor": "Piju, 9M2PJU",
+      "model": "9M2PJU APRS Echo and Signal Path Bot",
+      "class": "software",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L1976"
+    },
+    {
+      "tocall": "APRPJG",
+      "vendor": "Piju, 9M2PJU",
+      "model": "9M2PJU APRS Riddle Game Bot",
+      "class": "service",
+      "locator": "tocalls.yaml#L1983"
+    },
+    {
+      "tocall": "APRPJH",
+      "vendor": "Piju, 9M2PJU",
+      "model": "9M2PJU APRS Heat Bot",
+      "class": "service",
+      "locator": "tocalls.yaml#L1989"
+    },
+    {
+      "tocall": "APRPJL",
+      "vendor": "Piju, 9M2PJU",
+      "model": "9M2PJU Bidirectional APRS To Email Bot",
+      "class": "service",
+      "locator": "tocalls.yaml#L1995"
+    },
+    {
+      "tocall": "APRPJM",
+      "vendor": "Piju, 9M2PJU",
+      "model": "APRSMY Net Bot",
+      "class": "service",
+      "locator": "tocalls.yaml#L2001"
+    },
+    {
+      "tocall": "APRPJS",
+      "vendor": "Piju, 9M2PJU",
+      "model": "9M2PJU APRS Web Messenger",
+      "class": "service",
+      "locator": "tocalls.yaml#L2007"
+    },
+    {
+      "tocall": "APRPJT",
+      "vendor": "Piju, 9M2PJU",
+      "model": "9M2PJU APRS to Telegram Bot",
+      "class": "service",
+      "locator": "tocalls.yaml#L2013"
+    },
+    {
+      "tocall": "APRPJU",
+      "vendor": "Piju, 9M2PJU",
+      "model": "9M2PJU APRS Bot",
+      "class": "daemon",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L2019"
+    },
+    {
+      "tocall": "APRPJW",
+      "vendor": "Piju, 9M2PJU",
+      "model": "9M2PJU APRS WX Bot",
+      "class": "service",
+      "locator": "tocalls.yaml#L2027"
+    },
+    {
+      "tocall": "APRPR?",
+      "vendor": "Robert DM4RW, Peter DL6MAA",
+      "model": "Teensy RPR TNC",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L2033"
+    },
+    {
+      "tocall": "APRRDZ",
+      "vendor": "DL9RDZ",
+      "model": "rdzTTGOsonde",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L2040"
+    },
+    {
+      "tocall": "APRRES",
+      "vendor": "xssfox",
+      "model": "APRS-RepeaterRescue",
+      "class": "network",
+      "os": "embedded",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L2045"
+    },
+    {
+      "tocall": "APRRF?",
+      "vendor": "RRF - Réseau des Répéteurs Francophones",
+      "model": "Tracker for RRF",
+      "class": "tracker",
+      "os": "embedded",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L2054"
+    },
+    {
+      "tocall": "APRRT?",
+      "vendor": "RPC Electronics",
+      "model": "RTrak",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L2063"
+    },
+    {
+      "tocall": "APRS",
+      "vendor": "Unknown",
+      "model": "Unknown",
+      "locator": "tocalls.yaml#L2068"
+    },
+    {
+      "tocall": "APRTAC",
+      "vendor": "ModernHam",
+      "model": "APRStac",
+      "class": "software",
+      "os": "Multiple",
+      "locator": "tocalls.yaml#L2072"
+    },
+    {
+      "tocall": "APRX??",
+      "vendor": "Kenneth W. Finnegan, W6KWF",
+      "model": "Aprx",
+      "class": "igate",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L2079"
+    },
+    {
+      "tocall": "APSAR",
+      "vendor": "ZL4FOX",
+      "model": "SARTrack",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L2085"
+    },
+    {
+      "tocall": "APSC20",
+      "vendor": "OH2MQK, OH7LZB",
+      "model": "aprsc",
+      "class": "software",
+      "locator": "tocalls.yaml#L2091"
+    },
+    {
+      "tocall": "APSCOP",
+      "vendor": "Greg, K0GDI",
+      "model": "APRScope",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L2096"
+    },
+    {
+      "tocall": "APSDA?",
+      "vendor": "APSD Developers",
+      "model": "APSD",
+      "class": "software",
+      "locator": "tocalls.yaml#L2103"
+    },
+    {
+      "tocall": "APSDR?",
+      "vendor": "Marcus Roskosch, DL8MRE",
+      "model": "sdr-control",
+      "class": "app",
+      "locator": "tocalls.yaml#L2109"
+    },
+    {
+      "tocall": "APSF??",
+      "vendor": "F5OPV, SFCP_LABS",
+      "model": "embedded APRS devices",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L2115"
+    },
+    {
+      "tocall": "APSFLG",
+      "vendor": "F5OPV, SFCP_LABS",
+      "model": "LoRa/APRS Gateway",
+      "class": "digi",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L2120"
+    },
+    {
+      "tocall": "APSFRP",
+      "vendor": "F5OPV, SFCP_LABS",
+      "model": "VHF/UHF Repeater",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L2126"
+    },
+    {
+      "tocall": "APSFTL",
+      "vendor": "F5OPV, SFCP_LABS",
+      "model": "LoRa/APRS Telemetry Reporter",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L2131"
+    },
+    {
+      "tocall": "APSFWX",
+      "vendor": "F5OPV, SFCP_LABS",
+      "model": "embedded Weather Station",
+      "class": "wx",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L2136"
+    },
+    {
+      "tocall": "APSIGK",
+      "vendor": "Henri Bergius, DF4HB",
+      "model": "Signal K APRS Plugin",
+      "class": "service",
+      "locator": "tocalls.yaml#L2142"
+    },
+    {
+      "tocall": "APSIK?",
+      "vendor": "Zihao Meng, BI4KYG",
+      "model": "SiKA APRS Suite",
+      "class": "daemon",
+      "os": "Multiple",
+      "locator": "tocalls.yaml#L2148"
+    },
+    {
+      "tocall": "APSK63",
+      "vendor": "Chris Moulding, G4HYG",
+      "model": "APRS Messenger",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L2155"
+    },
+    {
+      "tocall": "APSMS?",
+      "vendor": "Paul Dufresne",
+      "model": "SMS gateway",
+      "class": "software",
+      "locator": "tocalls.yaml#L2161"
+    },
+    {
+      "tocall": "APSN01",
+      "vendor": "CSN Technologies Inc.",
+      "model": "iGateMini",
+      "os": "embedded",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L2166"
+    },
+    {
+      "tocall": "APSN??",
+      "vendor": "CSN Technologies Inc.",
+      "locator": "tocalls.yaml#L2174"
+    },
+    {
+      "tocall": "APSPOT",
+      "vendor": "Razvan Zeces, YO6RZV",
+      "model": "APRSpot",
+      "class": "app",
+      "os": "ios",
+      "locator": "tocalls.yaml#L2177"
+    },
+    {
+      "tocall": "APSRF?",
+      "vendor": "SoftRF",
+      "model": "Ham Edition",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L2184"
+    },
+    {
+      "tocall": "APSTAR",
+      "vendor": "AllStar Link LLC",
+      "model": "Asterisk/app_rpt",
+      "class": "daemon",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L2190"
+    },
+    {
+      "tocall": "APSTKA",
+      "vendor": "AxelStack LLC",
+      "model": "APRS Connect (Android)",
+      "class": "app",
+      "os": "Android",
+      "locator": "tocalls.yaml#L2196"
+    },
+    {
+      "tocall": "APSTKB",
+      "vendor": "AxelStack LLC",
+      "model": "APRS Connect (web)",
+      "class": "software",
+      "os": "browser",
+      "locator": "tocalls.yaml#L2203"
+    },
+    {
+      "tocall": "APSTKI",
+      "vendor": "AxelStack LLC",
+      "model": "APRS Connect (iOS)",
+      "class": "app",
+      "os": "ios",
+      "locator": "tocalls.yaml#L2210"
+    },
+    {
+      "tocall": "APSTKL",
+      "vendor": "AxelStack LLC",
+      "model": "APRS Connect (Linux)",
+      "class": "software",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L2217"
+    },
+    {
+      "tocall": "APSTKM",
+      "vendor": "AxelStack LLC",
+      "model": "APRS Connect (macOS)",
+      "class": "software",
+      "os": "macOS",
+      "locator": "tocalls.yaml#L2224"
+    },
+    {
+      "tocall": "APSTKW",
+      "vendor": "AxelStack LLC",
+      "model": "APRS Connect (Windows)",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L2231"
+    },
+    {
+      "tocall": "APSTM?",
+      "vendor": "W7QO",
+      "model": "Balloon tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L2238"
+    },
+    {
+      "tocall": "APSTPO",
+      "vendor": "N0AGI",
+      "model": "Satellite Tracking and Operations",
+      "class": "software",
+      "locator": "tocalls.yaml#L2243"
+    },
+    {
+      "tocall": "APSVX?",
+      "vendor": "Tobias Blomberg, SM0SVX",
+      "model": "SvxLink",
+      "class": "daemon",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L2248"
+    },
+    {
+      "tocall": "APSWIF",
+      "vendor": "Buğra Canata, TA1JS",
+      "model": "APRSSwift",
+      "class": "app",
+      "os": "ios",
+      "locator": "tocalls.yaml#L2255"
+    },
+    {
+      "tocall": "APSnnn",
+      "vendor": "Brent Hildebrand, KH2Z",
+      "model": "APRS+SA",
+      "class": "software",
+      "locator": "tocalls.yaml#L2262"
+    },
+    {
+      "tocall": "APT2??",
+      "vendor": "Byonics",
+      "model": "TinyTrak2",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L2267"
+    },
+    {
+      "tocall": "APT3??",
+      "vendor": "Byonics",
+      "model": "TinyTrak3",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L2272"
+    },
+    {
+      "tocall": "APT4??",
+      "vendor": "Byonics",
+      "model": "TinyTrak4",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L2277"
+    },
+    {
+      "tocall": "APTAAP",
+      "vendor": "TA2AEC, TA3JO",
+      "model": "TA-APRS",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L2282"
+    },
+    {
+      "tocall": "APTB??",
+      "vendor": "BG5HHP",
+      "model": "TinyAPRS",
+      "locator": "tocalls.yaml#L2288"
+    },
+    {
+      "tocall": "APTCHE",
+      "vendor": "PU3IKE",
+      "model": "TcheTracker, Tcheduino",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L2292"
+    },
+    {
+      "tocall": "APTCMA",
+      "vendor": "Cleber, PU1CMA",
+      "model": "CAPI Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L2297"
+    },
+    {
+      "tocall": "APTEMP",
+      "vendor": "KL7AF",
+      "model": "APRS-Tempest Weather Gateway",
+      "class": "wx",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L2302"
+    },
+    {
+      "tocall": "APTGIK",
+      "vendor": "Juliet Delta, 9M4GIK",
+      "model": "APRS Melaka",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L2309"
+    },
+    {
+      "tocall": "APTHUR",
+      "vendor": "YD0BCX",
+      "model": "APRSThursday weekly event mapbot daemon",
+      "class": "service",
+      "os": "Linux/Unix",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L2315"
+    },
+    {
+      "tocall": "APTKJ?",
+      "vendor": "W9JAJ",
+      "model": "ATTiny APRS Tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L2324"
+    },
+    {
+      "tocall": "APTKVB",
+      "vendor": "IT9KVB",
+      "model": "Python APRS QTH and Weather-Station",
+      "class": "daemon",
+      "locator": "tocalls.yaml#L2329"
+    },
+    {
+      "tocall": "APTLVC",
+      "vendor": "TA5LVC",
+      "model": "TR80 APRS Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L2335"
+    },
+    {
+      "tocall": "APTNG?",
+      "vendor": "Filip YU1TTN",
+      "model": "Tango Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L2340"
+    },
+    {
+      "tocall": "APTPN?",
+      "vendor": "KN4ORB",
+      "model": "TARPN Packet Node Tracker",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L2345"
+    },
+    {
+      "tocall": "APTR??",
+      "vendor": "Motorola",
+      "model": "MotoTRBO",
+      "locator": "tocalls.yaml#L2350"
+    },
+    {
+      "tocall": "APTSLA",
+      "vendor": "HA2NON",
+      "model": "tesla-aprs",
+      "class": "daemon",
+      "locator": "tocalls.yaml#L2354"
+    },
+    {
+      "tocall": "APTT*",
+      "vendor": "Byonics",
+      "model": "TinyTrak",
+      "class": "tracker",
+      "locator": "tocalls.yaml#L2360"
+    },
+    {
+      "tocall": "APTUR?",
+      "vendor": "aprs.ai, TA7HBK",
+      "model": "Türkiye'nin APRS Uygulaması",
+      "class": "app",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L2365"
+    },
+    {
+      "tocall": "APTW??",
+      "vendor": "Byonics",
+      "model": "WXTrak",
+      "class": "wx",
+      "locator": "tocalls.yaml#L2373"
+    },
+    {
+      "tocall": "APU1??",
+      "vendor": "Roger Barker, G4IDE",
+      "model": "UI-View16",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L2378"
+    },
+    {
+      "tocall": "APU2*",
+      "vendor": "Roger Barker, G4IDE",
+      "model": "UI-View32",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L2384"
+    },
+    {
+      "tocall": "APUAGP",
+      "vendor": "YF9UAG",
+      "model": "Python APRS UI",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L2390"
+    },
+    {
+      "tocall": "APUDR?",
+      "vendor": "NW Digital Radio",
+      "model": "UDR",
+      "locator": "tocalls.yaml#L2396"
+    },
+    {
+      "tocall": "APURSX",
+      "vendor": "Rich Beckwith, WN0X",
+      "model": "UPRSx",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L2400"
+    },
+    {
+      "tocall": "APVE??",
+      "vendor": "unknown",
+      "model": "EchoLink",
+      "locator": "tocalls.yaml#L2407"
+    },
+    {
+      "tocall": "APVM??",
+      "vendor": "Digital Radio China Club",
+      "model": "DRCC-DVM",
+      "class": "igate",
+      "locator": "tocalls.yaml#L2411"
+    },
+    {
+      "tocall": "APVOX?",
+      "vendor": "Joel Calado, CS7BLE",
+      "model": "VoxLink",
+      "class": "app",
+      "os": "Android",
+      "locator": "tocalls.yaml#L2416"
+    },
+    {
+      "tocall": "APVR??",
+      "vendor": "unknown",
+      "model": "IRLP",
+      "locator": "tocalls.yaml#L2423"
+    },
+    {
+      "tocall": "APW2W?",
+      "vendor": "Joachim Sonnabend, DG3FBL",
+      "model": "WiresX2Web Software",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L2427"
+    },
+    {
+      "tocall": "APW9??",
+      "vendor": "Mile Strk, 9A9Y",
+      "model": "WX Katarina",
+      "class": "wx",
+      "os": "embedded",
+      "features": [
+        "messaging"
+      ],
+      "locator": "tocalls.yaml#L2434"
+    },
+    {
+      "tocall": "APWA??",
+      "vendor": "KJ4ERJ",
+      "model": "APRSISCE",
+      "class": "software",
+      "os": "Android",
+      "locator": "tocalls.yaml#L2442"
+    },
+    {
+      "tocall": "APWEE?",
+      "vendor": "Tom Keffer and Matthew Wall",
+      "model": "WeeWX Weather Software",
+      "class": "software",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L2448"
+    },
+    {
+      "tocall": "APWHE?",
+      "vendor": "KF6UFO",
+      "model": "WX-Helios",
+      "class": "wx",
+      "os": "Linux",
+      "locator": "tocalls.yaml#L2454"
+    },
+    {
+      "tocall": "APWM??",
+      "vendor": "KJ4ERJ",
+      "model": "APRSISCE",
+      "class": "software",
+      "os": "Windows Mobile",
+      "features": [
+        "messaging",
+        "item-in-msg"
+      ],
+      "locator": "tocalls.yaml#L2461"
+    },
+    {
+      "tocall": "APWOLF",
+      "vendor": "Jim Perry, WT1W",
+      "model": "APRSWolf",
+      "locator": "tocalls.yaml#L2470"
+    },
+    {
+      "tocall": "APWW??",
+      "vendor": "KJ4ERJ",
+      "model": "APRSIS32",
+      "class": "software",
+      "os": "Windows",
+      "features": [
+        "messaging",
+        "item-in-msg"
+      ],
+      "locator": "tocalls.yaml#L2474"
+    },
+    {
+      "tocall": "APWXS?",
+      "vendor": "Colin Cogle, W1DNS",
+      "model": "aprs-weather-submit",
+      "class": "daemon",
+      "locator": "tocalls.yaml#L2483"
+    },
+    {
+      "tocall": "APWnnn",
+      "vendor": "Sproul Brothers",
+      "model": "WinAPRS",
+      "class": "software",
+      "os": "Windows",
+      "locator": "tocalls.yaml#L2489"
+    },
+    {
+      "tocall": "APX???",
+      "vendor": "Open Source",
+      "model": "Xastir",
+      "class": "software",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L2495"
+    },
+    {
+      "tocall": "APXR??",
+      "vendor": "G8PZT",
+      "model": "Xrouter",
+      "locator": "tocalls.yaml#L2501"
+    },
+    {
+      "tocall": "APY01D",
+      "vendor": "Yaesu",
+      "model": "FT1D",
+      "class": "ht",
+      "locator": "tocalls.yaml#L2505"
+    },
+    {
+      "tocall": "APY02D",
+      "vendor": "Yaesu",
+      "model": "FT2D",
+      "class": "ht",
+      "locator": "tocalls.yaml#L2510"
+    },
+    {
+      "tocall": "APY05D",
+      "vendor": "Yaesu",
+      "model": "FT5D",
+      "class": "ht",
+      "locator": "tocalls.yaml#L2515"
+    },
+    {
+      "tocall": "APY200",
+      "vendor": "Yaesu",
+      "model": "FTM-200D",
+      "class": "rig",
+      "locator": "tocalls.yaml#L2520"
+    },
+    {
+      "tocall": "APY300",
+      "vendor": "Yaesu",
+      "model": "FTM-300D",
+      "class": "rig",
+      "locator": "tocalls.yaml#L2525"
+    },
+    {
+      "tocall": "APY310",
+      "vendor": "Yaesu",
+      "model": "FTM-310D",
+      "class": "rig",
+      "locator": "tocalls.yaml#L2530"
+    },
+    {
+      "tocall": "APY400",
+      "vendor": "Yaesu",
+      "model": "FTM-400",
+      "class": "rig",
+      "locator": "tocalls.yaml#L2535"
+    },
+    {
+      "tocall": "APY500",
+      "vendor": "Yaesu",
+      "model": "FTM-500D",
+      "class": "rig",
+      "locator": "tocalls.yaml#L2540"
+    },
+    {
+      "tocall": "APY510",
+      "vendor": "Yaesu",
+      "model": "FTM-510D",
+      "class": "rig",
+      "locator": "tocalls.yaml#L2545"
+    },
+    {
+      "tocall": "APYS??",
+      "vendor": "W2GMD",
+      "model": "Python APRS",
+      "class": "software",
+      "locator": "tocalls.yaml#L2550"
+    },
+    {
+      "tocall": "APYX01",
+      "vendor": "Yaesu",
+      "model": "FTX-1",
+      "class": "rig",
+      "locator": "tocalls.yaml#L2555"
+    },
+    {
+      "tocall": "APZ*",
+      "vendor": "Unknown",
+      "model": "Experimental",
+      "locator": "tocalls.yaml#L2560"
+    },
+    {
+      "tocall": "APZ18",
+      "vendor": "IW3FQG",
+      "model": "UIdigi",
+      "class": "digi",
+      "locator": "tocalls.yaml#L2564"
+    },
+    {
+      "tocall": "APZ186",
+      "vendor": "IW3FQG",
+      "model": "UIdigi",
+      "class": "digi",
+      "locator": "tocalls.yaml#L2569"
+    },
+    {
+      "tocall": "APZ19",
+      "vendor": "IW3FQG",
+      "model": "UIdigi",
+      "class": "digi",
+      "locator": "tocalls.yaml#L2574"
+    },
+    {
+      "tocall": "APZ247",
+      "vendor": "NR0Q",
+      "model": "UPRS",
+      "locator": "tocalls.yaml#L2579"
+    },
+    {
+      "tocall": "APZG??",
+      "vendor": "OH2GVE",
+      "model": "aprsg",
+      "class": "software",
+      "os": "Linux/Unix",
+      "locator": "tocalls.yaml#L2583"
+    },
+    {
+      "tocall": "APZMAJ",
+      "vendor": "M1MAJ",
+      "model": "DeLorme inReach Tracker",
+      "locator": "tocalls.yaml#L2589"
+    },
+    {
+      "tocall": "APZMDR",
+      "vendor": "Open Source",
+      "model": "HaMDR",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L2593"
+    },
+    {
+      "tocall": "APZTKP",
+      "vendor": "Nick Hanks, N0LP",
+      "model": "TrackPoint",
+      "class": "tracker",
+      "os": "embedded",
+      "locator": "tocalls.yaml#L2599"
+    },
+    {
+      "tocall": "APZWKR",
+      "vendor": "GM1WKR",
+      "model": "NetSked",
+      "class": "software",
+      "locator": "tocalls.yaml#L2605"
+    },
+    {
+      "tocall": "APnnnD",
+      "vendor": "Painter Engineering",
+      "model": "uSmartDigi D-Gate",
+      "class": "dstar",
+      "locator": "tocalls.yaml#L2610"
+    },
+    {
+      "tocall": "APnnnU",
+      "vendor": "Painter Engineering",
+      "model": "uSmartDigi Digipeater",
+      "class": "digi",
+      "locator": "tocalls.yaml#L2615"
+    },
+    {
+      "tocall": "PSKAPR",
+      "vendor": "Open Source",
+      "model": "PSKmail",
+      "class": "software",
+      "locator": "tocalls.yaml#L2620"
+    }
+  ]
+}
