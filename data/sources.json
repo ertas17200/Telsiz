@@ -670,6 +670,58 @@
       "supersedes": [],
       "superseded_by": [],
       "notes": "SatNOGS DB is a public crowdsourced satellite/transmitter database maintained by Libre Space Foundation. The project states that its data are distributed under CC BY-SA 4.0. This source is technical/community evidence only: it cannot establish Turkish legal permission, frequency entitlement, licence authority, or current regulatory compliance. Operational/transmitter status is a snapshot and may change."
+    },
+    {
+      "id": "TR.AFAD.TAMP.2022",
+      "title": "Türkiye Afet Müdahale Planı (TAMP)",
+      "publisher": "T.C. İçişleri Bakanlığı Afet ve Acil Durum Yönetimi Başkanlığı",
+      "source_type": "official_technical",
+      "jurisdiction": "TR",
+      "url": "https://afad.gov.tr/turkiye-afet-mudahale-plani",
+      "topics": [
+        "afet müdahale koordinasyonu",
+        "TAMP",
+        "afet grupları",
+        "koordinasyon",
+        "müdahale seviyeleri"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-29T16:30:00Z",
+      "publication_date": "2022-09-15",
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": "TAMP 2022 / RG 31954",
+      "reference": "AFAD TAMP sayfası: amaç, kapsam, 2022 yayımlanma bilgisi, ulusal/yerel afet grupları ve S1–S4 müdahale seviyeleri",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "AFAD'ın güncel resmî TAMP açıklama/indirme sayfasıdır. Sayfa TAMP'ın görev ve koordinasyon rollerini tanımladığını, 15.09.2022 tarihli 31954 sayılı Resmî Gazete'de yayımlanarak yürürlüğe girdiğini ve dayanak yönetmeliğin 24.02.2022 tarihli 31760 sayılı Resmî Gazete'de yayımlandığını açıklar. Bu kayıt planın resmî bağlamını verir; amatör telsizciye kendiliğinden görev, frekans veya yayın yetkisi verildiği sonucu çıkarılamaz. Yönetmelik ve planın tam hukuki metni ayrı resmî-yasal doğrulama gerektirir."
+    },
+    {
+      "id": "IARU.R1.EMCOMM.PROCEDURES",
+      "title": "IARU Region 1 Emergency Operating Procedures",
+      "publisher": "International Amateur Radio Union Region 1",
+      "source_type": "amateur_association",
+      "jurisdiction": "IARU-REGION-1",
+      "url": "https://www.iaru-r1.org/about-us/committees-and-working-groups/emcomm/emergency-operating-procedures/",
+      "topics": [
+        "emergency communications",
+        "acil durum haberleşmesi",
+        "message handling",
+        "training",
+        "operating practice"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-29T16:30:00Z",
+      "publication_date": null,
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": null,
+      "reference": "Emergency Operating Procedures page; updated 20 April 2024",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "IARU Region 1 eğitim/işletme rehberidir. Sayfa, acil haberleşme rehberinin amatörlerin eğitimi ve acil olaylara katılım becerisini geliştirmek için hazırlandığını; mesaj aktarımında hız ve doğruluk hedefini ve ülkeler/gruplar arasında yerel prosedür farkları bulunduğunu açıklar. Sayfa ayrıca prosedürün bazı grupların isteyeceği kadar güncel olmadığını belirtir. Bu kaynak hukuki izin veya Türkiye'deki resmî görevlendirme kaynağı değildir."
     }
   ]
 }
