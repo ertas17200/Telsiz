@@ -644,6 +644,32 @@
       "supersedes": [],
       "superseded_by": [],
       "notes": "Bağımsız açık kaynak uygulama (GPL-2.0). Doğrulanan: depo kimliği, sabitlenmiş commit, lisans ve dosya hash'leri (data/ax25_parameters.json). Yalnız olgusal parametreler kaydedildi; kod kopyalanmadı. AX.25 2.2 / APRS protokol belgesi değildir; topluluk katmanındadır. Hukuki izin üretmez."
+    },
+    {
+      "id": "SATNOGS.DB.SATELLITE_TRANSMITTERS",
+      "title": "SatNOGS DB — Satellite and Transmitter Database",
+      "publisher": "Libre Space Foundation / SatNOGS DB contributors",
+      "source_type": "community",
+      "jurisdiction": "INTERNATIONAL",
+      "url": "https://db.satnogs.org/about/",
+      "topics": [
+        "amateur satellites",
+        "satellite transmitter frequencies",
+        "satellite transponders",
+        "satellite telemetry",
+        "satellite operating data"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-29T16:00:00Z",
+      "publication_date": null,
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": null,
+      "reference": "SatNOGS DB About + individual satellite transmitter pages",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "SatNOGS DB is a public crowdsourced satellite/transmitter database maintained by Libre Space Foundation. The project states that its data are distributed under CC BY-SA 4.0. This source is technical/community evidence only: it cannot establish Turkish legal permission, frequency entitlement, licence authority, or current regulatory compliance. Operational/transmitter status is a snapshot and may change."
     }
   ]
 }

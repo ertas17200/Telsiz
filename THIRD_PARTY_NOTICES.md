@@ -14,3 +14,14 @@ Most of this repository is original work. The files below contain data adapted f
 
 - `data/digital_modes.json` records protocol parameters with line locators into ft8_lib (MIT, https://github.com/kgoba/ft8_lib @ `9fec6ca39886edbf96f4f5e71edc76da5074e871`); no source code is copied.
 - `data/ax25_parameters.json` records AX.25/HDLC/AFSK parameter values with line locators into Dire Wolf (GPL-2.0, https://github.com/wb2osz/direwolf @ `eda1383f5fa9d8ba3cb27f99db1d2c79494404c9`); no source code is copied. The FCS table is regenerated from the polynomial, not copied.
+
+
+## SatNOGS satellite/transmitter snapshot
+
+- File: `data/satellite_transmitters.json`
+- Source: SatNOGS DB, maintained by Libre Space Foundation and SatNOGS DB contributors — https://db.satnogs.org/
+- Source licence: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) — https://creativecommons.org/licenses/by-sa/4.0/
+- Source licence statement: https://db.satnogs.org/about/
+- Changes: curated subset of ISS, SO-50, AO-73 and AO-91; selected transmitter/transponder fields normalized to JSON; frequencies normalized to Hz; source page URLs and SatNOGS transmitter UUIDs retained; contributor/contact fields and TLE/orbital data omitted.
+- The adapted snapshot is distributed under the same CC BY-SA 4.0 licence.
+- This dataset is technical/community information only and cannot establish legal permission, Turkish frequency entitlement, licensing authority or regulatory compliance.

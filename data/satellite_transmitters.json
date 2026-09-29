@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "source_id": "SATNOGS.DB.SATELLITE_TRANSMITTERS",
+  "snapshot_id": "satnogs-curated-amateur-satellite-v1-20260929",
+  "observed_at": "2026-09-29T16:00:00Z",
+  "authority": "community_open_data",
+  "decision_authority": "technical_reference_only",
+  "legal_status": "UNKNOWN",
+  "permission_inference": "PROHIBITED",
+  "trust_note": "SatNOGS DB is crowdsourced technical data. A listed satellite/transmitter does not establish Turkish amateur-radio permission, licence authority, frequency entitlement, or regulatory compliance.",
+  "license": {
+    "name": "Creative Commons Attribution-ShareAlike 4.0 International",
+    "spdx_like": "CC-BY-SA-4.0",
+    "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "attribution": "SatNOGS DB contributors / Libre Space Foundation — https://db.satnogs.org/",
+    "changes": "Curated subset of four amateur-relevant satellites; selected transmitter/transponder fields normalized into JSON; frequencies stored in Hz; contributor/contact fields omitted; source page and SatNOGS transmitter UUID retained."
+  },
+  "provenance": {
+    "about_url": "https://db.satnogs.org/about/",
+    "source_pages": [
+      "https://db.satnogs.org/satellite/25544/",
+      "https://db.satnogs.org/satellite/27607/",
+      "https://db.satnogs.org/satellite/39444/",
+      "https://db.satnogs.org/satellite/43017/"
+    ],
+    "capture_method": "Manual source-grounded snapshot from SatNOGS DB public satellite pages; no orbital elements/TLE copied.",
+    "mutable_upstream": true
+  },
+  "satellites": [
+    {
+      "norad_id": 25544,
+      "satnogs_id": "XSKZ-5603-1870-9019-3066",
+      "name": "ISS",
+      "aliases": [
+        "ZARYA",
+        "RS0ISS",
+        "NA1SS"
+      ],
+      "source_url": "https://db.satnogs.org/satellite/25544/",
+      "source_status": "Operational",
+      "transmitters": [
+        {
+          "uuid": "ZJxCeQmih9zDfYNVrB4wRN",
+          "description": "Mode V APRS",
+          "type": "Transceiver",
+          "service": null,
+          "downlink": {
+            "low_hz": 145825000,
+            "high_hz": null,
+            "mode": "AFSK"
+          },
+          "uplink": {
+            "low_hz": 145825000,
+            "high_hz": null,
+            "mode": "AFSK"
+          },
+          "baud": 1200,
+          "inverted": null,
+          "access_tone_hz": null,
+          "iaru_coordination": null,
+          "source_locator": "satellite/25544 — Mode V APRS",
+          "upstream_reviewed_at": "2019-06-16T08:49:00Z"
+        }
+      ]
+    },
+    {
+      "norad_id": 27607,
+      "satnogs_id": "IRES-5964-9687-1982-0089",
+      "name": "SAUDISAT 1C",
+      "aliases": [
+        "SO-50"
+      ],
+      "source_url": "https://db.satnogs.org/satellite/27607/",
+      "source_status": "Operational",
+      "transmitters": [
+        {
+          "uuid": "Y9P45XRJH8yAsbDDe4qHnE",
+          "description": "Mode V/U FM Voice CTCSS 67.0 Hz",
+          "type": "Transceiver",
+          "service": null,
+          "downlink": {
+            "low_hz": 436795000,
+            "high_hz": null,
+            "mode": "FM"
+          },
+          "uplink": {
+            "low_hz": 145850000,
+            "high_hz": null,
+            "mode": "FM"
+          },
+          "baud": null,
+          "inverted": null,
+          "access_tone_hz": 67,
+          "iaru_coordination": null,
+          "source_locator": "satellite/27607 — Mode V/U FM Voice CTCSS 67.0 Hz",
+          "upstream_reviewed_at": "2019-06-15T17:55:00Z"
+        }
+      ]
+    },
+    {
+      "norad_id": 39444,
+      "satnogs_id": "OTOF-8025-8953-4756-4779",
+      "name": "FUNCUBE-1",
+      "aliases": [
+        "AO-73"
+      ],
+      "source_url": "https://db.satnogs.org/satellite/39444/",
+      "source_status": "Operational",
+      "transmitters": [
+        {
+          "uuid": "kjb3TFADq77qj2AFSzxHCV",
+          "description": "Mode U/V Linear",
+          "type": "Transponder",
+          "service": "Amateur",
+          "downlink": {
+            "low_hz": 145950000,
+            "high_hz": 145970000,
+            "mode": "USB"
+          },
+          "uplink": {
+            "low_hz": 435130000,
+            "high_hz": 435150000,
+            "mode": "LSB"
+          },
+          "baud": null,
+          "inverted": true,
+          "access_tone_hz": null,
+          "iaru_coordination": "IARU Coordinated",
+          "source_locator": "satellite/39444 — Mode U/V Linear",
+          "upstream_reviewed_at": null
+        },
+        {
+          "uuid": "Pt4MFHSC8UFHu3aTQTLz9K",
+          "description": "BPSK Telemetry",
+          "type": "Transmitter",
+          "service": "Amateur",
+          "downlink": {
+            "low_hz": 145935000,
+            "high_hz": null,
+            "mode": "BPSK"
+          },
+          "uplink": {
+            "low_hz": null,
+            "high_hz": null,
+            "mode": null
+          },
+          "baud": 1200,
+          "inverted": null,
+          "access_tone_hz": null,
+          "iaru_coordination": null,
+          "source_locator": "satellite/39444 — BPSK Telemetry",
+          "upstream_reviewed_at": "2020-08-14T11:12:00Z"
+        }
+      ]
+    },
+    {
+      "norad_id": 43017,
+      "satnogs_id": "PMAW-9203-2442-8666-3249",
+      "name": "FOX-1B",
+      "aliases": [
+        "AO-91",
+        "RADFXSAT"
+      ],
+      "source_url": "https://db.satnogs.org/satellite/43017/",
+      "source_status": "Operational",
+      "transmitters": [
+        {
+          "uuid": "LoK6HANoyLWRnwhJKs8gHd",
+          "description": "Mode U/V FM Voice (no CTCSS any longer)",
+          "type": "Transceiver",
+          "service": "Amateur",
+          "downlink": {
+            "low_hz": 145960000,
+            "high_hz": null,
+            "mode": "FM"
+          },
+          "uplink": {
+            "low_hz": 435250000,
+            "high_hz": null,
+            "mode": "FM"
+          },
+          "baud": null,
+          "inverted": null,
+          "access_tone_hz": null,
+          "iaru_coordination": "IARU Coordinated",
+          "source_locator": "satellite/43017 — Mode U/V FM Voice (no CTCSS any longer)",
+          "upstream_reviewed_at": "2026-06-26T09:17:00Z"
+        }
+      ]
+    }
+  ]
+}
