@@ -1,0 +1,75 @@
+name: Official Artifact Byte Probe
+
+on:
+  push:
+    branches:
+      - "ops/btk-byte-probe-*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe-btk:
+    runs-on: ubuntu-latest
+    env:
+      EXPECTED_SHA: ${{ github.sha }}
+      BTK_URL: https://www.btk.gov.tr/uploads/pages/ftm-teknik-olcutler-ek-5.pdf
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          ref: ${{ env.EXPECTED_SHA }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Evidence runner and exact head
+        run: |
+          set -euo pipefail
+          actual="$(git rev-parse HEAD)"
+          test -n "${RUNNER_NAME:-}"
+          test "$actual" = "$EXPECTED_SHA"
+          echo "TELSiZ_PROBE_RUNNER=PASS name=$RUNNER_NAME os=$RUNNER_OS arch=$RUNNER_ARCH"
+          echo "TELSiZ_PROBE_EXACT_HEAD=PASS sha=$actual"
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Fetch canonical BTK PDF bytes
+        run: |
+          set -euo pipefail
+          python scripts/probe_official_artifact.py \
+            --url "$BTK_URL" \
+            --output "$RUNNER_TEMP/ftm-teknik-olcutler-ek-5.pdf" \
+            --evidence "$RUNNER_TEMP/btk-byte-evidence.json" \
+            --timeout 30
+
+      - name: Verify evidence with artifact gate
+        run: |
+          set -euo pipefail
+          fetched_at="$(python -c 'import json,os; print(json.load(open(os.environ["RUNNER_TEMP"]+"/btk-byte-evidence.json"))["fetched_at"])')"
+          python scripts/artifact_gate.py verify-file \
+            --source-id TR.BTK.FTM.TECH.2022-IK-SYD-245 \
+            --file "$RUNNER_TEMP/ftm-teknik-olcutler-ek-5.pdf" \
+            --fetched-at "$fetched_at" \
+            --output "$RUNNER_TEMP/artifact-gate-observation.json"
+
+      - name: Print acquisition evidence
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ -f "$RUNNER_TEMP/btk-byte-evidence.json" ]; then
+            cat "$RUNNER_TEMP/btk-byte-evidence.json"
+          else
+            echo "BTK_BYTE_EVIDENCE=HOLD reason=EVIDENCE_FILE_MISSING"
+          fi
+
+      - name: Verify final exact head
+        if: always()
+        run: |
+          set -euo pipefail
+          actual="$(git rev-parse HEAD)"
+          test "$actual" = "$EXPECTED_SHA"
+          echo "TELSiZ_PROBE_FINAL_EXACT_HEAD=PASS sha=$actual"
