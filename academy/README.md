@@ -1,5 +1,7 @@
 # Telsiz Academy
 
+> English navigation: [README_EN.md](README_EN.md). Bu Türkçe/source-backed içerik kanoniktir.
+
 Bu dizin, Telsiz bilgi tabanının kullanıcıya dönük eğitim katmanıdır. Kanonik manifest `academy/academy.json` dosyasıdır.
 
 ## Güven sözleşmesi
