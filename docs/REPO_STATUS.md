@@ -412,3 +412,33 @@ Open source conflicts remain unchanged:
 - `TR-BTK-UNIT-001`
 
 NEXT: continue P0 semantic modeling without silent normalization, then resume P1–P3 official consolidated-text verification.
+
+
+## 2026-09-29 — Satellite source layer closure
+
+PR #48 added the first fail-closed satellite technical source layer.
+
+```text
+ENGINEERING_MAIN_SHA=609a08b214a41e5b060f7e70ae922df92ab8562b
+PR=48
+PR_HEAD=5915cc35b518eea53f9fe383611ab7b544d28078
+PR_RUN=36596776703
+PR_JOB=109503606930
+PR_RUNNER=GitHub Actions 1000014243
+PR_CI=PASS
+MAIN_RUN=36596842015
+MAIN_JOB=109503835319
+MAIN_RUNNER=GitHub Actions 1000014244
+MAIN_CI=PASS
+TESTS=404/404
+SATELLITES=4
+SELECTED_TRANSMITTERS=5
+SOURCE=SATNOGS.DB.SATELLITE_TRANSMITTERS
+LICENSE=CC-BY-SA-4.0
+LEGAL_STATUS=UNKNOWN
+DECISION_AUTHORITY=technical_reference_only
+```
+
+Curated v1 covers ISS, SO-50, AO-73 and AO-91. The snapshot is mutable community/open technical data; a listed uplink/downlink never establishes Turkish transmit permission, licence authority, or regulatory compliance. Exact alias/NORAD matching is required and fuzzy invention is disabled.
+
+NEXT: extend the satellite layer only with source-pinned, licence-compatible records and explicit freshness boundaries; separately continue P0/P1–P3 legal work without allowing satellite operational data to override legal authority.
