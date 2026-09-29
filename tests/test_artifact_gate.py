@@ -48,7 +48,15 @@ class ArtifactRegistryTests(unittest.TestCase):
 
     def test_awaiting_record_rejects_false_reverify(self):
         payload = copy.deepcopy(ARTIFACTS)
-        payload["artifacts"][0]["reverify_required"] = False
+        record = payload["artifacts"][0]
+        record.update(
+            artifact_status="awaiting_bytes",
+            fetched_at=None,
+            size_bytes=None,
+            sha256=None,
+            change_status="UNKNOWN",
+            reverify_required=False,
+        )
         with self.assertRaises(gate.GateError):
             gate.validate_registry(payload, SOURCES_PAYLOAD)
 

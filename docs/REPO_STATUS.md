@@ -4,28 +4,31 @@ This file is the canonical human-readable **engineering closure snapshot** for T
 
 ## Canonical engineering baseline
 
-- Engineering baseline: `8765783514ba72569d7964aaf5ac19ae75b13e7f`
-- Technical closure PR: **#16**
+- Engineering baseline: `dec037601a1aacc255b25e50b7b2200d54c86ded`
+- Technical closure PR: **#32**
 - Open pull requests at technical-closure snapshot: **0**
 - Main workflow: `Knowledge Validation`
-- Main exact-head run: `36482477669`
+- Main exact-head run: `36554094775`
 - Status: `completed`
 - Conclusion: `success`
-- Runner: `GitHub Actions 1000014052`
-- Completed workflow steps: **11**
+- Runner: `GitHub Actions 1000014173`
+- Completed workflow steps: **19**
 
 The exact-head main job proves:
 
 - tracked Python/cache artifact check: **PASS**
 - source/rule/frequency registry validation: **PASS**
 - BTK raw transcription validator: **PASS**
-- unit test suite: **104 tests, OK**
-- source registry: **11 records**
+- unit test suite: **246 tests, OK**
+- source registry: **22 records**
 - grounded rules: **10 records**
 - semantic frequency rows: **7 records**
 - raw BTK amateur source rows: **33 records**
 - Tablo 26-1 emission definitions: **24 records**
 - official artifact registry: **1 record, awaiting_bytes, fail-closed**
+- Academy manifest: **10 modules**
+- repeater operational snapshot: **15 TRAC rows, association-only authority**
+- bilingual navigation translations: **2 validated entries**
 - semantic frequency coverage: **partial**
 
 ## Closed PR chain
@@ -171,10 +174,10 @@ Continue fail-closed in this order:
 ```text
 REPOSITORY_CONTROLS=PASS
 CI=PASS
-ENGINEERING_BASELINE=8765783514ba72569d7964aaf5ac19ae75b13e7f
+ENGINEERING_BASELINE=dec037601a1aacc255b25e50b7b2200d54c86ded
 RAW_BTK_ROWS=33
 EMISSION_DEFINITIONS=24
-TESTS=104
+TESTS=246
 FREQUENCY_COVERAGE=PARTIAL
 P0=RAW_TRANSCRIPTION_COMPLETE_SEMANTIC_PROMOTION_HOLD
 P1=VERIFY_REQUIRED
@@ -267,9 +270,69 @@ P0_ARTIFACT_STATUS=AWAITING_BYTES
 Render access is not treated as byte-level artifact verification.
 
 
+## PR #17–#33 — current engineering delta
+
+The repository advanced materially beyond the PR #16 baseline. The current engineering baseline is the bilingual implementation merge; the following PR #33 is documentation-only closure evidence.
+
+### Key merged capabilities
+
+- PR #19 — fail-closed Academy manifest and validator.
+- PR #21 — deterministic Maidenhead Grid Locator.
+- PR #22 — ITU-grounded Morse trainer.
+- PR #23 — source-grounded Q-code and RS(T) trainer.
+- PR #24 — bounded ADIF 3.1.7 QSO-log exporter.
+- PR #25 — source-grounded RF wavelength calculator.
+- PR #26 — fail-closed Yaesu FTM-400 device/firmware guard.
+- PR #27 — authority-separated TRAC repeater operational registry.
+- PR #28 — exact-head runner evidence enforcement.
+- PR #29 — SHA-pinned Node 24 GitHub Actions.
+- PR #32 — fail-closed bilingual documentation and drift validation.
+- PR #33 — bilingual closure evidence only.
+
+### Current exact-head evidence
+
+```text
+ENGINEERING_BASELINE=dec037601a1aacc255b25e50b7b2200d54c86ded
+CURRENT_MAIN=1e7d599aca08d52456ec04775cb3fae0b5ce7b48
+MAIN_RUN=36554094775
+MAIN_JOB=109358983262
+MAIN_RUNNER=GitHub Actions 1000014173
+MAIN_CI=completed/success
+WORKFLOW_STEPS=19
+TESTS=246/246
+SOURCE_RECORDS=22
+GROUNDED_RULES=10
+SEMANTIC_FREQUENCY_ROWS=7
+SOURCE_CANDIDATES=15
+RAW_BTK_ROWS=33/33
+EMISSION_DEFINITIONS=24/24
+ARTIFACT_RECORDS=1
+ACADEMY_MODULES=10
+REPEATER_SNAPSHOT_ROWS=15
+BILINGUAL_TRANSLATIONS=2
+OPEN_PRS=0
+```
+
+### Authority / safety boundaries retained
+
+- TRAC repeater operational status remains association-level information and does not become BTK permission.
+- Bilingual/English navigation remains subordinate to canonical Turkish/source-backed content.
+- Device firmware instructions remain region/family gated.
+- Academy/practice tools do not bypass the legal decision engine.
+- P0 remains partial while BTK byte-artifact SHA-256 is unknown.
+- P1/P2/P3 remain fail-closed until canonical consolidated texts are verified.
+
+## Current NEXT
+
+1. **P0 byte artifact** — acquire the canonical BTK PDF bytes, calculate file size + SHA-256, bind the hash and run source-change detection.
+2. **P0 semantic promotion** — continue mapping raw rows into semantic records only where source conflicts do not require silent correction.
+3. **P1–P3** — verify consolidated official legal texts before promoting legal rules.
+4. Continue P11/operator tooling only where it cannot weaken the authority hierarchy above.
+
+
 ## 2026-09-29 — P0 byte-artifact baseline closure delta
 
-The historical sections above preserve earlier closure snapshots. The current delta supersedes only the BTK byte-artifact status.
+The historical sections above preserve earlier closure snapshots. This delta supersedes only the BTK byte-artifact status.
 
 Exact observation evidence:
 
