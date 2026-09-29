@@ -9,7 +9,7 @@ Kaynak: `TR.BTK.FTM.TECH.2022-IK-SYD-245`, MADDE 22.
 
 `coverage_status = partial`
 
-Artık resmî BTK PDF içeriği doğrulanmış bir web-render yolu üzerinden okunmuş ve amatör frekans tablosundaki **33 görünür kaynak satırı** ham katmana aktarılmıştır. Ancak ham PDF byte'ları kod yürütme ortamına indirilemediği için artifact SHA-256 üretilememiştir. Ayrıca kaynak içindeki numaralandırma/emisyon/birim tutarsızlıkları açıktır.
+Artık resmî BTK PDF içeriği doğrulanmış bir web-render yolu üzerinden okunmuş ve amatör frekans tablosundaki **33 görünür kaynak satırı** ham katmana aktarılmıştır. Kanonik PDF byte'ları GitHub-hosted runner üzerinden HTTP 200 `application/pdf` olarak indirildi; boyut **508766 byte**, SHA-256 `sha256:eff832fc30df1adf60e4a8c514a6069154d526d3ab88ae803b51a5536d103db0`. Aynı digest ikinci bağımsız probe'da `UNCHANGED` olarak tekrarlandı. Kaynak içindeki numaralandırma/emisyon/birim tutarsızlıkları ise hâlâ açıktır.
 
 Bu nedenle:
 
@@ -82,7 +82,7 @@ Validator en az şunları kanıtlar:
 - locator sayfalarının 41–45/47 aralığında olması;
 - `J2C` tutarsızlığının korunması ve sessizce `J3C` yapılmaması;
 - semantic promotion'ın HOLD kalması;
-- artifact SHA-256'ın uydurulmaması.
+- artifact SHA-256'ın source registry ile eşleşmesi ve source drift halinde fail-closed kalması.
 
 ## Semantik satır modeli
 
@@ -122,8 +122,7 @@ Validator en az şunları kanıtlar:
 
 ## NEXT
 
-1. Resmî PDF'nin raw byte artifact'ını al.
-2. SHA-256 + file size kaydet.
-3. Raw 33 satırı semantik sınıf/güç/emisyon/özel-kullanım nesnelerine dönüştür.
-4. J2C/F2B ve 28000-29700 MHz uyuşmazlıklarını çözmeden pozitif izin üretme.
-5. Exact-head CI + merge + main CI sonrası ancak uygun ise `coverage_status=complete`.
+1. Raw 33 satırı semantik sınıf/güç/emisyon/özel-kullanım nesnelerine dönüştür.
+2. J2C/A3J/F2B/J3F ve 28000-29700 MHz uyuşmazlıklarını çözmeden pozitif izin üretme.
+3. Canonical byte probe'u yeniden çalıştırıldığında aynı SHA-256'yı bekle; farklı digest = SOURCE_CHANGED / REVERIFY_REQUIRED.
+4. Exact-head CI + merge + main CI sonrası ancak tüm completeness koşulları sağlanırsa `coverage_status=complete`.
