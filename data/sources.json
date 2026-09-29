@@ -783,6 +783,32 @@
       ],
       "superseded_by": [],
       "notes": "CURRENTNESS_METADATA_VERIFIED: Ulaştırma ve Altyapı Bakanlığının güncel afet/acil durum mevzuat listesi 31.12.2025 tarihli 10809 sayılı Yönetmeliği güncel düzenleme olarak listeler; Türkiye Belediyeler Birliği duyurusu exact Resmî Gazete PDF URL'sine bağlanır. CONSOLIDATED_TEXT_CORROBORATED_ONLY: güncel konsolide metin kopyaları 37 nci maddede 2022/5211 düzenlemesinin kaldırıldığını ve Geçici Madde 1'de TAMP'ın altı ay içinde uyarlanacağını gösterir. Ancak bu doğrulama ortamında origin Resmî Gazete PDF gövdesi/ham byte'ları alınamadığından verification_status fail-closed olarak pending tutulur; bu kayıt exact-text legal rule üretmez."
+    },
+    {
+      "id": "OSS.G4KLX.MMDVMHOST",
+      "title": "MMDVMHost — multi-mode digital voice modem host (DMR, D-STAR, System Fusion, P25, NXDN, POCSAG)",
+      "publisher": "Jonathan Naylor, G4KLX (GitHub: g4klx/MMDVMHost)",
+      "source_type": "community",
+      "jurisdiction": "INTERNATIONAL",
+      "url": "https://github.com/g4klx/MMDVMHost/tree/590c531391dfd3146073afbc3956f70d42c62a46",
+      "topics": [
+        "DMR",
+        "D-STAR",
+        "System Fusion",
+        "YSF",
+        "dijital ses"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-29T19:00:00Z",
+      "publication_date": null,
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": null,
+      "reference": "DMRDefines.h; DStarDefines.h; YSFDefines.h @ 590c531",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "Bağımsız açık kaynak uygulama (GPL-2.0). Doğrulanan: depo kimliği, sabitlenmiş commit, lisans ve dosya hash'leri (data/digital_voice.json). Yalnız olgusal parametreler kaydedildi; kod kopyalanmadı. ETSI DMR / JARL D-STAR belgesi değildir; topluluk katmanındadır. Hukuki izin üretmez."
     }
   ]
 }

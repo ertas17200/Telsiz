@@ -109,6 +109,9 @@ jobs:
       - name: Validate AX.25 packet parameters
         run: python scripts/validate_ax25.py
 
+      - name: Validate digital voice frame parameters
+        run: python scripts/validate_digital_voice.py
+
       - name: Validate satellite transmitter snapshot
         run: python scripts/validate_satellites.py
 
