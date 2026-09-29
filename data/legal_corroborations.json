@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "policy": "Official corroboration is audit evidence only. It cannot promote a canonical legal source or ground a verified legal rule. Canonical consolidated legal text remains required.",
+  "records": [
+    {
+      "id": "TR.BTK.EHK.5809.CORR.FTM.2026-09-29",
+      "canonical_source_id": "TR.BTK.EHK.5809",
+      "corroborating_publisher": "Bilgi Teknolojileri ve İletişim Kurumu",
+      "corroborating_url": "https://btk.gov.tr/frekans-tahsisinden-muaf-telsiz-cihaz-ve-sistemleri",
+      "observed_date": "2026-09-29",
+      "authority_scope": "official_corroboration_only",
+      "canonical_access_status": "unavailable_in_current_verification_path",
+      "promotes_canonical_source": false,
+      "may_ground_verified_legal_rule": false,
+      "legal_verdicts": false,
+      "references": [
+        {
+          "article": "37/3",
+          "evidence_kind": "exact_quote_observed",
+          "locator": "BTK FTM page — opening EHK 37/3 paragraph",
+          "summary": "BTK directly reproduces the exemption framework for approved radio devices/systems operating in designated bands and power conditions."
+        },
+        {
+          "article": "40/1",
+          "evidence_kind": "exact_quote_observed",
+          "locator": "BTK FTM page — Yaptırımlar ve diğer Yükümlülükler section",
+          "summary": "BTK directly reproduces the spectrum monitoring and inspection framework attributed to EHK Article 40(1)."
+        },
+        {
+          "article": "36",
+          "evidence_kind": "reference_only",
+          "locator": "BTK FTM page — Teknik Ölçütler compliance paragraph",
+          "summary": "BTK links loss of frequency-allocation/registration exemption to non-compliance under EHK Articles 36 and 37."
+        },
+        {
+          "article": "63",
+          "evidence_kind": "reference_only",
+          "locator": "BTK FTM page — Yaptırımlar ve diğer Yükümlülükler section",
+          "summary": "BTK links non-compliant use to enforcement under EHK Article 63 and other applicable legislation."
+        }
+      ],
+      "notes": "The canonical consolidated 5809 text at Mevzuat Bilgi Sistemi was not available through the current verification path. This record preserves official BTK corroboration only and must not be treated as a substitute for the canonical current law text."
+    },
+    {
+      "id": "TR.BTK.EHK.5809.CORR.INSTALL.2026-09-29",
+      "canonical_source_id": "TR.BTK.EHK.5809",
+      "corroborating_publisher": "Bilgi Teknolojileri ve İletişim Kurumu",
+      "corroborating_url": "https://www.btk.gov.tr/telsiz-kurulum-ve-kullanimlarinda-dikkat-edilecek-hususlar",
+      "observed_date": "2026-09-29",
+      "authority_scope": "official_corroboration_only",
+      "canonical_access_status": "unavailable_in_current_verification_path",
+      "promotes_canonical_source": false,
+      "may_ground_verified_legal_rule": false,
+      "legal_verdicts": false,
+      "references": [
+        {
+          "article": "36/1-b",
+          "evidence_kind": "exact_quote_observed",
+          "locator": "BTK Telsiz Kurulum ve Kullanımlarında Dikkat Edilecek Hususlar — opening paragraph",
+          "summary": "BTK directly reproduces the frequency assignment/registration obligation and the Article 37 exemption carve-out attributed to EHK Article 36(1)(b)."
+        },
+        {
+          "article": "37/1",
+          "evidence_kind": "exact_quote_observed",
+          "locator": "BTK Telsiz Kurulum ve Kullanımlarında Dikkat Edilecek Hususlar — opening EHK 37 paragraph",
+          "summary": "BTK directly reproduces the permit/licence obligation framework for radio devices or systems requiring frequency assignment."
+        }
+      ],
+      "notes": "A second official BTK page corroborates selected EHK provisions. It remains corroboration-only because the canonical consolidated law artifact is still unverified in this execution path."
+    },
+    {
+      "id": "TR.BTK.FTM.REGULATION.2018.CORR.BTK.2026-09-29",
+      "canonical_source_id": "TR.BTK.FTM.REGULATION.2018",
+      "corroborating_publisher": "Bilgi Teknolojileri ve İletişim Kurumu",
+      "corroborating_url": "https://www.btk.gov.tr/frekans-tahsisinden-muaf-telsiz-cihaz-ve-sistemleri",
+      "observed_date": "2026-09-29",
+      "authority_scope": "official_corroboration_only",
+      "canonical_access_status": "unavailable_in_current_verification_path",
+      "promotes_canonical_source": false,
+      "may_ground_verified_legal_rule": false,
+      "legal_verdicts": false,
+      "references": [
+        {
+          "article": "publication_metadata",
+          "evidence_kind": "publication_metadata",
+          "locator": "BTK FTM page — FTM Yönetmeliği section",
+          "summary": "BTK identifies the FTM Regulation as published in the Official Gazette dated 27 November 2018, number 30608."
+        },
+        {
+          "article": "6/1",
+          "evidence_kind": "exact_quote_observed",
+          "locator": "BTK FTM page — Teknik Ölçütler section",
+          "summary": "BTK directly reproduces the Article 6(1) statement that Technical Criteria are determined by the Authority and published on its official website."
+        }
+      ],
+      "notes": "This official BTK page corroborates regulation metadata and Article 6(1), but the canonical consolidated regulation text remains pending and is not promoted by this record."
+    }
+  ]
+}
