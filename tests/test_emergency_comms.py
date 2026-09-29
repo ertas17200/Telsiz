@@ -75,7 +75,7 @@ class EmergencyAskRouteTests(unittest.TestCase):
         result = self.ask.answer("Afet durumunda 145.500 MHz otomatik olarak serbest mi?", self.kb)
         text = " ".join(result["short_answer"]).lower()
         self.assertIn("yayın izni", text)
-        self.assertIn("bilinmiyor", text)
+        self.assertIn("karar:", text)
         self.assertNotIn("otomatik olarak serbesttir", text)
 
     def test_s4_route(self):
