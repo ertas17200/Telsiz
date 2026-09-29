@@ -45,6 +45,21 @@ Kaynaklar:
 - Güç: `10 W`, `5 watt`; `e.i.r.p.`/`eirp` geçerse güç esası e.i.r.p. kabul edilir, aksi halde verici çıkış gücü.
 - Konu: `data/answer_intents.json` içindeki anahtar kelimeler (Türkçe büyük/küçük harf ve aksan duyarsız, kelime başından eşleşir). Bir niyet yalnız **doğrulanmış kural veya kaynak ID'si** seçer; kendi metni yoktur. `--self-check` ve CI bunu zorlar.
 
+## Teknik / işletme soruları
+
+Hukuki olmayan sorular mevcut, kaynaklı Academy araçlarından cevaplanır (`scripts/ask_knowledge.py`). Bu cevaplar hiçbir zaman hukuki dayanak üretmez.
+
+| Soru örneği | Kaynak / araç |
+|---|---|
+| "QTH ne demek?" | Q kodları — IARU R1 işletme kaynağı |
+| "Karşı istasyon 59 rapor verdi" · "RST 599" | RS(T) ölçeği — IARU R1 |
+| `Mors "CQ TEST"` · "Mors ... --- ... ne demek?" | ITU-R M.1677-1 |
+| "145 MHz için çeyrek dalga anten boyu" · "7,1 MHz dipol hız faktörü 0,95" | Dalga boyu hesabı — BIPM SI sabitleri (varsayımlar yazılır) |
+| "Ankara röleleri hangileri?" | TRAC röle anlık görüntüsü (dernek bilgisi; BTK izni değildir) |
+| "KN41 locator nerede?" · "41.0, 29.0 grid locator" | Maidenhead eğitim aracı |
+
+Hangi alanların kapsandığı: [KNOWLEDGE_COVERAGE.md](KNOWLEDGE_COVERAGE.md).
+
 ## Kapsam
 
 Cevap kalitesi bilgi tabanının kapsamıyla sınırlıdır: frekans tablosu hâlâ `partial`, P1–P3 mevzuat metinleri `pending`. Motor bu sınırları gizlemez; her cevapta karar durumu ve eksik boyutlar açıkça yazılır.
