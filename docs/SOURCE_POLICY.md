@@ -122,3 +122,21 @@ Public repositories (e.g. GitHub) may be used as sources only under these condit
 5. mirrors of other projects are not used unless their authority is verified;
 6. no open-source repository can create legal permission or a Turkish frequency entitlement.
 
+
+
+## 10. Mutable community operational datasets
+
+Crowdsourced or association-operated operational datasets (for example satellite transmitter databases or repeater snapshots) are handled as **mutable snapshots**, not legal authority.
+
+Required controls:
+
+1. record the source organisation, licence, observation timestamp and exact upstream page/API identifiers;
+2. preserve the upstream object identifier where available;
+3. do not infer legal permission, national frequency entitlement or licensing authority from the presence of a record;
+4. unknown/missing records must stay unknown — no fuzzy or nearest-match invention;
+5. distinguish stable identity fields from volatile operational status;
+6. if upstream data are copied/adapted under a share-alike licence, keep attribution/change notices and the same licence on the adapted dataset;
+7. keep legal decision logic isolated from the operational snapshot;
+8. re-snapshot or independently corroborate before presenting volatile status as current.
+
+For satellite data specifically, `SOURCE_LISTED` / a transmitter frequency means only that the technical source lists it. It does not mean an operator in Türkiye may transmit on that frequency.
