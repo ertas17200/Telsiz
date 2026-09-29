@@ -109,6 +109,9 @@ jobs:
       - name: Validate satellite transmitter snapshot
         run: python scripts/validate_satellites.py
 
+      - name: Validate emergency communications layer
+        run: python scripts/validate_emergency_comms.py
+
       - name: Validate answer engine intents
         run: python scripts/ask.py --self-check
 
