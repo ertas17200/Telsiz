@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "source_id": "OSS.G4KLX.MMDVMHOST",
+  "trust_tier": "community_independent_implementation",
+  "trust_note": "Değerler bağımsız bir açık kaynak dijital ses röle/hotspot yazılımından (MMDVMHost, GPL-2.0) alınmıştır; yalnız olgusal parametreler kaydedilir, kaynak kod kopyalanmaz. ETSI DMR ve JARL D-STAR belgeleriyle doğrulama bekler. Hukuki izin veya frekans tahsisi içermez.",
+  "provenance": {
+    "repository": "https://github.com/g4klx/MMDVMHost",
+    "commit": "590c531391dfd3146073afbc3956f70d42c62a46",
+    "commit_date": "2026-09-05T08:21:06+01:00",
+    "license": "GPL-2.0",
+    "retrieved_at": "2026-09-29",
+    "files": [
+      {
+        "path": "DMRDefines.h",
+        "git_blob_sha1": "fed922b79915cddf2d58497b7195d8d9b77fd594",
+        "sha256": "a252dcde4c8fc927ef1bec347c30b0f91291f3d8a72f7db836c3a08cb9c96a39"
+      },
+      {
+        "path": "DStarDefines.h",
+        "git_blob_sha1": "3df93d8f053f70ec7eb4ed739b2654b8c857df38",
+        "sha256": "01ec9e392e40ffcf4762eedf313a54a792188aaecbef9872f6072e7c740b2f48"
+      },
+      {
+        "path": "YSFDefines.h",
+        "git_blob_sha1": "0efccc89a34b67343d613284a190bacc7c01541f",
+        "sha256": "a44bd51331327dc1b380d65e60bf8a53eabc950c893e77882bdbac937cfea8ae"
+      }
+    ]
+  },
+  "parameters": [
+    {
+      "id": "dmr_frame_bits",
+      "mode": "DMR",
+      "value": 264,
+      "meaning": "Bir DMR çerçevesinin (burst) bit uzunluğu",
+      "locator": "DMRDefines.h#L24",
+      "token": "DMR_FRAME_LENGTH_BITS",
+      "literal": "264U"
+    },
+    {
+      "id": "dmr_frame_bytes",
+      "mode": "DMR",
+      "value": 33,
+      "meaning": "Bir DMR çerçevesinin bayt uzunluğu",
+      "locator": "DMRDefines.h#L25",
+      "token": "DMR_FRAME_LENGTH_BYTES",
+      "literal": "33U"
+    },
+    {
+      "id": "dmr_sync_bits",
+      "mode": "DMR",
+      "value": 48,
+      "meaning": "Senkron alanının bit uzunluğu",
+      "locator": "DMRDefines.h#L27",
+      "token": "DMR_SYNC_LENGTH_BITS",
+      "literal": "48U"
+    },
+    {
+      "id": "dmr_voice_payload_bits",
+      "mode": "DMR",
+      "value": 216,
+      "meaning": "Bir çerçevedeki ses (AMBE) yükünün toplam bit uzunluğu",
+      "locator": "DMRDefines.h#L39",
+      "token": "DMR_AMBE_LENGTH_BITS",
+      "literal": "108U * 2U"
+    },
+    {
+      "id": "dmr_ambe_frames_per_burst",
+      "mode": "DMR",
+      "value": 3,
+      "meaning": "Bir çerçevedeki AMBE ses bloğu sayısı",
+      "locator": "DMRDefines.h#L79",
+      "token": "AMBE_PER_SLOT",
+      "literal": "3U"
+    },
+    {
+      "id": "dmr_sync_bs_voice",
+      "mode": "DMR",
+      "value": [
+        7,
+        85,
+        253,
+        125,
+        247,
+        95,
+        112
+      ],
+      "meaning": "Baz istasyonu (röle) kaynaklı ses senkron deseni",
+      "locator": "DMRDefines.h#L42",
+      "token": "BS_SOURCED_AUDIO_SYNC[]",
+      "literal": "0x07U, 0x55U, 0xFDU, 0x7DU, 0xF7U, 0x5FU, 0x70U"
+    },
+    {
+      "id": "dmr_sync_bs_data",
+      "mode": "DMR",
+      "value": [
+        13,
+        255,
+        87,
+        215,
+        93,
+        245,
+        208
+      ],
+      "meaning": "Baz istasyonu (röle) kaynaklı veri senkron deseni",
+      "locator": "DMRDefines.h#L43",
+      "token": "BS_SOURCED_DATA_SYNC[]",
+      "literal": "0x0DU, 0xFFU, 0x57U, 0xD7U, 0x5DU, 0xF5U, 0xD0U"
+    },
+    {
+      "id": "dmr_sync_ms_voice",
+      "mode": "DMR",
+      "value": [
+        7,
+        247,
+        213,
+        221,
+        87,
+        223,
+        208
+      ],
+      "meaning": "Mobil istasyon kaynaklı ses senkron deseni",
+      "locator": "DMRDefines.h#L45",
+      "token": "MS_SOURCED_AUDIO_SYNC[]",
+      "literal": "0x07U, 0xF7U, 0xD5U, 0xDDU, 0x57U, 0xDFU, 0xD0U"
+    },
+    {
+      "id": "dmr_sync_ms_data",
+      "mode": "DMR",
+      "value": [
+        13,
+        93,
+        127,
+        119,
+        253,
+        117,
+        112
+      ],
+      "meaning": "Mobil istasyon kaynaklı veri senkron deseni",
+      "locator": "DMRDefines.h#L46",
+      "token": "MS_SOURCED_DATA_SYNC[]",
+      "literal": "0x0DU, 0x5DU, 0x7FU, 0x77U, 0xFDU, 0x75U, 0x70U"
+    },
+    {
+      "id": "dmr_sync_mask",
+      "mode": "DMR",
+      "value": [
+        15,
+        255,
+        255,
+        255,
+        255,
+        255,
+        240
+      ],
+      "meaning": "Senkron desenlerinin 7 baytlık gösterimdeki bit maskesi",
+      "locator": "DMRDefines.h#L54",
+      "token": "SYNC_MASK[]",
+      "literal": "0x0FU, 0xFFU, 0xFFU, 0xFFU, 0xFFU, 0xFFU, 0xF0U"
+    },
+    {
+      "id": "dstar_header_bytes",
+      "mode": "D-STAR",
+      "value": 41,
+      "meaning": "D-STAR başlığının bayt uzunluğu",
+      "locator": "DStarDefines.h#L24",
+      "token": "DSTAR_HEADER_LENGTH_BYTES",
+      "literal": "41U"
+    },
+    {
+      "id": "dstar_frame_bytes",
+      "mode": "D-STAR",
+      "value": 12,
+      "meaning": "Bir D-STAR ses çerçevesinin bayt uzunluğu (ses + yavaş veri)",
+      "locator": "DStarDefines.h#L25",
+      "token": "DSTAR_FRAME_LENGTH_BYTES",
+      "literal": "12U"
+    },
+    {
+      "id": "dstar_voice_bytes",
+      "mode": "D-STAR",
+      "value": 9,
+      "meaning": "Çerçevedeki ses (AMBE) baytları",
+      "locator": "DStarDefines.h#L41",
+      "token": "DSTAR_VOICE_FRAME_LENGTH_BYTES",
+      "literal": "9U"
+    },
+    {
+      "id": "dstar_slow_data_bytes",
+      "mode": "D-STAR",
+      "value": 3,
+      "meaning": "Çerçevedeki yavaş veri baytları",
+      "locator": "DStarDefines.h#L42",
+      "token": "DSTAR_DATA_FRAME_LENGTH_BYTES",
+      "literal": "3U"
+    },
+    {
+      "id": "dstar_sync",
+      "mode": "D-STAR",
+      "value": [
+        85,
+        45,
+        22
+      ],
+      "meaning": "Yavaş veri alanındaki senkron baytları",
+      "locator": "DStarDefines.h#L73",
+      "token": "DSTAR_SYNC_BYTES[]",
+      "literal": "0x55U, 0x2DU, 0x16U"
+    },
+    {
+      "id": "dstar_long_callsign_chars",
+      "mode": "D-STAR",
+      "value": 8,
+      "meaning": "Uzun çağrı işareti alanı uzunluğu (karakter)",
+      "locator": "DStarDefines.h#L44",
+      "token": "DSTAR_LONG_CALLSIGN_LENGTH",
+      "literal": "8U"
+    },
+    {
+      "id": "dstar_short_callsign_chars",
+      "mode": "D-STAR",
+      "value": 4,
+      "meaning": "Kısa çağrı işareti alanı uzunluğu (karakter)",
+      "locator": "DStarDefines.h#L45",
+      "token": "DSTAR_SHORT_CALLSIGN_LENGTH",
+      "literal": "4U"
+    },
+    {
+      "id": "ysf_frame_bytes",
+      "mode": "YSF",
+      "value": 120,
+      "meaning": "Bir System Fusion (C4FM) çerçevesinin bayt uzunluğu",
+      "locator": "YSFDefines.h#L22",
+      "token": "YSF_FRAME_LENGTH_BYTES",
+      "literal": "120U"
+    },
+    {
+      "id": "ysf_sync",
+      "mode": "YSF",
+      "value": [
+        212,
+        113,
+        201,
+        99,
+        77
+      ],
+      "meaning": "Çerçeve senkron baytları",
+      "locator": "YSFDefines.h#L24",
+      "token": "YSF_SYNC_BYTES[]",
+      "literal": "0xD4U, 0x71U, 0xC9U, 0x63U, 0x4DU"
+    },
+    {
+      "id": "ysf_sync_bytes",
+      "mode": "YSF",
+      "value": 5,
+      "meaning": "Senkron alanı uzunluğu (bayt)",
+      "locator": "YSFDefines.h#L25",
+      "token": "YSF_SYNC_LENGTH_BYTES",
+      "literal": "5U"
+    },
+    {
+      "id": "ysf_fich_bytes",
+      "mode": "YSF",
+      "value": 25,
+      "meaning": "FICH (çerçeve bilgi kanalı) alanı uzunluğu (bayt)",
+      "locator": "YSFDefines.h#L27",
+      "token": "YSF_FICH_LENGTH_BYTES",
+      "literal": "25U"
+    },
+    {
+      "id": "ysf_callsign_chars",
+      "mode": "YSF",
+      "value": 10,
+      "meaning": "Çağrı işareti alanı uzunluğu (karakter)",
+      "locator": "YSFDefines.h#L31",
+      "token": "YSF_CALLSIGN_LENGTH",
+      "literal": "10U"
+    }
+  ],
+  "not_stated_by_source": [
+    "çerçeve/zaman dilimi süreleri: kaynakta sabitler var (DMR_SLOT_TIME, DSTAR_FRAME_TIME, YSF_FRAME_TIME) ancak birimleri belirtilmediği için alınmadı",
+    "modülasyon, kanal aralığı ve bant genişliği",
+    "Türkiye'de hangi bantta hangi sınıfın dijital ses kullanabileceği (bkz. BTK tablosu)",
+    "DMR renk kodu, konuşma grubu (TG) ve ağ (BrandMeister vb.) kuralları"
+  ]
+}

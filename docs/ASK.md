@@ -58,6 +58,7 @@ Hukuki olmayan sorular mevcut, kaynaklı Academy araçlarından cevaplanır (`sc
 | "Ankara röleleri hangileri?" | TRAC röle anlık görüntüsü (dernek bilgisi; BTK izni değildir) |
 | "KN41 locator nerede?" · "41.0, 29.0 grid locator" | Maidenhead eğitim aracı |
 | "ADIF kaydında hangi alanlar zorunlu?" · `ADIF <CALL:6>TA1ABC…<EOR>` | ADIF 3.1.7 — Telsiz'in sınırlı QSO sözleşmesi; BAND/MODE değer listeleri denetlenmez ve bu sınır cevapta yazılır |
+| "DMR çerçevesi nasıl?" · "D-STAR ve C4FM farkı" | MMDVMHost (commit-pinned, GPL-2.0; yalnız olgusal değerler) — **topluluk kaynağı**, her cevapta etiketlenir |
 | "FT8 nedir?" · "FT8 ve FT4 farkı" | ft8_lib (commit-pinned) — **topluluk kaynağı**, her cevapta etiketlenir |
 | "APRS APDW16 hangi cihaz?" | APRS cihaz kimliği veritabanı (aprsorg/aprs-deviceid, commit-pinned, CC BY-SA 2.0); kaynak README'nin arama kuralı: tam eşleşme → en uzun joker eşleşme, eşit eşleşmede tek cihaz seçilmez |
 | `Mic-E "_3" hangi cihaz?` · `Mic-E ">="` | Aynı veritabanının Mic-E dizinleri (yeni tip sonek / eski Kenwood önek+sonek); yalnız tam eşleşme |

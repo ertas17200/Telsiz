@@ -14,6 +14,7 @@ Most of this repository is original work. The files below contain data adapted f
 
 - `data/digital_modes.json` records protocol parameters with line locators into ft8_lib (MIT, https://github.com/kgoba/ft8_lib @ `9fec6ca39886edbf96f4f5e71edc76da5074e871`); no source code is copied.
 - `data/ax25_parameters.json` records AX.25/HDLC/AFSK parameter values with line locators into Dire Wolf (GPL-2.0, https://github.com/wb2osz/direwolf @ `eda1383f5fa9d8ba3cb27f99db1d2c79494404c9`); no source code is copied. The FCS table is regenerated from the polynomial, not copied.
+- `data/digital_voice.json` records DMR / D-STAR / System Fusion frame parameter values with line locators into MMDVMHost (GPL-2.0, https://github.com/g4klx/MMDVMHost @ `590c531391dfd3146073afbc3956f70d42c62a46`); no source code is copied.
 
 
 ## SatNOGS satellite/transmitter snapshot

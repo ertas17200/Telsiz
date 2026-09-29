@@ -560,6 +560,66 @@
         "turkish_permission"
       ],
       "notes": "2026-09-29: Exact Resmî Gazete PDF URL'si current source recordında çözüldü: https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-15.pdf . UAB güncel mevzuat sayfası 31.12.2025/10809 kaydını doğruluyor. Candidate policy gereği canonical_url burada null kalır; origin PDF bu doğrulama ortamında fetch/download edilemedi. Mirror/konsolide kopyalar yalnız corroboration için kullanıldı; origin exact text alınana kadar aday inaccessible ve current source pending kalır."
+    },
+    {
+      "jurisdiction": "INTERNATIONAL",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "cannot_support": [
+        "legal_claims",
+        "turkish_permission"
+      ],
+      "related_sources": [
+        "OSS.G4KLX.MMDVMHOST"
+      ],
+      "id": "CAND.ETSI.TS_102_361_1",
+      "title": "ETSI TS 102 361-1 — Digital Mobile Radio (DMR) Systems; Part 1: DMR Air Interface protocol",
+      "publisher": "ETSI",
+      "expected_source_type": "technical_manual",
+      "search_entry_point": "https://www.etsi.org/deliver/etsi_ts/102300_102399/10236101/",
+      "required_access_domains": [
+        "www.etsi.org"
+      ],
+      "unlocks": {
+        "phases": [
+          "P11"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "DMR çerçeve ve senkron parametrelerinin (OSS.G4KLX.MMDVMHOST) standart metniyle doğrulanması"
+      },
+      "notes": "2026-09-29: erişim denemesi proxy tarafından reddedildi (CONNECT 403). Sürüm numarası doğrulanmadan kaydedilmedi; aynalar kullanılmaz."
+    },
+    {
+      "jurisdiction": "INTERNATIONAL",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "cannot_support": [
+        "legal_claims",
+        "turkish_permission"
+      ],
+      "related_sources": [
+        "OSS.G4KLX.MMDVMHOST"
+      ],
+      "id": "CAND.JARL.DSTAR_SPEC",
+      "title": "JARL D-STAR system specification",
+      "publisher": "Japan Amateur Radio League (JARL)",
+      "expected_source_type": "technical_manual",
+      "search_entry_point": "https://www.jarl.com/d-star/",
+      "required_access_domains": [
+        "www.jarl.com"
+      ],
+      "unlocks": {
+        "phases": [
+          "P11"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "D-STAR çerçeve parametrelerinin protokol sahibinin belgesiyle doğrulanması"
+      },
+      "notes": "2026-09-29: erişim denemesi proxy tarafından reddedildi (CONNECT 403). Belge adı/sürümü doğrulanmadı."
     }
   ]
 }
