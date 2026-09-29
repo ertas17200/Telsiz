@@ -82,6 +82,14 @@ def fetch_registered_artifact(
         raise gate.GateError(f"canonical artifact download failed: {exc}") from exc
 
     with response_context as response:
+        http_status = getattr(response, "status", None)
+        if http_status is None and hasattr(response, "getcode"):
+            http_status = response.getcode()
+        if http_status != 200:
+            raise gate.GateError(
+                f"canonical artifact HTTP status must be 200, got {http_status!r}"
+            )
+
         final_url = response.geturl()
         if not _same_origin(canonical_url, final_url):
             raise gate.GateError(
@@ -132,6 +140,7 @@ def fetch_registered_artifact(
     return {
         "canonical_url": canonical_url,
         "final_url": final_url,
+        "http_status": http_status,
         "http_content_type": content_type,
         "downloaded_bytes": total,
     }
