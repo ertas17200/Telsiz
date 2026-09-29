@@ -118,12 +118,21 @@ Acceptance:
 
 ### P11.5 — Repeater and operating-practice data
 
-A repeater/practice registry may be added only with source date and authority class.
+**Implementation status: IMPLEMENTED BASELINE with a partial TRAC snapshot.**
+
+Implemented:
+- verified `TR.TRAC.REPEATER.LIST` operational source;
+- `data/repeaters.json` with source observation time and authority class on every row;
+- explicit `partial_snapshot` coverage semantics so absence never means non-existence;
+- `Aktif` and `Bakımda` preserved as source operational statuses;
+- every association-derived row fixed to `official_permission_status=UNKNOWN_NOT_VERIFIED`;
+- separate `TR.BTK.RADIO.PROCEDURES` official legal source for permission/licensing context;
+- 30-day stale detection explicitly labelled as a Telsiz repository engineering policy.
 
 Acceptance:
-- community/association repeater lists are labelled operational guidance;
-- official permission status is not inferred from a community list;
-- stale records are detectable.
+- association repeater data is labelled operational guidance;
+- official permission status is never inferred from the TRAC list;
+- stale records are detectable without rewriting the source's operational status.
 
 ### P11.6 — Bilingual documentation
 

@@ -40,6 +40,7 @@ Telsiz/
 │   ├── MORSE_TRAINER.md
 │   ├── QCODE_RST_TRAINER.md
 │   ├── QSO_LOG_ADIF.md
+│   ├── REPEATERS_TR.md
 │   ├── RF_WAVELENGTH.md
 │   ├── README.md
 │   ├── academy.json
@@ -49,6 +50,7 @@ Telsiz/
 │   ├── frequency_table.json
 │   ├── q_codes.json
 │   ├── qso_log_contract.json
+│   ├── repeaters.json
 │   ├── rf_calculator_contract.json
 │   ├── rst_reports.json
 │   ├── rules.json
@@ -74,6 +76,7 @@ Telsiz/
 │   ├── morse_trainer.py
 │   ├── qcode_rst_trainer.py
 │   ├── qso_log_adif.py
+│   ├── repeater_lookup.py
 │   ├── rf_wavelength.py
 │   ├── validate_academy.py
 │   ├── validate_device_manuals.py
@@ -81,6 +84,7 @@ Telsiz/
 │   ├── validate_morse.py
 │   ├── validate_operator_codes.py
 │   ├── validate_qso_log.py
+│   ├── validate_repeaters.py
 │   ├── validate_rf_calculator.py
 │   └── validate_knowledge.py
 └── tests/
@@ -106,6 +110,7 @@ python scripts/validate_operator_codes.py
 python scripts/validate_qso_log.py
 python scripts/validate_rf_calculator.py
 python scripts/validate_device_manuals.py
+python scripts/validate_repeaters.py
 python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
@@ -141,6 +146,7 @@ Do not add a source as `verified` until its publisher, canonical URL, status and
 - [Source-grounded QSO log / ADIF exporter contract](academy/QSO_LOG_ADIF.md)
 - [Source-grounded RF wavelength/electrical-length calculator](academy/RF_WAVELENGTH.md)
 - [Yaesu FTM-400 device manual / firmware compatibility guard](academy/DEVICE_FTM400.md)
+- [Türkiye repeater operational snapshot / authority-separation contract](academy/REPEATERS_TR.md)
 
 ## Status
 
