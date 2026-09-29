@@ -9,6 +9,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "emergency_comms.json"
 SOURCES = ROOT / "data" / "sources.json"
+CANDIDATES = ROOT / "data" / "source_candidates.json"
+
+CURRENT_LEGAL_ID = "TR.AFAD.MUDAHALE.REGULATION.2025-10809"
+HISTORICAL_LEGAL_ID = "TR.AFAD.MUDAHALE.REGULATION.2022-5211"
+CURRENT_CANDIDATE_ID = "CAND.TR.RG.AFAD.MUDAHALE.REGULATION.2025-10809"
+OLD_CANDIDATE_ID = "CAND.TR.AFAD.MUDAHALE_REGULATION.2022"
+CURRENT_RG_URL = "https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-15.pdf"
 
 EXPECTED_SOURCES = {"TR.AFAD.TAMP.2022", "IARU.R1.EMCOMM.PROCEDURES"}
 EXPECTED_OFFICIAL = {
@@ -40,6 +47,7 @@ def load(path: Path) -> dict:
 def main() -> int:
     data = load(DATA)
     sources = {s["id"]: s for s in load(SOURCES)["sources"]}
+    candidates = {s["id"]: s for s in load(CANDIDATES)["candidates"]}
 
     if set(data.get("source_ids", [])) != EXPECTED_SOURCES:
         fail("source_ids mismatch")
@@ -53,7 +61,58 @@ def main() -> int:
     if sources["IARU.R1.EMCOMM.PROCEDURES"]["source_type"] != "amateur_association":
         fail("IARU emergency source must remain amateur_association")
 
+
+    current = sources.get(CURRENT_LEGAL_ID)
+    historical = sources.get(HISTORICAL_LEGAL_ID)
+    if current is None:
+        fail("current 10809 legal source record missing")
+    if historical is None:
+        fail("historical 5211 legal source record missing")
+
+    if current.get("source_type") != "official_legal":
+        fail("current 10809 source must be official_legal")
+    if current.get("verification_status") != "pending":
+        fail("current 10809 source must remain pending until origin exact text is fetched")
+    if current.get("legal_status") != "current" or current.get("instrument_id") != "10809":
+        fail("current 10809 source legal metadata mismatch")
+    if current.get("url") != CURRENT_RG_URL:
+        fail("current 10809 source must use exact Resmi Gazete URL")
+    if current.get("verified_at") is not None:
+        fail("pending current 10809 source must not have verified_at")
+    if HISTORICAL_LEGAL_ID not in current.get("supersedes", []):
+        fail("current 10809 source must supersede historical 5211")
+
+    if historical.get("source_type") != "official_legal":
+        fail("historical 5211 source must be official_legal")
+    if historical.get("verification_status") != "verified":
+        fail("historical 5211 source must be verified")
+    if historical.get("legal_status") != "repealed" or historical.get("instrument_id") != "5211":
+        fail("historical 5211 source status mismatch")
+    if CURRENT_LEGAL_ID not in historical.get("superseded_by", []):
+        fail("historical 5211 source must point to current 10809")
+
+    if "[STALE_LEGAL_BASIS_METADATA]" not in sources["TR.AFAD.TAMP.2022"].get("notes", ""):
+        fail("TAMP source must explicitly mark stale 2022 legal-basis metadata")
+
+    if OLD_CANDIDATE_ID in candidates:
+        fail("obsolete 2022 AFAD candidate must be removed")
+    cand = candidates.get(CURRENT_CANDIDATE_ID)
+    if cand is None:
+        fail("current 10809 exact-text candidate missing")
+    if cand.get("status") != "candidate_inaccessible":
+        fail("current 10809 candidate must remain inaccessible until origin fetch succeeds")
+    if cand.get("canonical_url") != CURRENT_RG_URL:
+        fail("current 10809 candidate canonical URL mismatch")
+
     contract = data.get("authority_contract", {})
+    if contract.get("current_legal_source_id") != CURRENT_LEGAL_ID:
+        fail("authority contract current legal source mismatch")
+    if contract.get("current_legal_exact_text_status") != "PENDING_ORIGIN_FETCH":
+        fail("current legal exact-text status must remain pending")
+    if contract.get("tamp_page_legal_basis_metadata") != "STALE":
+        fail("TAMP legal-basis metadata must be marked stale")
+    if contract.get("historical_2022_regulation_status") != "REPEALED":
+        fail("historical 2022 regulation must be marked repealed")
     if contract.get("legal_permission_from_this_layer") != "PROHIBITED":
         fail("legal permission inference must be prohibited")
     if contract.get("frequency_inference") != "PROHIBITED":
@@ -90,6 +149,24 @@ def main() -> int:
         if item.get("source_id") != "IARU.R1.EMCOMM.PROCEDURES" or item.get("kind") != "amateur_practice":
             fail(f"{item['id']}: invalid practice source/kind")
 
+    guard = data.get("legal_status_guard", {})
+    if guard.get("current_source_id") != CURRENT_LEGAL_ID:
+        fail("legal status guard current source mismatch")
+    if guard.get("historical_source_id") != HISTORICAL_LEGAL_ID:
+        fail("legal status guard historical source mismatch")
+    if guard.get("historical_status") != "REPEALED":
+        fail("legal status guard must mark 5211 repealed")
+    if guard.get("tamp_page_legal_basis_metadata") != "STALE":
+        fail("legal status guard must mark TAMP metadata stale")
+    if guard.get("current_exact_text_verification") != "PENDING_ORIGIN_FETCH":
+        fail("legal status guard must fail closed on origin exact-text")
+    if guard.get("legal_rule_promotion_enabled") is not False:
+        fail("legal rule promotion must remain disabled")
+    warning = guard.get("warning_tr", "")
+    for token in ("5211", "10809", "güncel değildir", "hukuki"):
+        if token not in warning:
+            fail(f"legal status warning missing token: {token}")
+
     unsupported = data.get("unsupported_claims")
     if not isinstance(unsupported, list) or len(unsupported) < 5:
         fail("unsupported claim guard list incomplete")
@@ -100,7 +177,7 @@ def main() -> int:
 
     print(
         f"PASS: validated {len(official)} official-context item(s), "
-        f"{len(practice)} amateur-practice item(s); legal/frequency permission inference disabled"
+        f"{len(practice)} amateur-practice item(s); current-law gate pending exact origin fetch; legal/frequency permission inference disabled"
     )
     return 0
 
