@@ -88,6 +88,9 @@ jobs:
       - name: Validate repeater operational snapshot
         run: python scripts/validate_repeaters.py
 
+      - name: Validate bilingual documentation
+        run: python scripts/validate_translations.py
+
       - name: Test grounding contract
         run: python -m unittest discover -s tests -p "test_*.py" -v
 
