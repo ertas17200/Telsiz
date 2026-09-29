@@ -109,8 +109,10 @@ class FrequencyTableValidationTests(unittest.TestCase):
 
     def test_complete_coverage_rejected_without_source_hash(self):
         table = complete_table([full_row()])
+        sources = copy.deepcopy(SOURCES)
+        sources[LEGAL_SOURCE]["content_sha256"] = None
         with self.assertRaises(SystemExit):
-            self.validate(table)
+            self.validate(table, sources)
 
     def test_complete_coverage_accepts_fully_evidenced_table(self):
         self.validate(complete_table([full_row()]), hashed_sources())
@@ -148,7 +150,12 @@ class FrequencyTableValidationTests(unittest.TestCase):
         table["coverage_status"] = "complete"
         table["coverage_blocker"] = None
         with self.assertRaises(SystemExit):
-            self.validate(table, hashed_sources())
+            self.validate(table, SOURCES)
+
+    def test_repository_partial_table_uses_bound_artifact_hash(self):
+        self.assertEqual(TABLE["artifact"]["sha256"], SOURCES[LEGAL_SOURCE]["content_sha256"])
+        self.assertEqual(TABLE["artifact"]["file_size"], 508766)
+        self.assertEqual(TABLE["artifact"]["http_status"], 200)
 
     # integrity
     def test_row_source_must_exist(self):
@@ -269,6 +276,21 @@ class EvaluateContractTests(unittest.TestCase):
         result = self.evaluate(license_class="C", frequency_mhz=431.6)
         self.assertEqual(result["rows"], ["TR.FTM.AMATEUR.ROW.C.431.55-431.825"])
 
+    def test_a_51_mhz_finds_verified_general_100w_limit(self):
+        result = self.evaluate(license_class="A", frequency_mhz=51.0)
+        self.assertEqual(result["rows"], ["TR.FTM.AMATEUR.ROW.AB.50-52"])
+        self.assertEqual(result["known_limits"][0]["max_output_power"], 100)
+
+    def test_b_51_mhz_finds_verified_general_100w_limit(self):
+        result = self.evaluate(license_class="B", frequency_mhz=51.0)
+        self.assertEqual(result["rows"], ["TR.FTM.AMATEUR.ROW.AB.50-52"])
+        self.assertEqual(result["known_limits"][0]["max_output_power"], 100)
+
+    def test_c_51_mhz_is_not_inferred_from_ab_row(self):
+        result = self.evaluate(license_class="C", frequency_mhz=51.0)
+        self.assertEqual(result["rows"], [])
+        self.assertEqual(result["legal_status"], fl.UNKNOWN)
+
     def test_gaps_between_430_440_subbands_have_no_row(self):
         for freq in (430.0, 431.0, 433.0, 434.0, 438.5, 439.9):
             with self.subTest(freq=freq):
@@ -338,6 +360,34 @@ class EvaluateContractTests(unittest.TestCase):
 
     def test_power_within_limit_is_still_unknown_on_partial_table(self):
         result = self.evaluate(license_class="C", frequency_mhz=433.5, requested_power_w=5)
+        self.assertEqual(result["legal_status"], fl.UNKNOWN)
+
+    def test_ab_51_mhz_power_above_verified_general_limit_is_not_allowed(self):
+        for license_class in ("A", "B"):
+            with self.subTest(license_class=license_class):
+                result = self.evaluate(
+                    license_class=license_class,
+                    frequency_mhz=51.0,
+                    requested_power_w=101,
+                )
+                self.assertEqual(result["legal_status"], fl.NOT_ALLOWED)
+
+    def test_ab_51_mhz_within_general_limit_remains_unknown(self):
+        result = self.evaluate(
+            license_class="A",
+            frequency_mhz=51.0,
+            requested_power_w=100,
+        )
+        self.assertEqual(result["legal_status"], fl.UNKNOWN)
+        self.assertIn("row:emission", result["missing"])
+
+    def test_51_mhz_beacon_context_remains_unknown_until_special_25w_limit_is_modeled(self):
+        result = self.evaluate(
+            license_class="A",
+            frequency_mhz=51.0,
+            requested_power_w=50,
+            context="beacon",
+        )
         self.assertEqual(result["legal_status"], fl.UNKNOWN)
 
     # authority at evaluation time
