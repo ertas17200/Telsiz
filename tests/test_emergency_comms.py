@@ -28,6 +28,7 @@ class EmergencyCommunicationsDataTests(unittest.TestCase):
         ).stdout
         self.assertIn("5 official-context item(s)", out)
         self.assertIn("4 amateur-practice item(s)", out)
+        self.assertIn("current-law gate pending exact origin fetch", out)
 
     def test_authority_contract_is_fail_closed(self):
         c = registry["authority_contract"]
@@ -35,6 +36,23 @@ class EmergencyCommunicationsDataTests(unittest.TestCase):
         self.assertEqual(c["frequency_inference"], "PROHIBITED")
         self.assertFalse(c["amateur_status_implies_official_assignment"])
         self.assertFalse(c["emergency_context_expands_transmit_permission"])
+
+    def test_current_law_supersession_guard(self):
+        sources = {
+            s["id"]: s
+            for s in __import__("json").loads(
+                (ROOT / "data" / "sources.json").read_text(encoding="utf-8")
+            )["sources"]
+        }
+        current = sources["TR.AFAD.MUDAHALE.REGULATION.2025-10809"]
+        old = sources["TR.AFAD.MUDAHALE.REGULATION.2022-5211"]
+        self.assertEqual(current["legal_status"], "current")
+        self.assertEqual(current["verification_status"], "pending")
+        self.assertEqual(current["instrument_id"], "10809")
+        self.assertEqual(old["legal_status"], "repealed")
+        self.assertEqual(old["instrument_id"], "5211")
+        self.assertIn(old["id"], current["supersedes"])
+        self.assertIn(current["id"], old["superseded_by"])
 
     def test_tamp_levels_are_grounded(self):
         result = emc.answer_topic("TAMP S3 ne demek?", registry)
@@ -68,6 +86,8 @@ class EmergencyAskRouteTests(unittest.TestCase):
         text = " ".join(result["short_answer"])
         self.assertIn("TAMP", text)
         self.assertIn("IARU", text)
+        self.assertIn("10809", text)
+        self.assertIn("5211", text)
         self.assertIn("TR.AFAD.TAMP.2022", {s["source_id"] for s in result["sources"]})
         self.assertIn("IARU.R1.EMCOMM.PROCEDURES", {s["source_id"] for s in result["sources"]})
 
