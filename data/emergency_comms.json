@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "source_ids": [
+    "TR.AFAD.TAMP.2022",
+    "IARU.R1.EMCOMM.PROCEDURES"
+  ],
+  "authority_contract": {
+    "official_context_source_id": "TR.AFAD.TAMP.2022",
+    "operating_practice_source_id": "IARU.R1.EMCOMM.PROCEDURES",
+    "legal_permission_from_this_layer": "PROHIBITED",
+    "amateur_status_implies_official_assignment": false,
+    "emergency_context_expands_transmit_permission": false,
+    "frequency_inference": "PROHIBITED",
+    "instruction_priority": "Follow competent official/incident command instructions and applicable law; this dataset supplies context and operating practice only."
+  },
+  "official_context": [
+    {
+      "id": "TR.TAMP.PURPOSE",
+      "source_id": "TR.AFAD.TAMP.2022",
+      "kind": "official_context",
+      "claim_tr": "TAMP, afet ve acil durum müdahalesinde görev alacak afet grupları ve koordinasyon birimlerinin rollerini/sorumluluklarını ve müdahale planlamasının temel prensiplerini tanımlar.",
+      "locator": "AFAD TAMP page — purpose section",
+      "legal_rule": false
+    },
+    {
+      "id": "TR.TAMP.SCOPE",
+      "source_id": "TR.AFAD.TAMP.2022",
+      "kind": "official_context",
+      "claim_tr": "TAMP; bakanlıkları, kurum ve kuruluşları, özel sektörü, STK'ları ve gerçek kişileri afet ve acil durum müdahalesi kapsamı içinde ele alır.",
+      "locator": "AFAD TAMP page — scope statement",
+      "legal_rule": false
+    },
+    {
+      "id": "TR.TAMP.PUBLICATION",
+      "source_id": "TR.AFAD.TAMP.2022",
+      "kind": "official_context",
+      "claim_tr": "AFAD sayfasına göre TAMP'ın güncellenmiş hali 15.09.2022 tarihli ve 31954 sayılı Resmî Gazete'de yayımlanarak yürürlüğe girmiştir; dayanak yönetmeliğin 24.02.2022 tarihli ve 31760 sayılı Resmî Gazete'de yayımlandığı belirtilir.",
+      "locator": "AFAD TAMP page — publication/provenance paragraph",
+      "legal_rule": false
+    },
+    {
+      "id": "TR.TAMP.GROUP_COUNTS",
+      "source_id": "TR.AFAD.TAMP.2022",
+      "kind": "official_context",
+      "claim_tr": "AFAD sayfası TAMP'ta ulusal düzeyde 25, yerel düzeyde 23 afet grubu bulunduğunu belirtir.",
+      "locator": "AFAD TAMP page — group counts",
+      "legal_rule": false
+    },
+    {
+      "id": "TR.TAMP.RESPONSE_LEVELS",
+      "source_id": "TR.AFAD.TAMP.2022",
+      "kind": "official_context",
+      "claim_tr": "TAMP müdahale etki seviyelerini S1 (yerel imkânlar yeterli), S2 (destek iller gerekli), S3 (ulusal destek gerekli) ve S4 (uluslararası destek gerekli) olarak açıklar.",
+      "locator": "AFAD TAMP page — S1/S2/S3/S4 levels",
+      "legal_rule": false
+    }
+  ],
+  "operating_practice": [
+    {
+      "id": "IARU.EMCOMM.TRAINING_PURPOSE",
+      "source_id": "IARU.R1.EMCOMM.PROCEDURES",
+      "kind": "amateur_practice",
+      "claim_tr": "IARU acil telekomünikasyon materyali, radyo amatörlerini acil olaylara katılım için eğitmek ve bireysel operatörlerin süreci daha iyi anlamasına yardımcı olmak amacıyla sunulur.",
+      "locator": "Emergency Operating Procedures page — Emergency Telecommunications Guide",
+      "legal_rule": false
+    },
+    {
+      "id": "IARU.EMCOMM.ACCURACY",
+      "source_id": "IARU.R1.EMCOMM.PROCEDURES",
+      "kind": "amateur_practice",
+      "claim_tr": "IARU Region 1 acil haberleşme sayfası, mesaj aktarımının hızlı ve doğru olması gerektiğini; hedefin çok yüksek doğruluk olduğunu vurgular.",
+      "locator": "Emergency Operating Procedures page — Emergency Operating Procedure",
+      "legal_rule": false
+    },
+    {
+      "id": "IARU.EMCOMM.COMMON_FORMAT",
+      "source_id": "IARU.R1.EMCOMM.PROCEDURES",
+      "kind": "amateur_practice",
+      "claim_tr": "IARU, ülkeler ve gruplar arasında yerel prosedür farkları bulunduğunu; uluslararası haberleşmede ortak mesaj biçimlerinin tutarlılık ve hız açısından yararlı olduğunu belirtir.",
+      "locator": "Emergency Operating Procedures page — common format/local differences",
+      "legal_rule": false
+    },
+    {
+      "id": "IARU.EMCOMM.FRESHNESS_CAVEAT",
+      "source_id": "IARU.R1.EMCOMM.PROCEDURES",
+      "kind": "amateur_practice",
+      "claim_tr": "IARU sayfası HF acil durum prosedürünün bazı grupların isteyeceği kadar güncel olmadığını açıkça belirtir; bu nedenle yerel ve güncel resmî prosedürlerin yerini alamaz.",
+      "locator": "Emergency Operating Procedures page — currency caveat",
+      "legal_rule": false
+    }
+  ],
+  "unsupported_claims": [
+    "Bu katman tek başına Türkiye'de yayın izni vermez.",
+    "Bu katman tek başına herhangi bir afet/acil durum frekansını Türkiye için yetkili frekans ilan etmez.",
+    "Amatör telsiz belgesine sahip olmak tek başına TAMP kapsamında resmî görevlendirme kanıtı değildir.",
+    "AFAD TAMP web sayfası, dayanak yönetmeliğin tam konsolide hukuki metni yerine kullanılmaz.",
+    "IARU işletme rehberi ulusal mevzuat veya resmî olay komuta/koordinasyon talimatlarının yerine geçmez."
+  ]
+}
