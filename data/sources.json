@@ -809,6 +809,31 @@
       "supersedes": [],
       "superseded_by": [],
       "notes": "Bağımsız açık kaynak uygulama (GPL-2.0). Doğrulanan: depo kimliği, sabitlenmiş commit, lisans ve dosya hash'leri (data/digital_voice.json). Yalnız olgusal parametreler kaydedildi; kod kopyalanmadı. ETSI DMR / JARL D-STAR belgesi değildir; topluluk katmanındadır. Hukuki izin üretmez."
+    },
+    {
+      "id": "ITU.R.SG3.ITURHF",
+      "title": "ITURHFProp, P533 and P372 — ITU-R HF propagation and radio noise software (ITU-R-HF repository)",
+      "publisher": "ITU-R Study Group 3, Working Party 3L (GitHub: ITU-R-Study-Group-3/ITU-R-HF)",
+      "source_type": "technical_manual",
+      "jurisdiction": "INTERNATIONAL",
+      "url": "https://github.com/ITU-R-Study-Group-3/ITU-R-HF/tree/82017594a1c6cacfaa7e86954c4ae7b3a5825a3d",
+      "topics": [
+        "radyo gürültüsü",
+        "ITU-R P.372",
+        "HF propagasyon",
+        "ITU-R P.533"
+      ],
+      "verification_status": "verified",
+      "verified_at": "2026-09-30T06:00:00Z",
+      "publication_date": null,
+      "effective_date": null,
+      "legal_status": "not_applicable",
+      "instrument_id": null,
+      "reference": "P372/Src/P372/Noise.c; README.md @ 8201759",
+      "content_sha256": null,
+      "supersedes": [],
+      "superseded_by": [],
+      "notes": "Doğrulanan: depo kimliği, sabitlenmiş commit, dosya hash'leri ve README'deki telif notu (data/radio_noise.json). GitHub organizasyonunun ITU'ya aitliği itu.int'ten doğrulanamadı (erişim yok); bu nedenle official_technical olarak kaydedilmedi. Kod yorumları ITU-R P.372-10'u gösterir; güncel P.372 baskısıyla uyum doğrulanmadı. Hukuki izin üretmez."
     }
   ]
 }

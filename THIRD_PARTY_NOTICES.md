@@ -12,6 +12,8 @@ Most of this repository is original work. The files below contain data adapted f
 
 ## Referenced but not copied
 
+- `data/radio_noise.json` records man-made and galactic noise coefficients with line locators into the ITU-R SG3 ITU-R-HF repository (https://github.com/ITU-R-Study-Group-3/ITU-R-HF @ `82017594a1c6cacfaa7e86954c4ae7b3a5825a3d`), whose README states the software may be used "free from any copyright assertions"; no source code is copied.
+
 - `data/digital_modes.json` records protocol parameters with line locators into ft8_lib (MIT, https://github.com/kgoba/ft8_lib @ `9fec6ca39886edbf96f4f5e71edc76da5074e871`); no source code is copied.
 - `data/ax25_parameters.json` records AX.25/HDLC/AFSK parameter values with line locators into Dire Wolf (GPL-2.0, https://github.com/wb2osz/direwolf @ `eda1383f5fa9d8ba3cb27f99db1d2c79494404c9`); no source code is copied. The FCS table is regenerated from the polynomial, not copied.
 - `data/digital_voice.json` records DMR / D-STAR / System Fusion frame parameter values with line locators into MMDVMHost (GPL-2.0, https://github.com/g4klx/MMDVMHost @ `590c531391dfd3146073afbc3956f70d42c62a46`); no source code is copied.

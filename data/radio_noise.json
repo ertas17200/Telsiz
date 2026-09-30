@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "source_id": "ITU.R.SG3.ITURHF",
+  "trust_tier": "reference_implementation_authority_pending",
+  "trust_note": "Katsayılar ITU-R Study Group 3 (WP 3L) adıyla yayımlanan ITURHFProp/P372 referans yazılımından alınmıştır; kod yorumları ITU-R P.372-10 Bölüm 5 / Tablo 2'yi gösterir. GitHub organizasyonunun ITU'ya aitliği ve güncel P.372 baskısıyla uyum resmî metinle doğrulama bekler. Tahmini ortam gürültüsü bilgisidir; hukuki izin üretmez.",
+  "provenance": {
+    "repository": "https://github.com/ITU-R-Study-Group-3/ITU-R-HF",
+    "commit": "82017594a1c6cacfaa7e86954c4ae7b3a5825a3d",
+    "commit_date": "2025-05-15T10:39:37-06:00",
+    "license": "ITU-R SG3 notice: may be used by implementers free from any copyright assertions; provided as is",
+    "license_locator": "README.md#L1098-L1101",
+    "retrieved_at": "2026-09-30",
+    "files": [
+      {
+        "path": "P372/Src/P372/Noise.c",
+        "git_blob_sha1": "1d3d8bb9fd62d0acd961c103955297d3edf2cb46",
+        "sha256": "e41452975befc1c83def94ce8e0ca08b81d35efbe4864de4679b48dbd871e6d5"
+      },
+      {
+        "path": "README.md",
+        "git_blob_sha1": "f01d5b2c59ae70c350f64239c08292e47ed83c01",
+        "sha256": "1a2ada0741c75509cf96be90e8fb60a01160984c1ac44f450d7a0fe9531132a1"
+      }
+    ]
+  },
+  "formula": {
+    "expression": "Fa = c - d * log10(f)",
+    "frequency_unit": "MHz",
+    "man_made_locator": "P372/Src/P372/Noise.c#L582",
+    "galactic_locator": "P372/Src/P372/Noise.c#L612",
+    "frequency_unit_and_range_locator": "README.md#L85",
+    "frequency_min_mhz": 1.6,
+    "frequency_max_mhz": 30.0
+  },
+  "man_made": [
+    {
+      "id": "CITY",
+      "name_tr": "Şehir",
+      "c": {
+        "value": 76.8,
+        "locator": "P372/Src/P372/Noise.c#L531",
+        "token": "c =",
+        "literal": "76.8"
+      },
+      "d": {
+        "value": 27.7,
+        "locator": "P372/Src/P372/Noise.c#L532",
+        "token": "d =",
+        "literal": "27.7"
+      },
+      "upper_decile_db": {
+        "value": 11.0,
+        "locator": "P372/Src/P372/Noise.c#L534",
+        "token": "DuM =",
+        "literal": "11.0"
+      },
+      "lower_decile_db": {
+        "value": 6.7,
+        "locator": "P372/Src/P372/Noise.c#L535",
+        "token": "DlM =",
+        "literal": "6.7"
+      }
+    },
+    {
+      "id": "RESIDENTIAL",
+      "name_tr": "Yerleşim (konut) bölgesi",
+      "c": {
+        "value": 72.5,
+        "locator": "P372/Src/P372/Noise.c#L538",
+        "token": "c =",
+        "literal": "72.5"
+      },
+      "d": {
+        "value": 27.7,
+        "locator": "P372/Src/P372/Noise.c#L539",
+        "token": "d =",
+        "literal": "27.7"
+      },
+      "upper_decile_db": {
+        "value": 10.6,
+        "locator": "P372/Src/P372/Noise.c#L541",
+        "token": "DuM =",
+        "literal": "10.6"
+      },
+      "lower_decile_db": {
+        "value": 5.3,
+        "locator": "P372/Src/P372/Noise.c#L542",
+        "token": "DlM =",
+        "literal": "5.3"
+      }
+    },
+    {
+      "id": "RURAL",
+      "name_tr": "Kırsal",
+      "c": {
+        "value": 67.2,
+        "locator": "P372/Src/P372/Noise.c#L545",
+        "token": "c =",
+        "literal": "67.2"
+      },
+      "d": {
+        "value": 27.7,
+        "locator": "P372/Src/P372/Noise.c#L546",
+        "token": "d =",
+        "literal": "27.7"
+      },
+      "upper_decile_db": {
+        "value": 9.2,
+        "locator": "P372/Src/P372/Noise.c#L548",
+        "token": "DuM =",
+        "literal": "9.2"
+      },
+      "lower_decile_db": {
+        "value": 4.6,
+        "locator": "P372/Src/P372/Noise.c#L549",
+        "token": "DlM =",
+        "literal": "4.6"
+      }
+    },
+    {
+      "id": "QUIETRURAL",
+      "name_tr": "Sessiz kırsal",
+      "c": {
+        "value": 53.6,
+        "locator": "P372/Src/P372/Noise.c#L552",
+        "token": "c =",
+        "literal": "53.6"
+      },
+      "d": {
+        "value": 28.6,
+        "locator": "P372/Src/P372/Noise.c#L553",
+        "token": "d =",
+        "literal": "28.6"
+      },
+      "upper_decile_db": {
+        "value": 9.2,
+        "locator": "P372/Src/P372/Noise.c#L555",
+        "token": "DuM =",
+        "literal": "9.2"
+      },
+      "lower_decile_db": {
+        "value": 4.6,
+        "locator": "P372/Src/P372/Noise.c#L556",
+        "token": "DlM =",
+        "literal": "4.6"
+      },
+      "decile_note": "Kaynak bu kategori için kırsal (RURAL) desillerini kullanır (Noise.c yorum satırı)."
+    }
+  ],
+  "galactic": {
+    "c": {
+      "value": 52.0,
+      "locator": "P372/Src/P372/Noise.c#L610",
+      "token": "c =",
+      "literal": "52.0"
+    },
+    "d": {
+      "value": 23.0,
+      "locator": "P372/Src/P372/Noise.c#L611",
+      "token": "d =",
+      "literal": "23.0"
+    },
+    "upper_decile_db": {
+      "value": 2.0,
+      "locator": "P372/Src/P372/Noise.c#L615",
+      "token": "DuG =",
+      "literal": "2.0"
+    },
+    "lower_decile_db": {
+      "value": 2.0,
+      "locator": "P372/Src/P372/Noise.c#L616",
+      "token": "DlG =",
+      "literal": "2.0"
+    }
+  },
+  "excluded": [
+    "QUIET ve NOISY kategorileri: kaynak bunların ITU-R P.372-10'da olmadığını belirtir (Noise.c)",
+    "atmosferik gürültü: konum, ay ve saat katsayı dosyaları gerektirir; bu sürümde alınmadı"
+  ],
+  "not_stated_by_source": [
+    "Fa değerinin referans seviyesi/tanımı (kaynak yalnız dB der)",
+    "1,6–30 MHz dışındaki geçerlilik — Telsiz bu aralık dışında hesap yapmaz"
+  ]
+}

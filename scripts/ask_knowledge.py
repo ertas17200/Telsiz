@@ -43,6 +43,7 @@ sat = _load_module("satellite_lookup")
 emc = _load_module("emergency_comms")
 adif = _load_module("qso_log_adif")
 vdv = _load_module("validate_digital_voice")
+noise = _load_module("radio_noise")
 
 QCODE_RE = re.compile(r"(?<![a-z0-9_<])(q[a-z]{2})(?![a-z0-9_])")
 RST_KEY_RE = re.compile(r"(?<![a-z0-9])(rst|rs|rapor\w*|sinyal raporu)(?![a-z0-9])")
@@ -63,6 +64,7 @@ AX25_KEY_RE = re.compile(r"(?<![a-z0-9])(ax\.?25|hdlc|afsk|fcs|paket radyo\w*|pa
 TOCALL_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])([A-Za-z][A-Za-z0-9]{3,5})(?:-\d{1,2})?(?![A-Za-z0-9])")
 ADIF_KEY_RE = re.compile(r"(?<![a-z0-9])(adif|adi dosya\w*|<eor>|qso kayd\w*|log kayd\w*|log dosya\w*)")
 DIGITAL_VOICE_KEY_RE = re.compile(r"(?<![a-z0-9])(dmr|d-?star|ysf|system fusion|c4fm)(?![a-z0-9])")
+NOISE_KEY_RE = re.compile(r"(?<![a-z0-9])(gurultu\w*|noise|p\.?372)(?![a-z0-9])")
 REPEATER_KEY_RE = re.compile(r"(?<![a-z0-9])(role\w*|tekrarlayici\w*|repeater\w*)")
 SATELLITE_KEY_RE = re.compile(r"(?<![a-z0-9])(uydu\w*|satellite\w*|transponder\w*|uplink\w*|downlink\w*)(?![a-z0-9])")
 EMERGENCY_KEY_RE = re.compile(r"(?<![a-z0-9])(afet\w*|acil(?:\s+durum)?\w*|emergency\w*|tamp|kriz\w*|s[1-4])(?![a-z0-9])")
@@ -460,6 +462,36 @@ def digital_voice_route(text: str, question: str) -> dict | None:
             "source_ids": [payload["source_id"]]}
 
 
+def noise_route(text: str, question: str, frequencies_mhz: list[float]) -> dict | None:
+    if not NOISE_KEY_RE.search(text):
+        return None
+    payload = _json("radio_noise.json")
+    formula = payload["formula"]
+    label = "[ITU-R SG3 referans yazılımı; resmî P.372 metniyle doğrulama bekliyor]"
+    short = []
+    for f in frequencies_mhz:
+        try:
+            result = noise.evaluate(f, payload)
+        except ValueError:
+            short.append(f"{_tr(f, 3)} MHz: kaynağın giriş aralığı {_tr(formula['frequency_min_mhz'], 1)}–"
+                         f"{_tr(formula['frequency_max_mhz'], 1)} MHz dışında; hesap yapılmaz.")
+            continue
+        levels = "; ".join(f"{row['name_tr']} {_tr(row['fa_db'], 1)} dB" for row in result["man_made"])
+        short.append(f"{_tr(f, 3)} MHz insan yapımı gürültü Fa: {levels}; galaktik {_tr(result['galactic_fa_db'], 1)} dB {label}.")
+    if not short:
+        cats = ", ".join(f"{e['name_tr']} (c={_tr(e['c']['value'], 1)}, d={_tr(e['d']['value'], 1)})" for e in payload["man_made"])
+        short.append(f"Ortam gürültüsü Fa = c − d·log10(f), f MHz; kategoriler: {cats}. Hesap için "
+                     f"{_tr(formula['frequency_min_mhz'], 1)}–{_tr(formula['frequency_max_mhz'], 1)} MHz arası bir frekans yazın, "
+                     f"ör. \"7,1 MHz gürültü seviyesi\" {label}.")
+    prov = payload["provenance"]
+    lines = [payload["trust_note"],
+             f"Kaynak commit: {prov['repository']} @ {prov['commit'][:12]}; katsayılar satır numaralarıyla data/radio_noise.json içinde.",
+             "Bu değerler tahmini ortalama ortam gürültüsüdür; ölçüm veya hukuki sınır değildir."]
+    lines.extend(f"Alınmayan: {item}" for item in payload["excluded"])
+    lines.extend(f"Bu kaynağın belirtmediği: {item}" for item in payload["not_stated_by_source"])
+    return {"topic": "Radyo gürültüsü (ITU-R P.372)", "short": short, "lines": lines, "source_ids": [payload["source_id"]]}
+
+
 def grid_route(text: str, question: str) -> dict | None:
     if not GRID_KEY_RE.search(text):
         return None
@@ -499,6 +531,7 @@ def technical_routes(text: str, question: str, frequencies_mhz: list[float]) -> 
         emergency_route(text, question),
         satellite_route(text, question),
         adif_route(text, question),
+        noise_route(text, question, frequencies_mhz),
         grid_route(text, question),
     ]
     return [r for r in routes if r]
