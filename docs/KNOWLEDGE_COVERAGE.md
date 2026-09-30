@@ -28,7 +28,7 @@ Durum anlamları: **VAR** = doğrulanmış kaynakla cevaplanıyor · **KISMİ** 
 | QSO kaydı / ADIF | VAR | Sözleşme özeti; soruda verilen ADI kaydının ayrıştırılıp Telsiz QSO sözleşmesine göre denetlenmesi (`ADIF.SPEC.3.1.7`) | BAND/MODE değer listeleri (enumeration) denetimi |
 | Cihaz bilgisi | KISMİ | Yaesu FTM-400 yazılım uyumluluğu (`device_firmware_guard.py`) | Diğer cihazlar |
 | IARU band planı | KISMİ | "Ulusal kural esastır" ilkesi | Sürümlü HF/VHF band planı içeriği (aday kaynak) |
-| Propagasyon | YOK | — | Güvenilir eğitim kaynağı |
+| Propagasyon / radyo gürültüsü | KISMİ | 1,6–30 MHz insan yapımı (şehir, yerleşim, kırsal, sessiz kırsal) ve galaktik gürültü Fa hesabı (`ITU.R.SG3.ITURHF`, commit-pinned; otorite doğrulaması bekliyor) | Resmî P.372 metni (`CAND.ITU.R.P372`); atmosferik gürültü; MUF/propagasyon tahmini (P.533) |
 | Dijital modlar (FT8, FT4) | KISMİ | FT8/FT4 modülasyon, sembol, zamanlama ve kodlama parametreleri — **topluluk katmanı** (`OSS.KGOBA.FT8_LIB`, commit-pinned) | Protokol yazarlarının belgesiyle doğrulama (`CAND.QEX.FT4_FT8_PROTOCOLS`, `CAND.WSJTX.REFERENCE_SOURCE`); bant genişliği ve çalışma frekansları kaynakta yok |
 | APRS | KISMİ | Cihaz/yazılım kimliği: 417 tocall + 32 Mic-E kaydı (`APRS.DEVICEID.TOCALLS`, commit-pinned, CC BY-SA 2.0) | APRS protokol belgesi (`CAND.APRS.PROTOCOL_1_0_1`), Mic-E konum kodlaması, frekanslar |
 | AX.25 / paket radyo | KISMİ | HDLC bayrağı, bit doldurma, bit sırası, FCS (CRC-16) ve 1200 baud AFSK tonları — **topluluk katmanı** (`OSS.WB2OSZ.DIREWOLF`, commit-pinned) | AX.25 2.2 standardıyla doğrulama (`CAND.TAPR.AX25_2_2`); 9600 baud ve diğer modemler |

@@ -164,3 +164,11 @@ The current Telsiz architecture remains:
 `official source -> structured source record -> grounded rule/data -> validator -> tests -> answer/tooling layer`.
 
 P11 features must sit on top of that chain rather than bypass it.
+
+## Re-check 2026-09-30
+
+Repository re-read at commit `a5beb80f20f3da2b54363f1fc391b42bb1eb8d66` (last commit 2026-04-04; unchanged since the first review).
+
+- **Toroid calculator (`scripts/toroid_hesaplayici.py`) — not adopted.** It applies `N = 100·√(L/AL)` to every core, including the ferrite (`FT…-43`) entries in the same table; that form fits iron-powder AL values, while ferrite AL values are normally given in a different unit, so the ferrite results can be wrong. The AL table itself is marked "yaklaşık" and has no source. A Telsiz toroid tool needs manufacturer datasheet AL values with units first.
+- **Remaining docs** (propagation, SDR, antennas, grounding/safety, band plan) have no citations; they stay idea-only and cannot ground answers.
+- **Outcome of this round:** the missing *propagation/noise* area was sourced from a different repository instead — the ITU-R Study Group 3 reference software (`ITU.R.SG3.ITURHF`, data `data/radio_noise.json`), with its authority kept as pending until the P.372 text on itu.int can be read.

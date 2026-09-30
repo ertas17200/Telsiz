@@ -229,7 +229,10 @@ def answer(question: str, kb: Knowledge | None = None) -> dict:
                 target.append(item)
 
     technical_knowledge = akn.technical_routes(parsed["normalized"], question, parsed["frequencies_mhz"])
-    wave_only = any(t["topic"].startswith("Dalga boyu") for t in technical_knowledge) and not (
+    # A wavelength or radio-noise question uses the frequency as a physical
+    # input, not as a permission question; skip the legal verdict unless a
+    # class or power was also asked about.
+    wave_only = any(t["topic"].startswith(("Dalga boyu", "Radyo gürültüsü")) for t in technical_knowledge) and not (
         parsed["license_classes"] or parsed["requested_power_w"] is not None
     )
     for item in technical_knowledge:

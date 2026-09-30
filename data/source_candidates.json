@@ -620,6 +620,36 @@
         "purpose": "D-STAR çerçeve parametrelerinin protokol sahibinin belgesiyle doğrulanması"
       },
       "notes": "2026-09-29: erişim denemesi proxy tarafından reddedildi (CONNECT 403). Belge adı/sürümü doğrulanmadı."
+    },
+    {
+      "id": "CAND.ITU.R.P372",
+      "title": "Recommendation ITU-R P.372 — Radio noise",
+      "publisher": "ITU-R",
+      "expected_source_type": "official_technical",
+      "jurisdiction": "INTERNATIONAL",
+      "search_entry_point": "https://www.itu.int/rec/R-REC-P.372",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.itu.int"
+      ],
+      "unlocks": {
+        "phases": [
+          "P11"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "ITU.R.SG3.ITURHF gürültü katsayılarının resmî P.372 metniyle ve güncel baskıyla doğrulanması; depo sahibinin ITU olduğunun teyidi"
+      },
+      "related_sources": [
+        "ITU.R.SG3.ITURHF"
+      ],
+      "cannot_support": [
+        "legal_claims",
+        "turkish_permission"
+      ],
+      "notes": "itu.int bu ortamdan erişilemiyor. Baskı numarası doğrulanmadan kaydedilmedi."
     }
   ]
 }

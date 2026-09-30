@@ -112,6 +112,9 @@ jobs:
       - name: Validate digital voice frame parameters
         run: python scripts/validate_digital_voice.py
 
+      - name: Validate radio noise coefficients
+        run: python scripts/radio_noise.py
+
       - name: Validate satellite transmitter snapshot
         run: python scripts/validate_satellites.py
 
