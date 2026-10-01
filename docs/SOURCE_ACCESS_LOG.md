@@ -181,3 +181,12 @@ TR.BTK.FTM.REGULATION.2018=PENDING / BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
 TR.KEGM.AMATEUR.EXAM.REGULATION=PENDING / BLOCKED_BY_OFFICIAL_SOURCE_ACCESS
 RULE_PROMOTION=PROHIBITED_UNTIL_EXACT_OFFICIAL_TEXT_VERIFIED
 ```
+
+## 2026-10-01 — manufacturer antenna site (Claude Code environment)
+
+| DOMAIN | ACCESS | HTTP_STATUS | ERROR_CLASS |
+|---|---|---|---|
+| www.diamondantenna.net | BLOCKED | — (CONNECT 403); http:// 403 | EGRESS_POLICY |
+| www.diamond-ant.co.jp | BLOCKED | — (CONNECT 403) | EGRESS_POLICY |
+
+Request: add Diamond antenna drawings. Result: `CAND.DIAMOND.ANTENNA_PRODUCT_DOCS` recorded; nothing copied. Even with access, drawings stay out of the repository without a licence or permission (SOURCE_POLICY §11).

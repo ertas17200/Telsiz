@@ -47,6 +47,7 @@ Açık GitHub depoları taranırken bulunan, bu turda doğrulanamayan veya lisan
 |---|---|---|---|
 | `CAND.QEX.FT4_FT8_PROTOCOLS` | technical_manual | FT8/FT4 parametrelerinin protokol yazarlarının makalesiyle doğrulanması | physics.princeton.edu erişilemedi |
 | `CAND.WSJTX.REFERENCE_SOURCE` | technical_manual | Referans uygulamayla çapraz doğrulama | Resmî depo erişimi yok; aynalar kullanılmaz |
+| `CAND.DIAMOND.ANTENNA_PRODUCT_DOCS` | technical_manual | Diamond anten modellerinin üretici teknik değerleri (çizimler kopyalanmaz) | diamondantenna.net erişimi reddedildi (403) |
 | `CAND.ITU.R.P372` | official_technical | ITU-R P.372 resmî metni — gürültü katsayılarının ve depo sahipliğinin doğrulanması | itu.int erişimi yok |
 | `CAND.ETSI.TS_102_361_1` | technical_manual | ETSI DMR hava arayüzü — MMDVMHost DMR parametrelerinin doğrulanması | www.etsi.org erişimi reddedildi (403) |
 | `CAND.JARL.DSTAR_SPEC` | technical_manual | JARL D-STAR belgesi — D-STAR parametrelerinin doğrulanması | www.jarl.com erişimi reddedildi (403) |
