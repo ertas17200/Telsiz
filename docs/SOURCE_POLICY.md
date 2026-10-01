@@ -140,3 +140,12 @@ Required controls:
 8. re-snapshot or independently corroborate before presenting volatile status as current.
 
 For satellite data specifically, `SOURCE_LISTED` / a transmitter frequency means only that the technical source lists it. It does not mean an operator in Türkiye may transmit on that frequency.
+
+## 11. Manufacturer drawings, images and datasheets
+
+Manufacturer product drawings, photos, dimension sheets and PDFs are copyrighted by default.
+
+1. they are not copied into this repository unless the manufacturer's licence or written permission allows it, and that permission is recorded with the source;
+2. without such permission, only the source URL, retrieval date, byte hash and factual values (with page/figure locators) may be recorded;
+3. factual values from a manufacturer are `technical_manual` claims about that product, not legal permission and not independent measurement;
+4. diagrams drawn for Telsiz must be original work generated from Telsiz's own sourced formulas, and must not trace or reproduce a manufacturer drawing.

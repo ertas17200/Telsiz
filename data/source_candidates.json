@@ -650,6 +650,34 @@
         "turkish_permission"
       ],
       "notes": "itu.int bu ortamdan erişilemiyor. Baskı numarası doğrulanmadan kaydedilmedi."
+    },
+    {
+      "id": "CAND.DIAMOND.ANTENNA_PRODUCT_DOCS",
+      "title": "Diamond Antenna product pages and specification sheets",
+      "publisher": "Diamond Antenna (manufacturer; US distributor site diamondantenna.net)",
+      "expected_source_type": "technical_manual",
+      "jurisdiction": "INTERNATIONAL",
+      "search_entry_point": "https://www.diamondantenna.net/",
+      "canonical_url": null,
+      "status": "candidate_unverified",
+      "required_access_domains": [
+        "www.diamondantenna.net"
+      ],
+      "unlocks": {
+        "phases": [
+          "P11"
+        ],
+        "fields": [],
+        "conflicts": [],
+        "rules": [],
+        "purpose": "Diamond anten modellerinin üretici beyanı teknik değerleri (frekans aralığı, kazanç, boy, konnektör) — model başına sayfa/PDF konumu ve hash ile"
+      },
+      "related_sources": [],
+      "cannot_support": [
+        "legal_claims",
+        "turkish_permission"
+      ],
+      "notes": "2026-10-01: kullanıcı anten çizimlerinin eklenmesini istedi. Erişim denemesi reddedildi (CONNECT 403, http 403). Üretici çizimleri/görselleri telif hakkıyla korunur; açık bir lisans veya izin olmadan repoya kopyalanmaz (SOURCE_POLICY §11). Erişim sağlandığında yalnız URL, hash ve olgusal değerler kaydedilir."
     }
   ]
 }
