@@ -146,6 +146,21 @@ class HttpTests(unittest.TestCase):
                 code, _, _ = self.req(method, path, body=body, headers=headers)
                 self.assertEqual(code, 421, "untrusted host must be refused")
 
+    def test_missing_or_duplicate_host_header_rejected(self):
+        allowed = f"127.0.0.1:{self.server.server_port}"
+        for hosts in ((), ("untrusted.example",), ("localhost",),
+                      (allowed, allowed), (allowed, "untrusted.example")):
+            with self.subTest(hosts=hosts):
+                conn = http.client.HTTPConnection("127.0.0.1", self.server.server_port, timeout=3)
+                conn.putrequest("GET", "/", skip_host=True)
+                for host in hosts:
+                    conn.putheader("Host", host)
+                conn.endheaders()
+                response = conn.getresponse()
+                self.assertEqual(response.status, 421)
+                response.read()
+                conn.close()
+
     def test_http_oversized_request_rejected(self):
         hdr = {"Authorization": "Bearer " + TOKEN, "Content-Type": "application/json"}
         code, _, _ = self.req("POST", "/api/preview", " " * 1030, hdr)
