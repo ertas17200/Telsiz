@@ -27,6 +27,26 @@ el("connect").addEventListener("click", async () => {
   try { show(await call("/api/state")); } catch(e) { token = ""; message("HOLD: " + e.message); }
 });
 el("set-model").addEventListener("click", () => execute("select_model", "model", el("model").value));
-el("set-frequency").addEventListener("click", () => execute("preview_frequency", "frequency_mhz", Number(el("frequency").value)));
-el("set-channel").addEventListener("click", () => execute("preview_channel", "channel", Number(el("channel").value)));
-el("set-volume").addEventListener("click", () => execute("preview_volume", "volume", Number(el("volume").value)));
+function parseNumberInput(raw, min, max, integer) {
+  // Number("") and Number(" ") both become 0, which is a valid volume value.
+  // Require an explicit decimal value before allowing any command to be sent.
+  if (typeof raw !== "string" || !/^(?:\d+(?:\.\d+)?|\.\d+)$/.test(raw.trim())) {
+    throw Error("Sayısal değer girilmeli (boş veya geçersiz giriş reddedildi)");
+  }
+  const value = Number(raw);
+  if (!Number.isFinite(value) || value < min || value > max || (integer && !Number.isInteger(value))) {
+    throw Error("Değer izin verilen aralıkta olmalı");
+  }
+  return value;
+}
+function executeNumber(action, inputId, key, min, max, integer) {
+  try {
+    return execute(action, key, parseNumberInput(el(inputId).value, min, max, integer));
+  } catch (e) {
+    message("HOLD: " + e.message);
+    return Promise.resolve();
+  }
+}
+el("set-frequency").addEventListener("click", () => executeNumber("preview_frequency", "frequency", "frequency_mhz", 1, 1000, false));
+el("set-channel").addEventListener("click", () => executeNumber("preview_channel", "channel", "channel", 1, 999, true));
+el("set-volume").addEventListener("click", () => executeNumber("preview_volume", "volume", "volume", 0, 100, true));

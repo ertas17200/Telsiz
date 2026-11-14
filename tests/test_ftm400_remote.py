@@ -134,6 +134,18 @@ class HttpTests(unittest.TestCase):
         code, _, _ = self.req("POST", "/api/preview", '{"action":"x","action":"ptt"}', hdr)
         self.assertEqual(code, 400)
 
+    def test_dns_rebinding_host_is_rejected(self):
+        for method, path, body in (
+            ("GET", "/", None),
+            ("GET", "/api/state", None),
+            ("POST", "/api/preview", '{"action":"preview_volume","volume":1}'),
+        ):
+            with self.subTest(method=method, path=path):
+                headers = {"Host": "untrusted.example", "Authorization": "Bearer " + TOKEN,
+                           "Content-Type": "application/json"}
+                code, _, _ = self.req(method, path, body=body, headers=headers)
+                self.assertEqual(code, 421, "untrusted host must be refused")
+
     def test_http_oversized_request_rejected(self):
         hdr = {"Authorization": "Bearer " + TOKEN, "Content-Type": "application/json"}
         code, _, _ = self.req("POST", "/api/preview", " " * 1030, hdr)

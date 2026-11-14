@@ -144,11 +144,20 @@ def make_server(host: str, port: int, token: str, radio: PreviewRadio | None = N
             got = self.headers.get("Authorization", "")
             return hmac.compare_digest(got, "Bearer " + token)
 
+        def _check_host(self) -> bool:
+            # A strict loopback Host boundary blocks browser DNS rebinding to this
+            # development server. Duplicate or missing Host headers also fail closed.
+            hosts = self.headers.get_all("Host", [])
+            return len(hosts) == 1 and hosts[0] == f"127.0.0.1:{self.server.server_port}"
+
         def _check_origin(self) -> bool:
             origin = self.headers.get("Origin")
             return origin is None or origin == f"http://127.0.0.1:{self.server.server_port}"
 
         def do_GET(self) -> None:
+            if not self._check_host():
+                self._json(421, {"error": "untrusted_host"})
+                return
             assets = {"/": ("index.html", "text/html; charset=utf-8"), "/client.js": ("client.js", "text/javascript; charset=utf-8"), "/style.css": ("style.css", "text/css; charset=utf-8")}
             if self.path in assets:
                 filename, mime = assets[self.path]
@@ -162,6 +171,9 @@ def make_server(host: str, port: int, token: str, radio: PreviewRadio | None = N
                 self._json(200, target.snapshot())
 
         def do_POST(self) -> None:
+            if not self._check_host():
+                self._json(421, {"error": "untrusted_host"})
+                return
             if self.path != "/api/preview":
                 self._json(404, {"error": "not_found"})
                 return
