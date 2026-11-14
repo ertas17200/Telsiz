@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 """Loopback-only, receive/transmit-disconnected FTM-400 remote-control UI prototype.
 
-No GPIO, serial, DATA-port, CAT, microphone, audio or RF adapter is implemented.
+No GPIO, serial, DATA-port, CAT, microphone TX or RF adapter is implemented.
+Optional, explicitly configured Windows DirectShow RX-only PCM audio clips are supported.
 All controls in this module are previews, never commands to a physical radio.
 """
 from __future__ import annotations
 
 import argparse
+import io
+import subprocess
+import sys
+import wave
 import hmac
 import json
 import os
@@ -23,6 +28,9 @@ MODELS = {
 TOKEN_ENV = "FTM400_REMOTE_TOKEN"
 ROOT = Path(__file__).resolve().parent
 MAX_BODY = 1024
+RX_DEVICE_ENV = "FTM400_RX_AUDIO_DEVICE"
+RX_MAX_WAV_BYTES = 131072
+RX_DURATION_SECONDS = 2
 
 
 class InvalidCommand(ValueError):
@@ -40,6 +48,70 @@ def _unique_pairs(pairs: list[tuple[str, object]]) -> dict:
             raise InvalidCommand("duplicate JSON key")
         value[key] = item
     return value
+
+
+class RxUnavailable(Exception):
+    """Receive audio requires explicit Windows device configuration."""
+
+
+class RxBusy(Exception):
+    """Only one audio capture may run at once."""
+
+
+class RxCaptureFailed(Exception):
+    """The selected local audio input did not return a valid bounded WAV."""
+
+
+class RxCapture:
+    """Opt-in, two-second receiver audio capture. No TX-side calls or ports."""
+
+    def __init__(self, device=None, platform=None, runner=None, executable="ffmpeg"):
+        self.device = os.environ.get(RX_DEVICE_ENV, "") if device is None else device
+        self.platform = sys.platform if platform is None else platform
+        self.runner = subprocess.run if runner is None else runner
+        self.executable = executable
+        self._lock = threading.Lock()
+
+    @property
+    def configured(self):
+        return (self.platform == "win32" and isinstance(self.device, str)
+                and 1 <= len(self.device) <= 256 and not any(ord(c) < 32 for c in self.device)
+                and self.device == self.device.strip())
+
+    def sample(self):
+        if not self.configured:
+            raise RxUnavailable("receive audio is not configured for Windows")
+        if not self._lock.acquire(blocking=False):
+            raise RxBusy("another receive sample is in progress")
+        try:
+            # User-configured DirectShow INPUT only. No shell, PTT, radio control,
+            # microphone output, network output, or permanent recording.
+            args = [self.executable, "-nostdin", "-hide_banner", "-loglevel", "error",
+                    "-f", "dshow", "-i", "audio=" + self.device,
+                    "-t", str(RX_DURATION_SECONDS), "-vn", "-ac", "1", "-ar", "16000",
+                    "-c:a", "pcm_s16le", "-f", "wav", "-fs", str(RX_MAX_WAV_BYTES), "pipe:1"]
+            try:
+                result = self.runner(args, capture_output=True, timeout=7, check=False)
+            except (OSError, subprocess.TimeoutExpired) as exc:
+                raise RxCaptureFailed("receive capture failed or timed out") from exc
+            if result.returncode != 0 or not isinstance(result.stdout, bytes):
+                raise RxCaptureFailed("receive capture failed")
+            data = result.stdout
+            if not (44 <= len(data) <= RX_MAX_WAV_BYTES and data[:4] == b"RIFF"
+                    and data[8:12] == b"WAVE"):
+                raise RxCaptureFailed("invalid receive WAV")
+            try:
+                with wave.open(io.BytesIO(data), "rb") as clip:
+                    if (clip.getnchannels(), clip.getframerate(), clip.getsampwidth(),
+                            clip.getcomptype()) != (1, 16000, 2, "NONE"):
+                        raise RxCaptureFailed("unexpected receive WAV format")
+                    if not clip.readframes(1):
+                        raise RxCaptureFailed("empty receive WAV")
+            except (EOFError, wave.Error) as exc:
+                raise RxCaptureFailed("malformed receive WAV") from exc
+            return data
+        finally:
+            self._lock.release()
 
 
 class PreviewRadio:
@@ -113,12 +185,13 @@ class PreviewRadio:
             return self.snapshot()
 
 
-def make_server(host: str, port: int, token: str, radio: PreviewRadio | None = None) -> ThreadingHTTPServer:
+def make_server(host: str, port: int, token: str, radio: PreviewRadio | None = None, rx_capture: RxCapture | None = None) -> ThreadingHTTPServer:
     if host != "127.0.0.1":
         raise ValueError("only literal IPv4 loopback 127.0.0.1 may be bound")
     if not isinstance(token, str) or len(token) < 24 or any(ch.isspace() for ch in token):
         raise ValueError("set FTM400_REMOTE_TOKEN to a non-whitespace token of at least 24 characters")
     target = radio if radio is not None else PreviewRadio()
+    rx = rx_capture if rx_capture is not None else RxCapture()
 
     class Handler(BaseHTTPRequestHandler):
         server_version = "FTM400Preview/0.1"
@@ -133,7 +206,7 @@ def make_server(host: str, port: int, token: str, radio: PreviewRadio | None = N
             self.send_header("Cache-Control", "no-store")
             self.send_header("X-Content-Type-Options", "nosniff")
             self.send_header("Referrer-Policy", "no-referrer")
-            self.send_header("Content-Security-Policy", "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'")
+            self.send_header("Content-Security-Policy", "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; media-src blob:; base-uri 'none'; form-action 'none'")
             self.end_headers()
             self.wfile.write(body)
 
@@ -163,12 +236,30 @@ def make_server(host: str, port: int, token: str, radio: PreviewRadio | None = N
                 filename, mime = assets[self.path]
                 self._send(200, (ROOT / filename).read_bytes(), mime)
                 return
+            if self.path == "/api/rx/sample":
+                if not self._authorized():
+                    self._json(401, {"error": "unauthorized"})
+                elif not self._check_origin():
+                    self._json(403, {"error": "origin_denied"})
+                else:
+                    try:
+                        self._send(200, rx.sample(), "audio/wav")
+                    except RxUnavailable:
+                        self._json(503, {"error": "rx_not_configured"})
+                    except RxBusy:
+                        self._json(409, {"error": "rx_busy"})
+                    except RxCaptureFailed:
+                        self._json(503, {"error": "rx_capture_failed"})
+                return
             if self.path != "/api/state":
                 self._json(404, {"error": "not_found"})
             elif not self._authorized():
                 self._json(401, {"error": "unauthorized"})
             else:
-                self._json(200, target.snapshot())
+                state = target.snapshot()
+                state["rx_capture_configured"] = rx.configured
+                state["rx_capture_verified"] = False  # No hardware readback in this software.
+                self._json(200, state)
 
         def do_POST(self) -> None:
             if not self._check_host():
