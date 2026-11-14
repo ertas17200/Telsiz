@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>FTM-400 Remote Önizleme</title><link rel="stylesheet" href="/style.css"><script defer src="/client.js"></script></head>
+<body><main><header><h1>FTM-400 Remote</h1><p>DR · DE · XDR · XDE — tek uygulama</p><strong class="hold">SİMÜLATÖR — RF KAPALI</strong></header>
+<section><h2>Bağlantı</h2><label>Yerel erişim anahtarı <input id="token" type="password" autocomplete="off" placeholder="FTM400_REMOTE_TOKEN"></label><button id="connect">Bağlan</button><p id="message" role="status">Henüz bağlanılmadı.</p></section>
+<section><h2>Model</h2><label>FTM-400 <select id="model"><option>FTM-400DR</option><option>FTM-400DE</option><option>FTM-400XDR</option><option>FTM-400XDE</option></select></label><button id="set-model">Model seç</button><p id="family">Firmware ailesi: —</p></section>
+<section><h2>Yerel önizleme — telsize komut gönderilmez</h2>
+<label>Frekans önizlemesi (MHz) <input id="frequency" type="number" min="1" max="1000" step="0.00001" placeholder="145.500"></label><button id="set-frequency">Önizle</button>
+<label>Hafıza kanalı önizlemesi <input id="channel" type="number" min="1" max="999" step="1" placeholder="1"></label><button id="set-channel">Önizle</button>
+<label>Ses düzeyi önizlemesi <input id="volume" type="number" min="0" max="100" step="1" placeholder="50"></label><button id="set-volume">Önizle</button>
+<p id="readback">Radyo bağlantısı: YOK</p></section>
+<section><h2>Donanım fonksiyonları</h2><div class="grid"><button disabled>PTT — KİLİTLİ</button><button disabled>Mikrofon — BAĞLI DEĞİL</button><button disabled>Hoparlör — BAĞLI DEĞİL</button><button disabled>Ekran — BAĞLI DEĞİL</button></div><p>Bu sürüm hiçbir RF yayını başlatamaz. Gerçek cihaz ve arayüz bağımsız doğrulanmadan kontroller açılmaz.</p></section>
+</main></body></html>
