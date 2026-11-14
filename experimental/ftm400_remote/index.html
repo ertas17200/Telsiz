@@ -8,5 +8,6 @@
 <label>Hafıza kanalı önizlemesi <input id="channel" type="number" min="1" max="999" step="1" placeholder="1"></label><button id="set-channel">Önizle</button>
 <label>Ses düzeyi önizlemesi <input id="volume" type="number" min="0" max="100" step="1" placeholder="50"></label><button id="set-volume">Önizle</button>
 <p id="readback">Radyo bağlantısı: YOK</p></section>
+<section><h2>Analog FM alıcı sesi (Windows)</h2><p>Yalnızca operatör tarafından yapılandırılan PC ses girişinden 2 saniyelik kayıt alınır. Telsize frekans/PTT komutu gönderilmez. Fiziksel cihaz bağlantısı bu arayüzden doğrulanamaz.</p><button id="rx-button" disabled>2 saniye alıcı sesi al</button><audio id="rx-player" controls preload="none" aria-label="Alıcı ses örneği"></audio><p id="rx-status">RX girişi: yapılandırılmadı</p></section>
 <section><h2>Donanım fonksiyonları</h2><div class="grid"><button disabled>PTT — KİLİTLİ</button><button disabled>Mikrofon — BAĞLI DEĞİL</button><button disabled>Hoparlör — BAĞLI DEĞİL</button><button disabled>Ekran — BAĞLI DEĞİL</button></div><p>Bu sürüm hiçbir RF yayını başlatamaz. Gerçek cihaz ve arayüz bağımsız doğrulanmadan kontroller açılmaz.</p></section>
 </main></body></html>

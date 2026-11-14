@@ -7,16 +7,19 @@ const path = require('node:path');
 (async function run() {
   const handlers = {};
   const elements = new Map();
-  for (const id of ['token', 'connect', 'message', 'model', 'family', 'readback', 'frequency', 'set-frequency', 'channel', 'set-channel', 'volume', 'set-volume', 'set-model']) {
+  for (const id of ['token', 'connect', 'message', 'model', 'family', 'readback', 'frequency', 'set-frequency', 'channel', 'set-channel', 'volume', 'set-volume', 'set-model', 'rx-button', 'rx-player', 'rx-status']) {
     elements.set(id, {value: '', textContent: '', addEventListener: (_event, cb) => {handlers[id] = cb;}});
   }
+  elements.get('rx-player').load = () => {};
   const requests = [];
   const context = {
     document: {getElementById: id => {assert.ok(elements.has(id), 'unexpected DOM id ' + id); return elements.get(id);}},
+    URL: {createObjectURL: () => 'blob:rx-test', revokeObjectURL: () => {}},
     fetch: async (route, options) => {
       requests.push({route, options});
+      if (route === '/api/rx/sample') return {ok: true, headers: {get: () => 'audio/wav'}, blob: async () => ({size: 100})};
       return {ok: true, json: async () => ({model: 'FTM-400DR', firmware_family: 'DR/DE',
-        frequency_preview_mhz: null, channel_preview: null, volume_preview: 0, ptt: 'HARDWARE_LOCKED', status: 'SIMULATION_ONLY'})};
+        frequency_preview_mhz: null, channel_preview: null, volume_preview: 0, ptt: 'HARDWARE_LOCKED', status: 'SIMULATION_ONLY', rx_capture_configured: true})};
     },
   };
   const script = fs.readFileSync(path.join(__dirname, '..', 'experimental', 'ftm400_remote', 'client.js'), 'utf8');
@@ -59,5 +62,16 @@ const path = require('node:path');
   await handlers['set-frequency']();
   assert.equal(JSON.parse(requests[2].options.body).frequency_mhz, 145.5);
 
+  elements.get('token').value = 'test-only-token';
+  await handlers.connect();
+  assert.equal(elements.get('rx-button').disabled, false);
+  const countBefore = requests.length;
+  await handlers['rx-button']();
+  assert.equal(requests.length, countBefore + 1);
+  assert.equal(requests[requests.length - 1].route, '/api/rx/sample');
+  assert.equal(requests[requests.length - 1].options.headers.Authorization, 'Bearer test-only-token');
+  assert.equal(elements.get('rx-player').src, 'blob:rx-test');
+  assert.match(elements.get('message').textContent, /RX kaydı hazır/);
+  console.log('FTM400_JS_RX_AUTH_AUDIO=PASS scenarios=4');
   console.log('FTM400_JS_UI_NUMERIC_VALIDATION=PASS scenarios=14');
 })().catch(e => {console.error(e); process.exitCode = 1;});
